@@ -27,7 +27,7 @@
     "public": false
   },
   "Department": {
-    "dataSource": null,
+    "dataSource": "dbmysql",
     "public": true
   }
 }

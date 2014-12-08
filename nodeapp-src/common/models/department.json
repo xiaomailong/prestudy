@@ -1,17 +1,25 @@
 {
   "name": "Department",
-  "base": "Model",
+  "base": "PersistedModel",
   "idInjection": true,
   "properties": {
-    "Name": {
+    "parentid": {
+      "type": "number",
+      "comments": "上级部门ID"
+    },
+    "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "comments": "部门名称"
     },
-    "ParentID": {
-      "type": "number"
+    "isreal": {
+      "type": "boolean",
+      "required": true,
+      "comments": "是否为实际部门"
     },
-    "Description": {
-      "type": "string"
+    "description": {
+      "type": "string",
+      "comments": "详细信息"
     }
   },
   "validations": [],
