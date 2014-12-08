@@ -25,5 +25,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Department": {
+    "dataSource": null,
+    "public": true
   }
 }

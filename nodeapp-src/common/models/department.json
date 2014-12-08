@@ -1,0 +1,21 @@
+{
+  "name": "Department",
+  "base": "Model",
+  "idInjection": true,
+  "properties": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "ParentID": {
+      "type": "number"
+    },
+    "Description": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
