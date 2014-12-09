@@ -16,7 +16,7 @@ var fib = eval(Wind.compile("async", function () {
         current = a + b;
 
         $await(Wind.Async.sleep(1));
-        console.log(current);
+        // console.log(current);
         if (current == Infinity) {
           console.log(--i);
           break;
