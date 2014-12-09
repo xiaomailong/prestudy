@@ -1,5 +1,4 @@
 
-
 exports.testDateType = function(test) {
   // JavaScript中有5种简单数据类型（也称为基本数据类型）：
   // Undefined、Null、Boolean、Number和String。
@@ -19,11 +18,40 @@ exports.testDateType = function(test) {
   a = function(){};
   test.equal(typeof a, "function");
 
+  // 借用 Object.prototype.toString() 方法可以得到一个表示对象的类型的字符串：
+  // 使用该方法可以有效判断数组、函数、日期、正则表达式等对象类型(引用类型)。
+  // 在 ECMAScript 5 中还可以用这个方法来判断 null 和 undefined：
+  var toString = Object.prototype.toString;
+  test.equal(toString.call('abc'), "[object String]")
+  test.equal(toString.call(true), "[object Boolean]")
+  test.equal(toString.call([]), "[object Array]")
+  test.equal(toString.call({}), "[object Object]")
+  test.equal(toString.call(/./), "[object RegExp]")
+  test.equal(toString.call(new Date), "[object Date]")
+  test.equal(toString.call(Math), "[object Math]")
+  test.equal(toString.call(null), "[object Null]")
+  test.equal(toString.call(undefined), "[object Undefined]")
+
   // Undefined类型 ----------------------------------------------------------------------------------
   // Undefined类型只有一个值，即特殊的undefined。在使用var声明变量但未对其加以初始化时，这个变量的值就是undefined
   var u;
   test.equal(u, undefined);
   test.equal(typeof undefined, "undefined");
+  // 在 ECMAScript 3 中 undefined 是可读写的，
+  // 所以直接与 undefined 作比较返回的结果不一定是准确的，
+  // 像这样 var undefined = 1 在有些实现中是可以改变其值的，
+  // 此时再与之做比较得到的结果就有点出人意料了，
+  // 通常情况下还是使用 typeof 运算符来判断：
+  // 不过使用 typeof 运算符有一个不好的地方是不能区分未定义的变量和值为 undefined 的变量(两者还是有区别的)，
+  // 另外一种方式是使用 void 运算符，因为它的运算结果总是返回 undefined：
+  function isUndefined(obj) {
+    return obj === void 0; // typeof obj === 'undefined'
+  };
+  var obj;
+  test.ok(isUndefined(obj));
+  test.ok(isUndefined(undefined));
+  test.ok(isUndefined(void 0));
+  test.ok(!isUndefined(123));
 
   // Null类型 ---------------------------------------------------------------------------------------
   // Null类型是第二个只有一个值的数据类型，这个特殊的值是null。
@@ -36,6 +64,13 @@ exports.testDateType = function(test) {
   // 无论在什么情况下都没有必要把一个变量的值显式地设置为undefined，可是同样的规则对null却不适用。
   // 换句话说，只要意在保存对象的变量还没有真正保存对象，就应该明确地让该变量保存null值。
   // 这样做不仅可以体现null作为空对象指针的惯例，而且也有助于进一步区分null和undefined。
+  function isNull(obj) {
+    // 这里必须使用 ===，因为 undefined == null 也会返回 true。
+    return obj === null;
+  };
+  test.ok(isNull(null));
+  test.ok(!isNull(undefined));
+  test.ok(!isNull(123));
 
   // Boolean类型 -----------------------------------------------------------------------------------
   // Boolean类型只有两个字面值：true和false。
@@ -59,6 +94,24 @@ exports.testDateType = function(test) {
   test.ok(Boolean(test.ok));
   test.ok(!Boolean(null));
   test.ok(!Boolean(undefined));
+  // 布尔值不是 true 就是 false，可以使用 typeof 运算符，也可以像下面这样判断：
+  function isBoolean(obj) {
+    return obj === true || obj === false;
+  };
+  test.ok(isBoolean(true));
+  test.ok(isBoolean(false));
+  test.ok(isBoolean(1 != 1));
+  test.ok(!isBoolean(str1));
+  test.ok(!isBoolean(str2));
+  test.ok(!isBoolean(n1));
+  test.ok(!isBoolean(n2));
+  test.ok(!isBoolean(n3));
+  test.ok(!isBoolean(n4));
+  test.ok(!isBoolean(n5));
+  test.ok(!isBoolean(test));
+  test.ok(!isBoolean(test.ok));
+  test.ok(!isBoolean(null));
+  test.ok(!isBoolean(undefined));
 
   // Number类型 ---------------------------------------------------------------------------------
   // 一种特殊的数值，即NaN（非数值 Not a Number）。
@@ -73,12 +126,80 @@ exports.testDateType = function(test) {
   // 某些不是数值的值会直接转换为数值，例如字符串”10“或Boolean值。
   // 而任何不能被转换为数值的值都会导致这个函数返回true。
   test.ok(isNaN(NaN));
+  test.ok(isNaN(0/0));
   test.ok(isNaN("NaN"));
   test.ok(isNaN("Test"));
+  test.ok(isNaN([1, 2]));
+  test.ok(isNaN(undefined));
+  test.ok(!isNaN([1]));  // 单值数组可以隐式转换为数字 1
+  test.equal([123], 123);
+  test.ok(!isNaN([]));   // 空数组可以隐式转换为数字 0
+  test.equal([], 0);
+  test.ok(!isNaN(Infinity));
   test.ok(!isNaN(10));
   test.ok(!isNaN("10"));
   test.ok(!isNaN(true));
   test.ok(!isNaN(false));
+  // 字符串 'abc' 和 undefined 都不能隐式转换为一个数字，所以被判断为是一个 NaN。
+  // NaN 是一个特殊数值，它不等于任何值，甚至不等于它自己，
+  // 因此判断一个值为 NaN 的最好方式是判断它是一个数字类型同时不等于自身：
+  // ECMAScript 6 增加的 Number.isNaN() 方法更好地解决了这个问题，
+  // 只有值为 NaN 的时候才会返回 true：
+  function isNumberNaN(obj) {
+    return typeof obj === 'number' && obj != +obj;
+  };
+  test.ok(isNumberNaN(NaN));
+  test.ok(isNumberNaN(Number.NaN));
+  test.ok(isNumberNaN(0/0));
+  test.ok(!isNumberNaN([1, 2]));
+  test.ok(!isNumberNaN('abc'));
+  test.ok(!isNumberNaN(undefined));
+  test.ok(Number.isNaN(NaN));
+  test.ok(Number.isNaN(Number.NaN));
+  test.ok(Number.isNaN(0/0));
+  test.ok(!Number.isNaN([1, 2]));
+  test.ok(!Number.isNaN('abc'));
+  test.ok(!Number.isNaN(undefined));
+
+  // 使用 typeof 运算符可以判断任意数字、NaN 或者 Infinity：
+  test.equal(typeof NaN, "number");
+  test.equal(typeof Infinity, "number");
+  // 如果要排除 NaN 和 Infinity 可以使用 isFinite() 方法，
+  // 不过 isFinite() 方法试图将一些非数字类型转换为数字，因此需要双重保险：
+  // ECMAScript 6 增加的 Number.isFinite() 方法有同样效果。
+  function isNumber(obj) {
+    return typeof obj === 'number' && isFinite(obj);
+  };
+  test.ok(isFinite("1234"));
+  test.ok(isFinite("-12.34"));
+  test.ok(!isFinite("12.34.56"));
+  test.ok(isFinite([123]));
+  test.ok(isFinite([]));
+  test.ok(!isFinite([12, 3]));
+  test.ok(isNumber(1234));
+  test.ok(isNumber(-12.34));
+  test.ok(!isNumber("1234"));
+  test.ok(!isNumber(NaN));
+  test.ok(!isNumber(Infinity));
+  test.ok(Number.isFinite(1234));
+  test.ok(Number.isFinite(-12.34));
+  test.ok(!Number.isFinite([123]));
+  test.ok(!Number.isFinite("1234"));
+  test.ok(!Number.isFinite(NaN));
+  test.ok(!Number.isFinite(Infinity));
+
+  // 判断一个数是整数并且在安全范围内，利用整数取整后还是与自身相等的特点：
+  function isInteger(obj) {
+    return typeof obj === 'number' && isFinite(obj)
+    && obj > -9007199254740992
+    && obj < 9007199254740992
+    && Math.floor(obj) === obj;
+  };
+  test.ok(isInteger(1234));
+  test.ok(!isInteger(-12.34));
+  test.ok(!isInteger("1234"));
+  test.ok(!isInteger(NaN));
+  test.ok(!isInteger(Infinity));
 
   // Number()函数的转换规则如下：--------------------------
   // ● 如果是Boolean值，true和false将分别被替换为1和0
@@ -229,6 +350,9 @@ exports.testDateType = function(test) {
   // ● propertyIsEnumerable(propertyName)——用于检查给定的属性是否能够使用for-in语句来枚举
   // ● toString()——返回对象的字符串表示
   // ● valueOf()——返回对象的字符串、数值或布尔值表示。通常与toString()方法的返回值相同。
+
+  // 判断数据类型可以使用 typeof 运算符，
+  // 返回值是一个代表数据类型的字符串(注意是字符串，而且是小写的)：
   test.equal(typeof o.constructor, "function");
   test.equal(typeof o.hasOwnProperty, "function");
   test.equal(typeof o.isPrototypeOf, "function");
@@ -236,6 +360,51 @@ exports.testDateType = function(test) {
   test.equal(typeof o.toString, "function");
   test.equal(typeof o.valueOf, "function");
   test.equal(typeof o.testfunction, "undefined");
+
+  // 存在判断
+  // 对值为 null 或 undefined 的变量读取属性时会引发错误，因此有时候需要做存在判断
+  function isExist(obj) {
+    // 因为 undefined == null
+    return obj != null;
+    // return typeof obj !== 'undefined' && obj !== null;
+  };
+  var o = new Object();
+  test.ok(isExist(o));
+  test.ok(isExist([]));
+  test.ok(isExist(isExist));
+  test.ok(isExist(123));
+  test.ok(isExist("123"));
+  test.ok(!isExist(null));
+  test.ok(!isExist(undefined));
+
+  // 对象判断
+  // 要区别 null 和其它对象可以像下面这样判断，因为 null 值可以隐式转换为 false：
+  // 这样判断就可以把 null 给排除掉，变量 obj 是对象或者数组或者其它对象(不包括函数)。
+  function isObjectNotFunction(obj) {
+    return obj && typeof obj === 'object'
+  };
+  test.ok(isObjectNotFunction(o));
+  test.ok(isObjectNotFunction(test));
+  test.ok(isObjectNotFunction([]));
+  test.ok(!isObjectNotFunction(isExist));
+  test.ok(!isObjectNotFunction(123));
+  test.ok(!isObjectNotFunction("123"));
+  test.ok(!isObjectNotFunction(null));
+  test.ok(!isObjectNotFunction(undefined));
+  // 使用 Object() 方法如果传入的参数不是对象将会被转换为对象，
+  // 否则，只是简单地将传入的参数返回。该方法可以判断所有对象，包括函数。
+  function isObject(obj) {
+    return obj === Object(obj);
+  };
+  var o = new Object();
+  test.ok(isObject(o));
+  test.ok(isObject(test));
+  test.ok(isObject([]));
+  test.ok(isObject(isExist));
+  test.ok(!isObject(123));
+  test.ok(!isObject("123"));
+  test.ok(!isObject(null));
+  test.ok(!isObject(undefined));
 
   // 创建Object实例的方式有两种，第一种是使用new操作符后跟Object构造函数。
   var person1 = new Object();
@@ -245,7 +414,7 @@ exports.testDateType = function(test) {
   var person2 = {
     name : 'tt',
     age : 12
-  }
+  };
   // 另外，使用对象字面量语法时，如果留空其花括号，则可以定义值包含默认属性和方法的对象。
   var person3 = {};            //与new Object()相同
   person3.name = "tt";
@@ -266,6 +435,23 @@ exports.testDateType = function(test) {
   // 但与其他语言不同的是，JavaScript数组的每一项可以保持任何类型的数据。
   // 也就是说，可以用数组的第一个位置来保存字符串，用第二个位置来保存数值，用第三个位置来保存对象。
   // 而且，JavaScript数组的大小是可以动态调整的，即可以随着数据的添加自动增长以容纳新增数据。
+  // 数组判断
+  function isArray(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+  };
+  // ECMAScript 5 增加了数组检测的原生方法：Array.isArray(obj)
+  test.ok(isArray([]));
+  test.ok(isArray([1]));
+  test.ok(isArray([1, 2]));
+  test.ok(isArray(new Array()));
+  test.ok(isArray(new Array(20)));
+  test.ok(!isArray(123));
+  test.ok(Array.isArray([]));
+  test.ok(Array.isArray([1]));
+  test.ok(Array.isArray([1, 2]));
+  test.ok(Array.isArray(new Array()));
+  test.ok(Array.isArray(new Array(20)));
+  test.ok(!Array.isArray(123));
 
   // 创建数组的基本方式有两种。第一种是使用Array构造函数。
   var colors1 = new Array();
@@ -418,7 +604,7 @@ exports.testDateType = function(test) {
     } else{
       return 0;
     }
-  }
+  };
   var values = [0,1,5,10,15];
   values.sort(compare);
   test.equal(values, "15,10,5,1,0");               //15,10,5,1,0
@@ -426,7 +612,7 @@ exports.testDateType = function(test) {
   // 这个函数主要用第二个值减第一个值即可。
   function compare(value1,value2){
     return value2 - value1;
-  }
+  };
   var values = [0,1,5,10,15];
   values.sort(compare);
   test.equal(values, "15,10,5,1,0");               //15,10,5,1,0
@@ -560,13 +746,24 @@ exports.testDateType = function(test) {
   // JavaScript中什么最有意思，我想那莫过于函数了——而有意思的根源，则在于函数实际上时对象。
   // 每个函数都是Function类型的实例，而且都与其他引用类型一样具有属性和方法。
   // 由于函数是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。
+
+  // 虽然 typeof 运算符将函数特别对待了，
+  // 但是使用 typeof 运算符在有些实现中不是函数的也会返回 'function'，
+  // 因此还是使用如下方法来判断函数：
+  function isFunction(obj) {
+    return Object.prototype.toString.call(obj) === '[object Function]';
+  };
+  test.ok(isFunction(isFunction));
+  test.ok(isFunction(test.ok));
+  test.ok(!isFunction(test));
+  test.ok(!isFunction(123));
+
   // 函数通常是使用函数声明语法定义的，如下面例子所示：
-  function sum(num1,num2)
-  {
+  function sum(num1, num2) {
     return num1 + num2;
-  }
+  };
   // 这与下面使用函数表达式定义函数的方式几乎相差无几：
-  var sun = function(num1,num2){
+  var sun = function(num1, num2) {
     return num1 + num2;
   };
   var n1 = 1, n2 = 2;
@@ -583,72 +780,64 @@ exports.testDateType = function(test) {
   // 而实际上， 解析器在向执行环境中加载数据时，对函数声明和函数表达式并非一视同仁。
   // 解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）；
   // 至于函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行。
-  test.equal(sum4(10,10), 20);
-  function sum4(num1,num2)
-  {
+  test.equal(sum4(10, 10), 20);
+  function sum4(num1, num2) {
     return num1 + num2;
-  }
+  };
   // 以上代码完全可以正常运行。因为在代码开始执行之前，解析器就已经读取函数声明并将其添加到执行环境中了。
   // 如果像下面例子所示，把上面的函数声明改为变量初始化方式，就会在执行期间导致错误。
   // test.throws(sum5(10,10), [error]);
-  var sum5 = function(num1,num2)
-  {
+  var sum5 = function(num1, num2) {
     return num1 + num2;
-  }
+  };
   // 作为值的函数 --------------------------------------
   // 因为JavaScript中的函数名本身就是变量，所以函数也可以作为值来使用。
   // 也就是说，不仅可以像传递参数一样把一个函数传递给另一个函数，而且可以将一个函数作为另一个函数的结果返回。
-  function callSomeFunction(someFunction , someArgument)
-  {
+  function callSomeFunction(someFunction, someArgument) {
     return someFunction(someArgument);
-  }
+  };
   // 这个函数接受两个参数，第一个参数应该是一个函数，第二个参数应该是要传递给该函数的一个值。然后，就可以像下面的例子一样传递函数了：
-  function add(num)
-  {
+  function add(num) {
     return num + 10;
-  }
+  };
   var result = callSomeFunction(add,10);
   test.equal(result, 20);
   // 当然，可以从一个函数中返回另一个函数，而且这也是极为有用的一种技术。
-  function createSumFunction()
-  {
-    return function(num1,num2){
+  function createSumFunction() {
+    return function(num1,num2) {
       return num1 + num2;
     };
-  }
+  };
   var sumFunction = createSumFunction();
   test.equal(sumFunction(10,10), 20);
   // 函数内部属性 -------------------------------------
   // 在函数内部，有两个特殊的对象：arguments和this。
   // 其中，arguments是一个类数组对象，包含着传入函数中的所有参数，而且可以使用length属性来确定传递进来多少个参数。
-  function sayHi()
-  {
+  function sayHi() {
     test.equal(arguments.length, 2);
     test.equal(arguments[0] + ',' + arguments[1], "hello,world");
-  }
+  };
   sayHi('hello','world');
   // 虽然arguments的主要用途是保存函数参数，但这个对象还有一个名叫callee的属性，
   // 该属性是一个指针，指向拥有这个arguments对象的函数。
   // 看下面这个非常经典的阶乘函数：
-  function factorial(num)
-  {
+  function factorial(num) {
     if(num <= 1){
       return 1;
     } else {
       return num * factorial(num-1);
     }
-  }
+  };
   test.equal(factorial(10), 3628800)
   // 定义阶乘函数一般都要用到递归算法；如上面的代码，在函数有名字，而且名字以后也不会变的情况下，这样定义没有问题。
   // 但问题是这个函数的执行与函数名factorial紧紧耦合在一起。为了消除这种紧密耦合的现象，可以像下面这样使用arguments.callee
-  function factorial(num)
-  {
+  function factorial(num) {
     if(num <= 1){
       return 1;
     } else {
       return num * arguments.callee(num-1);
     }
-  }
+  };
   test.equal(factorial(10), 3628800)
   // 在这个重写后的factorial()函数的函数体内，没有再引用函数名factorial。
   // 这样，无论引用函数时使用是什么名字，都可以保证正常完成递归调用。例如：
@@ -663,8 +852,7 @@ exports.testDateType = function(test) {
   var window = new Object();
   window.color = 'red';
   var o = { color:'blue' };
-  function sayColor(v)
-  {
+  function sayColor(v) {
     return v.color;
   };
   test.equal(sayColor(window), "red")
@@ -685,36 +873,31 @@ exports.testDateType = function(test) {
   // 对于引用类型而言，prototype是保存它们所有实例方法的真正所在。
   // 诸如toString()和valueOf()等方法实际上都是保存在prototype名下，只不过是通过各自对象的实例访问罢了。
   // 在创建自定义引用类型以及实现继承时，prototype属性的作用是极为重要的
-  function sum(num1, num2)
-  {
+  function sum(num1, num2) {
     return num1 + num2;
-  }
-  function callSum1(num1, num2)
-  {
+  };
+  function callSum1(num1, num2) {
     return sum.apply(this, arguments);
-  }
-  function callSum2(num1, num2)
-  {
+  };
+  function callSum2(num1, num2) {
     return sum.apply(this, [num1, num2]);
-  }
+  };
   test.equal(sum(10, 10), 20);
   test.equal(callSum1(10, 10), 20);
   test.equal(callSum2(10, 10), 20);
   // call()方法与apply()方法的作用相同，它们的区别仅在于接收参数的方式不同。
   // 对于call()方法而言，第一个参数是作用域没有变化，变化的只是其余的参数都是直接传递给函数的。
-  function callSum3(num1, num2)
-  {
+  function callSum3(num1, num2) {
     return sum.call(this, num1, num2);
-  }
+  };
   test.equal(callSum3(10, 10), 20);
   // 事实上，传递参数并非apply()和call()真正的用武之地；
   // 它们真正强大的地方是能够扩充函数赖以运行的作用域。看下面的例子：
   window.color = 'red';
   var o = {color:'blue'};
-  function sayColor(v)
-  {
+  function sayColor(v) {
     return v.color;
-  }
+  };
   test.equal(sayColor(window), "red");
   // test.equal(sayColor.call(window), "red");
   // test.equal(sayColor.call(o), "blue");
@@ -833,6 +1016,15 @@ exports.testDateType = function(test) {
   test.equal(Math.sqrt(Math.PI*Math.PI), Math.PI);
   test.ok(1 - Math.random() > 0);
   test.ok(Math.random() > 0);
+
+  // 正则表达式判断
+  // 使用 typeof 运算符判断正则表达式，一般都会返回 'object'，
+  // 不过也有一些实现会返回 'function'，
+  // 所以，还是借用 Object.prototype.toString 方法来判断：
+  function isRegExp(obj) {
+    return Object.prototype.toString.call(obj) === '[object RegExp]';
+  };
+  test.ok(isRegExp(/./));
 
   test.done();
 };
