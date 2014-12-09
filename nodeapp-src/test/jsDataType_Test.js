@@ -494,14 +494,345 @@ exports.testDateType = function(test) {
   var y2k2 = new Date(2000,0);
   //本地时间2005年5月5日下午5:55:55
   var allFives2 = new Date(2005,4,5,17,55,55);
-  test.equal(y2k1.toString(), y2k2.toString());
+  //  test.equal(y2k1.toString(), y2k2.toString());
   test.equal(y2k1.toString(), "Sat Jan 01 2000 08:00:00 GMT+0800 (CST)");
-  test.equal(allFives1.toString(), allFives2.toString());
+  // test.equal(allFives1.toString(), allFives2.toString());
   test.equal(allFives1.toString(), "Fri May 06 2005 01:55:55 GMT+0800 (CST)");
+  // Date类型还有一些专门用于将日期格式化为字符串的方法，这些方法如下：
+  // ● toDateString()——以特定于实现的格式显示星期几、月、日和年
+  // ● toTimeString()——以特定于实现的格式显示时、分、秒和时区
+  // ● toLocaleDateString()——以特定于地区的格式显示星期几、月、日和年
+  // ● toLocaleTimeString()——以特定于实现的格式显示时、分、秒
+  // ● toUTCString()——以特定于实现的格式完整的UTC日期
+  // 以上这些字符串格式方法的输出也是因浏览器而异的，因此没有哪一个方法能够用来在用户界面中显示一致的日期信息。
+  // 以下是Date类型的所有方法：
+  // 方法	描述
+  // Date()	返回当日的日期和时间。
+  // getDate()	从 Date 对象返回一个月中的某一天 (1 ~ 31)。
+  // getDay()	从 Date 对象返回一周中的某一天 (0 ~ 6)。
+  // getMonth()	从 Date 对象返回月份 (0 ~ 11)。
+  // getFullYear()	从 Date 对象以四位数字返回年份。
+  // getYear()	请使用 getFullYear() 方法代替。
+  // getHours()	返回 Date 对象的小时 (0 ~ 23)。
+  // getMinutes()	返回 Date 对象的分钟 (0 ~ 59)。
+  // getSeconds()	返回 Date 对象的秒数 (0 ~ 59)。
+  // getMilliseconds()	返回 Date 对象的毫秒(0 ~ 999)。
+  // getTime()	返回 1970 年 1 月 1 日至今的毫秒数。
+  // getTimezoneOffset()	返回本地时间与格林威治标准时间 (GMT) 的分钟差。
+  // getUTCDate()	根据世界时从 Date 对象返回月中的一天 (1 ~ 31)。
+  // getUTCDay()	根据世界时从 Date 对象返回周中的一天 (0 ~ 6)。
+  // getUTCMonth()	根据世界时从 Date 对象返回月份 (0 ~ 11)。
+  // getUTCFullYear()	根据世界时从 Date 对象返回四位数的年份。
+  // getUTCHours()	根据世界时返回 Date 对象的小时 (0 ~ 23)。
+  // getUTCMinutes()	根据世界时返回 Date 对象的分钟 (0 ~ 59)。
+  // getUTCSeconds()	根据世界时返回 Date 对象的秒钟 (0 ~ 59)。
+  // getUTCMilliseconds()	根据世界时返回 Date 对象的毫秒(0 ~ 999)。
+  // parse()	返回1970年1月1日午夜到指定日期（字符串）的毫秒数。
+  // setDate()	设置 Date 对象中月的某一天 (1 ~ 31)。
+  // setMonth()	设置 Date 对象中月份 (0 ~ 11)。
+  // setFullYear()	设置 Date 对象中的年份（四位数字）。
+  // setYear()	请使用 setFullYear() 方法代替。
+  // setHours()	设置 Date 对象中的小时 (0 ~ 23)。
+  // setMinutes()	设置 Date 对象中的分钟 (0 ~ 59)。
+  // setSeconds()	设置 Date 对象中的秒钟 (0 ~ 59)。
+  // setMilliseconds()	设置 Date 对象中的毫秒 (0 ~ 999)。
+  // setTime()	以毫秒设置 Date 对象。
+  // setUTCDate()	根据世界时设置 Date 对象中月份的一天 (1 ~ 31)。
+  // setUTCMonth()	根据世界时设置 Date 对象中的月份 (0 ~ 11)。
+  // setUTCFullYear()	根据世界时设置 Date 对象中的年份（四位数字）。
+  // setUTCHours()	根据世界时设置 Date 对象中的小时 (0 ~ 23)。
+  // setUTCMinutes()	根据世界时设置 Date 对象中的分钟 (0 ~ 59)。
+  // setUTCSeconds()	根据世界时设置 Date 对象中的秒钟 (0 ~ 59)。
+  // setUTCMilliseconds()	根据世界时设置 Date 对象中的毫秒 (0 ~ 999)。
+  // toSource()	返回该对象的源代码。
+  // toString()	把 Date 对象转换为字符串。
+  // toTimeString()	把 Date 对象的时间部分转换为字符串。
+  // toDateString()	把 Date 对象的日期部分转换为字符串。
+  // toGMTString()	请使用 toUTCString() 方法代替。
+  // toUTCString()	根据世界时，把 Date 对象转换为字符串。
+  // toLocaleString()	根据本地时间格式，把 Date 对象转换为字符串。
+  // toLocaleTimeString()	根据本地时间格式，把 Date 对象的时间部分转换为字符串。
+  // toLocaleDateString()	根据本地时间格式，把 Date 对象的日期部分转换为字符串。
+  // UTC()	根据世界时返回 1970 年 1 月 1 日 到指定日期的毫秒数。
+  // valueOf()	返回 Date 对象的原始值。
 
+  // Function类型 ----------------------------------------------------------------------------------------
+  // JavaScript中什么最有意思，我想那莫过于函数了——而有意思的根源，则在于函数实际上时对象。
+  // 每个函数都是Function类型的实例，而且都与其他引用类型一样具有属性和方法。
+  // 由于函数是对象，因此函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。
+  // 函数通常是使用函数声明语法定义的，如下面例子所示：
+  function sum(num1,num2)
+  {
+    return num1 + num2;
+  }
+  // 这与下面使用函数表达式定义函数的方式几乎相差无几：
+  var sun = function(num1,num2){
+    return num1 + num2;
+  };
+  var n1 = 1, n2 = 2;
+  test.equal(sum(n1, n2), sun(n1, n2));
+  // 最后一种定义函数的方式是使用Function构造函数。
+  // Function构造函数可以接收任意数量的参数，但最后一个参数始终都被看成是函数体，而前面的参数则枚举出了新函数的参数。
+  var sum2 = Function('num1','num2','return num1 + num2');        //不推荐使用此种方式
+  test.equal(sum(n1, n2), sum2(n1, n2));
+  // 注意：使用不带括号的函数名是访问函数指针，而非调用函数。
+  var sum3 = sum;
+  test.equal(sum(n1, n2), sum3(n1, n2));
+  // 函数声明与函数表达式
+  // 目前为止，我们一直没有对函数声明和函数表达式加以区别。
+  // 而实际上， 解析器在向执行环境中加载数据时，对函数声明和函数表达式并非一视同仁。
+  // 解析器会率先读取函数声明，并使其在执行任何代码之前可用（可以访问）；
+  // 至于函数表达式，则必须等到解析器执行到它所在的代码行，才会真正被解释执行。
+  test.equal(sum4(10,10), 20);
+  function sum4(num1,num2)
+  {
+    return num1 + num2;
+  }
+  // 以上代码完全可以正常运行。因为在代码开始执行之前，解析器就已经读取函数声明并将其添加到执行环境中了。
+  // 如果像下面例子所示，把上面的函数声明改为变量初始化方式，就会在执行期间导致错误。
+  // test.throws(sum5(10,10), [error]);
+  var sum5 = function(num1,num2)
+  {
+    return num1 + num2;
+  }
+  // 作为值的函数 --------------------------------------
+  // 因为JavaScript中的函数名本身就是变量，所以函数也可以作为值来使用。
+  // 也就是说，不仅可以像传递参数一样把一个函数传递给另一个函数，而且可以将一个函数作为另一个函数的结果返回。
+  function callSomeFunction(someFunction , someArgument)
+  {
+    return someFunction(someArgument);
+  }
+  // 这个函数接受两个参数，第一个参数应该是一个函数，第二个参数应该是要传递给该函数的一个值。然后，就可以像下面的例子一样传递函数了：
+  function add(num)
+  {
+    return num + 10;
+  }
+  var result = callSomeFunction(add,10);
+  test.equal(result, 20);
+  // 当然，可以从一个函数中返回另一个函数，而且这也是极为有用的一种技术。
+  function createSumFunction()
+  {
+    return function(num1,num2){
+      return num1 + num2;
+    };
+  }
+  var sumFunction = createSumFunction();
+  test.equal(sumFunction(10,10), 20);
+  // 函数内部属性 -------------------------------------
+  // 在函数内部，有两个特殊的对象：arguments和this。
+  // 其中，arguments是一个类数组对象，包含着传入函数中的所有参数，而且可以使用length属性来确定传递进来多少个参数。
+  function sayHi()
+  {
+    test.equal(arguments.length, 2);
+    test.equal(arguments[0] + ',' + arguments[1], "hello,world");
+  }
+  sayHi('hello','world');
+  // 虽然arguments的主要用途是保存函数参数，但这个对象还有一个名叫callee的属性，
+  // 该属性是一个指针，指向拥有这个arguments对象的函数。
+  // 看下面这个非常经典的阶乘函数：
+  function factorial(num)
+  {
+    if(num <= 1){
+      return 1;
+    } else {
+      return num * factorial(num-1);
+    }
+  }
+  test.equal(factorial(10), 3628800)
+  // 定义阶乘函数一般都要用到递归算法；如上面的代码，在函数有名字，而且名字以后也不会变的情况下，这样定义没有问题。
+  // 但问题是这个函数的执行与函数名factorial紧紧耦合在一起。为了消除这种紧密耦合的现象，可以像下面这样使用arguments.callee
+  function factorial(num)
+  {
+    if(num <= 1){
+      return 1;
+    } else {
+      return num * arguments.callee(num-1);
+    }
+  }
+  test.equal(factorial(10), 3628800)
+  // 在这个重写后的factorial()函数的函数体内，没有再引用函数名factorial。
+  // 这样，无论引用函数时使用是什么名字，都可以保证正常完成递归调用。例如：
+  var trueFactorial = factorial;
+  factorial = function(){
+    return 0;
+  };
+  test.equal(trueFactorial(10), 3628800);
+  test.equal(factorial(5), 0);
+  // 函数内部的另一个特殊对象是this，this引用的是函数据以执行操作的对象——或者也可以说，
+  // this是函数在执行时所处的作用域（当在网页的全局作用域中调用函数时，this对象引用的就是window）。
+  var window = new Object();
+  window.color = 'red';
+  var o = { color:'blue' };
+  function sayColor(v)
+  {
+    return v.color;
+  };
+  test.equal(sayColor(window), "red")
+  test.equal(sayColor(o), "blue")
+  // 函数属性和方法 -----------------------------------
+  // 因为JavScript中的函数是对象，因此函数也有属性和方法。
+  // 每个函数都包含两个属性：length和prototype。
+  // 其中，length属性表示函数希望接收的命名参数的个数。
+  function sayFullName(firstname, lastname) {
+    return firstname + lastname;
+  };
+  function sayHi() {
+    return 'hi';
+  };
+  test.equal(sayFullName.length, 2);    　　
+  test.equal(sayHi.length, 0);
+  // 在JavaScript中最耐人寻味的就要数prototype属性了。
+  // 对于引用类型而言，prototype是保存它们所有实例方法的真正所在。
+  // 诸如toString()和valueOf()等方法实际上都是保存在prototype名下，只不过是通过各自对象的实例访问罢了。
+  // 在创建自定义引用类型以及实现继承时，prototype属性的作用是极为重要的
+  function sum(num1, num2)
+  {
+    return num1 + num2;
+  }
+  function callSum1(num1, num2)
+  {
+    return sum.apply(this, arguments);
+  }
+  function callSum2(num1, num2)
+  {
+    return sum.apply(this, [num1, num2]);
+  }
+  test.equal(sum(10, 10), 20);
+  test.equal(callSum1(10, 10), 20);
+  test.equal(callSum2(10, 10), 20);
+  // call()方法与apply()方法的作用相同，它们的区别仅在于接收参数的方式不同。
+  // 对于call()方法而言，第一个参数是作用域没有变化，变化的只是其余的参数都是直接传递给函数的。
+  function callSum3(num1, num2)
+  {
+    return sum.call(this, num1, num2);
+  }
+  test.equal(callSum3(10, 10), 20);
+  // 事实上，传递参数并非apply()和call()真正的用武之地；
+  // 它们真正强大的地方是能够扩充函数赖以运行的作用域。看下面的例子：
+  window.color = 'red';
+  var o = {color:'blue'};
+  function sayColor(v)
+  {
+    return v.color;
+  }
+  test.equal(sayColor(window), "red");
+  // test.equal(sayColor.call(window), "red");
+  // test.equal(sayColor.call(o), "blue");
+  // 注意：每个函数都有一个非标准的caller属性，该属性指向调用当前函数的函数。
+  // 一般是在一个函数的内部，通过arguments.callee.caller来实现对调用栈的追溯。
+  // 目前，IE、FireFox、Chrome都支持该属性，但建议将该属性用于调试目的。
 
+  // 内置对象
+  // JavaScript中有两个内置对象：Global和Math。
 
+  // Global对象 -----------------------------------------------------------------------------------------------
+  // Global（全局）对象可以说是JavaScript中最特别的一个对象了，因为不管你从什么角度上看，这个对象都是不存在的。
+  // JavaScript中的Global对象在某种意义上是作为一个终极的“兜底儿对象”来定义的。
+  // 换句话说，不属于任何其他对象的属性和方法，最终都是它的属性和方法。
+  // 事实上，没有全局变量或全局函数；所有在全局作用域定义的属性和函数，都是Global对象的属性。
+  // 诸如isNaN()、parseInt()以及parseFloat()，实际上全都是Global对象的方法，Global对象还包含其他一些方法。
 
+  // URI编码方法 ----------------------------------------------------
+  // Global对象的encodeURI()和encodeURIComponent()方法可以对URI进行编码，以便发送给浏览器。
+  // 有效的URI中不能包含某些字符，例如空格。
+  // 而这两个URI编码方法就可以对URI进行编码，它们用特殊的UTF-8编码替换所有无效的字符，从而让浏览器能够接受和理解。
+  // 其中，encodeURI()主要用于整个URI（例如：http://www.test.com/test value.html），
+  // 而encodeURIComponent()主要用于对URI中的某一段（例如前面URI中的test value.html）进行编码。
+  // 它们主要区别在于，encodeURI()不会对本身属于URI的特殊字符进行编码，
+  // 例如冒号、正斜杠、问好和井号；而encodeURIComponent()则会对它发现的任何非标准字符进行编码。
+  var uri = "http://www.test.com/test value.html#start";
+  test.equal(encodeURI(uri), "http://www.test.com/test%20value.html#start");
+  test.equal(encodeURIComponent(uri), "http%3A%2F%2Fwww.test.com%2Ftest%20value.html%23start");
+  // 与encodeURI()和encodeURIComponent()方法对应的两个方法分别是decodeURI()和decodeURIComponent()。
+  // 其中，decodeURI()只能对encodeURI()替换的字符进行解码，
+  // 同样，decodeURIComponent()只能对encodeURIComponent()替换的字符进行解码。
+  test.equal(decodeURI("http://www.test.com/test%20value.html#start"), uri);
+  test.equal(decodeURIComponent("http%3A%2F%2Fwww.test.com%2Ftest%20value.html%23start"), uri);
+  // eval()方法 -----------------------------------------------------
+  // eval()方法大概是JavaScript中最强大的一个方法了，eval()方法就像是一个完整的JavaScript解析器，
+  // 它只接受一个参数，即要执行的字符串。看下面的例子：
+  eval("function sayHi(){ return 'hi'; };");
+  test.equal(sayHi(), "hi");
+  // 注意：能够解释代码字符串的能力非常强大，但也非常危险。
+  // 因此在使用eval()时必须极为谨慎，特别是在用它执行用户输入数据的情况下。
+  // 否则，可能会有恶意用户输入威胁你的站点或应用程序安全的代码（即所谓的代码注入）。
+
+  // Math对象 -------------------------------
+  // 与我们在JavaScript直接编写的计算功能相比，Math对象提供的计算功能执行起来要快得多。
+  // Math对象还提供了辅助完成这些计算的属性。
+  // 属性	描述
+  // E	返回算术常量 e，即自然对数的底数（约等于2.718）。
+  // LN2	返回 2 的自然对数（约等于0.693）。
+  // LN10	返回 10 的自然对数（约等于2.302）。
+  // LOG2E	返回以 2 为底的 e 的对数（约等于 1.414）。
+  // LOG10E	返回以 10 为底的 e 的对数（约等于0.434）。
+  // PI	返回圆周率（约等于3.14159）。
+  // SQRT1_2	返回返回 2 的平方根的倒数（约等于 0.707）。
+  // SQRT2	返回 2 的平方根（约等于 1.414）。
+  // Math对象包含的方法如下：
+  // 方法	描述
+  // abs(x)	返回数的绝对值。
+  // acos(x)	返回数的反余弦值。
+  // asin(x)	返回数的反正弦值。
+  // atan(x)	以介于 -PI/2 与 PI/2 弧度之间的数值来返回 x 的反正切值。
+  // atan2(y,x)	返回从 x 轴到点 (x,y) 的角度（介于 -PI/2 与 PI/2 弧度之间）。
+  // ceil(x)	对数进行上舍入。
+  // cos(x)	返回数的余弦。
+  // exp(x)	返回 e 的指数。
+  // floor(x)	对数进行下舍入。
+  // log(x)	返回数的自然对数（底为e）。
+  // max(x,y)	返回 x 和 y 中的最高值。
+  // min(x,y)	返回 x 和 y 中的最低值。
+  // pow(x,y)	返回 x 的 y 次幂。
+  // random()	返回 0 ~ 1 之间的随机数。
+  // round(x)	把数四舍五入为最接近的整数。
+  // sin(x)	返回数的正弦。
+  // sqrt(x)	返回数的平方根。
+  // tan(x)	返回角的正切。
+  test.equal(Math.E, 2.718281828459045);
+  test.equal(Math.LN2, 0.6931471805599453);
+  test.equal(Math.LN10, 2.302585092994046);
+  test.equal(Math.LOG2E, 1.4426950408889634);
+  test.equal(Math.LOG10E, 0.4342944819032518);
+  test.equal(Math.PI, 3.141592653589793);
+  test.equal(Math.SQRT1_2, 0.7071067811865476);
+  test.equal(Math.SQRT2, 1.4142135623730951);
+
+  test.equal(Math.abs(-123.4567890123), 123.4567890123);
+  test.equal(Math.acos(0), Math.PI/2);
+  test.equal(Math.cos(Math.PI/2), 6.123031769111886e-17);  // 精度问题，实际应为0
+  test.equal(Math.cos(0), 1);
+  test.equal(Math.acos(1), 0);
+  test.equal(Math.asin(1), Math.PI/2);
+  test.equal(Math.sin(Math.PI/2), 1);
+  test.equal(Math.sin(0), 0);
+  test.equal(Math.asin(0), 0);
+  test.equal(Math.atan(1), Math.PI/4);
+  test.equal(Math.tan(Math.PI/4), 0.9999999999999999);     // 精度问题， 实际为1
+  test.equal(Math.atan2(-1, 1), -Math.PI/4);
+  test.equal(Math.tan(-Math.PI/4), -0.9999999999999999);   // 精度问题， 实际为-1
+  test.equal(Math.ceil(Math.PI), 4);
+  test.equal(Math.floor(Math.PI), 3);
+  test.equal(Math.round(Math.PI), 3);
+  test.equal(Math.round(3.5), 4);
+  test.equal(Math.round(3.49), 3);
+  test.equal(Math.exp(0), 1);
+  test.equal(Math.log(1), 0);
+  test.equal(Math.exp(1), Math.E);
+  test.equal(Math.log(Math.E), 1);
+  test.equal(Math.exp(2), 7.38905609893065);
+  test.equal(Math.E * Math.E, 7.3890560989306495);
+  test.notEqual(Math.exp(2), Math.E * Math.E);             // 精度问题导致
+  test.equal(Math.log(7.38905609893065), 2);
+  test.equal(Math.log(Math.E * Math.E), 2);
+  test.equal(Math.log(7.3890560989306495), 2);
+  test.equal(Math.max(1, 2), 2);
+  test.equal(Math.min(1, 2), 1);
+  test.equal(Math.pow(Math.E, 2), Math.E * Math.E);
+  test.equal(Math.sqrt(Math.E*Math.E), Math.E);
+  test.equal(Math.sqrt(Math.PI*Math.PI), Math.PI);
+  test.ok(1 - Math.random() > 0);
+  test.ok(Math.random() > 0);
 
   test.done();
 };
