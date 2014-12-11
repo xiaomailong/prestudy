@@ -1,6 +1,23 @@
 {
   "name": "nodeapp",
   "version": "0.0.1",
+  "description": "Bolik's node study app.",
+  "homepage": "http://waterbolik.github.io",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": {
+    "name": "Bolik",
+    "email": "waterbolik@163.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/waterbolik/prestudy.git"
+  },
   "main": "server/server.js",
   "scripts": {
     "pretest": "jshint ."
@@ -8,11 +25,14 @@
   "dependencies": {
     "compression": "^1.0.3",
     "errorhandler": "^1.1.1",
+    "jquery": "^2.1.1",
+    "jquery-ui": "^1.10.5",
     "loopback": "^2.5.0",
     "loopback-boot": "^2.2.0",
     "loopback-connector-mysql": "^1.4.9",
     "loopback-datasource-juggler": "^2.7.0",
     "serve-favicon": "^2.0.1",
+    "underscore": "^1.7.0",
     "wind": "^0.7.3"
   },
   "optionalDependencies": {

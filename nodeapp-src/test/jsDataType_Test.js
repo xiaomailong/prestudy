@@ -1,5 +1,5 @@
 
-exports.testDateType = function(test) {
+exports.JavaScriptDateType_Test = function(test) {
   // JavaScript中有5种简单数据类型（也称为基本数据类型）：
   // Undefined、Null、Boolean、Number和String。
   // 还有1种复杂数据类型——Object，Object本质上是由一组无序的名值对组成的。
@@ -475,7 +475,8 @@ exports.testDateType = function(test) {
   test.equal(colors3.length, 3);
   test.equal(colors4.length, 0);
   test.equal(colors5.length, 4);
-  // 数组的length属性很有特点——它不是只读的。因此，通过设置这个属性，可以从数组的末尾移除项或想数组中添加新项。
+  // 数组的length属性很有特点——它不是只读的。
+  // 因此，通过设置这个属性，可以从数组的末尾移除项或想数组中添加新项。
   test.equal(colors5[3], "black");
   colors5.length = 3;
   test.equal(colors5[3], undefined);

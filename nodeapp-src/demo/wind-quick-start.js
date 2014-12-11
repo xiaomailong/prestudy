@@ -2,10 +2,10 @@ var Wind = require("wind");
 
 var fib = eval(Wind.compile("async", function () {
 
-    $await(Wind.Async.sleep(300));
+    $await(Wind.Async.sleep(100));
     console.log(0);
 
-    $await(Wind.Async.sleep(300));
+    $await(Wind.Async.sleep(100));
     console.log(1);
 
     var a = 0, current = 1, i = 0;
@@ -15,7 +15,7 @@ var fib = eval(Wind.compile("async", function () {
         a = current;
         current = a + b;
 
-        $await(Wind.Async.sleep(1));
+        $await(Wind.Async.sleep(10));
         // console.log(current);
         if (current == Infinity) {
           console.log(--i);

@@ -1,5 +1,5 @@
 
-exports.testThis = function(test) {
+exports.This_Test = function(test) {
   // 在node环境里，如果执行一个js脚本，在全局范围内，this以一个空对象开始作为最高级的命名空间，
   // 这个时候，它和global不是等价的。
   test.notEqual(this, global);
@@ -9,8 +9,8 @@ exports.testThis = function(test) {
   test.equal(global.toString(), "[object global]");
 
   foo = "bar";
-  console.log(this.foo);
-  console.log(global.foo);
+  // console.log(this.foo);
+  // console.log(global.foo);
   test.equal(foo, "bar");
   test.equal(this.foo, undefined);
   test.equal(global.foo, "bar");
