@@ -2,7 +2,7 @@ TEMPLATE = app
 LANGUAGE = C++
 
 CONFIG += warn_on debug console
-QMAKE_MAC_SDK = macosx10.9
+#QMAKE_MAC_SDK = macosx10.10
 
 INCLUDEPATH += . \
     ../../googletest/ \
