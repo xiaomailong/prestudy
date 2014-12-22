@@ -200,7 +200,9 @@ exports.JavaScriptDateType_Test = function(test) {
   test.ok(!isInteger("1234"));
   test.ok(!isInteger(NaN));
   test.ok(!isInteger(Infinity));
-
+  test.equal(Number.MIN_VALUE, 5e-324);
+  test.equal(Number.MAX_VALUE, 1.7976931348623157e+308);
+  test.equal(Infinity, 1.7976931348623157e+308 + 0.0000000000000001e+308);
   // Number()函数的转换规则如下：--------------------------
   // ● 如果是Boolean值，true和false将分别被替换为1和0
   // ● 如果是数字值，只是简单的传入和返回
