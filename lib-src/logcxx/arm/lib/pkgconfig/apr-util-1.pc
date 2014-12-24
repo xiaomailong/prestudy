@@ -1,0 +1,13 @@
+prefix=/home/dtg/arm
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+APRUTIL_MAJOR_VERSION=1
+includedir=${prefix}/include/apr-${APRUTIL_MAJOR_VERSION}
+
+Name: APR Utils
+Description: Companion library for APR
+Version: 1.3.9
+# assume that apr-util requires libapr of same major version
+Requires: apr-1
+Libs: -L${libdir} -laprutil-${APRUTIL_MAJOR_VERSION}  /home/dtg/work/apr-util-1.3.9/xml/expat/lib/libexpat.la
+Cflags: -I${includedir}
