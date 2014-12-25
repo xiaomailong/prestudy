@@ -40,6 +40,8 @@
     return this;
   };
 
+  waterbolik.getCitizenIdentityCardInfo = require("./lib/CitizenIdentityCard.js");
+
   // 格式化数字成0,000.00
   waterbolik.formatMoneyByComma = function(value) {
     var result = "";
@@ -99,7 +101,6 @@
   //   }
   //   return true;
   // }
-
 
 
   // AMD registration happens at the end for compatibility with AMD loaders
