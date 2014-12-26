@@ -26,7 +26,6 @@ function openMac(callback) {
 	callback(null,"Chrome");
 }
 
-
 function normalFunc() {
 	console.log("Normal function Run");
 	drinkWater(function (error,data) {
@@ -57,21 +56,18 @@ function normalFunc() {
 function seriesFunc() {
 	async.series([
 		function(callback) {
-			sleep(100);
 			console.log("Series function Run");
 			drinkWater(function(error,data) {
 				callback(error,data);
 			});
 		},
 		function(callback) {
-			sleep(100);
 			console.log("drink water finish, I will eat food");
 			eatFood(function(error,data) {
 				callback(error,data);
 			});
 		},
 		function(callback) {
-			sleep(100);
 			console.log("eat food finish, I will open mac");
 			openMac(function(error,data) {
 				callback(error,data);
@@ -122,11 +118,11 @@ function waterFunc() {
 exports.Async_Test = function(test) {
 	// 使用 async node.js 可以将复杂的逻辑表现的更直观。
 	// 但如果逻辑只有一次回调，就不建议使用async了，这会无意义的增加一些运行的成本。
-	normalFunc();
-
-	waterFunc();
-
-	seriesFunc();
+	// normalFunc();
+	//
+	// waterFunc();
+	//
+	// seriesFunc();
 
 
 
