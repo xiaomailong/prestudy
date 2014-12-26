@@ -125,3 +125,23 @@ function isChinese(str){
 function isQQ(str){
 	return /^\d{5,9}$/.test(str);
 }
+// 去除头部和尾部空格
+function trim(str) {
+	return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+// 去除头部空格
+function ltrim(str) {
+	return str.replace(/(^\s*)/g, "");
+}
+// 去除尾部空格
+function rtrim(str) {
+	return str.replace(/(\s*$)/g, "");
+}
+// 去除头尾和中间空格,制表符
+function trimSpaces(str){
+	var ResultStr = "";
+	Temp=str.split(/\s/);
+	for(i = 0; i < Temp.length; i++)
+		ResultStr +=Temp[i];
+		return ResultStr;
+}
