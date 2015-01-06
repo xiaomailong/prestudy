@@ -39,5 +39,8 @@ exports.UnderscoreObjectFunctions_Test = function(test) {
   test.equal(card.cardNumber, "653131192312212428");
   test.equal(card.county, "新疆塔什库尔干塔吉克自治县");
 
+  test.equal(waterbolik.md5("abc"), "900150983cd24fb0d6963f7d28e17f72");
+  test.equal(waterbolik.sha256("abc"), "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
+
   test.done();
 }

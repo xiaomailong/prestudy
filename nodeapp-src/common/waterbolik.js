@@ -41,6 +41,8 @@
   };
 
   waterbolik.getCitizenIdentityCardInfo = require("./lib/CitizenIdentityCard.js");
+  waterbolik.md5 = require("./lib/md5.js");
+  waterbolik.sha256 = require("./lib/sha256.js");
 
   // 格式化数字成0,000.00
   waterbolik.formatMoneyByComma = function(value) {
