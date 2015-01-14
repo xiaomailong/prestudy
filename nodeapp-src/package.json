@@ -31,6 +31,7 @@
     "cors": "^2.5.2",
     "errorhandler": "^1.1.1",
     "iconv-lite": "^0.4.5",
+    "ipware": "0.0.3",
     "loopback": "^2.5.0",
     "loopback-boot": "^2.2.0",
     "loopback-connector-mysql": "^1.4.9",
