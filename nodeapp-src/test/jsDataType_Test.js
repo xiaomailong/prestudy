@@ -986,7 +986,7 @@ exports.JavaScriptDateType_Test = function(test) {
 
   test.equal(Math.abs(-123.4567890123), 123.4567890123);
   test.equal(Math.acos(0), Math.PI/2);
-  test.equal(Math.cos(Math.PI/2), 6.123031769111886e-17);  // 精度问题，实际应为0
+  test.equal(Math.cos(Math.PI/2), 6.123233995736766e-17);  // 精度问题，实际应为0 // 6.123031769111886e-17
   test.equal(Math.cos(0), 1);
   test.equal(Math.acos(1), 0);
   test.equal(Math.asin(1), Math.PI/2);
@@ -1006,9 +1006,9 @@ exports.JavaScriptDateType_Test = function(test) {
   test.equal(Math.log(1), 0);
   test.equal(Math.exp(1), Math.E);
   test.equal(Math.log(Math.E), 1);
-  test.equal(Math.exp(2), 7.38905609893065);
+  test.equal(Math.exp(2), 7.3890560989306495);   // 7.38905609893065
   test.equal(Math.E * Math.E, 7.3890560989306495);
-  test.notEqual(Math.exp(2), Math.E * Math.E);             // 精度问题导致
+  test.equal(Math.exp(2), Math.E * Math.E);             // 精度问题导致
   test.equal(Math.log(7.38905609893065), 2);
   test.equal(Math.log(Math.E * Math.E), 2);
   test.equal(Math.log(7.3890560989306495), 2);
@@ -1028,6 +1028,306 @@ exports.JavaScriptDateType_Test = function(test) {
     return Object.prototype.toString.call(obj) === '[object RegExp]';
   };
   test.ok(isRegExp(/./));
+
+  // 一元操作符 ------------------------------------------
+  // 1、自增自减操作符：分为前置型和后置型；
+  // 前置型：++a;--a;
+  // 后置型：a++;a--;
+  {
+    var a, b, i = 1, j = 1;
+    a = i++; // 相当于a = i; i = i+1;
+    b = ++j; // 相当于j = j+1; b = j;
+    test.equal(a, 1);
+    test.equal(i, 2);
+    test.equal(b, 2);
+    test.equal(j, 2);
+  }
+  // 2、一元加减操作符：a=+i;a=-i;
+  {
+    var a, b, i = 1, j = 1;
+    a = +i;
+    b = -j;
+    test.equal(a, 1);
+    test.equal(i, 1);
+    test.equal(b, -1);
+    test.equal(j, 1);
+  }
+
+  // 位操作符 --------------------------------------------
+  // 1、按位非~ （NOT）
+  // 非，即按二进制形式将所有数字取反。
+  // 常见用法：位运算 NOT 实质上是对数字求负，然后减 1
+  {
+    test.equal(~Infinity, -1);
+    test.equal(~-Infinity, -1);
+    var a = Math.floor(Math.random() * (Math.pow(2, 31)));
+    test.equal(~a, -a - 1);
+    test.equal(~-a, a - 1);
+  }
+  // 2、按位或| （OR）
+  // 或，即按二进制形式将所有的数字与目标数字按位进行或操作。
+  // 常见用法：通常用于二进制数字的无条件赋值。例如：一个数字|1，相当于与获取与当前数字最接近的奇数。
+  {
+    test.equal(2 | 1, 3);
+    test.equal(Infinity | 1, 1);
+    test.equal(-Infinity | 1, 1);
+  }
+  // 3、按位与& （AND）
+  // 与，即按二进制形式将所有的数字与目标数字按位进行与操作。
+  // 常见用法：通常用于二进制的取位操作，例如：一个数字&1，如果结果为0则为偶数，如果为1则为奇数。
+  {
+    test.equal(7 & 1, 1);
+    test.equal(7 & 2, 2);
+    test.equal(Infinity & 1, 0);
+    test.equal(-Infinity & 1, 0);
+  }
+  // 4、按位异或^ （XOR）
+  // 异或，即按二进制形式将所有数字与目标数字对比，只有两个数字不相同即只有一个数位存放的是1的时候返回1，如两个数字相同返回0.
+  // 常见用法：xor运算的逆运算是它本身，也就是说两次异或同一个数最后结果不变。可以用于简单的加密，或交互数值操作。
+  {
+    var a = Math.floor(Math.random() * Math.pow(2, 31));
+    var b = Math.floor(Math.random() * Math.pow(2, 31));
+    test.equal(a ^ b ^ b, a);
+  }
+  // 5、左移<<
+  // 左移，即按二进制形式把所有的数字向左移动对应的位数，高位移出(舍弃)，低位的空位补零。左移不会影响符号位。
+  // 数学意义：在数字没有溢出的前提下，对于正数和负数，左移一位都相当于乘以2的1次方，左移n位就相当于乘以2的n次方。
+  {
+    test.equal(1 << 2, 4);
+    test.equal(-1 << 4, -16);
+    var a = Math.floor(Math.random() * Math.pow(2, 30));
+    test.equal(a << 1, a * 2);
+  }
+  // 6、右移
+  // 6.1有符号的右移>>：即按二进制形式把所有的数值向右移动但是保留符号位。
+  // 数学意义：在数字没有溢出的前提下，对于正数和负数，右移一位都相当于除以2的1次方，右移n位就相当于除以2的n次方。
+  {
+    test.equal(4 >> 2, 1);
+    test.equal(1 >> 1, 0);
+    test.equal(-16 >> 4, -1);
+    var a = Math.floor(Math.random() * Math.pow(2, 31));
+    test.equal(a >> 2, Math.floor(a / 4));
+  }
+  // 6.2无符号的右移>>>:即按二进制形式把所有的数值,包括符号位都向右移动。
+  // 对于正数来说>>和>>>的结果是一样的；
+  // 对负数来说，由于负数以其绝对值的补码形式表示，因此会导致无符号右移结果非常大。
+  {
+    var a = Math.floor(Math.random() * Math.pow(2, 31));
+    test.equal(a >> 2, a >>> 2);
+    test.equal(-1 >>> 1, 2147483647);
+    test.equal(-1 >>> 8, 16777215);
+    test.equal(-1 >>> 16, 65535);
+    test.equal(-1 >>> 24, 255);
+    test.equal(-1 >>> 31, 1);
+    test.equal(-1 >>> 32, 4294967295);
+    test.equal(-1 >>> 33, 2147483647);
+    test.equal(a >>> 33, a >>> 1);
+    test.equal(-a >>> 33, -a >>> 1);
+  }
+
+  // 布尔操作符 --------------------------------------------
+  // 1、逻辑非!
+  // 逻辑非用!表示，可以应用与ECMAScript的任何类型的值，逻辑非操作返回的是一个布尔值（true/false）。
+  // 该操作符首先会将它的操作数转换为一个布尔值，然后再对其求反.
+  // !!相当于Boolean()函数。
+  {
+    test.ok(!false);
+    test.ok(!!true);
+  }
+  // 2、逻辑与&&
+  // 逻辑与有两个操作数。
+  // 逻辑与操作可以应用于任何类型的操作数，而不仅仅是布尔值。
+  // 在有一个操作数不是布尔值的情况下，逻辑与操作就不一定返回布尔值；此时，它遵循一下规则：
+  // 1. 如果第一个操作数是对象，则返回第二个操作数；
+  // 2. 如果第二个操作数是对象，则只有在第一个操作数的求值结果为true的情况下才会返回该对象；
+  // 3. 如果两个操作符都是对象，则返回第二个操作数； 遵循第一规则。
+  // 4. 如果有一个操作数是null，则返回null；
+  // 5. 如果有一个操作数是NaN，则返回NaN；
+  // 6. 如果有一个操作数是undefined，则返回undefined。
+  // 逻辑与操作属于短路操作，即如果第一操作数能够决定结果，那么就不会再对第二个操作数求值。
+  // （可以理解为内部的两个return操作）。因此当4、5、6规则冲突时，遵循短路操作原则。
+  {
+    var a = undefined, b = NaN, c = null, d = true, e = false;
+    test.equal(a && b, undefined);
+    test.ok(Number.isNaN(b && a));
+    test.equal(c && a, null);
+    test.equal(e && a, false);
+    test.equal(e && b, false);
+    test.equal(e && c, false);
+    test.equal(e && d, false);
+    test.equal(d && a, undefined);
+    test.ok(Number.isNaN(d && b));
+    test.equal(d && c, null);
+  }
+  // 3、逻辑或||
+  // 逻辑或有两个操作数。
+  // 逻辑或与逻辑与相似，操作可以应用于任何类型的操作数，而不仅仅是布尔值。
+  // 在有一个操作数不是布尔值的情况下，逻辑或操作就不一定返回布尔值；此时，它遵循一下规则：
+  // 1. 如果第一个操作数是对象，则返回第一个操作数；
+  // 2. 如果第一个操作数的结果是false，则返回第二个操作数；
+  // 3. 如果两个操作符都是对象，则返回第一个操作数，遵循第一条规则。
+  // 4. 如果两个操作数都是null，则返回null；
+  // 5. 如果两个操作数都是NaN，则返回NaN；
+  // 6. 如果两个操作数都是undefined，则返回undefined。
+  // 逻辑或操作属于短路操作，即如果第一操作数结果为true，那么就不会再对第二个操作数求值。
+  // 我们可以利用逻辑或的这个特性来避免为变量赋null或undefined的值
+  // 例如：var myObject=firstObject||secondObject
+  // 如果firstObject不是null，则firstObject被赋值给myObject,否则将secondObject的值赋给myObject.
+  {
+    var a = undefined, b = NaN, c = null, d = true, e = false;
+    test.ok(Number.isNaN(a || b));
+    test.ok(Number.isNaN(b || b));
+    test.equal(b || a, null);
+    test.equal(c || a, null);
+    test.equal(e || a, undefined);
+    test.ok(Number.isNaN(e || b));
+    test.equal(e || c, null);
+    test.equal(e || d, true);
+    test.equal(d || a, true);
+    test.equal(d || b, true);
+    test.equal(d || c, true);
+  }
+  // 乘性操作符 -------------------------------------------------------------
+  // 1、乘法：*
+  // 乘法操作符的一些特殊规则：
+  // 如果操作数都是数值，按照常规的乘法计算，如果乘积超过了ECMAscript数值的表示范围，则返回infinity或者-infinity
+  // 如果有一个操作数是NaN，那返回结果就是NaN
+  // 如果是infinity与0相乘，返回NaN
+  // 如果infinity与非0数相乘，返回infinity或者-infinity
+  // infinity与infinity相乘，返回infinity
+  // 如果有一个操作数不是数值，后台会先调用number()将其转化为数值，再应用上面的规则
+  {
+    test.equal(5 * 6, 30);
+    test.ok(Number.isNaN(5 * NaN));
+    test.ok(Number.isNaN(Infinity * 0));
+    test.equal(Infinity * 2, Infinity);
+    test.equal(Infinity * Infinity, Infinity);
+    test.equal(Infinity * -Infinity, -Infinity);
+    test.equal(-Infinity * -Infinity, Infinity);
+    test.equal(Infinity * -2, -Infinity);
+    test.equal("5" * 5, 25);
+    test.equal(true * 10, 10);
+    test.equal(false * 10, 0);
+  }
+  // 2、除法：/
+  // 除法操作符的一些特殊规则：
+  // 如果操作数都是数值，按照常规的除法计算，如果商超过了ECMAscript数值的表示范围，则返回infinity或者-infinity
+  // 如果有一个操作数是NaN，那返回结果就是NaN
+  // 如果是infinity被infinity除，返回NaN
+  // 如果是0被0除，返回NaN
+  // 如果是非0的有限数被0除，返回infinity或者-infinity
+  // 如果是infinity被非0的有限数除，返回infinity或者-infinity
+  // 如果有一个操作数不是数值，后台会先调用number()将其转化为数值，再应用上面的规则
+  {
+    test.equal(5 / 5, 1);
+    test.ok(Number.isNaN(5 / NaN));
+    test.ok(Number.isNaN(Infinity / Infinity));
+    test.ok(Number.isNaN(0 / 0));
+    test.equal(5 / 0, Infinity);
+    test.equal(-5 / 0, -Infinity);
+    test.equal(1000 / Infinity, 0);
+    test.equal(-1000 / Infinity, 0);
+    test.equal(Infinity / 5, Infinity);
+    test.equal(Infinity / -5, -Infinity);
+    test.equal(-Infinity / -5, Infinity);
+    test.equal("5" / 5, 1);
+    test.equal(true / 10, 0.1);
+    test.equal(false / 10, 0);
+  }
+  // 3、求模（余数）：%
+  // 求模操作符的一些特殊规则：
+  // 如果操作数都是数值，按照常规的除法计算，返回除得的余数
+  // 如果被除数是无穷大，除数是有限数，那返回结果就是NaN
+  // 如果被除数是有限大，除数是0，返回NaN
+  // 如果是infinity被infinity除，返回NaN
+  // 如果被除数是有限大而除数是无穷大，返回被除数
+  // 如果被除数是0，返回0
+  // 如果有一个操作数不是数值，后台会先调用number()将其转化为数值，再应用上面的规则
+  {
+    test.equal(26 % 5, 1);
+    test.ok(Number.isNaN(Infinity % 3));
+    test.ok(Number.isNaN(3 % 0));
+    test.equal(5 % Infinity, 5);
+    test.equal(0 % 10, 0);
+    test.equal(true % 25, 1);
+    test.ok(Number.isNaN(3 % false));
+  }
+  // 加性操作符 -----------------------------------------------
+  // 1、加法操作符：+
+  // 加法操作符：+
+  // 如果操作数中有一个是字符串：
+  // 如果两个操作数都是字符串，那么将第二个操作数拼接到第一个操作数后面。
+  // 如果只有一个操作数是字符串，那么将另一个操作数转化为字符串后再执行上述规则
+  {
+    test.equal(5 + 5, 10);
+    test.equal(5 + "5", "55");   //数字加字符串
+  }
+  // 减法操作符：-
+  // 如果有一个操作数是字符串、布尔值、null或者undefined，则在后台先调用number()将其转化为数值，然后执行减法。
+  {
+    test.equal(5 - 5, 0);
+    test.equal(5 - "5", 0);
+  }
+  // 关系操作符 ------------------------------------------------
+  // 大于：>,小于：<,大于等于：>=,小于等于：<=
+  // 关系操作符特殊规则：
+  // 如果操作数是字符串，对比两个字符串相应的字符编码
+  // 如果操作数一个是数值，则先将另一个操作数转化为数值，再进行比较
+  // 任何数与NaN进行比较，结果都是false
+  {
+    test.ok(1 < 2);
+    test.ok("2" > 1);
+    test.ok("a" > "A");
+    test.ok(!(1 > NaN));
+  }
+  // 相等操作符 --------------------------------------------
+  // 1、相等和不相等：==和!=
+  // 这两个操作符都会先将操作数转换为同一类型再进行比较
+  // 转换时，相等和不相等操作符遵循如下规则：
+  // 如果其中一个操作数的类型为 Boolean ，那么，首先将它转换为数字类型，false 转换为 0, true 将转换为 1。
+  // 如果其中一个操作数的类型是字符串，另外一个为数字类型，那么，将字符串转换为数字进行比较。
+  // 如果其中一个操作数是对象，另一个不是，则先调用操作数的valueof()方法，得到基本类型值之后再比较
+  // 比较时的特殊规则：
+  // null 和 undefined 是相等的。
+  // null 和 undefined 不会转换为任何其他类型
+  // 如果任何一个操作的结果为 NaN，那么相等比较返回 false，不相等比较返回 true。
+  // 注意，即使两个操作数都为 NaN，返回结果一样是 false，也就是说，NaN 不等于 NaN。
+  // 如果两个操作数都是对象，那么比较它们引用的值，如果引用同一个对象，那么，返回真，否则，返回假。
+  {
+    test.ok(null == undefined);
+    test.ok(NaN != NaN);
+    test.ok(12 == "12")
+  }
+  // 2、全等和不全等：==和===
+  // ==会将操作数转换成同一类型比较；
+  // ===不会转换类型，直接比较
+  {
+    test.ok(!(null === undefined));
+    test.ok(!("1" === 1));
+  }
+  // 条件操作符 ---------------------------------------------
+  // 变量=条件表达式？真值：假值
+  // 首先会对条件表达式求值，如果结果是真，则把真值赋给变量，如果为假则把假值赋给变量。
+  {
+    var a = Math.random(), b = Math.random();
+    test.equal(a > b ? a : b, Math.max(a, b));
+  }
+  // 赋值操作符 ---------------------------------------------
+  // 1、简单赋值操作符：=
+  // 2、复合赋值操作符：+=、-=、*=、/=、%=、>>=、<<=、>>>=
+  {
+    var a = 1, b = 2;
+    test.equal(a += 1, 2);
+    test.equal(b *= 2, 4);
+  }
+  // 逗号操作符 ----------------------------------------------
+  // 逗号操作符可以在一条语句中执行多个操作
+  // 用途：1、声明多个变量 2、赋值
+  // 在用于赋值操作时，逗号操作符总是返回最后一个表达式的值。
+  {
+    var a = 1, b = 2;
+    test.equal((a *= 10, b += 2, a + b), 14);
+  }
 
   test.done();
 };

@@ -2,7 +2,7 @@ var os = require('os');
 function getLocalIP() {
 	var map = [];
 	var inet = os.networkInterfaces();
-	console.log(inet);
+	// console.log(inet);
 	for (var dev in inet) {
 		// console.log(dev);
 		// console.log(inet[dev]);
