@@ -202,7 +202,33 @@ exports.JavaScriptDateType_Test = function(test) {
   test.ok(!isInteger(Infinity));
   test.equal(Number.MIN_VALUE, 5e-324);
   test.equal(Number.MAX_VALUE, 1.7976931348623157e+308);
-  test.equal(Infinity, 1.7976931348623157e+308 + 0.0000000000000001e+308);
+  test.equal(Number.POSITIVE_INFINITY, Infinity);
+  test.equal(Number.NEGATIVE_INFINITY, -Infinity);
+  test.ok(Number.isInteger(1));
+  test.ok(!Number.isInteger("1"));
+  test.ok(!Number.isInteger("A"));
+  // toExponential(value) ：将一个数字转为指数类型，参数表示小数点后的位数
+  test.equal((123456789).toExponential(2), "1.23e+8");
+  test.equal((123456789).toExponential(5), "1.23457e+8");
+  test.equal((123456789).toExponential(10), "1.2345678900e+8");
+  // toFixed(value) ：将一个数字转换为指定小数位数的字符串。不传入参数，就是没小数位。返回值为四舍五入
+  test.equal((1.23456789).toFixed(), "1");
+  test.equal((1.23456789).toFixed(5), "1.23457");
+  test.equal((1).toFixed(2), "1.00");
+  // toString() ：使用指定的进制，将一个数字转换为字符串。不传入参数，默认为十进制。
+  test.equal((10).toString(), "10");
+  test.equal((10).toString(2), "1010");
+  test.equal((10).toString(8), "12");
+  test.equal((10).toString(10), "10");
+  test.equal((10).toString(16), "a");
+  test.equal(Infinity, Number.MAX_VALUE + 0.0000000000000001e+308);
+  // Js中的2个浮点数进行加减乘除运算，会返回异常的数值，如：0.2 + 0.7，返回0.899999999999。可以使用toFixed()方法，指定小数位。
+  test.equal(0.2 + 0.7, 0.8999999999999999);
+  test.equal(0.7 - 0.2, 0.49999999999999994);
+  test.equal(3.03 * 10, 30.299999999999997);
+  test.equal((0.2 + 0.7).toFixed(1), 0.9);
+  test.equal((0.7 - 0.2).toFixed(2), 0.50);
+  test.equal((3.03 * 10).toFixed(2), 30.30);
   // Number()函数的转换规则如下：--------------------------
   // ● 如果是Boolean值，true和false将分别被替换为1和0
   // ● 如果是数字值，只是简单的传入和返回
@@ -975,51 +1001,52 @@ exports.JavaScriptDateType_Test = function(test) {
   // sin(x)	返回数的正弦。
   // sqrt(x)	返回数的平方根。
   // tan(x)	返回角的正切。
-  test.equal(Math.E, 2.718281828459045);
-  test.equal(Math.LN2, 0.6931471805599453);
-  test.equal(Math.LN10, 2.302585092994046);
-  test.equal(Math.LOG2E, 1.4426950408889634);
-  test.equal(Math.LOG10E, 0.4342944819032518);
-  test.equal(Math.PI, 3.141592653589793);
-  test.equal(Math.SQRT1_2, 0.7071067811865476);
-  test.equal(Math.SQRT2, 1.4142135623730951);
+  {
+    test.equal(Math.E, 2.718281828459045);
+    test.equal(Math.LN2, 0.6931471805599453);
+    test.equal(Math.LN10, 2.302585092994046);
+    test.equal(Math.LOG2E, 1.4426950408889634);
+    test.equal(Math.LOG10E, 0.4342944819032518);
+    test.equal(Math.PI, 3.141592653589793);
+    test.equal(Math.SQRT1_2, 0.7071067811865476);
+    test.equal(Math.SQRT2, 1.4142135623730951);
 
-  test.equal(Math.abs(-123.4567890123), 123.4567890123);
-  test.equal(Math.acos(0), Math.PI/2);
-  test.equal(Math.cos(Math.PI/2), 6.123233995736766e-17);  // 精度问题，实际应为0 // 6.123031769111886e-17
-  test.equal(Math.cos(0), 1);
-  test.equal(Math.acos(1), 0);
-  test.equal(Math.asin(1), Math.PI/2);
-  test.equal(Math.sin(Math.PI/2), 1);
-  test.equal(Math.sin(0), 0);
-  test.equal(Math.asin(0), 0);
-  test.equal(Math.atan(1), Math.PI/4);
-  test.equal(Math.tan(Math.PI/4), 0.9999999999999999);     // 精度问题， 实际为1
-  test.equal(Math.atan2(-1, 1), -Math.PI/4);
-  test.equal(Math.tan(-Math.PI/4), -0.9999999999999999);   // 精度问题， 实际为-1
-  test.equal(Math.ceil(Math.PI), 4);
-  test.equal(Math.floor(Math.PI), 3);
-  test.equal(Math.round(Math.PI), 3);
-  test.equal(Math.round(3.5), 4);
-  test.equal(Math.round(3.49), 3);
-  test.equal(Math.exp(0), 1);
-  test.equal(Math.log(1), 0);
-  test.equal(Math.exp(1), Math.E);
-  test.equal(Math.log(Math.E), 1);
-  test.equal(Math.exp(2), 7.3890560989306495);   // 7.38905609893065
-  test.equal(Math.E * Math.E, 7.3890560989306495);
-  test.equal(Math.exp(2), Math.E * Math.E);             // 精度问题导致
-  test.equal(Math.log(7.38905609893065), 2);
-  test.equal(Math.log(Math.E * Math.E), 2);
-  test.equal(Math.log(7.3890560989306495), 2);
-  test.equal(Math.max(1, 2), 2);
-  test.equal(Math.min(1, 2), 1);
-  test.equal(Math.pow(Math.E, 2), Math.E * Math.E);
-  test.equal(Math.sqrt(Math.E*Math.E), Math.E);
-  test.equal(Math.sqrt(Math.PI*Math.PI), Math.PI);
-  test.ok(1 - Math.random() > 0);
-  test.ok(Math.random() > 0);
-
+    test.equal(Math.abs(-123.4567890123), 123.4567890123);
+    test.equal(Math.acos(0), Math.PI/2);
+    test.equal(Math.cos(Math.PI/2), 6.123233995736766e-17);  // 精度问题，实际应为0 // 6.123031769111886e-17
+    test.equal(Math.cos(0), 1);
+    test.equal(Math.acos(1), 0);
+    test.equal(Math.asin(1), Math.PI/2);
+    test.equal(Math.sin(Math.PI/2), 1);
+    test.equal(Math.sin(0), 0);
+    test.equal(Math.asin(0), 0);
+    test.equal(Math.atan(1), Math.PI/4);
+    test.equal(Math.tan(Math.PI/4), 0.9999999999999999);     // 精度问题， 实际为1
+    test.equal(Math.atan2(-1, 1), -Math.PI/4);
+    test.equal(Math.tan(-Math.PI/4), -0.9999999999999999);   // 精度问题， 实际为-1
+    test.equal(Math.ceil(Math.PI), 4);
+    test.equal(Math.floor(Math.PI), 3);
+    test.equal(Math.round(Math.PI), 3);
+    test.equal(Math.round(3.5), 4);
+    test.equal(Math.round(3.49), 3);
+    test.equal(Math.exp(0), 1);
+    test.equal(Math.log(1), 0);
+    test.equal(Math.exp(1), Math.E);
+    test.equal(Math.log(Math.E), 1);
+    test.equal(Math.exp(2), 7.3890560989306495);   // 7.38905609893065
+    test.equal(Math.E * Math.E, 7.3890560989306495);
+    test.equal(Math.exp(2), Math.E * Math.E);             // 精度问题导致
+    test.equal(Math.log(7.38905609893065), 2);
+    test.equal(Math.log(Math.E * Math.E), 2);
+    test.equal(Math.log(7.3890560989306495), 2);
+    test.equal(Math.max(1, 2), 2);
+    test.equal(Math.min(1, 2), 1);
+    test.equal(Math.pow(Math.E, 2), Math.E * Math.E);
+    test.equal(Math.sqrt(Math.E*Math.E), Math.E);
+    test.equal(Math.sqrt(Math.PI*Math.PI), Math.PI);
+    test.ok(1 - Math.random() > 0);
+    test.ok(Math.random() > 0);
+  }
   // 正则表达式判断
   // 使用 typeof 运算符判断正则表达式，一般都会返回 'object'，
   // 不过也有一些实现会返回 'function'，
@@ -1327,6 +1354,256 @@ exports.JavaScriptDateType_Test = function(test) {
   {
     var a = 1, b = 2;
     test.equal((a *= 10, b += 2, a + b), 14);
+  }
+
+  // Label: <语句组>
+  {
+    var num = 0;
+    for (var i = 0 ; i < 10 ; i++) {
+      for (var j = 0 ; j < 10 ; j++) {
+        if (i == 5 && j == 5) {
+          break;
+        }
+        num++;
+      }
+    }
+    test.equal(num, 95);  // 未加lable：
+  }
+  {
+    var num = 0;
+    outPoint:
+    for (var i = 0 ; i < 10 ; i++) {
+      for (var j = 0 ; j < 10 ; j++) {
+        if (i == 5 && j == 5) {
+          break outPoint;
+        }
+        num++;
+      }
+    }
+    test.equal(num, 55);  // 加入lable：是因为执行到break outpoint时，直接跳出到outPoint层
+  }
+  {
+    var num = 0;
+    for (var i = 0 ; i < 10 ; i++) {
+      outPoint:
+      for (var j = 0 ; j < 10 ; j++) {
+        if (i == 5 && j == 5) {
+          break  outPoint;
+        }
+        num++;
+      }
+    };
+    test.equal(num, 95);
+  }
+
+  // break语句执行后跳出for()循环
+  {
+    var num = 0;
+    for (var i = 1 ; i < 10 ; i++){
+      if (i % 5 == 0){
+        break;
+      }
+      num++;
+    };
+    test.equal(num, 4);
+  }
+  // continue语句执行后跳到for()循环，继续执行循环，直到循环条件不成立。
+  {
+    var num = 0;
+    for (var i = 1 ; i < 10 ; i++){
+      if(i % 5 == 0){
+        continue;
+      }
+      num++;
+    };
+    test.equal(num, 8);
+  }
+
+  // switch语句在比较时使用的是全等操作符比较，因此不会发生类型转换。
+
+  // ECMAscript函数参数的特点;
+  // 不介意传递进来多少个参数
+  // 不介意传递进来的参数的数据类型
+  // 之所以有上述两个特点，是因为ECMAscript参数在内部是用一个数组表示的。函数接收到的始终是这个数组，而不关心数组中包含哪些参数，或者是否有参数。
+  // 实际上，在函数体内可以通过arguments对象来访问这个参数数组，从而获取传递给函数的每一个参数。
+  {
+    function howManyArgs() {
+      for (var arg in arguments) {
+        test.equal(Number.parseInt(arg) + 1, arguments[arg]);
+      }
+      return arguments.length;
+    }
+    test.equal(howManyArgs(1, 2, 3), 3);
+  }
+  // arguments还有一个属性：callee,它的作用是返回正在被执行的function
+  // 在使用函数递归调用时推荐使用arguments.callee代替函数名本身。
+  {
+    function getcount(a) {
+      if (a == 1) {
+        return 1;
+      }
+      return a + arguments.callee(--a);
+    }
+    test.equal(getcount(2), 3);
+    test.equal(getcount(5), 15);
+  }
+  // arguments.length返回的是传递给函数的参数个数，也叫实参
+  // arguments.callee.length返回的是函数定义的参数，即形参。
+  {
+    function calleeLengthDemo(arg1, arg2) {
+      test.equal(arguments.length, 4);
+      test.equal(arguments.callee.length, 2);
+    }
+    calleeLengthDemo(1,2,3,4);
+  }
+  // ECMAscript函数不能实现重载，不能够定义同样的函数然后通过编译器去根据不同的参数执行不同的函数。
+  // 只要函数名一致，ECMAscript就会认为是同一个东西，那么后定义的就会覆盖先定义的。
+  // 对于ECMAscript函数来说，我自己本没有参数，你给我什么参数我就接受什么样的参数。
+
+  // 变量分类：
+  // 基本类型值：null、undefined、number、string、Boolean；
+  // 引用类型值：保存在内存中的对象，如：Object / Array / Function / Date / RegExp / Error / Map / Set …
+  {
+    var person = new Object();
+    var person2 = person;
+    test.equal(person.name, undefined);
+    person.name = "Nicholas";
+    test.equal(person.name, "Nicholas");
+    test.equal(person2.name, "Nicholas");
+  }
+  // String一个特殊的基本数据类型
+  {
+    var str1 = "test";
+    var str2 = str1;
+    str1 = "test2";
+    test.equal(str1, "test2");
+    test.equal(str2, "test");
+  }
+  // 在向参数传递引用类型的值时，会把这个值在内存中的地址复制给一个局部变量，因此这个局部变量的变化会反应在函数的外部。
+  {
+    function setName(obj) {
+      obj.name = "Nicholas";
+    }
+    var person = new Object();
+    setName(person);
+    test.equal(person.name, "Nicholas");
+  }
+  {
+    function setName(obj) {
+      obj.name = "Nicholas";
+      obj = new Object();
+      obj.name = "jack";
+      test.equal(obj.name, "jack");
+    }
+    var person = new Object();
+    setName(person);
+    test.equal(person.name, "Nicholas");
+  }
+  // 检测基本数据类型：typeof
+  // 检测引用类型值：instanceof
+  {
+    var s =[1,2];
+    var a = true;
+    var i = new Object();
+    test.ok(i instanceof Object);
+    test.ok(!(a instanceof Object));
+    test.ok(s instanceof Array);
+  }
+
+  // 执行环境：定义了变量或者函数有权访问的其他数据，决定了它们各自的行为。每个执行环境都有与之关联的变量对象。
+  // 变量对象：保存着环境中定义的变量和函数。
+  // 作用域链：保证对执行环境有权访问的所有变量和函数的有序访问。
+  // 标识符解析：沿着作用域链一级一级地搜索标识符的过程。
+  {
+    var color = "blue";
+    function changeColor(){
+      var anotherColor = "red";
+      function swapColors(){
+        var tempColor = anotherColor;
+        anotherColor = color;
+        color = tempColor;
+        test.equal(color, "red");
+      }
+      test.equal(color, "blue");
+      swapColors();
+      test.equal(color, "red");
+    }
+    changeColor();
+    test.equal(color, "red");
+  }
+
+  // Javscript没有块级作用域。看下面代码：
+  // {
+  //   function buildUrl() {
+  //     var qs = "?debug=true";
+  //     with(location){
+  //       var url = href + qs;
+  //     }
+  //     return url;
+  //   }
+  //   var result = buildUrl();
+  //   alert(result);
+  // }
+  
+  // 垃圾收集原理：
+  // 找出那些不再继续使用的变量，然后释放其中占用的内存。
+  // 垃圾收集器会按照固定的时间间隔（或代码执行中预设的收集时间），周期性的执行这一操作。
+  // 标记清除：当变量进入环境时标记“进入环境”，而当变量离开环境时，这将其 标记为“离开环境”。
+  // 引用计数：引用计数的含义是跟踪记录每个值被引用的次数。当声明一个变量并将引用类型的值赋给该变量时，则这个值的引用次数就是1。
+  // 如果同一个值又被赋给另一个变量，则该值的引用次数加1。相反，如果包含对这个值引用的变量又取得另外一个值，则这个值的引用次数减1.
+  // 当这个值的引用次数变成0时，则说明没有办法访问这个值了，因此就可以将其占用的内存空间回收回来。
+  // 这样当垃圾收集器下次再运行时，它就会释放那些引用次数为零的值所占用的内存。
+  {
+    function countMethod(){
+      var object1 = new Object(); // 声明变量，计数器由 0 变为 1
+      var object2 = new Object(); // 声明变量，计数器由 0 变为 1
+      object1.method1 = "This is object1";  // object1 计数器 -1，object1 读数变为0
+      object2.method2 = "This is object2";  // object2 计数器 -1，object2 读数变为0
+    }
+  }
+  {
+    function countMethod(){
+      var object1 = new Object(); // 声明变量，object1计数器由 0 变为 1
+      var object2 = new Object(); // 声明变量，object2计数器由 0 变为 1
+      object1.method1 = object2;  // object1 计数器 -1，object2 计数器 +1
+      object2.method2 = object1;  // object1 计数器 +1，object2 计数器 -1
+      object1.method1 = null;     // object2 计数器 -1
+      object2.method2 = null;     // object1 计数器 -1
+    }
+  }
+  // 解除一个值的引用并不意味着自动回收该值所占用的内存。解除引用的真正作用是让值脱离执行环境，以便垃圾收集器下次运行时将其回收。
+  {
+    function createPerson (name) {
+      var localPerson = new Object();
+      localPerson.name = name;
+      return localPerson;
+    };
+    var gllbalPerson = createPerson("Nicholas");
+    // 手工解除globalPerson的引用
+    globalPerson = null;
+  }
+
+  // 向函数传递大量可选参数时，建议使用字面量表示法：
+  {
+    function displayInfo(args) {
+      var output = "";
+      if (typeof args.name == "string"){
+        output += "Name: " + args.name + "\n";
+      }
+      if (typeof args.age == "number") {
+        output += "Age: " + args.age + "\n";
+      }
+      return output;
+    }
+
+    test.equal(displayInfo({
+      name: "Nicholas",
+      age: 29
+    }), "Name: Nicholas\nAge: 29\n");
+
+    test.equal(displayInfo({
+      name: "Greg"
+    }), "Name: Greg\n");
   }
 
   test.done();
