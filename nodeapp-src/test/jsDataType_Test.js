@@ -1,10 +1,12 @@
 
 exports.JavaScriptDateType_Test = function(test) {
-  // JavaScript中有5种简单数据类型（也称为基本数据类型）：
+  // JavaScript中有5种简单数据类型（也称为基本数据类型），其它值都是对象：
   // Undefined、Null、Boolean、Number和String。
   // 还有1种复杂数据类型——Object，Object本质上是由一组无序的名值对组成的。
 
   // JavaScript是松散类型的，因此需要通过typeof来检测给定变量的数据类型
+  // typeof运算符产生的值有：number、"string"、"boolean"、"undefined"、"function"、"object"。
+  // 对于数组或null，typeof均返回"object"。
   var a;
   test.equal(typeof a, "undefined");
   a = true;
@@ -15,6 +17,9 @@ exports.JavaScriptDateType_Test = function(test) {
   test.equal(typeof a, "string");
   a = new Object();
   test.equal(typeof a, "object");
+  test.equal(typeof [], "object");
+  test.equal(typeof {}, "object");
+  test.equal(typeof null, "object");
   a = function(){};
   test.equal(typeof a, "function");
 
@@ -81,6 +86,8 @@ exports.JavaScriptDateType_Test = function(test) {
   // Number                 任何非零数字值(包括无穷大)       0和NaN
   // Object                 任何对象                      null
   // Undefined              n/a(不适用)                   undefined
+  // false、null、undefined、空字符串、0、NaN都被认为是false。
+  // 除此之外的其它值都是true，包括"false"、new Boolean(false)。
   var str1 = "", str2 = "test";
   test.ok(!Boolean(str1));
   test.ok(Boolean(str2));
@@ -94,6 +101,13 @@ exports.JavaScriptDateType_Test = function(test) {
   test.ok(Boolean(test.ok));
   test.ok(!Boolean(null));
   test.ok(!Boolean(undefined));
+  test.ok(!false);
+  test.ok(!"");
+  test.ok(!0);
+  test.ok(!NaN);
+  test.ok(!null);
+  test.ok(!undefined);
+  test.ok(!Boolean(false));
   // 布尔值不是 true 就是 false，可以使用 typeof 运算符，也可以像下面这样判断：
   function isBoolean(obj) {
     return obj === true || obj === false;
@@ -114,6 +128,8 @@ exports.JavaScriptDateType_Test = function(test) {
   test.ok(!isBoolean(undefined));
 
   // Number类型 ---------------------------------------------------------------------------------
+  // JavaScript只有一个数字类型，它在内部被表示为64位的浮点数。没有分离出整数，所以1和1.0的值相同。
+  test.equal(1, 1.0);
   // 一种特殊的数值，即NaN（非数值 Not a Number）。
   // 这个数值用于表示一个本来要返回数值的操作数未返回数值的情况（这样就不会抛出错误了）。
   // 在JavaScript中，任何数值除以0会返回NaN，因此不会影响其他代码的执行。
@@ -121,6 +137,7 @@ exports.JavaScriptDateType_Test = function(test) {
   // 首先，任何涉及NaN的操作（例如NaN/10）都会返回NaN，这个特点在多步计算中有可能导致问题。
   // 其次，NaN与任何值都不相等，包括NaN本身。
   test.notEqual(NaN, NaN);
+  test.ok(typeof NaN === 'number');
   // JavaScript中有一个isNaN()函数，接受一个参数，帮我们确定这个参数是否“不是数值”。
   // isNaN()在接收一个值之后，会尝试将这个值转换为数值。
   // 某些不是数值的值会直接转换为数值，例如字符串”10“或Boolean值。
@@ -338,6 +355,8 @@ exports.JavaScriptDateType_Test = function(test) {
   // String类型用于表示由零或多个16位Unicode字符组成的字符序列，即字符串。
   // 字符串可以由单引号(')或双引号(")表示。
   // 任何字符串的长度都可以通过访问其length属性取得
+  // JavaScript没有字符类型。要表示字符，只需创建仅包含一个字符的字符串即可，一旦被创建，就是不可变的。
+  // 在被创建的时候，Unicode是一个16位的字符集，所以JavaScript中的所有字符都是16位的。
   var str1 = "123456789.1234567890", str2 = "";
   test.equal(str1.length, 20);
   test.equal(str2.length, 0);
@@ -1047,6 +1066,18 @@ exports.JavaScriptDateType_Test = function(test) {
     test.ok(1 - Math.random() > 0);
     test.ok(Math.random() > 0);
   }
+
+  // 用于处理正则的方法：
+  // regexp.exec()、regexp.test()、
+  // string.match()、string.replace()、string.search()和string.split()
+  // 正则表达式因子：\   /  [  ]  (   )  {  }  ？  +  *   |  .  ^  $。
+  // 若要匹配因子，在字面量中用\进行转义，在RegExp对象中则双写\。注意\前缀不能使字母或数字字面化。
+  // 正则表达式分组
+  // ● 捕获型：一个捕获型分组是一个被包围在圆括号中的正则表达式分支。任何匹配这个分组的字符都会被捕获。
+  //   每个捕获型分组都被指定了一个数字。1是第一个捕获分组，2是第二个，依此类推。
+  // ● 非捕获型：非捕获型分组带 ?: 前缀。它仅做简单的匹配，并不捕获匹配文本，也不干扰捕获型分组的编号
+  // ● 向前正向匹配：带 ?= 前缀，类似于非捕获型分组，但在这个组匹配之后，文本会倒回到它开始的地方，实际上不匹配任何东西。
+  // ● 向前负向匹配：带 ?! 前缀，类似于向前正向匹配，但是只有它匹配失败时它才继续向前进行匹配
   // 正则表达式判断
   // 使用 typeof 运算符判断正则表达式，一般都会返回 'object'，
   // 不过也有一些实现会返回 'function'，
@@ -1324,6 +1355,16 @@ exports.JavaScriptDateType_Test = function(test) {
     test.ok(null == undefined);
     test.ok(NaN != NaN);
     test.ok(12 == "12")
+    // 关于 == 的有趣例子
+    test.ok("" != "0");
+    test.ok("" == 0);
+    test.ok(0 == "0");
+    test.ok(false != "false");
+    test.ok(false == "0");
+    test.ok(false != undefined);
+    test.ok(false != null);
+    test.ok(null == undefined);
+    test.ok("\t\r\n" == 0);
   }
   // 2、全等和不全等：==和===
   // ==会将操作数转换成同一类型比较；
@@ -1544,7 +1585,7 @@ exports.JavaScriptDateType_Test = function(test) {
   //   var result = buildUrl();
   //   alert(result);
   // }
-  
+
   // 垃圾收集原理：
   // 找出那些不再继续使用的变量，然后释放其中占用的内存。
   // 垃圾收集器会按照固定的时间间隔（或代码执行中预设的收集时间），周期性的执行这一操作。
@@ -1605,6 +1646,34 @@ exports.JavaScriptDateType_Test = function(test) {
       name: "Greg"
     }), "Name: Greg\n");
   }
+
+  // javascript判断对象、字符串、数组是否为空（兼容绝大部分浏览器）
+  function isEmpty(obj) {
+    // 本身为空直接返回true
+    if (obj == null) {
+      return true;
+    }
+    // 然后可以根据长度判断，在低版本的ie浏览器中无法这样判断。
+    if (obj.length > 0) {
+      return false;
+    }
+    if (obj.length === 0) {
+      return true;
+    }
+    //最后通过属性长度判断。
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) return false;
+    }
+    return true;
+  }
+  test.ok(isEmpty(""));
+  test.ok(isEmpty([]));
+  test.ok(isEmpty({}));
+  test.ok(isEmpty({length: 0, custom_property: []}));
+  test.ok(!isEmpty("Hello"));
+  test.ok(!isEmpty([1,2,3]));
+  test.ok(!isEmpty({test: 1}));
+  test.ok(!isEmpty({length: 3, custom_property: [1,2,3]}));
 
   test.done();
 };

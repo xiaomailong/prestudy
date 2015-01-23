@@ -44,5 +44,19 @@ exports.UnderscoreObjectFunctions_Test = function(test) {
 
   test.equal(waterbolik.getLocalIP().toString(), "10.11.20.12,10.211.55.2,10.37.129.2");
 
+  test.equal(waterbolik.Kaprekar(6767), 4);
+  test.equal(waterbolik.Kaprekar(14), 7);
+  test.equal(waterbolik.Kaprekar(9985), 7);
+  waterbolik.Kaprekar(Math.floor(Math.random() * 10000));
+  var j = 0, k = 0;
+  for (var i = 0; i < 10000; i++) {
+    k = waterbolik.Kaprekar(i);
+    if (k > j) {
+      j = k;
+      // console.log(i + ": " + j);
+    }
+  }
+  test.equal(j, 7);
+
   test.done();
 }
