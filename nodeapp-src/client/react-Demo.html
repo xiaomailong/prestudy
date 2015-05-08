@@ -17,5 +17,171 @@
   <script type="text/javascript" src="thirdparty/react.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="thirdparty/JSXTransformer.js" charset="utf-8"></script>
   <script type="text/jsx" src="js/react-Demo.js"></script>
+
+  <div id="container1">test</div>
+  <div id="container2">test</div>
+  <div id="container3">test</div>
+  <div id="container4">test</div>
+  <div id="container5">test</div>
+  <div id="container6">test</div>
+  <div id="container7">test</div>
+  <div id="container8">test</div>
+  <div id="container9">test</div>
+  <script type="text/jsx">
+      // container1 数组
+      var names = ['Jack', 'Tom', 'Alice'];
+      React.render(
+        <div>
+        {
+          names.map(function (name) {
+            return <div>Hello, {name}!</div>
+          })
+        }
+        </div>,
+        document.getElementById('container1')
+      );
+
+      // container2 直接在模板插入 JavaScript 变量
+      var arr = [
+        <h1>Hello world!</h1>,
+        <h2>React is perfect!</h2>,
+      ];
+      React.render(
+        <div>*{arr}*</div>,
+        document.getElementById('container2')
+      );
+
+      // container3 组件Greet
+      // 　　1、获取属性的值用的是this.props.属性名
+      // 　　2、创建的组件名称首字母必须大写。
+      // 　　3、为元素添加css的class时，要用className.
+      // 　　4、组件的style属性的设置方式也值得注意，要写成style=width: this.state.witdh
+      var Greet = React.createClass({
+        render: function() {
+          return <h1>Hello {this.props.name}</h1>;
+        }
+      });
+      React.render(
+        <Greet name="Jack" />,
+        document.getElementById('container3')
+      );
+
+      // container4 组件InputState
+      // 　　1、getInitialState函数必须有返回值，可以是NULL或者一个对象。
+      // 　　2、访问state的方法是this.state.属性名。
+      // 　　3、变量用{}包裹，不需要再加双引号。
+      var InputState = React.createClass({
+        getInitialState: function() {
+          return {enable: false};
+        },
+        handleClick: function(event) {
+          this.setState({enable: !this.state.enable});
+        },
+        render: function() {
+          return (
+            <p>
+               <input type="text" disabled={this.state.enable} />
+               <button onClick={this.handleClick}>Change State</button>
+            </p>
+          );
+        }
+      });
+      React.render(
+        <InputState />,
+        document.getElementById('container4')
+      );
+
+      // container5 组件的生命周期
+      // 组件的生命周期分成三个状态：
+      //     Mounting：已插入真实 DOM
+      //     Updating：正在被重新渲染
+      //     Unmounting：已移出真实 DOM
+      // React 为每个状态都提供了两种处理函数，will 函数在进入状态之前调用，did 函数在进入状态之后调用，三种状态共计五种处理函数。
+      //     componentWillMount()
+      //     componentDidMount()
+      //     componentWillUpdate(object nextProps, object nextState)
+      //     componentDidUpdate(object prevProps, object prevState)
+      //     componentWillUnmount()
+      // 此外，React 还提供两种特殊状态的处理函数。
+      //     componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用
+      //     shouldComponentUpdate(object nextProps, object nextState)：组件判断是否重新渲染时调用
+      var Hello = React.createClass({
+        getInitialState: function () {
+          return {
+            opacity: 1.0
+          };
+        },
+        componentDidMount: function () {
+          this.timer = setInterval(function () {
+            var opacity = this.state.opacity;
+            opacity -= .05;
+            if (opacity < 0.1) {
+              opacity = 1.0;
+            }
+            this.setState({
+              opacity: opacity
+            });
+          }.bind(this), 100);
+        },
+        render: function () {
+          return (
+            <div style={{opacity: this.state.opacity}}>
+              Hello {this.props.name}
+            </div>
+          );
+        }
+      });
+      React.render(
+        <Hello name="world"/>,
+        document.getElementById('container5')
+      );
+
+      // container6 组件的嵌套
+      var Search = React.createClass({
+        render: function() {
+          return (
+            <div>
+               {this.props.searchType}:<input type="text" />
+               <button>Search</button>
+            </div>
+          );
+        }
+      });
+      var Page = React.createClass({
+        render: function() {
+          return (
+            <div>
+               <h1>Welcome!</h1>
+               <Search searchType="Title" />
+               <Search searchType="Content" />
+            </div>
+          );
+        }
+      });
+      React.render(
+        <Page />,
+        document.getElementById('container6')
+      );
+
+      // container7 React.findDOMNode()
+      var MyComponent = React.createClass({
+        handleClick: function() {
+          // React.findDOMNode(this.refs.myTextInput).text = "Focus the text input";
+          React.findDOMNode(this.refs.myTextInput1).focus();
+        },
+        render: function() {
+          return (
+            <div>
+              <input type="text" ref="myTextInput1" />
+              <input type="button" value="Focus the text input" onClick={this.handleClick} />
+            </div>
+          );
+        }
+      });
+      React.render(
+        <MyComponent />,
+        document.getElementById('container7')
+      );
+  </script>
 </body>
 </html>
