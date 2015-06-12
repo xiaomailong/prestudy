@@ -163,10 +163,22 @@ exports.UnderscoreObjectFunctions_Test = function(test) {
   'wrap',
   'zip' ]);
   test.deepEqual(_.methods(test),
-                 ['AssertionError', 'deepEqual',
-      'doesNotThrow', 'done', 'equal', 'equals', 'expect', 'fail', 'ifError',
-      'notDeepEqual', 'notEqual', 'notStrictEqual', 'ok', 'same', 'strictEqual',
-      'throws']);
+[ 'AssertionError', 
+  'deepEqual',      
+  'doesNotThrow', 
+  'done', 
+  'equal', 
+  'equals', 
+  'expect', 
+  'fail', 
+  'ifError',      
+  'notDeepEqual', 
+  'notEqual', 
+  'notStrictEqual', 
+  'ok', 
+  'same', 
+  'strictEqual',      
+  'throws' ]);
 
   // _.extend(destination, *sources) ------------------------------------------
   // Copy all of the properties in the source objects
