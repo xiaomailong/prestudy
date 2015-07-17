@@ -42,7 +42,7 @@ exports.UnderscoreObjectFunctions_Test = function(test) {
   test.equal(waterbolik.md5("abc"), "900150983cd24fb0d6963f7d28e17f72");
   test.equal(waterbolik.sha256("abc"), "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
 
-  test.equal(waterbolik.getLocalIP().toString(), "10.11.20.74,10.211.55.2,10.37.129.2");
+  test.equal(waterbolik.getLocalIP().toString(), "10.11.20.75,10.211.55.2,10.37.129.2");
 
   test.equal(waterbolik.Kaprekar(6767), 4);
   test.equal(waterbolik.Kaprekar(14), 7);
