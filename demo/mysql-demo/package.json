@@ -1,0 +1,14 @@
+{
+  "name": "mysql-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": {
+    "name": "Bolik",
+    "email": "waterbolik@163.com"
+  },
+  "dependencies": {
+    "mysql": "^2.8.0",
+    "wind": "^0.7.3"
+  }
+}
