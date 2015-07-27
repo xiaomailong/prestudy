@@ -19,7 +19,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "reviewer": {
+      "type": "belongsTo",
+      "model": "Reviewer",
+      "foreignKey": "publisherId"
+    },
+    "coffeeShop": {
+      "type": "belongsTo",
+      "model": "CoffeeShop",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": []
 }
