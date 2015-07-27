@@ -4,12 +4,21 @@
     "connector": "memory"
   },
   "db_mysql": {
-    "name": "db_mysql",
-    "connector": "mysql",
     "host": "localhost",
     "port": 3306,
     "database": "demo",
     "username": "demo",
-    "password": "demo"
+    "password": "demo",
+    "name": "db_mysql",
+    "connector": "mysql"
+  },
+  "db_mongo": {
+    "host": "demo.strongloop.com",
+    "port": 27017,
+    "database": "getting_started_intermediate",
+    "username": "demo",
+    "password": "L00pBack",
+    "name": "db_mongo",
+    "connector": "mongodb"
   }
 }

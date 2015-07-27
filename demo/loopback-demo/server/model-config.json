@@ -35,5 +35,13 @@
   "CoffeeShop": {
     "dataSource": "db_mysql",
     "public": true
+  },
+  "Review": {
+    "dataSource": "db_mongo",
+    "public": true
+  },
+  "Reviewer": {
+    "dataSource": "db_mongo",
+    "public": true
   }
 }
