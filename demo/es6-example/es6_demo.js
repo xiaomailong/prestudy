@@ -348,3 +348,40 @@
   // 尾调用由于是函数的最后一步操作，所以不需要保留外层函数的调用记录，
   // 因为调用位置、内部变量等信息都不会再用到了，只要直接用内层函数的调用记录，取代外层函数的调用记录就可以了。
 }
+
+// -->是一个JS运算符：“趋向于”运算符！
+function countdown(n) {
+  while (n --> 0) { // "n goes to zero"
+    console.log(n);
+  }
+  blastoff();
+}
+
+// ES5
+var selected = allJobs.filter(function (job) {
+  return job.isSelected();
+});
+// ES6
+var selected = allJobs.filter(job => job.isSelected());
+
+// ES5
+var total = values.reduce(function (a, b) {
+  return a + b;
+}, 0);
+// ES6
+var total = values.reduce((a, b) => a + b, 0);
+
+// ES5
+$("#confetti-btn").click(function (event) {
+  playTrumpet();
+  fireConfettiCannon();
+});
+// ES6
+$("#confetti-btn").click(event => {
+  playTrumpet();
+  fireConfettiCannon();
+});
+
+// 为与你玩耍的每一个小狗创建一个新的空对象
+var chewToys = puppies.map(puppy => {});   // 这样写会报Bug！
+var chewToys = puppies.map(puppy => ({})); //
