@@ -2,9 +2,7 @@
   "name": "cluster-demo",
   "version": "1.0.0",
   "main": "server/server.js",
-  "scripts": {
-    "pretest": "jshint ."
-  },
+  "scripts": {},
   "dependencies": {
     "http-proxy": "^1.11.1"
   },

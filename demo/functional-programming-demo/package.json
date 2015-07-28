@@ -1,0 +1,16 @@
+{
+  "name": "functional-programming-demo",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "scripts": {},
+  "dependencies": {
+    "fn.js": "^0.8.1",
+    "lazy.js": "^0.4.0",
+    "sloth": "^0.5.1",
+    "wu": "^2.0.0"
+  },
+  "optionalDependencies": {},
+  "devDependencies": {},
+  "repository": {},
+  "description": "functional-programming-demo"
+}
