@@ -333,16 +333,16 @@
 
   // 以下三种情况，都不属于尾调用。
   // 情况一
-  function f(x) {
+  function f1(x) {
     let y = g(x);
     return y;
   }
   // 情况二
-  function f(x) {
+  function f2(x) {
     return g(x) + 1;
   }
   // 情况三
-  function f(x) {
+  function f3(x) {
     g(x);
   }
   // 尾调用由于是函数的最后一步操作，所以不需要保留外层函数的调用记录，
@@ -358,30 +358,30 @@ function countdown(n) {
 }
 
 // ES5
-var selected = allJobs.filter(function (job) {
-  return job.isSelected();
-});
+// var selected = allJobs.filter(function (job) {
+//   return job.isSelected();
+// });
 // ES6
-var selected = allJobs.filter(job => job.isSelected());
+// var selected = allJobs.filter(job => job.isSelected());
 
 // ES5
-var total = values.reduce(function (a, b) {
-  return a + b;
-}, 0);
+// var total = values.reduce(function (a, b) {
+//   return a + b;
+// }, 0);
 // ES6
-var total = values.reduce((a, b) => a + b, 0);
+// var total = values.reduce((a, b) => a + b, 0);
 
 // ES5
-$("#confetti-btn").click(function (event) {
-  playTrumpet();
-  fireConfettiCannon();
-});
+// $("#confetti-btn").click(function (event) {
+//   playTrumpet();
+//   fireConfettiCannon();
+// });
 // ES6
-$("#confetti-btn").click(event => {
-  playTrumpet();
-  fireConfettiCannon();
-});
+// $("#confetti-btn").click(event => {
+//   playTrumpet();
+//   fireConfettiCannon();
+// });
 
 // 为与你玩耍的每一个小狗创建一个新的空对象
-var chewToys = puppies.map(puppy => {});   // 这样写会报Bug！
-var chewToys = puppies.map(puppy => ({})); //
+// var chewToys = puppies.map(puppy => {});   // 这样写会报Bug！
+// var chewToys = puppies.map(puppy => ({})); //
