@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JS判断是什么设备是什么浏览器-webkfa.com</title>
+		<meta charset="utf-8">
+		<meta name="apple-touch-fullscreen" content="YES" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="format-detection" content="telephone=no"/>
+
+	</head>
+	<body>
+		<div id="divid">
+		</div>
+		<script type="text/javascript">
+			var os = function() {
+			     var ua = navigator.userAgent,
+			     isQB = /(?:MQQBrowser|QQ)/.test(ua),
+			     isUC = /(?:UCWEB|UCBrowser)/.test(ua),
+			     isFireFox = /(?:Firefox)/.test(ua),
+			     isChrome = /(?:Chrome|CriOS)/.test(ua),
+			     isSafari = /(?:Safari)/.test(ua),
+			     isOpera = /(?:Opera Mini)/.test(ua),
+			     isWindowsPhone = /(?:Windows Phone)/.test(ua),
+			     isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+			     isAndroid = /(?:Android)/.test(ua),
+			     isIpad = /(?:iPad|PlayBook)/.test(ua),
+			     isTablet = /(?:iPad|PlayBook)/.test(ua)||(isFireFox && /(?:Tablet)/.test(ua)),
+			     isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+			     isPc = !isPhone && !isAndroid && !isSymbian;
+			     return {
+			          isQB: isQB,
+			          isUC: isUC,
+                isFireFox : isFireFox,
+                isChrome : isChrome,
+                isSafari : isSafari,
+			          isOpera : isOpera,
+                isWindowsPhone: isWindowsPhone,
+                isSymbian: isSymbian,
+			          isAndroid : isAndroid,
+			          isIpad : isIpad,
+			          isTablet : isTablet,
+                isPhone : isPhone,
+			          isPc : isPc
+			     };
+			}();
+			var html=[];
+      html[html.length]='navigator.userAgent: '+navigator.userAgent+"<br/>";
+			html[html.length]='是QQ浏览器:'+os.isQB+"<br/>";
+			html[html.length]='是UC浏览器:'+os.isUC+"<br/>";
+			html[html.length]='是Firefox浏览器:'+os.isFireFox+"<br/>";
+			html[html.length]='是Chrome|CriOS浏览器:'+os.isChrome+"<br/>";
+			html[html.length]='是Safari浏览器:'+os.isSafari+"<br/>";
+			html[html.length]='是Opera浏览器:'+os.isOpera+"<br/>";
+			html[html.length]='是Windows Phone:'+os.isWindowsPhone+"<br/>";
+			html[html.length]='是SymbianOS:'+os.isSymbian+"<br/>";
+			html[html.length]='是Android:'+os.isAndroid+"<br/>";
+			html[html.length]='是Ipad:'+os.isIpad+"<br/>";
+			html[html.length]='是Tablet:'+os.isTablet+"<br/>";
+			html[html.length]='是Phone:'+os.isPhone+"<br/>";
+			html[html.length]='是电脑:'+os.isPc+"<br/>";
+			document.getElementById("divid").innerHTML=html.join("");
+		</script>
+	</body>
+</html>
