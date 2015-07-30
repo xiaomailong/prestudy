@@ -150,3 +150,60 @@ console.log(
   typeof myRegExpL,      // object
   typeof myError         // object
 );
+
+// javascript 原型 和 原型链 -----------------------------------------
+// JavaScript 不包含传统的类继承模型，而是使用 prototype 原型模型。代码实现大概是这样子的
+function Student(name){
+  this.name = name;
+}
+var Kimy = new Student("Kimy");
+// new 做了三件事情
+// 1、定义了一个空对象
+// 2、设置其原型
+// 3、初始化对象
+// 这样就能理解为什么Kimy.__proto__指向的是Student.prototype了(同一个引用)，原来就是new在起着关键的作用！
+{
+  var Kimy1  = {};
+  Kimy1.__proto__ = Student.prototype;
+  Student.call(Kimy1, "Kimy1");
+}
+Student.prototype.say = function() {
+  console.log(this.name + " say");
+}
+Kimy.say();  // Kimy say
+Kimy1.say();  // Kimy1 say
+
+// 构造函数、__proto__以及原型链
+// 除了IE浏览器，其他浏览器都在Object对象的实例上，部署了一个非标准的__proto__属性（前后各两个下划线），
+// 指向该对象的原型对象，即构造函数的prototype属性。
+// 构造方法
+function Foo(y) {
+  this.y = y;
+}
+Foo.prototype.x = 10;
+// 继承方法"calculate"
+Foo.prototype.calculate = function (z) {
+  console.log(this.x, this.y, z);
+  return this.x + this.y + z;
+};
+// 使用foo模式创建 "b" and "c"
+var b = new Foo(20);
+var c = new Foo(30);
+// 调用继承的方法
+console.log(b.calculate(30)); // 60
+console.log(c.calculate(40)); // 80
+console.log(
+  b.__proto__ === Foo.prototype,                        // true
+  c.__proto__ === Foo.prototype,                        // true
+  b.constructor === Foo,                                // true
+  c.constructor === Foo,                                // true
+  Foo.prototype.constructor === Foo,                    // true
+  b.calculate === b.__proto__.calculate,                // true
+  b.__proto__.calculate === Foo.prototype.calculate,    // true
+  Object instanceof Function,
+  Function instanceof Object
+);
+// 每个对象都是含有一个__proto__属性，
+// b的__proto__指向的构造b的构造方法Foo的prototype属性；
+// 而Foo.prototype也是一个对象，本身也有一个__proto__指向构造其的构造方法Object的prototype。
+// Object.prototype的__proto__被指向了 null, 这就形成了一个原型链了。
