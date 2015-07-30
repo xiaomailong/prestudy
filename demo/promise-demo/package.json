@@ -1,0 +1,13 @@
+{
+  "name": "promise-demo",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "scripts": {},
+  "dependencies": {
+    "bluebird": "^2.9.34"
+  },
+  "optionalDependencies": {},
+  "devDependencies": {},
+  "repository": {},
+  "description": "promise-demo"
+}
