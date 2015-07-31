@@ -356,32 +356,3 @@ function countdown(n) {
   }
   blastoff();
 }
-
-// ES5
-// var selected = allJobs.filter(function (job) {
-//   return job.isSelected();
-// });
-// ES6
-// var selected = allJobs.filter(job => job.isSelected());
-
-// ES5
-// var total = values.reduce(function (a, b) {
-//   return a + b;
-// }, 0);
-// ES6
-// var total = values.reduce((a, b) => a + b, 0);
-
-// ES5
-// $("#confetti-btn").click(function (event) {
-//   playTrumpet();
-//   fireConfettiCannon();
-// });
-// ES6
-// $("#confetti-btn").click(event => {
-//   playTrumpet();
-//   fireConfettiCannon();
-// });
-
-// 为与你玩耍的每一个小狗创建一个新的空对象
-// var chewToys = puppies.map(puppy => {});   // 这样写会报Bug！
-// var chewToys = puppies.map(puppy => ({})); //
