@@ -1,5 +1,9 @@
 {
-  "name"    : "electron-demo",
-  "version" : "0.1.0",
-  "main"    : "main.js"
+  "name": "electron-demo",
+  "version": "0.1.0",
+  "main": "main.js",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-build-atom-shell": "^2.1.1"
+  }
 }
