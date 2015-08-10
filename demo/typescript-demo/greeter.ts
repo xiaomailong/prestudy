@@ -27,13 +27,13 @@ var user = {firstname: "Jane", lastname: "User"};
 console.log(greeter3(user));
 
 // class
-class Greeter {
+class Greeter4 {
   constructor(public greeting: string) { }
   greet() {
     return "" + this.greeting + "";
   }
 };
-var greeter = new Greeter("Hello, world!");
+var greeter = new Greeter4("Hello, world!");
 console.log(greeter.greet());
 
 // TypeScript supports the current ES6 proposal for class-based object-oriented programming.
