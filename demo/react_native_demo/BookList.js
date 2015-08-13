@@ -8,6 +8,7 @@ var FAKE_BOOK_DATA = [{
     imageLinks: { thumbnail: 'http://books.google.com/books/content?id=PCDengEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api' }
   }
 }];
+var REQUEST_URL = 'https://www.googleapis.com/books/v1/volumes?q=subject:fiction';
 
 var {
   Image,
@@ -16,7 +17,8 @@ var {
   View,
   Component,
   ListView,
-  TouchableHighlight
+  TouchableHighlight,
+  ActivityIndicatorIOS
 } = React;
 
 var styles = StyleSheet.create({
@@ -48,6 +50,14 @@ var styles = StyleSheet.create({
   separator: {
     height: 1,
     backgroundColor: '#dddddd'
+  },
+  listView: {
+    backgroundColor: '#F5FCFF'
+  },
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 });
 
@@ -55,17 +65,43 @@ class BookList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: true,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       })
     };
   }
-
+  // 当组件被加载到 UI 视图时，会调用 componentDidMount()函数。
+  // 该函数一旦被调用，我们用数据对象中的数据来设置 datasource 属性。
   componentDidMount() {
-    var books = FAKE_BOOK_DATA;
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows(books)
-    });
+    // var books = FAKE_BOOK_DATA;
+    // this.setState({
+    //   dataSource: this.state.dataSource.cloneWithRows(books)
+    // });
+    this.fetchData();
+  }
+
+  fetchData() {
+    fetch(REQUEST_URL)
+    .then((response) => response.json())
+    .then((responseData) => {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(responseData.items),
+        isLoading: false
+      });
+    })
+    .done();
+    // 由于不能访问Google数据，故增加如下代码防止不能获取数据
+    var theThis = this;
+    setTimeout(function (){
+      if (theThis.state.isLoading) {
+        var books = FAKE_BOOK_DATA;
+        theThis.setState({
+          dataSource: theThis.state.dataSource.cloneWithRows(books),
+          isLoading: false
+        });
+      }
+    }, 2000);
   }
 
   renderBook(book) {
@@ -88,8 +124,22 @@ class BookList extends Component {
     );
   }
 
+  renderLoadingView() {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicatorIOS size='large'/>
+        <Text>
+          Loading books...
+        </Text>
+      </View>
+    );
+  }
+
   render() {
-    var book = FAKE_BOOK_DATA[0];
+    if (this.state.isLoading) {
+      return this.renderLoadingView();
+    }
+    // var book = FAKE_BOOK_DATA[0];
     return (
       <ListView
         dataSource={this.state.dataSource}
