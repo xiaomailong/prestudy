@@ -1,10 +1,12 @@
 'use strict';
 
 var React = require('react-native');
+var BookDetail = require('./BookDetail');
 var FAKE_BOOK_DATA = [{
   volumeInfo: {
     title: 'The Catcher in the Rye',
     authors: "J. D. Salinger",
+    description: "这本书很值得一读！",
     imageLinks: { thumbnail: 'http://books.google.com/books/content?id=PCDengEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api' }
   }
 }];
@@ -106,7 +108,10 @@ class BookList extends Component {
 
   renderBook(book) {
     return (
-      <TouchableHighlight>
+      <TouchableHighlight
+         onPress={() => this.showBookDetail(book)}
+         underlayColor='#dddddd'
+      >
         <View>
           <View style={styles.container}>
             <Image
@@ -122,6 +127,14 @@ class BookList extends Component {
         </View>
       </TouchableHighlight>
     );
+  }
+
+  showBookDetail(book) {
+    this.props.navigator.push({
+      title: book.volumeInfo.title,
+      component: BookDetail,
+      passProps: {book}
+    });
   }
 
   renderLoadingView() {
