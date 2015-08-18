@@ -149,3 +149,228 @@ var fn = require('fn.js');
 // 需要无穷序列和惰性求值的非严格求值可以通过一个叫Lazy.js的库来实现。
 // 不可变量只需要简单的通过编程技巧就可以实现，不过它不是通过依赖语言层面来限制而是需要程序员自律。
 // 尾递归消除可以通过一个叫Trampolining的方法实现。
+
+// apply、call和this关键词 -----------------------
+// 在纯函数式语言中，函数不会被唤起（invoke），他们是被应用（apply）。
+// JavaScript以同样的方式工作， 甚至提供了手动调用(call)和应用(apply)函数的工具。
+// 这些都是与this关键词有关的，当然this指的是函数所属的那个对象。
+
+// call()函数把第一个参数作为this关键字。它是这样工作的：
+console.log(['Hello', 'world'].join(' ')) // 正常方式
+console.log(Array.prototype.join.call(['Hello', 'world'], ' ')); //使用call
+
+// call()函数可以唤起匿名函数：
+console.log((function(){
+  console.log(this.length);
+  return "匿名函数调用返回值！";
+}).call([1,2,3]));
+
+// apply()函数和call()函数很像，但是更有用一些：
+console.log(Math.max(1,2,3));                // 返回3
+console.log(Math.max([1,2,3]));              // 返回NaN 无法应用于数组
+console.log(Math.max.apply(null, [1,2,3]));  // 返回3 这样就可以了
+// 基本的区别是：call()函数接受一列参数，apply函数接受一个数组作为参数。
+
+// call()和apply()让你可以只写一次函数，其它对象可以继承它而无需再写一遍函数。
+// 并且他俩都是Function对象的成员。
+
+// 当你对call()自己调用call()的时候，会发生些有趣的事情。
+function func(a) {
+  console.log(a);
+}
+// 这两行代码是等价的
+func.call("thisValue1");
+Function.prototype.call.call(func, "thisValue2");
+
+// 绑定参数 -----------
+// bind()函数让你能够调用一个对象的函数时this指向另一个对象。
+// 这跟call()函数差不多，不过它可以让方法链式调用，返回一个新的函数。
+
+// 这对于回调非常有用，就像下面的代码那样：
+function Drum() {
+  this.noise = 'boom';
+  this.duration = 1000;
+  this.goBoom = function() {
+    console.log(this.noise)
+  };
+}
+var drum = new Drum();
+// setInterval(drum.goBoom.bind(drum), drum.duration);
+setTimeout(drum.goBoom.bind(drum), drum.duration);
+// 这解决了许多面向对象框架中的问题，比如Dojo，特别是对于那些有自己的handler函数的类处理状态维持的问题。
+// 不过我们也可以用bind()来进行函数式编程。
+
+// 函数工厂 -----------
+// 闭包使建立函数工厂这种Javascript编程模式成为可能。 它们使你能够手动绑定函数的参数。
+
+// 首先我们需要一个为另一个函数绑定参数的函数：
+function bindFirstArg(func, a) {
+  return function(b) {
+    return func(a, b);
+  };
+}
+
+// 现在我们可以用它来创建更多的泛型函数（generic function）：
+var powersOfTwo = bindFirstArg(Math.pow, 2);
+console.log(powersOfTwo(3));  // 8
+console.log(powersOfTwo(5));  // 32
+
+// 也可以针对于其它参数：
+function bindSecondArg(func, b) {
+  return function(a) {
+    return func(a, b);
+  };
+}
+var squareOf = bindSecondArg(Math.pow, 2);
+var cubeOf = bindSecondArg(Math.pow, 3);
+console.log(squareOf(3));   // 9
+console.log(squareOf(4));   // 16
+console.log(cubeOf(3));     // 27
+console.log(cubeOf(4));     // 64
+
+// 在函数式编程中，创建泛型函数的能力十分重要。然而还有更巧妙的方式可以更加一般化地完成这一过程。
+// bindFirstArg()函数接受两个参数，第一个参数是个函数。
+// 如果我们把bindFirstArg本身作为第一个参数的函数传给它自己， 我们就可以创建绑定函数。
+// 最好用下面的例子来描述：
+var makePowersOf = bindFirstArg(bindFirstArg, Math.pow);
+var powersOfThree = makePowersOf(3);
+console.log(powersOfThree(2));   // 9
+console.log(powersOfThree(3));   // 27
+
+// 部分应用 ------------
+// 部分应用是这样一个过程：它给函数的一个或多个参数绑定上值，返回一个已经部分应用过的函数，
+// 这个函数仍然需要接受未绑定的参数。
+// 补充的方式是为原型增加新的函数，这会允许我们在为想要部分应用的函数调用我们的新函数的时候作为它的一个方法。
+
+// 左端部分应用
+// 如你所见，它的工作方式是对arguments这个特殊的值调用slice。
+Function.prototype.partialApply = function() {
+  var func = this;
+  args = Array.prototype.slice.call(arguments);
+  return function() {
+    return func.apply(this, args.concat(
+      Array.prototype.slice.call(arguments)
+    ));
+  };
+};
+// 每一个函数又有一个特殊的内部变量叫做arguments，它是一个类似于数组的对象，包含传入函数的全部参数。
+// 从技术层面说，它不是数组，因此它没有slice和forEach这些数组的方法。
+// 这也就是为什么我们需要使用Array的slice.call方法。
+
+// 我们来建立一个把数字转换为16进制的小应用。
+function nums2hex() {
+  function componentToHex(component) {
+    var hex = component.toString(16);
+    // 确保返回的数值是两位数字，比如0c或12
+    if (hex.length == 1) {
+      return "0" + hex;
+    } else {
+      return hex;
+    }
+  }
+  return Array.prototype.map.call(arguments, componentToHex).join('');
+}
+// 这个函数对多少个数字都有效
+console.log(nums2hex());                        // ''
+console.log(nums2hex(100, 200));                // '64c8'
+console.log(nums2hex(100, 200, 255, 0, 123));   // '64c8ff007b'
+// 不过我们可以用部分函数来对部分参数进行应用，比如mac地址的OUI
+// ( OUI，“组织唯一标识符”，即网卡制造商的唯一标识符。)
+var myOUI = 123;
+var getMacAddress = nums2hex.partialApply(myOUI);
+console.log(getMacAddress());                            // '7b'
+console.log(getMacAddress(100, 200, 2, 123, 66, 0, 1));  // '7b64c8027b420001'
+// 我们还可以转换全红基础上的颜色rgb十六进制值
+var shadesOfRed = nums2hex.partialApply(255);
+console.log(shadesOfRed(123, 0));       // 'ff7b00'
+console.log(shadesOfRed(100, 200));     // 'ff64c8'
+// 这个例子展示出了我们可以应用部分参数而生成一个新的函数。
+// 它是左-右的，意思是我们只能部分应用从左边开始的若干参数。
+
+// 右端部分应用
+// 为了从右边开始应用参数，我们可以再定义一个补充函数。
+Function.prototype.partialApplyRight = function() {
+  var func = this;
+  args = Array.prototype.slice.call(arguments);
+  return function() {
+    return func.apply(
+      this, [].slice.call(arguments, 0)
+      .concat(args));
+  };
+};
+var shadesOfBlue = nums2hex.partialApplyRight(255);
+console.log(shadesOfBlue(123, 0));     // '7b00ff'
+console.log(shadesOfBlue(100, 200));   // '64c8ff'
+var shadesOfGreen = nums2hex.partialApplyRight(255, 0);
+console.log(shadesOfGreen(123));   // '7bff00'
+console.log(shadesOfGreen(100, 200));   // '64ff00'
+
+// 部分应用使我们能够创建非常一般化的函数，并从它提取出更多特殊化的函数。
+// 但是这个方法最大的缺点在于参数传入的方式，也就是参数有多少个，是什么样的顺序，这些不太明确。
+// 不明确性在编程中永远不是个好事儿。还有个更好的方式：珂理化。
+
+// 珂理化（currying）
+// 珂理化是这样一个过程：它把一个具有多个参数的函数转换为一个只有一个参数的函数并返回另一个函数，
+// 这个被返回的函数需要原函数剩余的参数。
+// 正式的说法是：一个具有N个参数的函数可以被转换为具有N个函数的函数链， 其中每一个函数只有一个参数。
+
+// 一个普遍的问题是：部分应用和珂理化有什么区别？
+// 实际就是部分应用立刻返回一个值， 而珂理化只返回另一个珂理化的函数来获取下一个参数，
+// 本质的区别是珂理化可以更好的控制参数传入的方式。
+
+// 我们将会看到真的是这样，不过首先我们需要先创建一个呈现珂理化的函数。
+Function.prototype.curry = function(numArgs) {
+  var func = this;
+  numArgs = numArgs || func.length; //func.length是调用此方法的函数的形参个数
+  // 递归地获取参数
+  function subCurry(prev) {
+    return function(arg) {
+      var args = prev.concat(arg);
+      if (args.length < numArgs) {
+        // 递归情形: 仍需要更多的参数
+        return subCurry(args);
+      } else {
+        // 基准情形: 执行函数
+        return func.apply(this, args);
+      }
+    };
+  }
+  return subCurry([]);
+};
+
+// Function.prototype.curry = (numArgs) ->
+//   func = this
+//   numArgs or= func.length
+//   subCurry = (prev) ->
+//     (arg) ->
+//       args = prev.concat arg
+//       if args.length < numArgs
+//         subCurry args
+//       else
+//         func.apply this, args
+//   subCurry []
+// numArgs参数让我们可以在被珂理化的函数没有给出确切参数的时候指定参数的个数。
+
+// 来看看用它来如何处理我们的十六进制应用。我们先写个函数，它会把RGB值转换为适合HTML的16进制字符串。
+function rgb2hex(r, g, b) {
+  // nums2hex is previously defined in this chapter
+  return '#' + nums2hex(r) + nums2hex(g) + nums2hex(b);
+}
+var hexColors = rgb2hex.curry();
+console.log(hexColors(11))            // 返回一个珂理化的函数
+console.log(hexColors(11, 12, 123))   // 返回一个珂理化的函数
+console.log(hexColors(11)(12)(123))   // 返回 #0b0c7b
+console.log(hexColors(210)(12)(0))    // 返回 #d20c00
+// 注意，curry方法返回的函数只接受一个参数，所以上例倒数第三行传入的三个参数的后两个是没用的。
+
+// 如果我们想对nums2hex()这个函数进行珂理化就会有点问题，
+// 因为这个函数没有指定参数， 你可以传入任意数量的参数。
+// 所以我们需要定义参数的个数。
+// 我们curry函数的那个可选的参数来设置被珂理化函数的参数个数。
+var hexs = nums2hex.curry(2);
+console.log(hexs(11)(12));       // 返回 0b0c
+console.log(hexs(11));           // 返回一个函数
+// console.log(hexs(110)(12)(0));   // 不正确
+
+// 所以珂理化不太适合可变参数的函数，对于这种情况，建议使用部分应用函数。
+// 所有这些不只是利于函数工厂和代码重用，珂理化和部分应用在函数组合中扮演着更重要的角色。
