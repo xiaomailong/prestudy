@@ -4,7 +4,9 @@
   "main": "server/server.js",
   "scripts": {},
   "dependencies": {
+    "bacon": "0.0.1",
     "fn.js": "^0.8.1",
+    "lazy": "^1.0.11",
     "lazy.js": "^0.4.0",
     "sloth": "^0.5.1",
     "wu": "^2.0.0"

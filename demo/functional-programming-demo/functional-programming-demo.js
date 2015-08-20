@@ -374,3 +374,181 @@ console.log(hexs(11));           // 返回一个函数
 
 // 所以珂理化不太适合可变参数的函数，对于这种情况，建议使用部分应用函数。
 // 所有这些不只是利于函数工厂和代码重用，珂理化和部分应用在函数组合中扮演着更重要的角色。
+
+// 函数组合 -------------------------------------------------
+// 一元函数是只接受单个输入的函数。
+// 函数如果有多个输入就是多元的，不过我们一般把接受两个输入的叫二元函数， 把接受三个输入的叫三元函数。
+// 有的函数接受的输入的数量并不确定，我们称它为可变的。
+
+// 组合函数使我们能够从简单的、通用的函数建立复杂的函数。
+// 通过把函数作为其它函数的构建单元， 我们可以建立真正模块化的应用，使其具有很棒的可读性和可维护性。
+// compose = (f, g) -> (x) -> f g x
+Function.prototype.compose = function(prevFunc) {
+  var nextFunc = this;
+  return function() {
+    return nextFunc.call(this, prevFunc.apply(this, arguments));
+  }
+}
+var roundedSqrt = Math.round.compose(Math.sqrt)
+console.log(roundedSqrt(17));                      // Returns: 4
+var squaredDate =  roundedSqrt.compose(Date.parse)
+console.log(squaredDate("January 1, 2014"));      // Returns: 1178370 1178349
+function function1(a){
+  return a + ' 1';
+}
+function function2(b){
+  return b + ' 2';
+}
+function function3(c){
+  return c + ' 3';
+}
+var composition = function3.compose(function2).compose(function1);
+console.log(composition('count')); // returns 'count 1 2 3'
+
+// 序列——反向组合
+// 为了让顺序相反，我们需要交换nextFunc和prevFunc参数。
+Function.prototype.sequence = function(prevFunc) {
+  var nextFunc = this;
+  return function() {
+    return prevFunc.call(this, nextFunc.apply(this, arguments));
+  }
+}
+var sequences = function3.sequence(function2).sequence(function1);
+console.log(sequences('count')); // returns 'count 3 2 1'
+
+// 组合 vs. 链
+// 第一种方法很明显冗长且低效。
+function floorSqrt1(num) {
+  var sqrtNum = Math.sqrt(num);
+  var floorSqrt = Math.floor(sqrtNum);
+  var stringNum = String(floorSqrt);
+  return stringNum;
+}
+// 第二种方式是个不错的一行代码，但是这种方式只要有几个函数应用就会变得可读性很差。
+function floorSqrt2(num) {
+  return String(Math.floor(Math.sqrt(num)));
+}
+// 第三种方式是一个数组函数的链，尤其是map函数。它工作得很好，但并非数学正确的。
+function floorSqrt3(num) {
+  return [num].map(Math.sqrt).map(Math.floor).toString();
+}
+// 第四个是我们compose()函数的实际应用。
+// 所有的方法被强制为一元的， 鼓励使用更好、更简单、更小函数的纯函数只做一件事情，并且做得很好。
+var floorSqrt4 = String.compose(Math.floor).compose(Math.sqrt);
+// 最后一种实现使用compose()函数相反的顺序，同样有效。
+var floorSqrt5 = Math.sqrt.sequence(Math.floor).sequence(String);
+// 所有的函数都可以这样调用
+// floorSqrt < N > (17); // Returns: 4
+console.log(floorSqrt1(17));
+console.log(floorSqrt2(17));
+console.log(floorSqrt3(17));
+console.log(floorSqrt4(17));
+console.log(floorSqrt5(17));
+
+// 使用组合来编程
+// 组合最重要的一个方面是，除了应用的第一个函数以外，他们使用纯函数、只接受一个参数的一元函数效果最好。
+// 执行的第一个函数的输出传递给了第二个函数。也就是函数必须接受前一个函数所传给它的东西。 类型签名对其有重要作用。
+
+// 类型签名用于明确地声明函数接受的输入类型是什么以及输出类型是什么。
+// 它首先被Haskell使用， 实际上Haskell在函数定义时使用它们是为了编译器使用它们。
+// 但是，在Javascript里，我们只能把了性签名放在代码注释里。
+// getStringLength :: String -> Int
+function getStringLength(s){
+  return s.length
+};
+// concatDates :: Date -> Date -> [Date]
+function concatDates(d1, d2){
+  return [d1, d2]
+};
+// pureFunc :: (int -> Bool) -> [int] -> [int]
+function pureFunc(func, arr){
+  return arr.filter(func);
+}
+
+// 为了能真正尝到组合的甜头，所有应用都需要一个由一元纯函数组成的强大的集合。
+// 它们是更大的函数的结构单元， 这些大的函数使应用非常模块化、可靠、易维护
+// stringToArray :: String -> [Char]
+function stringToArray(s) {
+  return s.split('');
+}
+// arrayToString :: [Char] -> String
+function arrayToString(a) {
+  return a.join('');
+}
+// nextChar :: Char -> Char
+function nextChar(c) {
+  return String.fromCharCode(c.charCodeAt(0) + 1);
+}
+// previousChar :: Char -> Char
+function previousChar(c) {
+  return String.fromCharCode(c.charCodeAt(0) - 1);
+}
+// higherColorHex :: Char -> Char
+function higherColorHex(c) {
+  return c >= 'f' ? 'f' :
+    c == '9' ? 'a' :
+    nextChar(c)
+}
+// lowerColorHex :: Char -> Char
+function lowerColorHex(c) {
+  return c <= '0' ? '0' :
+    c == 'a' ? '9' :
+    previousChar(c);
+}
+// raiseColorHexes :: String -> String
+function raiseColorHexes(arr) {
+  return arr.map(higherColorHex);
+}
+// lowerColorHexes :: String -> String
+function lowerColorHexes(arr) {
+  return arr.map(lowerColorHex);
+}
+
+// 现在来把它们组合在一起
+var lighterColor = arrayToString
+  .compose(raiseColorHexes)
+  .compose(stringToArray);
+var darkerColor = arrayToString
+  .compose(lowerColorHexes)
+  .compose(stringToArray);
+
+console.log(lighterColor('af0189')); // Returns: 'bf129a'
+console.log(darkerColor('af0189'));  // Returns: '9e0078'
+
+// 我们甚至可以混合使用compse()和curry()。实际上，它们一起工作得很好。
+// 我们来借助组合的例子来打造珂理化的例子。 首先我们需要一些前面的辅助函数。
+// component2hex :: Ints -> Int
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+// nums2hex :: Ints* -> Int
+function nums2hex() {
+  return Array.prototype.map.call(arguments, componentToHex).join('');
+}
+
+// 首先我们需要建立柯里化和部分应用的函数，然后把它们组合成其它组合函数。
+var lighterColors = lighterColor
+  .compose(nums2hex.curry());
+var darkerRed = darkerColor
+  .compose(nums2hex.partialApply(255));
+var lighterRgb2hex = lighterColor
+  .compose(nums2hex.partialApply());
+
+console.log(lighterColors(123, 0, 22));    // Returns: 8cff11 [原书代码错误，实际返回是8c]
+console.log(darkerRed(123, 0));            // Returns: ee6a00
+console.log(lighterRgb2hex(123,200,100));  // Returns: 8cd975
+
+// 先有个函数根据一个可变的值来减淡RBG值，然后我们用组合根据它创建一个新函数。
+// lighterColorNumSteps :: string -> num -> string
+// function lighterColorNumSteps(color, n) {
+//   for (var i = 0; i < n; i++) {
+//     color = lighterColor(color);
+//   }
+//   return color;
+// }
+// // 现在我们可以这样建立函数:
+// var lighterRedNumSteps = lighterColorNumSteps.curry().compose(reds)(0, 0);
+// // 然后这样使用:
+// console.log(lighterRedNumSteps(5)); // Return: 'ff5555'
+// console.log(lighterRedNumSteps(2)); // Return: 'ff2222'
