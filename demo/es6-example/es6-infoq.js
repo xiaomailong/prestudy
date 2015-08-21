@@ -39,7 +39,7 @@ for (var value of myArray) {
 for (var chr of "Abc123中国人") {
   console.log(chr);
 }
-
+ 
 // Set对象可以自动排除重复项
 // 基于单词数组创建一个set对象
 var words = ['abc', '123', 'ABC', 'abc'];
