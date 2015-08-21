@@ -1675,5 +1675,114 @@ exports.JavaScriptDateType_Test = function(test) {
   test.ok(!isEmpty({test: 1}));
   test.ok(!isEmpty({length: 3, custom_property: [1,2,3]}));
 
+  // 五种常见运算符 ---------------------------
+  // in运算符希望它的左操作数是一个字符串或可以转换为字符串，希望它的右操作数是一个对象。
+  // 如果右侧的对象拥有一个名为左操作数值的属性名，那么表达式返回true。
+  var point = {x:1, y:1};
+  test.ok('x' in point);           // =>true:对象有一个名为'x'的属性
+  test.ok(!('z' in point));        // =>false:对象中不存在名为'z'的属性
+  test.ok('toString' in point);    // =>true:对象集成了toString()方法
+  var data = [7, 8, 9];
+  test.ok('0' in data);            // =>true:数组包含元素'0'
+  test.ok(0 in data);              // =>true:数字转换为字符串
+  test.ok(1 in data);              // =>true:数字转换为字符串
+  test.ok(2 in data);              // =>true:数字转换为字符串
+  test.ok(!(3 in data));           // =>false:没有索引为3的元素
+  test.ok(!(7 in data));           // =>false:没有索引为7的元素
+  test.ok(!(8 in data));           // =>false:没有索引为8的元素
+  test.ok(!(9 in data));           // =>false:没有索引为9的元素
+  // 注意：①当通过in判断一个字符串是否是一个对象的属性名时，这个判断也会包含对该对象集成属性的检测；
+
+  // instanceof运算符希望左操作数是一个对象，右操作数标识对象的类。
+  // 如果左侧对象是右侧类的实例，则表达式返回true，否则返回false。
+  // 因为JavaScript中对象的类是通过初始化它们的构造函数来定义的，所以instanceof的右操作数应当是一个函数。
+  var d = new Date();              // 通过Date()构造函数来创建一个新对象
+  test.ok(d instanceof Date);      // =>true:d是由Date()创建的
+  test.ok(d instanceof Object);    // =>true:所有对象都是Object的实例
+  test.ok(!(d instanceof Number)); // =>false:计算结果为false，d不是一个Number对象
+  var a = [1, 2, 3];
+  test.ok(a instanceof Array);     // =>true:a是一个数组
+  test.ok(a instanceof Object);    // =>true:所有数组都是对象
+  test.ok(!(a instanceof RegExp)); // =>false:数组不是正则表达式
+  var b = 3;
+  test.ok(!(b instanceof Object)); // =>false
+  test.ok(!(b instanceof Number)); // =>false:右操作数不是一个对象，只是一个原始值
+  // ***(切记这里不做类型转换：当右操作数是合法的函数时，只要右操作数是任何原始类型都会返回false）
+  // 注意：
+  // ①所有对象都是Object的实例；
+  // ②通过instanceof判断一个对象是否是一个类的实例的时候，这个判断也会包含对“父类”的检测；
+  // ③如果instanceof的左操作数不是对象的话，instanceof返回false，
+  //  如果右操作数不是函数，则抛出一个类型错误异常（先检测右操作数是否合法，再检测左操作数，最后判断表达式）。
+
+  // typeof是一元运算符，放在其单个操作数的前面，操作数可以是任意类型。
+  // 返回值为表示操作数类型的一个字符串。下面是任意值在typeof运算后的返回值：　
+  // x                         typeof x
+  // undefined	               "undefined"
+  // null                      "object"
+  // true或false               "boolean"
+  // 任意数字或NaN              "number"
+  // 任意字符串                 "string"
+  // 任意函数                   "function"
+  // 任意内置对象(非函数)        "object"
+  // 任意宿主对象               有编译器各自实现的字符串，但不是"undefined"、"boolean"、"number"或"string"
+  // typeof运算符可以带上圆括号，这让typeof看起来像一个函数名，而不是一个运算符：typeof(i)
+
+  // delete是一元操作符，它用来删除对象属性或者数组元素，当然它也有返回值。
+  var o = {x:1, y:2};
+  test.ok(delete o.x);         // =>true：成功删除一个属性
+  test.ok(!('x' in o));        // =>false:这个属性在对象中不再存在了
+  test.ok('y' in o);           // =>true
+  test.equal(o.x, undefined);  // =>undefined:读取不存在的属性将返回undefined
+  test.ok(delete o.x);         // =>true:删除不存在的属性，返回true
+  test.ok(delete o.z);         // =>true:删除不存在的属性，返回true
+  var a = [1, 2, 3];
+  test.ok(2 in a);             // =>true:元素2在数组中
+  test.ok(delete a[2]);        // =>true:成功删除一个数组元素
+  test.ok(!(2 in a));          // =>false:元素2已经不在数组中了
+  test.equal(a.length, 3);     // =>3:注意，数组长度并没有改变
+  test.ok(delete a[3]);        // =>true:删除不存在的元素，返回true
+  test.equal(a[2], undefined); // =>undefined:读取不存在的元素将返回undefined
+  var b = [1, 2, undefined];
+  test.ok(2 in b);             // =>true:元素2在数组b中
+  test.equal(b[2], undefined); // =>undefined:读取元素2的值，返回其值undefined
+  test.ok(delete b[2]);        // =>true:成功删除一个数组元素
+  test.ok(!(2 in b));          // =>false：元素2已经不再数组中了
+  test.equal(b.length, 3);     // =>3:数组长度未变
+  test.equal(b[2], undefined); // =>undefined:读取不存在的元素返回undefined
+  // delete如果删除成功或者删除不存在的属性或元素时都会返回true，那么什么时候返回false呢？
+  // 其实，并不是所有属性都可删除，一些内置核心和客户端属性是不能删除，用户通过var语句声明的变量不能删除
+  // （当用var声明全局变量时，这个变量也是全局对象window的一个属性），
+  // 同样，通过function语句定义的函数和函数参数也不能删除。
+  var o11 = {x:1, y:2};
+  var aa = 22;
+  test.ok(delete o11.x);                    // =>true
+  test.equal(typeof o11.x, "undefined");    // =>undefined
+  test.ok(!(delete o11));                   // =>false:不能删除通过var声明的变量，返回false
+  test.ok(!(delete aa));                    // =>false:不能删除通过var声明的变量，返回false
+  test.ok(delete window.aa);                // =>false:无法删除???
+  test.ok(delete this.aa);                  // =>false:无法删除???
+  // delete希望它的操作数是一个左值，如果它不是左值，那么delete将不进行任何操作同时返回true。
+  test.ok(delete 1);                        // 数字1不是一个左值，返回true
+
+  // void是一元运算符，它出现在操作数之前，操作数可以是任意类型，操作数会照常计算，但永远返回undefined
+  var aa = 33;
+  var bb = 44;
+  var cc = 0;
+  var dd = void(aa+bb);         // dd = undefined
+  test.equal(dd, undefined);
+  var ee = void(cc = aa+bb);    // ee = undefined, cc=77
+  // 注意：最后一句不能写成var ee = void(cc = aa + bb;);，
+  // 因为void一元运算符，后面是操作数，不能是完整的语句
+  test.equal(ee, undefined);
+  test.equal(cc, 77);
+
+
+
+
+
+
+
+
+
   test.done();
 };
