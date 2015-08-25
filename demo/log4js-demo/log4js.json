@@ -1,0 +1,15 @@
+{
+	"appenders": [{
+		"type": "console"
+	}, {
+		"type": "dateFile",
+		"filename": "logs/app",
+		"pattern": "-yyyy-MM-dd.log",
+		"alwaysIncludePattern": true,
+		"category": "app"
+	}],
+	"replaceConsole": true,
+	"levels": {
+		"app": "ALL"
+	}
+}

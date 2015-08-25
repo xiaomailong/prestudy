@@ -356,3 +356,115 @@ function countdown(n) {
   }
   blastoff();
 }
+
+// Ecmascript中，浮点数值的最高精度是17位小数，但是在算数计算时精度还是远不如整数。
+// 因为浮点运算会出现舍入不准的问题，所以千万不要测试某个特定的浮点数值。
+console.log(0.1+0.2);  // 0.30000000000000004
+// 浮点计算会出现误差的问题，是因为ecmascript的浮点计算是基于IEEE754数值的浮点计算的通病，
+// 只要是使用该数值格式的语言都有此问题。
+console.log(Number.MIN_VALUE);  // 5e-324
+console.log(Number.MAX_VALUE);  // 1.7976931348623157e+308
+// 如果超出了这个范围就会输出Infinity，负数的话就是-Infinity，
+// Number.POSITIVE_INFINITY和Number.NEGATIVE_INFINITY也分别指的是Infinity和-Infinity。
+console.log(Number.POSITIVE_INFINITY);  // Infinity
+console.log(Number.NEGATIVE_INFINITY);  // -Infinity
+
+// ECMAScript之Number和String类型重点小解
+// 加号和字符串连接符都是+，在使用的过程中要注意它们的区别。
+var num1=1,num2=20;
+console.log('the sum of num2 and num2 is '+num1+num2);    // the sum of num2 and num2 is 120
+// 所以如果真想求和的话，可以把num1+num2用括号括起来
+console.log('the sum of num2 and num2 is '+(num1+num2));  // the sum of num2 and num2 is 21
+// 或者把num1+num2放到字符串前面，
+console.log(num1+num2+' is the sum of num2 and num2');    // 21 is the sum of num2 and num2
+
+// 自加、自减
+var num1=2,num2=20;
+var num3=--num1+num2;
+console.log(num1, num2, num3);   // 1  20  21
+var num1=2,num2=20;
+var num4=num1--+num2;
+console.log(num1, num2, num4);   // 1  20  22
+
+// 按位非的本质是操作数的负值减1。
+// 负值是正值按位取反加1，那么按位取反自然就是负值减1。
+var num1=25;
+var num2=~num1;
+console.log(num1, num2);   // 25  -26
+var num1=25;
+var num2=-num1-1;
+console.log(num1, num2);   // 25  -26
+
+// 逗号操作符可以用来负值，返回表达式的最后一项
+var num=(1,2,3,4);
+console.log(num);  // 4
+
+
+// ECMAScript中的几个关键语句switch、for-in、label -------------------
+for(i=0;i<5;i++){
+	console.log(i);
+}
+console.log(i); // 5
+
+// switch语句比较的时候使用的全等操作符，即===，所以'10'和10不相等，因为在进行全等比较的时候，并不发生类型转换。
+var o={prop1:'value1', prop2:'value2', prop3:'value3'};
+for (var i in o){
+  console.log(i);  // prop1 prop2 prop3
+}
+
+var array1=[1,2,3,4];
+for(var i in array1){
+  console.log(i);  // 0 1 2 3
+}
+
+var num1=0;
+for(var i=0;i<10;i++){
+  for(var j=0;j<10;j++){
+    if(i==5&&j==5){
+      break;
+    }
+    num1++;
+  }
+}
+// break跳出了处在内部的for循环，j剩下的5次循环不再执行，所以打印的结果是95。
+console.log(num1);
+
+var num2=0;
+for(var i=0;i<10;i++){
+  for(var j=0;j<10;j++){
+    if(i==5&&j==5){
+      continue;
+    }
+    num2++;
+  }
+}
+// continue跳出了本次循环，就是说跳出了处在内部for循环的这一次循环，所以打印的结果是99
+console.log(num2);
+
+var num3=0;
+outer3:
+for(var i=0;i<10;i++){
+  for(var j=0;j<10;j++){
+    if(i==5&&j==5){
+      break outer3;
+    }
+    num3++;
+  }
+}
+// 加上了标签以后，用break跳到了标签outer处，就是说程序跳出了外循环，
+// 即程序执行到了i=5且j=5时停止执行，所以打印的结果是55。
+console.log(num3);  // 55
+
+var num4=0;
+outer4:
+for(var i=0;i<10;i++){
+  for(var j=0;j<10;j++){
+    if(i==5&&j==5){
+      continue outer4;
+    }
+    num4++;
+  }
+}
+// 这一次用的是continue，所以当程序执行到i=5且j=5时并没有跳出外循环，而只是跳出了内循环，
+// 即剩下的5次不予执行，所以打印的结果是95。
+console.log(num4); // 95
