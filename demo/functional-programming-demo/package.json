@@ -8,7 +8,10 @@
     "fn.js": "^0.8.1",
     "lazy": "^1.0.11",
     "lazy.js": "^0.4.0",
+    "lodash": "^3.10.1",
+    "ramda": "^0.17.1",
     "sloth": "^0.5.1",
+    "underscore": "^1.8.3",
     "wu": "^2.0.0"
   },
   "optionalDependencies": {},
