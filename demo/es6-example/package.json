@@ -1,9 +1,13 @@
 {
   "name": "es6-example",
   "version": "1.0.0",
-  "main": "server/server.js",
-  "scripts": {},
+  "main": "lib/person.js",
+  "scripts": {
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
+  },
   "dependencies": {
+    "core-js": "^1.0.1",
     "fs": "0.0.2",
     "jquery": "^2.1.4",
     "suspend": "^0.6.1"
