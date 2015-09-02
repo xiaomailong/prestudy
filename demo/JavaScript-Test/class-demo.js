@@ -958,3 +958,132 @@ function getPrototypeChain(object) {
 	console.log(sq.instanceof(rectangle));
 	console.log(sq.instanceof(eventEmitter));
 })();
+
+// 向原型发送变化 -------------
+// 上面例子中的clones属性有双重作用。
+// 它可以用来判断一个对象是否是通过合并继承自一个原型的，然后他可以用来发送原型改变给所有它的克隆。
+// 原型继承相比类继承最大的优势就是你可以修改一个原型在它创建之后。
+// 为了使克隆可以继承对于原型的修改，我们创建了一个叫做define的函数：
+(function() {
+	console.log("\n---修复Blueprints合并继承instanceof操作");
+	Object.prototype.define = function(property, value) {
+		this[property] = value;
+
+		if (Object.hasOwnProperty.call(this, "clones")) {
+			var clones = this.clones;
+			var length = clones.length;
+
+			while (length) {
+				var clone = clones[--length];
+				if (typeof clone[property] === "undefined") {
+					clone.define(property, value);
+				}
+			}
+		}
+	};
+
+	// 蓝图需要特别注意。尽管对于蓝图的修改会被发送到它的克隆，但是蓝图的新的克隆并不会反映这些修改。
+	// 幸运的是这个问题的解决方法很简单。我们只需要对blueprint方法进行小小的修改，然后任何对于蓝图的修改就会反映在克隆上了。
+	// function blueprint(f) {
+	// 	var g = function() {
+	// 		f.apply(this, arguments);
+	// 		g.clones.unshift(this);
+	// 		var hasOwnProperty = Object.hasOwnProperty;
+	// 		for (var property in g) {
+	// 			if (property !== "clones" &&
+	// 				hasOwnProperty.call(g, property)) {
+	// 				this[property] = g[property];
+	// 			}
+	// 		}
+	// 	};
+	// 	g.clones = [];
+	// 	return g;
+	// };
+
+	// var eventEmitter = blueprint(function() {
+	// 	this.eventEmitter = 'eventEmitter';
+	// 	var events = Object.create(null);
+	//
+	// 	this.on = function(event, listener) {
+	// 		if (typeof events[event] !== "undefined") {
+	// 			events[event].push(listener);
+	// 		} else {
+	// 			events[event] = [listener];
+	// 		}
+	// 	};
+	//
+	// 	this.emit = function(event) {
+	// 		if (typeof events[event] !== "undefined") {
+	// 			var listeners = events[event];
+	// 			var length = listeners.length;
+	// 			var index = length;
+	// 			var args = Array.prototype.slice.call(arguments, 1);
+	//
+	// 			while (index) {
+	// 				var listener = listeners[length - (index--)];
+	// 				listener.apply(this, args);
+	// 			}
+	// 		}
+	// 	};
+	// });
+	// 现在我们可以修改原型然后这个修改会反映在所有的克隆上。
+	// 例如我们可以创建创建一个别名addEventListener针对eventEmitter上的on方法：
+	var eventEmitter = {
+		eventEmitter: 'eventEmitter',
+		on: function(event, listener) {
+			if (typeof this.event !== 'undefined') {
+				this.event.push(listener);
+			} else {
+				this.event = [listener];
+			}
+		},
+		emit: function(event) {
+			if (typeof this.event !== 'undefined') {
+				var listeners = this.event;
+				var length = listeners.length;
+				var index = length;
+				var args = Array.prototype.slice.call(arguments, 1);
+
+				while (index) {
+					var listener = listeners[length - (index--)];
+					listener.apply(this, args);
+				}
+			}
+		}
+	};
+	var rectangle = {
+		rectangle: 'rectangle',
+
+		create: function(width, height) {
+			return this.extend({
+				rect: 'rect',
+				height: height,
+				width: width
+			});
+		},
+		area: function() {
+			return this.width * this.height;
+		}
+	};
+	var square = rectangle.extend(eventEmitter, {
+		create: function(side) {
+			return rectangle.create.call(this, side, side);
+		},
+		resize: function(newSize) {
+			var oldSize = this.width;
+			this.width = this.height = newSize;
+			this.emit("resize", oldSize, newSize);
+		}
+	});
+
+	var sq = square.create(5);
+
+	eventEmitter.define("addEventListener", eventEmitter.on);
+
+	sq.addEventListener("resize", function(oldSize, newSize) {
+		console.log("sq resized from " + oldSize + " to " + newSize + ".");
+	});
+
+	sq.resize(10);
+	console.log(sq.area());
+})();
