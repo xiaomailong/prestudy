@@ -276,3 +276,4 @@ UpgradeLog*.htm
 *.bim_*.settings
 # Microsoft Fakes
 FakesAssemblies/
+demo/es6-example/lib
