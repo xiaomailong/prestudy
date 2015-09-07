@@ -1,3 +1,5 @@
+import 'core-js/shim';
+
 // Typed Arrays (Uint8Array, Int16Array, Float32Array, etc.)
 // interpret the ArrayBuffer as an indexed sequence of elements of a single type.
 // http://www.2ality.com/2015/09/typed-arrays.html
@@ -79,12 +81,12 @@ console.log(uint8c[0]); // lowest value within range  0
 uint8c[0] = -1;
 console.log(uint8c[0]); // underflow  0
 
-let ui8 = Uint8Array.of(0, 1, 2);
-for (let byte of ui8) {
-  console.log(byte);
-}
-ui8.slice(-1);
-console.log(ui8);
+// let ui8 = Uint8Array.of(0, 1, 2);
+// for (let byte of ui8) {
+//   console.log(byte);
+// }
+// ui8.slice(-1);
+// console.log(ui8);
 // DataView.prototype.getInt8(byteOffset);
 
 // Endianness
@@ -98,6 +100,7 @@ const LITTLE_ENDIAN = Symbol('LITTLE_ENDIAN');
 
 function getPlatformEndianness() {
   let arr32 = Uint32Array.of(0x12345678);
+  // let arr32 = new Uint32Array(0x12345678);
   let arr8 = new Uint8Array(arr32.buffer);
   switch ((arr8[0] * 0x1000000) + (arr8[1] * 0x10000) + (arr8[2] * 0x100) + (arr8[3])) {
     case 0x12345678:
