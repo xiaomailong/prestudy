@@ -1,15 +1,17 @@
 {
   "name": "es6-example",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "lib/person.js",
   "scripts": {
     "compile": "babel -d lib/ src/",
+    "lint": "jshint lib/* --exclude node_modules",
     "prepublish": "npm run compile"
   },
   "dependencies": {
     "core-js": "^1.0.1",
-    "fs": "0.0.2",
+    "fs": "^0.0.2",
     "jquery": "^2.1.4",
+    "jshint":"^2.8.0",
     "suspend": "^0.6.1"
   },
   "optionalDependencies": {},
