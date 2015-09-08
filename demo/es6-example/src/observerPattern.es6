@@ -53,12 +53,12 @@ class Subject {
       this.Observers[idx].updateSubject(subject)
     }
   }
-// }
-//
-// class ConcreteSubject {
-//   constructor() {
-//     Subject.call(this);
-//   }
+}
+
+class ConcreteSubject extends Subject {
+  constructor() {
+    super();
+  }
 
   operate() {
     var state = 'info';
@@ -89,7 +89,7 @@ class ConcreteObserverB {
   }
 }
 
-var subject = new Subject();
+var subject = new ConcreteSubject();
 var aobserver = new ConcreteObserverA();
 var bobserver = new ConcreteObserverB();
 subject.add(aobserver);
