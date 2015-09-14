@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var webpack = require("gulp-webpack");
+var size = require('gulp-size');
 var webpackConfig = require("./webpack.config.js");
 
 // 语法检查
@@ -42,5 +43,14 @@ gulp.task('webpack', function() {
     .pipe(gulp.dest('./build'));
 });
 
+gulp.task('size', function() {
+  return gulp.src('*.js')
+    .pipe(size()) // 压缩前计算所有js大小
+    .pipe(uglify()) // 压缩js文件
+    .pipe(size()) // 压缩后计算所有js文件大小
+    .pipe(gulp.dest('dist')); // 将文件拷贝到目标目录
+});
+
 //注册任务
-gulp.task('default', ['jshint', 'minify', 'watch', 'webpack']);
+// gulp.task('default', ['size', 'jshint', 'minify', 'watch', 'webpack']);
+gulp.task('default', ['jshint', 'size']);

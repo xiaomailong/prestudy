@@ -2,13 +2,13 @@
 
 Function.prototype.method = function(name, fn) {
   this.prototype[name] = fn;
-}
+};
 var Anim = function() {
   //----
 };
 Anim.method("start", function() {
   //----
-})
+});
 Anim.method("stop", function() {
   //----
 });
@@ -18,7 +18,7 @@ Anim.method("stop", function() {
 Function.prototype.method = function(name, fn) {
   this.prototype[name] = fn;
   return this;
-}
+};
 var Anim = function() {
   //----
 };
@@ -53,7 +53,7 @@ var baz;
   var bar = 22;
   baz = function() {
     return foo * bar;
-  }
+  };
 })();
 console.log(baz());
 
@@ -62,7 +62,7 @@ var baz = function() {
   var bar = 222;
   return function() {
     return foo * bar;
-  }
+  };
 }();
 console.log(baz());
 
@@ -84,16 +84,16 @@ console.log(baz());
     */
 var sx = function() {
   //------
-}
+};
 sx.prototype.add = function() {
   //------
-}
+};
 sx.prototype.remove = function() {
   //------
-}
+};
 sx.prototype.get = function() {
   //------
-}
+};
 
 // 　　2.属性检查法：
 /*
@@ -112,7 +112,7 @@ var sx = function(id, method, action) {
 
 function addForm(formInstance) {
   if (!impletements(formInstance, 'jk', 'jk_two')) {
-    throw new Error("Object does not implement a required interface.")
+    throw new Error("Object does not implement a required interface.");
   }
 }
 
@@ -137,7 +137,7 @@ function impletements(object) {
 //----下面是Interface类
 var Interface = function(name, methods) {
   if (arguments.length != 2) {
-    throw new Error("Interface constructor called with " + arguments.length + "arguments, but expected exactly 2.")
+    throw new Error("Interface constructor called with " + arguments.length + "arguments, but expected exactly 2.");
   }
 
   this.name = name;
@@ -145,27 +145,27 @@ var Interface = function(name, methods) {
   for (var i = 0, len = methods.length; i < len; i++) {
     if (typeof methods[i] !== 'string') {
       //接口构造函数希望将方法名称传递给字符串
-      throw new Error("Interface constructor expects method names to be" + "passed in as a string")
+      throw new Error("Interface constructor expects method names to be" + "passed in as a string");
     }
-    this.methods.push(methods[i])
+    this.methods.push(methods[i]);
   }
 };
 //静态类方法
 Interface.ensureImplements = function(object) {
   if (arguments.length < 2) {
     //函数 interface.ensureimplements 称有2个参数，但预计至少2。
-    throw new Error("Function Interface.ensureImplements called with " + arguments.length + "arguments, but expected at least 2.")
+    throw new Error("Function Interface.ensureImplements called with " + arguments.length + "arguments, but expected at least 2.");
   }
   for (var i = 1, len = arguments.length; i < len; i++) {
     var interface = arguments[i];
     if (interface.constructor !== Interface) {
-      throw new Error("Function Interface.ensureImplements expects arguments" + "two and above to be instances of Interface.")
+      throw new Error("Function Interface.ensureImplements expects arguments" + "two and above to be instances of Interface.");
     }
     for (var j = 0, methodsLen = interface.methods.length; j < methodsLen; j++) {
       var method = interface.methods[j];
       if (!object[method] || typeof object[method] !== 'function') {
         //没有继承 xx 接口，方法 xx 没有发现
-        throw new Error("Function Interface.ensureImplements:object does not implement the " + interface.name + " interface.Method" + method + " was not found.")
+        throw new Error("Function Interface.ensureImplements:object does not implement the " + interface.name + " interface.Method" + method + " was not found.");
       }
     }
   }
@@ -199,7 +199,7 @@ var Book = function(isbn, title, author) {
   this.setIsbn(isbn);
   this.setTitle(title);
   this.setAuthor(author);
-}
+};
 Book.prototype = {
   checkIsbn: function(isbn) {
     //.....检查isbn的格式是否规范
@@ -225,7 +225,7 @@ Book.prototype = {
   },
   display: function() {
     //..............
-    console.log(this.getIsbn() + this.getTitle() + this.getAuthor())
+    console.log(this.getIsbn() + this.getTitle() + this.getAuthor());
   }
 };
 // 这种方法看似很完善了，但是对于里面的属性还是可以进行修改的，isbn亦可能被赋值为一个无效值。
@@ -249,23 +249,23 @@ var Book = function(newisbn, newtitle, newauthor) {
   //特权方法
   this.getIsbn = function() {
     return isbn;
-  }
+  };
   this.getTitle = function() {
     return title;
-  }
+  };
   this.getAuthor = function() {
     return author;
-  }
+  };
   this.setIsbn = function() {
     if (!checkIsbn(newisbn)) throw new Error('Book: Invalid ISBN');
     isbn = newisbn;
-  }
+  };
   this.setTitle = function() {
     title = newtitle;
-  }
+  };
   this.setAuthor = function() {
     author = newauthor;
-  }
+  };
 
   //构造
   this.setIsbn(newisbn);
@@ -318,7 +318,7 @@ Author.prototype.getBooks = function() {
 // 为了简化类的声明，可以把派生子类的整个过程包装在一个extend的函数中。
 function extend(subClass, superClass) {
   var F = function() {};
-  F.prototype = new superClass.prototype;
+  F.prototype = new superClass.prototype();
   subClass.prototype = new F();
   subClass.prototype.constructor = subClass;
 }
@@ -326,7 +326,7 @@ function extend(subClass, superClass) {
 // 但是，这样终究存在一个问题。就是超类的名称（Person）被固化在了Author类的声明中.......很难受啊.....................但是有个更好的方法
 function extend(subClass, superClass) {
   var F = function() {};
-  F.prototype = superClass.prototype;
+  F.prototype = new superClass.prototype();
   subClass.prototype = new F();
   subClass.prototype.constructor = subClass;
 
@@ -361,7 +361,7 @@ var clone = function(obj) {
   var _f = function() {};
   //这句是原型式继承最核心的地方，函数的原型对象为对象字面量
   _f.prototype = obj;
-  return new _f;
+  return new _f();
 };
 //先声明一个对象字面量
 var Person = {
@@ -373,9 +373,9 @@ var Person = {
 //不需要定义一个Person的子类，只要执行一次克隆即可
 var Programmer = clone(Person);
 //可以直接获得Person提供的默认值，也可以添加或者修改属性和方法
-console.log(Programmer.getName())
-Programmer.name = 'Darren2'
-console.log(Programmer.getName())
+console.log(Programmer.getName());
+Programmer.name = 'Darren2';
+console.log(Programmer.getName());
 
 //声明子类,执行一次克隆即可
 var Someone = clone(Programmer);
