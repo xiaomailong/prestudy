@@ -56,28 +56,28 @@ tags : [JavaScript]
 
 #javascript严格模式下的8点规则  
 ##【作用】  
-　　[1]消除js语法的一些不合理、不严谨、不安全问题，减少怪异行为并保证代码运行安全
-　　[2]提高编译器效率，增加运行速度
+    [1]消除js语法的一些不合理、不严谨、不安全问题，减少怪异行为并保证代码运行安全
+    [2]提高编译器效率，增加运行速度
 
 ##【使用】  
-　　[1]整个脚本启用严格模式，在顶部执行："use strict";
-　　[2]在指定函数中执行严格模式，在函数体第一行："use strict"
-　　[3]不支持strict模式的浏览器把"use strict"当做一个字符串语句执行，支持strict模式的浏览器将开启strict模式
-　　[4]支持严格模式的浏览器包括IE10+、Firefox4+、safari12+、opera12+、chrome
+    [1]整个脚本启用严格模式，在顶部执行："use strict";　　
+    [2]在指定函数中执行严格模式，在函数体第一行："use strict"
+    [3]不支持strict模式的浏览器把"use strict"当做一个字符串语句执行，支持strict模式的浏览器将开启strict模式　　
+    [4]支持严格模式的浏览器包括IE10+、Firefox4+、safari12+、opera12+、chrome
 
 ##【规则】  
 ###【1】【变量】  
-　　[a]不允许意外创建全局变量  
+    [a]不允许意外创建全局变量  
         "use strict";
-        message = 'hello world!';  
-
-　　[b]不能对变量调用delete操作符  
+        message = 'hello world!';    
+  
+    [b]不能对变量调用delete操作符  
         "use strict";
         var color = 'red';
         delete color;
 
 ###【2】【对象】  
-　　[a]不能为只读属性赋值
+    [a]不能为只读属性赋值
         "use strict";
         var person = {
             name:'cook'
@@ -87,7 +87,7 @@ tags : [JavaScript]
         });
         person.name = 'Nicholas';
 
-　　[b]不能为不可配置的属性使用delete操作
+    [b]不能为不可配置的属性使用delete操作
         "use strict";
         var person = {
             name:'cook'
@@ -98,13 +98,13 @@ tags : [JavaScript]
         delete person.name;
 
 ###【3】函数  
-　　[a]参数必须唯一
+    [a]参数必须唯一
         "use strict";
         function sun(num,num){
             //TODO
         }
 
-　　[b]修改形参不会反映到arguments中
+    [b]修改形参不会反映到arguments中
         function showValue(value){
             value = "Foo";
             alert(arguments[0]);
@@ -113,7 +113,7 @@ tags : [JavaScript]
         }
         showValue("Hi");
 
-　　[c]不允许使用arguments.callee和arguments.caller
+    [c]不允许使用arguments.callee和arguments.caller
         "use strict";
         function fn(num){
             return arguments.callee(num);

@@ -23,7 +23,7 @@ console.log(person);
 var person = {
   name: 'bai',
   age: 29
-}
+};
 console.log(person);
 
 // 　　[注意1]在对象字面量中使用逗号来分隔不同的属性，但是在最后一个属性后面添加逗号，会在IE7及更早版本和Opera中导致错误
@@ -96,7 +96,7 @@ var student = {
   },
   sex: 1,
   age: 26
-}
+};
 console.log(student);
 // 　　[注意]取值只能一层一层取,如student.name.chinese,而不能跨过name,直接用student.chinese,因为与name的同级下也可能有叫chinese的元素
 
@@ -104,4 +104,4 @@ console.log(student);
 // 	　　[5.1]如果在全局状态下声明变量a，相当于window对象下的一个数据a,
 //           可以通过window.a或a来对a赋值，且window.a和a的值总是相等，但就是无法删除
 // 	　　[5.2]如果用window.b 来声明并赋值(b相当于声明在window对象下),可以删除,且用delete b 和 delete window.b 的效果相同，
-//          删除后，console.log(b)提示变量不存在，console.log(window.b)提示undefined 
+//          删除后，console.log(b)提示变量不存在，console.log(window.b)提示undefined
