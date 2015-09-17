@@ -38,16 +38,16 @@ tags : [JavaScript]
 
 ##【关键字和保留字】  
     [1]关键字  
-    Break | do| instanceof| typeof | case | else | new | var | catch | finally | return | void | continue | for | *switch | while | function | this | with | default | if | throw | delete | in | try | debugger*  
+    Break | do| instanceof| typeof | case | else | new | var | catch | finally | return | void | continue | for | \*switch | while | function | this | with | default | if | throw | delete | in | try | debugger\*  
 
     [2]保留字  
-    Abstract | enum | int | short | Boolean | export | interface | static | byte | extends | long | super | char | *final | native | synchronized | class | float | package | throws | const | goto | private | transient | *debugger | implements | protected | volatile | double | import | public  
+    Abstract | enum | int | short | Boolean | export | interface | static | byte | extends | long | super | char | \*final | native | synchronized | class | float | package | throws | const | goto | private | transient | \*debugger | implements | protected | volatile | double | import | public  
 
     [3]第5版在非严格模式下的保留字  
     Class | enum | extends | super | const | export | import  
 
     [4]第5版在严格模式下的保留字  
-    Implements | package | public | interface | private | static | let* | protected | yield*  
+    Implements | package | public | interface | private | static | let\* | protected | yield*  
 
     [注意1]在js中，class是保留字，不可使用，而应该用className。class->className  
 
@@ -70,7 +70,7 @@ tags : [JavaScript]
     [a]不允许意外创建全局变量  
         "use strict";
         message = 'hello world!';    
-  
+
     [b]不能对变量调用delete操作符  
         "use strict";
         var color = 'red';
