@@ -55,6 +55,7 @@ function getLocalIP() {
 	return map;
 }
 
+// 第一段判断是否有反向代理IP(头信息：x-forwarded-for)，在判断connection的远程IP，以及后端的socket的IP。
 function getClientIp(req) {
 	return req.headers['x-forwarded-for'] ||
 	req.connection.remoteAddress ||

@@ -1,0 +1,2035 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]> <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="zh-CN" prefix="og: http://ogp.me/ns#" class="no-js"> <!--<![endif]-->
+
+
+<!-- BEGIN head -->
+<head>
+
+	<!-- Title -->
+	<title>通过一行代码学习javascript - WEB前端 - 伯乐在线</title>
+
+	<!-- Meta Tags -->
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Favicon & Mobileicon -->
+	<link rel="shortcut icon" href="http://web.jobbole.com/wp-content/uploads/sites/11/2014/12/favicon.png" />
+	<link rel="apple-touch-icon" href="http://web.jobbole.com/wp-content/themes/jobboleblogv3/mobileicon.png" />
+
+	<!-- RSS, Atom & Pingbacks -->
+		<link rel="alternate" title="WEB前端 &#8211; 伯乐在线 RSS Feed" href="http://web.jobbole.com/feed/" />
+		<link rel="alternate" title="RSS .92" href="http://web.jobbole.com/feed/rss/" />
+	<link rel="alternate" title="Atom 0.3" href="http://web.jobbole.com/feed/atom/" />
+	<link rel="pingback" href="http://web.jobbole.com/xmlrpc.php" />
+
+	<!-- Theme Hook -->
+
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.4.13 - http://yoast.com/wordpress/seo/ -->
+<meta name="description" content="在javascript无处不在的今天，我们每天都能很容易地学习到新的东西。一旦你掌握了这门语言的基本知识，就可以随处找到蕴含着丰富知识的代码。Bookmarklets是一个完美的多种功能组合起来的工具，每当我发现一个有用的功能，我都会开心地去学习其源码，从中探索出怎么实现这样强大的功能。"/>
+<link rel="canonical" href="http://web.jobbole.com/82204/" />
+<meta property='og:locale' content='zh_CN'/>
+<meta property='og:type' content='article'/>
+<meta property='og:title' content='通过一行代码学习javascript - WEB前端 - 伯乐在线'/>
+<meta property='og:description' content='在javascript无处不在的今天，我们每天都能很容易地学习到新的东西。一旦你掌握了这门语言的基本知识，就可以随处找到蕴含着丰富知识的代码。Bookmarklets是一个完美的多种功能组合起来的工具，每当我发现一个有用的功能，我都会开心地去学习其源码，从中探索出怎么实现这样强大的功能。'/>
+<meta property='og:url' content='http://web.jobbole.com/82204/'/>
+<meta property='og:site_name' content='WEB前端 - 伯乐在线'/>
+<meta property='og:image' content='http://jbcdn2.b0.upaiyun.com/2014/12/91e7e29a085d868e7d49d93d911787a9.png'/>
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel='stylesheet' id='thickbox-css'  href='http://web.jobbole.com/wp-includes/js/thickbox/thickbox.css?ver=20121105' type='text/css' media='all' />
+<link rel='stylesheet' id='jobbole-wp-css-css'  href='http://web.jobbole.com/wp-content/plugins/jobbole-wp-plugin/css/jobbole-wp-plugin.css?ver=1.0.17' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-css'  href='http://web.jobbole.com/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=2.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='http://web.jobbole.com/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=2.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='http://web.jobbole.com/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=2.7.1' type='text/css' media='all' />
+<link rel='stylesheet' id='v48fv_images-css'  href='http://web.jobbole.com/wp-content/plugins/mu-widgets/library/base/public/css/images.css?ver=1.2.v48fv' type='text/css' media='all' />
+<link rel='stylesheet' id='v48fv_front-css'  href='http://web.jobbole.com/wp-content/plugins/mu-widgets/library/base/public/css/front.css?ver=1.2.v48fv' type='text/css' media='all' />
+<link rel='stylesheet' id='v48fv_common-css'  href='http://web.jobbole.com/wp-content/plugins/mu-widgets/library/base/public/css/common.css?ver=1.2.v48fv' type='text/css' media='all' />
+<script type='text/javascript' src='http://web.jobbole.com/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-includes/js/comment-reply.min.js?ver=3.5.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var JobboleAjax = {"ajaxurl":"http:\/\/web.jobbole.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/plugins/jobbole-wp-plugin/js/jobbole-wp-plugin.js?ver=1.0.22'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.7.1","is_admin":"0","ajaxurl":"http:\/\/web.jobbole.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"\u4f7f\u7528 %s \u590d\u5236\uff0c\u4f7f\u7528 %s \u7c98\u8d34\u3002","minimize":"\u70b9\u51fb\u5c55\u5f00\u4ee3\u7801"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=2.7.1'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/modernizr.js?ver=2.5.3'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://web.jobbole.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://web.jobbole.com/wp-includes/wlwmanifest.xml" />
+<link rel='shortlink' href='http://web.jobbole.com/?p=82204' />
+<script type="text/javascript">
+	window._wp_rp_static_base_url = 'http://dtmvdvtzf8rz0.cloudfront.net/static/';
+	window._wp_rp_wp_ajax_url = "http://web.jobbole.com/wp-admin/admin-ajax.php";
+	window._wp_rp_plugin_version = '2.8';
+	window._wp_rp_post_id = '82204';
+	window._wp_rp_num_rel_posts = '10';
+</script>
+
+	<!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://web.jobbole.com/wp-content/themes/jobboleblogv3/style.css?ver=1.0.56">
+	<style>
+				*::selection { background: #0099cc; }
+		*::-moz-selection { background: #0099cc; }
+		body {
+            background: #ffffff         }
+
+        a,
+        .tabs ul.nav li a:hover,
+        .tabs ul.nav li.active a,
+        .dropcap,
+        .toggle.hover .toggle-title,
+        li.comment cite a:hover,
+        h3.widget-title,
+        .post-meta .meta-title:hover,
+        .the-latest a:hover h4,
+        .aw_socialcounter_widget li a:hover,
+        .aw_tabbed_widget #tab-latest-comments a:hover
+        {
+            color: #0099cc;
+        }
+
+		a:hover { color: #b30000; }
+		input:focus, textarea:focus { border-color: #0099cc; }
+
+		#searchsubmit,
+        .highlight,
+        .aw_tabbed_widget .tabs ul.nav li.active a, footer .aw_tabbed_widget .tabs ul.nav li.active a,
+        #top .aw_tabbed_widget .tabs ul.nav li.active a,
+        .aw_tabbed_widget .tabs ul.nav li a:hover,
+        footer .aw_tabbed_widget .tabs ul.nav li a:hover,
+        #top .aw_tabbed_widget .tabs ul.nav li a:hover,
+        .aw_twitter_widget .twitter-icon, .testimonial-icon,
+        #top-closed:hover,
+        .flex-control-nav a:hover,
+        .flex-control-nav a.flex-active {
+            background-color: #0099cc;
+        }
+
+		.submit { background-color: #0099cc; border-color: #007399; }
+		.submit:hover { background-color: #b30000; border-color: #860000; }
+		#searchsubmit:hover { background-color: #b30000; }
+		.toggle.hover .toggle-icon { border-top-color: #0099cc; }
+		.toggle.hover.active .toggle-icon { border-bottom-color: #0099cc; }
+		.flex-direction-nav li .flex-prev:hover { border-right-color: #0099cc; }
+		.flex-direction-nav li .flex-next:hover { border-left-color: #0099cc; }
+		@media only screen and (min-width: 768px) and (max-width: 959px) {
+			.aw_tabbed_widget .tabs ul.nav li a:hover, .tabs ul.nav li.active a { color: #0099cc; }
+		}
+		@media screen and (max-width: 767px) {
+			.tabs ul.nav li a:hover, .tabs ul.nav li.active a { color: #0099cc; }
+		}
+	</style>
+
+	<!--[if IE 8]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+    <![endif]-->
+
+	<!-- Links: RSS + Atom Syndication + Pingback etc. -->
+	<link rel="alternate" type="application/rss+xml" title="WEB前端 &#8211; 伯乐在线 RSS Feed" href="http://web.jobbole.com/feed/" />
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://web.jobbole.com/feed/rss/" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://web.jobbole.com/feed/atom/" />
+	<link rel="pingback" href="http://web.jobbole.com/xmlrpc.php" />
+
+<!-- END head -->
+</head>
+
+<!-- BEGIN body -->
+<body class="single single-post postid-82204 single-format-standard unknown">
+
+
+	    <nav id="top-nav" class="menu-nav">
+
+        <!-- BEGIN .container -->
+        <div class="container">
+
+            <div class="grid-8 hide-on-480 hide-on-767">
+                <ul id="menu-main-menu" class="menu left">
+                    <li class="menu-item">
+                        <a href="http://www.jobbole.com">首页</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://top.jobbole.com">头条</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://blog.jobbole.com">博客</a>
+                    </li>
+                    <li class="menu-item">
+                        <span><a href="#">频道 <i class="fa fa-angle-double-down"></i></a></span>
+                        <ul class="sub-menu sf-js-enabled">
+                            <li class="menu-item"><a href="http://web.jobbole.com">Web前端</a></li>
+                            <li class="menu-item"><a href="http://python.jobbole.com">Python开发</a></li>
+                            <li class="menu-item"><a href="http://www.importnew.com/?utm_source=home-top-nav">Java技术</a></li>
+                            <li class="menu-item"><a href="http://android.jobbole.com">Android应用</a></li>
+                            <li class="menu-item"><a href="http://ios.jobbole.com">iOS应用</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="http://hao.jobbole.com">资源</a>
+                    </li>
+
+
+                    <li class="menu-item">
+                        <a href="http://group.jobbole.com">小组</a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a href="http://date.jobbole.com"><i class="fa fa-heart-o pinkiconcolor"></i> 相亲</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid-4">
+                <ul id="menu-main-menu" class="menu">
+
+                    <li class="menu-item hide-on-768-wider left">
+                        <span><a href="#">切换频道 <i class="fa fa-angle-double-down"></i></a></span>
+                        <ul class="sub-menu sf-js-enabled">
+                            <li class="menu-item"><a href="http://www.jobbole.com">首页</a></li>
+                            <li class="menu-item"><a href="http://top.jobbole.com">头条</a></li>
+                            <li class="menu-item"><a href="http://blog.jobbole.com">博客</a></li>
+                            <li class="menu-item"><a href="http://group.jobbole.com">小组</a></li>
+                            <li class="menu-item"><a href="http://date.jobbole.com">相亲 <i class="fa fa-heart-o pinkiconcolor"></i></a></li>
+                            <li class="menu-item"><a href="http://hao.jobbole.com">资源</a></li>
+                            <li class="menu-item"><a href="http://web.jobbole.com">前端</a></li>
+                            <li class="menu-item"><a href="http://python.jobbole.com">Python</a></li>
+                            <li class="menu-item"><a href="http://www.importnew.com/">Java</a></li>
+                            <li class="menu-item"><a href="http://android.jobbole.com">安卓</a></li>
+                            <li class="menu-item"><a href="http://ios.jobbole.com">iOS</a></li>
+
+                                                    </ul>
+                    </li>
+
+                                            <li class="menu-item"><a href="http://www.jobbole.com/login?redirect=http://web.jobbole.com/82204/"><i class="fa fa-sign-in"></i> 登录</a></li>
+                        <li class="menu-item"><a href="http://www.jobbole.com/register"><i class="fa fa-user-plus"></i> 注册</a></li>
+                                        <li class="menu-item"><a href="http://blog.jobbole.com/87622/"><i class="fa fa-life-ring"></i> 帮助</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .container -->
+
+    </nav>
+    <!-- END #top-nav -->
+
+	<!-- BEGIN #wrapper -->
+	<div id="wrapper" class="container">
+
+		<!-- BEGIN header -->
+		<header>
+
+
+			<div class="header-wrapper">
+
+				<!-- BEGIN #logo -->
+				<div id="logo" class="leaderboard-true">
+                    <a href="http://web.jobbole.com"><img src="http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/img/jobbole-logo.png" alt="WEB前端 &#8211; 伯乐在线" /></a>
+				</div>
+				<!-- END #logo -->
+
+				<!-- BEGIN #leaderboard -->
+				<div id="leaderboard">
+
+					<a href='http://group.jobbole.com/category/feedback/writer-team/' target='_blank'><img width='728' height='90'  src='http://ww2.sinaimg.cn/mw690/bfdcef89gw1esk26xvzrqj20k802it9n.jpg' /></a>
+				</div>
+				<!-- END #leaderboard -->
+
+				<div class="clear"></div>
+
+			</div>
+
+
+			<div class="clear"></div>
+
+            			<!-- BEGIN #main-nav -->
+			<nav id="main-nav" class="grid-12 menu-nav">
+                <div class="menu-sub-menu-container"><ul id="main-nav-menu" class="menu"><li id="menu-item-81438" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81438"><a href="http://web.jobbole.com/">首页</a></li>
+<li id="menu-item-81437" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-81437"><a href="http://web.jobbole.com/all-posts/">所有文章</a></li>
+<li id="menu-item-81439" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-81439"><a href="http://web.jobbole.com/category/javascript-2/">JavaScript</a></li>
+<li id="menu-item-81440" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-81440"><a href="http://web.jobbole.com/category/html5/">HTML5</a></li>
+<li id="menu-item-81441" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-81441"><a href="http://web.jobbole.com/category/css/">CSS</a></li>
+<li id="menu-item-81442" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81442"><a href="http://hao.jobbole.com/category/web-front-end/">工具资源</a></li>
+<li id="menu-item-81775" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81775"><a href="http://top.jobbole.com">我要投稿</a></li>
+<li id="menu-item-81824" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81824"><a href="#">更多频道 »</a>
+<ul class="sub-menu">
+	<li id="menu-item-81825" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81825"><a href="http://ios.jobbole.com">iOS</a></li>
+	<li id="menu-item-81827" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81827"><a href="http://www.importnew.com">Java</a></li>
+	<li id="menu-item-81828" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81828"><a href="http://android.jobbole.com">Android</a></li>
+	<li id="menu-item-81829" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-81829"><a href="http://python.jobbole.com">Python</a></li>
+</ul>
+</li>
+</ul></div>				<div class="clear"></div>
+			</nav>
+			<!-- END #main-nav -->
+                        <div class="clear"></div>
+
+		</header>
+		<!-- END header -->
+
+		<div id="breadcrumb" class="grid-12 margin-20"><div class="breadcrumb-wrapper"><!-- Breadcrumb NavXT 4.4.0 -->
+<a title="Go to 伯乐在线." href="http://www.jobbole.com" class="main-home">伯乐在线</a> &gt; <a title="Go to WEB前端 - 伯乐在线." href="http://web.jobbole.com" class="home">WEB前端 - 伯乐在线</a> &gt; <a title="Go to 所有文章." href="http://web.jobbole.com/all-posts/" class="post-root post-post">所有文章</a> &gt; <a title="Go to the JavaScript category archives." href="http://web.jobbole.com/category/javascript-2/" class="category">JavaScript</a> &gt; 通过一行代码学习javascript</div></div><div class="clear"></div>
+
+<!-- BEGIN .grid-8 -->
+<div class="grid-8">
+
+
+	<!-- BEGIN .post -->
+<div class="post-82204 post type-post status-publish format-standard hentry category-javascript-2 tag-javascript odd" id="post-82204">
+
+	<!-- BEGIN .entry-header -->
+	<div class="entry-header">
+
+
+		<h1>通过一行代码学习javascript</h1>
+
+
+	</div>
+	<!-- BEGIN .entry-header -->
+
+	<!-- BEGIN .entry-meta -->
+	<div class="entry-meta">
+
+		<p class="entry-meta-hide-on-mobile">
+
+            2015/03/20 &middot;  <a href="http://web.jobbole.com/category/javascript-2/" title="查看 JavaScript 中的全部文章" rel="category tag">JavaScript</a>
+
+                            &middot; <a href="#article-comment"> 9 评论 </a>
+
+
+
+             &middot;  <a href="http://web.jobbole.com/tag/javascript/">Javascript</a>
+
+</p>
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style" style="display: block; margin: 0 0px; clear: both;"><span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_qzone"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_readitlater"></a>
+<a class="jiathis_button_evernote"></a>
+<a class="jiathis_button_ydnote"></a>
+<a href="http://www.jiathis.com/share?uid=1745061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+<!-- JiaThis Button END -->
+
+
+	</div>
+	<!-- END .entry-meta -->
+
+	<!-- BEGIN .entry -->
+	<div class="entry">
+
+
+		<div class='copyright-area'>本文由 <a href='http://web.jobbole.com'>伯乐在线</a> - <a href='http://www.jobbole.com/members/foolalex'>鸭梨山大</a> 翻译，<a href='http://www.jobbole.com/members/hampotato'>戴仓薯</a> 校稿。未经许可，禁止转载！<br/>英文出处：<a target='_blank' href='http://arqex.com/939/learning-much-javascript-one-line-code'>arqex.com</a>。欢迎加入<a target='_blank' href='http://group.jobbole.com/category/feedback/trans-team/'>翻译组</a>。</div><p>在javascript无处不在的今天，我们每天都能很容易地学习到新的东西。一旦你掌握了这门语言的基本知识，就可以随处找到蕴含着丰富知识的代码。<a href="https://www.squarefree.com/bookmarklets/">Bookmarklets</a>是一个完美的多种功能组合起来的工具，每当我发现一个有用的功能，我都会开心地去学习其源码，从中探索出怎么实现这样强大的功能。另外，如Google Analytics Code，或是Facebook Likebox的一些调用外部服务的小代码段，能教给我们的比一些书还多。</p>
+<p>今天我想逐条跟大家分析<a href="http://addyosmani.com/blog/">Addy Osmani </a>几天前分享的一个<a title="CSS Layout Debugger" href="https://gist.github.com/addyosmani/fd3999ea7fce242756b1">单行代码</a> 。这行代码可以帮你debug你的各层CSS。为了方便观看，我将其分为三行显示：</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe4c111700867" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+[].forEach.call($ $(""),function(a){
+ a.style.outline="1px solid #"+(~~(Math.random()*(1&lt;&lt;24))).toString(16)
+ })</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe4c111700867-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe4c111700867-2">2</div><div class="crayon-num" data-line="crayon-55ebc2e36fe4c111700867-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe4c111700867-1"><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-st">forEach</span><span class="crayon-sy">.</span><span class="crayon-e">call</span><span class="crayon-sy">(</span><span class="crayon-sy">$</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">""</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-t">function</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">)</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe4c111700867-2"><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-sy">.</span><span class="crayon-v">style</span><span class="crayon-sy">.</span><span class="crayon-e ">outline</span><span class="crayon-o">=</span><span class="crayon-s">"1px solid #"</span><span class="crayon-o">+</span><span class="crayon-sy">(</span><span class="crayon-o">~</span><span class="crayon-o">~</span><span class="crayon-sy">(</span><span class="crayon-v">Math</span><span class="crayon-sy">.</span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">*</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-o">&lt;&lt;</span><span class="crayon-cn">24</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">16</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-55ebc2e36fe4c111700867-3"><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0027 seconds] -->
+<p>将它放在你的浏览器控制台中运行，页面中各层的HTML就会被不同的颜色标记出来。很酷对不对？基本上，这行代码<strong>获取了页面中所有元素，然后给它们加上1px，颜色随机的边框。</strong>虽然它的原理很简单，但是想要自己写出这样的代码，你得熟练掌握Web开发的方方面面。下面让我们一起学习它们。</p>
+<h3>选取一个页面上所有的元素</h3>
+<p>首先需要做的是选取所有的元素，Addy用了只能在浏览器控制台中使用的<code style="font-style: inherit;">$ $</code>。你可以在自己的浏览器的javascript控制台中输入<code style="font-style: inherit;">$ $(‘a’)</code>，然后你会得到一个含有当前页面所有锚元素的列表。</p>
+<p><code style="font-style: inherit;">$ $</code>函数是现代浏览器命令行的API的一部分，它等同于使用<code style="font-style: inherit;">document.querySelectorAll</code> 方法。你可以将一个CSS选择器作为参数传入document.querySelectorAll去选取当前页面的元素。所以如果你想在浏览器的控制台以外使用那个单行代码，你可以用<code style="font-style: inherit;">document.querySelectorAll('*')</code>来替代<code style="font-style: inherit;">$ $('*')</code>。点击<a title="what-is-the-source-of-the-double-dollar-sign-selector-query-function-in-chrome" href="http://stackoverflow.com/questions/8981211/what-is-the-source-of-the-double-dollar-sign-selector-query-function-in-chrome-f#answer-10308917">这个stackoverflow问答</a>可以进一步了解<code style="font-style: inherit;">$ $</code>。</p>
+<p>非常好！对于我来说，能从这行代码中学习到<code style="font-style: inherit;">$ $</code>函数就已经很满足了。然而在一个页面上选取所有元素的方法还有很多。如果你有看过gist上面的评论，你会发现有人在讨论这个话题。其中一个人就是<a href="https://mathiasbynens.be/">Mathias Bynens</a>（那里有很多大神！），他告诉我们可以用<code style="font-style: inherit;">document.all</code>去实现这个功能，并且能在所有的浏览器上运行。</p>
+<h3>遍历元素</h3>
+<p>于是我们得到了存储所有的元素的<code style="font-style: inherit;">NodeList</code>，然后想给它们一个一个加上彩色的边框。不过等等，我们的代码里到底是怎么写的呢？</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe5c493600707" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+[].forEach.call( $ $('*'), function( element ) { /* And the modification code here */ });
+[].forEach.call( $ $('*'), function( element ) { /* 对元素作出改变的代码 */ });</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe5c493600707-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe5c493600707-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe5c493600707-1"><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-st">forEach</span><span class="crayon-sy">.</span><span class="crayon-e">call</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">'*'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">function</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-i">element</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-c">/* And the modification code here */</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe5c493600707-2"><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-st">forEach</span><span class="crayon-sy">.</span><span class="crayon-e">call</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-sy">(</span><span class="crayon-s">'*'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">function</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-i">element</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-c">/* 对元素作出改变的代码 */</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0034 seconds] -->
+<p><code style="font-style: inherit;">NodeList</code>看起来像<code style="font-style: inherit;">Array</code>，你可以使用方括号去访问它的节点，还可以访问length属性去了解它包含了多少元素，但是它并没有实现<code style="font-style: inherit;">Array</code>的所有接口，因此<code style="font-style: inherit;">$ $(‘*’).forEach</code>会失效。在Javascript里，有很多看起来像但不是数组的对象，例如函数里的arguments变量。我们有一个很好用的方法去处理这些对象：通过call和apply去实现像<code style="font-style: inherit;">NodeList</code>一样的非array对象有机会去调用array的函数。我几个月前<a href="http://arqex.com/853/javascript-function-bind-vs-call-apply">谈过这些函数</a>，它们调用另外一个函数，并将第一个参数作为该函数里面的this对象。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe63232114896" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+function say(name) {
+console.log( this + ' ' + name );
+}
+
+say.call( 'hola', 'Mike' ); // Prints out 'hola Mike' in the console
+say.call( 'hola', 'Mike' ); // 在console中输出’hola Mike’
+
+// Also you can use it on the arguments object
+//你也可以在arguments对象上使用它
+function example( arg1, arg2, arg3 ) {
+return Array.prototype.slice.call(arguments, 1); // Returns [arg2, arg3]
+}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe63232114896-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe63232114896-2">2</div><div class="crayon-num" data-line="crayon-55ebc2e36fe63232114896-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe63232114896-4">4</div><div class="crayon-num" data-line="crayon-55ebc2e36fe63232114896-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe63232114896-6">6</div><div class="crayon-num" data-line="crayon-55ebc2e36fe63232114896-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe63232114896-8">8</div><div class="crayon-num" data-line="crayon-55ebc2e36fe63232114896-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe63232114896-10">10</div><div class="crayon-num" data-line="crayon-55ebc2e36fe63232114896-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe63232114896-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe63232114896-1"><span class="crayon-t">function</span><span class="crayon-h"> </span><span class="crayon-e">say</span><span class="crayon-sy">(</span><span class="crayon-r">name</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe63232114896-2"><span class="crayon-v">console</span><span class="crayon-sy">.</span><span class="crayon-e">log</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-r">this</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-s">' '</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-r">name</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-55ebc2e36fe63232114896-3"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe63232114896-4">&nbsp;</div><div class="crayon-line" id="crayon-55ebc2e36fe63232114896-5"><span class="crayon-v">say</span><span class="crayon-sy">.</span><span class="crayon-e">call</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-s">'hola'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'Mike'</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// Prints out 'hola Mike' in the console</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe63232114896-6"><span class="crayon-v">say</span><span class="crayon-sy">.</span><span class="crayon-e">call</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-s">'hola'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'Mike'</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// 在console中输出’hola Mike’</span></div><div class="crayon-line" id="crayon-55ebc2e36fe63232114896-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe63232114896-8"><span class="crayon-c">// Also you can use it on the arguments object</span></div><div class="crayon-line" id="crayon-55ebc2e36fe63232114896-9"><span class="crayon-c">//你也可以在arguments对象上使用它</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe63232114896-10"><span class="crayon-t">function</span><span class="crayon-h"> </span><span class="crayon-e">example</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-v">arg1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">arg2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">arg3</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-55ebc2e36fe63232114896-11"><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-t">Array</span><span class="crayon-sy">.</span><span class="crayon-v">prototype</span><span class="crayon-sy">.</span><span class="crayon-v">slice</span><span class="crayon-sy">.</span><span class="crayon-e">call</span><span class="crayon-sy">(</span><span class="crayon-r">arguments</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// Returns [arg2, arg3]</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe63232114896-12"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0035 seconds] -->
+<p>单行代码用<code style="font-style: inherit;">[].forEach.call</code>来替代<code style="font-style: inherit;">Array.prototype.forEach.call</code>。通过<code style="font-style: inherit;">Array</code>对象<code style="font-style: inherit;">[]</code>去调用<code style="font-style: inherit;">Array</code>的函数这样的方式（哈，又是一个给力的小技巧），节省了一些字节。这相当于在<code style="font-style: inherit;">$ $(‘*’).forEach</code>中，把<code style="font-style: inherit;">$ $(‘*’)</code>当成一个<code style="font-style: inherit;">Array</code>来使用。</p>
+<p>如果你再去看看评论区，你会发现有些人为了让代码更短些而使用<code style="font-style: inherit;">for(i=0;A=$ $(‘*’);)</code>。这确实可行，但是它会泄漏全局变量，所以如果你想要在控制台以外的地方使用这种方法，你最好在一个干净的环境中使用。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe6a009925272" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+for(var i=0,B=document.querySelectorAll('*');A=B[i++];){ /* your code here */ }</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe6a009925272-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe6a009925272-1"><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-o">=</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-v">B</span><span class="crayon-o">=</span><span class="crayon-v">document</span><span class="crayon-sy">.</span><span class="crayon-e">querySelectorAll</span><span class="crayon-sy">(</span><span class="crayon-s">'*'</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-v">A</span><span class="crayon-o">=</span><span class="crayon-v">B</span><span class="crayon-sy">[</span><span class="crayon-v">i</span><span class="crayon-o">++</span><span class="crayon-sy">]</span><span class="crayon-sy">;</span><span class="crayon-sy">)</span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-c">/* your code here */</span><span class="crayon-h"> </span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p>如果你在浏览器的控制台中使用就无所谓了，从你在里面定义它们开始，<code style="font-style: inherit;">i</code>和<code style="font-style: inherit;">A</code>变量将会一直在里面。</p>
+<h3>给元素上色</h3>
+<p>为了使这些元素都有漂亮的边框，代码使用了CSS的<code style="font-style: inherit;">outline</code>属性。如果你还不知道的话，显示的边框是在CSS区块模型外的，它并不对元素本身在布局中的大小和位置产生任何影响，因此该属性非常适合用来实现我们的需求。 它的语法就像<code style="font-style: inherit;">border</code>的一样，所以理解下面的部分应该不难：</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe71372924318" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+a.style.outline="1px solid #" + color</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe71372924318-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe71372924318-1"><span class="crayon-v">a</span><span class="crayon-sy">.</span><span class="crayon-v">style</span><span class="crayon-sy">.</span><span class="crayon-e ">outline</span><span class="crayon-o">=</span><span class="crayon-s">"1px solid #"</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">color</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p>有意思的是这里定义颜色的方式：</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe76983123756" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+~~(Math.random()*(1&lt;&lt;24))).toString(16)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe76983123756-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe76983123756-1"><span class="crayon-o">~</span><span class="crayon-o">~</span><span class="crayon-sy">(</span><span class="crayon-v">Math</span><span class="crayon-sy">.</span><span class="crayon-e">random</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">*</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-o">&lt;&lt;</span><span class="crayon-cn">24</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">16</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0011 seconds] -->
+<p>被吓到了吗？当然，我不是一个位操作的专家，因此这是我最喜欢的部分，因为我从中学到了很多新东西。</p>
+<p>我们想得到的是十六进制表示的颜色，如白色 <code style="font-style: inherit;">FFFFFF</code>， 或是蓝色<code style="font-style: inherit;">0000FF</code>，亦或是&#8230;谁知道呢&#8230;<code style="font-style: inherit;">37f9ac</code>吧。像我一样的普通人都习惯了使用十进制数字，而我们心爱的代码对十六进制非常地了解。</p>
+<p>首先我们可以从中学到用<code style="font-style: inherit;">toString</code>方法把十进制整数转换成十六进制整数。该方法以接收的参数作为其进制基数，将一个数转换为一个字符串表示的数。如果没有传入参数，将会默认进行十进制转换，但其实你可以使用其他基数。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe7c460314664" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+(30).toString(); // "30"
+(30).toString(10); // "30"
+(30).toString(16); // "1e" Hexadecimal
+(30).toString(2); // "11110" Binary
+(30).toString(36); // "u" 36 is the maximum base allowed
+
+(30).toString(); // "30"
+(30).toString(10); // "30"
+(30).toString(16); // "1e" 十六进制
+(30).toString(2); // "11110" 二进制
+(30).toString(36); // "u" 36 是所允许的最大基数</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe7c460314664-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe7c460314664-2">2</div><div class="crayon-num" data-line="crayon-55ebc2e36fe7c460314664-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe7c460314664-4">4</div><div class="crayon-num" data-line="crayon-55ebc2e36fe7c460314664-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe7c460314664-6">6</div><div class="crayon-num" data-line="crayon-55ebc2e36fe7c460314664-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe7c460314664-8">8</div><div class="crayon-num" data-line="crayon-55ebc2e36fe7c460314664-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe7c460314664-10">10</div><div class="crayon-num" data-line="crayon-55ebc2e36fe7c460314664-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe7c460314664-1"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe7c460314664-2"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div><div class="crayon-line" id="crayon-55ebc2e36fe7c460314664-3"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">16</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "1e" Hexadecimal</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe7c460314664-4"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "11110" Binary</span></div><div class="crayon-line" id="crayon-55ebc2e36fe7c460314664-5"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">36</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "u" 36 is the maximum base allowed</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe7c460314664-6">&nbsp;</div><div class="crayon-line" id="crayon-55ebc2e36fe7c460314664-7"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe7c460314664-8"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div><div class="crayon-line" id="crayon-55ebc2e36fe7c460314664-9"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">16</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "1e" 十六进制</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe7c460314664-10"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "11110" 二进制</span></div><div class="crayon-line" id="crayon-55ebc2e36fe7c460314664-11"><span class="crayon-sy">(</span><span class="crayon-cn">30</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">toString</span><span class="crayon-sy">(</span><span class="crayon-cn">36</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "u" 36 是所允许的最大基数</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0038 seconds] -->
+<p>反过来，你可以使用<code style="font-style: inherit;">parseInt</code>方法的第二个参数将十六进制数的字符串形式转换为十进制数。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe82278437498" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+parseInt("30"); // "30"
+parseInt("30", 10); // "30"
+parseInt("1e", 16); // "30"
+parseInt("11110", 2); // "30"
+parseInt("u", 36); // "30"</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe82278437498-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe82278437498-2">2</div><div class="crayon-num" data-line="crayon-55ebc2e36fe82278437498-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe82278437498-4">4</div><div class="crayon-num" data-line="crayon-55ebc2e36fe82278437498-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe82278437498-1"><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-s">"30"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe82278437498-2"><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-s">"30"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div><div class="crayon-line" id="crayon-55ebc2e36fe82278437498-3"><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-s">"1e"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">16</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe82278437498-4"><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-s">"11110"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div><div class="crayon-line" id="crayon-55ebc2e36fe82278437498-5"><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-s">"u"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">36</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// "30"</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0034 seconds] -->
+<p>我们需要一个介于<code style="font-style: inherit;">0</code>和十六进制数 <code style="font-style: inherit;">ffffff</code>之间的随机数，那么就是<code style="font-style: inherit;">parseInt("ffffff", 16) == 16777215</code>。16777215正好是<code style="font-style: inherit;">2^24 - 1</code>。</p>
+<p>你喜欢二进制算术吗？不喜欢的话，你只需要知道<code style="font-style: inherit;">1&amp;lt;&amp;lt;24 == 16777216</code>就好了（建议在控制台里试试）。</p>
+<p>如果喜欢二进制算术，你得知道每次你在1的右侧加一个0，就相当于做了一次<code style="font-style: inherit;">2^n</code>操作，其中<code style="font-style: inherit;">n</code>为你加0的次数。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe88768975969" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+1 // 1 == 2^0
+100 // 4 == 2^2
+10000 // 16 == 2^4
+1000000000000000000000000 // 16777216 == 2^24</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe88768975969-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe88768975969-2">2</div><div class="crayon-num" data-line="crayon-55ebc2e36fe88768975969-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe88768975969-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe88768975969-1"><span class="crayon-cn">1</span><span class="crayon-h"> </span><span class="crayon-c">// 1 == 2^0</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe88768975969-2"><span class="crayon-cn">100</span><span class="crayon-h"> </span><span class="crayon-c">// 4 == 2^2</span></div><div class="crayon-line" id="crayon-55ebc2e36fe88768975969-3"><span class="crayon-cn">10000</span><span class="crayon-h"> </span><span class="crayon-c">// 16 == 2^4</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe88768975969-4"><span class="crayon-cn">1000000000000000000000000</span><span class="crayon-h"> </span><span class="crayon-c">// 16777216 == 2^24</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p>左移运算<code style="font-style: inherit;">x&lt;&lt;n</code>是向<code style="font-style: inherit;">x</code>的二进制表示加入<code style="font-style: inherit;">n</code>个<code style="font-style: inherit;">0</code>，因此<code style="font-style: inherit;">1&lt;&lt;24</code>是16777216的简写版，进而通过<code style="font-style: inherit;">Math.random()*(1&lt;&lt;4)</code>我们可以得到一个介于<code style="font-style: inherit;">0</code>和<code style="font-style: inherit;">16777216</code>之间的随机数。</p>
+<p>这还没完，因为<code style="font-style: inherit;">Math.random</code>返回的值是浮点数，而我们只需要整数部分。我们这里使用了波浪符号（~）去实现。波浪符号用于对一个变量按位取反。如果你不明白我在说什么，这里有个很好的<a href="http://www.bubuko.com/infodetail-407132.html">Javascript波浪符号讲解</a>。</p>
+<p>但是这些代码重点不在于按位取反，而在于利用位操作符会丢弃浮点数中的小数部分的特性，因此连续两次按位取反是一个替代<code style="font-style: inherit;">parseInt</code>的便捷方法：</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe8e084039505" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+var a = 12.34, // ~~a = 12
+b = -1231.8754, // ~~b = -1231
+c = 3213.000001; // ~~c = 3213
+
+~~a == parseInt(a, 10); // true
+~~b == parseInt(b, 10); // true
+~~c == parseInt(c, 10); // true</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe8e084039505-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe8e084039505-2">2</div><div class="crayon-num" data-line="crayon-55ebc2e36fe8e084039505-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe8e084039505-4">4</div><div class="crayon-num" data-line="crayon-55ebc2e36fe8e084039505-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe8e084039505-6">6</div><div class="crayon-num" data-line="crayon-55ebc2e36fe8e084039505-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe8e084039505-1"><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">12.34</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-c">// ~~a = 12</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe8e084039505-2"><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">1231.8754</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-c">// ~~b = -1231</span></div><div class="crayon-line" id="crayon-55ebc2e36fe8e084039505-3"><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">3213.000001</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// ~~c = 3213</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe8e084039505-4">&nbsp;</div><div class="crayon-line" id="crayon-55ebc2e36fe8e084039505-5"><span class="crayon-o">~</span><span class="crayon-o">~</span><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// true</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe8e084039505-6"><span class="crayon-o">~</span><span class="crayon-o">~</span><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-v">b</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// true</span></div><div class="crayon-line" id="crayon-55ebc2e36fe8e084039505-7"><span class="crayon-o">~</span><span class="crayon-o">~</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-v">c</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// true</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0030 seconds] -->
+<p>再提醒大家一遍，如果你去<a href="https://gist.github.com/addyosmani/fd3999ea7fce242756b1">gist</a>中看看评论区，你会发现大家在用更简短的代码去获取<code style="font-style: inherit;">parseInt</code>的结果。使用<code style="font-style: inherit;">OR</code>位操作符你可以去掉我们随机数中的小数部分。</p><!-- Crayon Syntax Highlighter v2.7.1 -->
+
+		<div id="crayon-55ebc2e36fe94546799978" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-always" style=" margin-top: 12px; margin-bottom: 12px; font-size: 13px !important; line-height: 15px !important;">
+
+			<div class="crayon-toolbar" data-settings=" show" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><span class="crayon-title"></span>
+			<div class="crayon-tools" style="font-size: 13px !important;height: 19.5px !important; line-height: 19.5px !important;"><div class="crayon-button crayon-nums-button" title="切换是否显示行编号"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-plain-button" title="纯文本显示代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-wrap-button" title="切换自动换行"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-expand-button" title="点击展开代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-copy-button" title="复制代码"><div class="crayon-button-icon"></div></div><div class="crayon-button crayon-popup-button" title="在新窗口中显示代码"><div class="crayon-button-icon"></div></div><span class="crayon-language">JavaScript</span></div></div>
+			<div class="crayon-info" style="min-height: 18.2px !important; line-height: 18.2px !important;"></div>
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 13px !important; line-height: 15px !important;">
+~~a == 0|a == parseInt(a, 10)
+~~b == 0|b == parseInt(b, 10)
+~~c == 0|c == parseInt(c, 10)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 13px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-55ebc2e36fe94546799978-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-55ebc2e36fe94546799978-2">2</div><div class="crayon-num" data-line="crayon-55ebc2e36fe94546799978-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 13px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-55ebc2e36fe94546799978-1"><span class="crayon-o">~</span><span class="crayon-o">~</span><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-o">|</span><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-55ebc2e36fe94546799978-2"><span class="crayon-o">~</span><span class="crayon-o">~</span><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-o">|</span><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-v">b</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-55ebc2e36fe94546799978-3"><span class="crayon-o">~</span><span class="crayon-o">~</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-o">|</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-r">parseInt</span><span class="crayon-sy">(</span><span class="crayon-v">c</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0024 seconds] -->
+<p><code style="font-style: inherit;">Or</code>操作符的优先级在最后，所以使用时可以省掉括号。这里是<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence">Javascript操作符的优先级介绍</a>，感兴趣的话可以看看。</p>
+<p>终于我们有了介于<code style="font-style: inherit;">0</code>和<code style="font-style: inherit;">16777216</code>之间的随机数，即我们的随机颜色。为了使用它，我们现在只需要用<code style="font-style: inherit;">toString(16)</code>将其转换成字符串形式的十六进制数即可。</p>
+<h3>一些感想</h3>
+<p>当一名程序员并不容易。我们疯狂地写代码，有时却没有意识到我们需要多少知识去做我们做的事情。而消化掉所有我们在工作中用到的概念，需要很长的时间。</p>
+<p>我想突出强调的是我们工作的复杂度，因为我知道程序员通常都会被低估（尤其在我的国家，西班牙）。在大部分公司里我们扮演着重要角色，并且我们的工作非常有价值——能经常这样说，是一件很好的事情。</p>
+<p>如果你第一眼看到这单行代码，你就能理解它，你可以为你感到骄傲。</p>
+<p>如果不能，但是你还是把文章看到这里，不要担心，你很快就有能力写出这样的代码，因为你是一个学习者！</p>
+<p>如果你看到文章的第二行就在想<b>太长不看</b>，但你还是看到这里了，你真是个奇葩，但我仍欢迎你在评论区写下你的意见：）</p>
+
+
+
+    <div class="post-adds">
+        <span data-post-id="82204" class="btn-bluet href-style vote-post-up   register-user-only "><i class="fa  fa-thumbs-o-up"></i> <h10 id="82204votetotal"></h10> 赞</span>
+        <span data-book-type="1" data-site-id="11" data-item-id="82204" data-item-type="1" class="btn-bluet href-style bookmark-btn  register-user-only "><i class="fa fa-bookmark-o  "></i> 3 收藏</span>
+
+                <a href="#article-comment"><span class="btn-bluet href-style"><i class="fa fa-comments-o"></i> 9 评论</span></a>
+
+
+
+    </div>
+
+
+        <!-- BEGIN #author-bio -->
+
+<div id="author-bio">
+
+	<h3 class="widget-title">
+	关于作者：<a target="_blank" href="http://www.jobbole.com/members/foolalex">鸭梨山大</a>
+	</h3>
+	<div class="alignleft">
+		<a target="_blank" href="http://www.jobbole.com/members/foolalex">
+			<img src="http://www.jobbole.com/wp-content/uploads/avatars/50755/389209aa30e1aab6918f82bad34c57ec-bpfull.jpg" />
+		</a>
+	</div>
+
+    <div class="author-bio-info">
+
+        <span class="author-bio-info-block">
+            不想当前端的测试不是一个好DBA        </span>
+        <span class="author-bio-info-block">
+            <a href="http://www.jobbole.com/members/foolalex" target="_blank"><i class="fa fa-user"></i> 个人主页</a> &middot;
+            <a href="http://web.jobbole.com/author/foolalex/" target="_blank"><i class="fa fa-file-text-o"></i> 我的文章</a>
+
+             &middot; <a title='声望值' target='_blank' href='http://www.jobbole.com/members/foolalex/reputation/'><i class='fa fa-graduation-cap'></i> 10</a>        </span>
+    </div>
+	<div class="clear"></div>
+</div>
+
+<!-- END #author-bio -->
+	</div>
+	<!-- END .entry -->
+
+<!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+<a class="jiathis_button_tsina"></a>
+<a class="jiathis_button_weixin"></a>
+<a class="jiathis_button_qzone"></a>
+<a class="jiathis_button_fb"></a>
+<a class="jiathis_button_douban"></a>
+<a class="jiathis_button_readitlater"></a>
+<a class="jiathis_button_evernote"></a>
+<a class="jiathis_button_ydnote"></a>
+<a href="http://www.jiathis.com/share?uid=1745061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+<a class="jiathis_counter_style"></a>
+</div>
+
+
+<script type="text/javascript" >
+var jiathis_config={
+	data_track_clickback:false,
+	title:"《通过一行代码学习javascript》",
+	summary:"在javascript无处不在的今天，我们每天都能很容易地学习到新的东西。一旦你掌握了这门语言的基本知识，就可以随处找到蕴含着丰富知识的代码。Bookmarklets是一个完美的多种功能组合起来的工具，每当我发现一个有用的功能，我都会开心地去学习其源码，从中探索出怎么实现这样强大的功能。",
+	pic:"http://jbcdn2.b0.upaiyun.com/2014/12/91e7e29a085d868e7d49d93d911787a9.png",
+	appkey:{
+         "tsina": 1473879058    },
+	ralateuid:{
+		"tsina": 5261893910	},
+	hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1745061" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+<br/><br/>
+			<div class="textwidget"><p><a href="http://100offer.com/join/jobbole?utm_source=jobbole&#038;utm_medium=dis&#038;utm_campaign=jobbole" target="_blank"><img src="http://ww4.sinaimg.cn/mw690/bfdcef89gw1eulzkdluxfj208c06y74u.jpg" border="0" /></a></p>
+</div>
+
+</div>
+<!-- END .post -->
+
+<div class="wp_rp_wrap  wp_rp_vertical" id="wp_rp_first"><div class="wp_rp_content"><h3 class="related_post_title">相关文章</h3><ul class="related_post wp_rp" style="visibility: visible"><li ><a href="http://web.jobbole.com/69284/" class="wp_rp_title">我希望自己尽早知道的7个JavaScript怪癖</a></li><li ><a href="http://web.jobbole.com/18987/" class="wp_rp_title">JavaScript面向对象15分钟教程</a></li><li ><a href="http://web.jobbole.com/18191/" class="wp_rp_title">如何编写可维护的面向对象JavaScript代码</a></li><li ><a href="http://web.jobbole.com/71529/" class="wp_rp_title">jQuery对象入门级介绍</a></li><li ><a href="http://web.jobbole.com/23563/" class="wp_rp_title">Javascript定义类（class）的三种方法</a></li><li ><a href="http://web.jobbole.com/74290/" class="wp_rp_title">阅读 jQuery 源码的18个惊喜</a></li><li ><a href="http://web.jobbole.com/67560/" class="wp_rp_title">编写可测试的 JavaScript 代码</a></li><li ><a href="http://web.jobbole.com/77956/" class="wp_rp_title">函数式JavaScript（4）：函数柯里化</a></li><li ><a href="http://web.jobbole.com/82265/" class="wp_rp_title">也谈谈规范，JS代码的几个注意点</a></li><li ><a href="http://web.jobbole.com/81937/" class="wp_rp_title">(JavaScript)函数名里有什么？</a></li></ul></div></div>
+
+
+<div style="text-align: left;">
+    <h3>可能感兴趣的话题</h3>
+    <ul style="font-size: 13px; list-style: disc inside;">
+                        <li>
+                    <a href="http://group.jobbole.com/6772/" target="_blank">在国内一直做技术真的没前途吗？必须要转管理...</a>
+                     &middot; <a href="http://group.jobbole.com/6772/#comments" target="_blank"><i class="fa fa-comments-o"></i> 10</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6601/" target="_blank">亲，来吐槽下你的周末怎么过的吧！</a>
+                     &middot; <a href="http://group.jobbole.com/6601/#comments" target="_blank"><i class="fa fa-comments-o"></i> 46</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6761/" target="_blank">还有人在用人人网吗？</a>
+                     &middot; <a href="http://group.jobbole.com/6761/#comments" target="_blank"><i class="fa fa-comments-o"></i> 7</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6795/" target="_blank">有人想用 500 刀做一个这样的Wifi APP</a>
+                                    </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6670/" target="_blank">话说好多人都认为程序媛都是女汉纸？？？</a>
+                     &middot; <a href="http://group.jobbole.com/6670/#comments" target="_blank"><i class="fa fa-comments-o"></i> 51</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6787/" target="_blank">有人用了最新版的Chrome吗？能感觉到明显提...</a>
+                     &middot; <a href="http://group.jobbole.com/6787/#comments" target="_blank"><i class="fa fa-comments-o"></i> 1</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6794/" target="_blank">诺基亚3310十五岁生日，有用过3310的小伙伴吗？</a>
+                                    </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6789/" target="_blank">国内有哪些不错的镜像，可以下载到墙外的常用...</a>
+                                    </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6687/" target="_blank">在你身处的城市，你需要什么？</a>
+                     &middot; <a href="http://group.jobbole.com/6687/#comments" target="_blank"><i class="fa fa-comments-o"></i> 26</a>                </li>
+                            <li>
+                    <a href="http://group.jobbole.com/6613/" target="_blank">写代码排版的时候，你是用 Tab，还是 Spac...</a>
+                     &middot; <a href="http://group.jobbole.com/6613/#comments" target="_blank"><i class="fa fa-comments-o"></i> 19</a>                </li>
+                </ul>
+</div>
+
+        <!-- BEGIN .navigation -->
+        <div class="navigation margin-20">
+
+            <div class="alignleft"><a href="http://web.jobbole.com/82186/" rel="prev">&laquo; 响应式增强设计</a></div>
+            <div class="alignright"><a href="http://web.jobbole.com/82218/" rel="next">最常见的20个jQuery面试问题及答案 &raquo;</a></div>
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .navigation -->
+
+
+
+            <div id="article-comment" class="dot-box center-align">
+
+                        <a href="http://www.jobbole.com/login?redirect=http://web.jobbole.com/82204/"><button type="button" class="btn btn-non-transparent">登录后评论</button></a>
+
+            <a target="_blank" href="http://www.jobbole.com/register"><button type="button" class="btn btn-primary">新用户注册</button></a>
+
+            <br/><br/>
+            <span>直接登录</span>
+            <style type="text/css">.t_login_text{margin:0; padding:0;}.t_login_button{margin:0; padding: 5px 0;}.t_login_button a{margin:0; padding-right:3px; line-height:25px}.t_login_button img{display:inline; border:none;}</style><!-- 使用社交帐号登录 来自 WordPress连接微博 插件 --><span class="connectBox1 t_login_button"><a href="http://web.jobbole.com/wp-content/plugins/wp-connect/login.php?go=weixin&redirect_url=http%3A%2F%2Fweb.jobbole.com%2F82204%2F" title="微信" rel="nofollow"><img src="http://web.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_weixin.png" /></a><a href="http://web.jobbole.com/wp-content/plugins/wp-connect/login.php?go=qzone&redirect_url=http%3A%2F%2Fweb.jobbole.com%2F82204%2F" title="QQ" rel="nofollow"><img src="http://web.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_qzone.png" /></a><a href="http://web.jobbole.com/wp-content/plugins/wp-connect/login.php?go=sina&redirect_url=http%3A%2F%2Fweb.jobbole.com%2F82204%2F" title="新浪微博" rel="nofollow"><img src="http://web.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_sina.png" /></a><a href="http://web.jobbole.com/wp-content/plugins/wp-connect/login.php?go=douban&redirect_url=http%3A%2F%2Fweb.jobbole.com%2F82204%2F" title="豆瓣" rel="nofollow"><img src="http://web.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_douban.png" /></a><a href="http://web.jobbole.com/wp-content/plugins/wp-connect/login.php?go=github&redirect_url=http%3A%2F%2Fweb.jobbole.com%2F82204%2F" title="GitHub" rel="nofollow"><img src="http://web.jobbole.com/wp-content/plugins/wp-connect/images/login/btn_github.png" /></a></span>        </div>
+
+
+    <div id="comment_list" class="comments">
+
+                    <h5 id="comments" class="sub-title"><i class="glyphicon"></i>最新评论</h5>
+            <ul class="cmnt-list">
+
+                        <li id="comment-95760"  class="comment cmnt odd">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a href="http://www.jobbole.com/members/boris" class="cmnt-img"><img width="37" height="37" src="http://jbcdn2.b0.upaiyun.com/2015/06/a0483bc0c924e5eb1f62b4cd4b45a9f92.jpg" alt=""></a>
+                <div class="cmnt-meta">
+                    <span><a href="http://www.jobbole.com/members/boris">跑调的包子</a><label class="comment_author_data">&nbsp;（ <a title='声望值' target='_blank' href='http://www.jobbole.com/members/boris/reputation/'><i class='fa fa-graduation-cap'></i> 1</a> &middot; <a title='个人微信：borisyu1990' target='_blank' href='#'><i class='fa fa-weixin'></i></a>&nbsp; ）</label></span>
+                    <span class="c-title">
+                        Web前端开发                    </span>
+
+                    <span class="c-date">
+                        <a href="http://web.jobbole.com/82204/#comment-95760">08/17</a>
+                    </span>
+
+
+
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>这段代码才正确哟<br />
+[].forEach.call($$("*"),function(a){a.style.outline="1px solid #"+(~~(Math.random()*(1&lt;&lt;24))).toString(16)})</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95760voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95760"><i class="fa fa-thumbs-o-up"></i> <span id="95760voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95760voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95760"><i class="fa fa-thumbs-o-down"></i> <span id="95760votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95760#respond' onclick='return addComment.moveForm("comment-95760", "95760", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+</li>
+        <li id="comment-95697"  class="comment cmnt even">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a href="http://www.jobbole.com/members/weifun" class="cmnt-img"><img width="37" height="37" src="http://tp2.sinaimg.cn/1770705800/180/0/1" alt=""></a>
+                <div class="cmnt-meta">
+                    <span><a href="http://www.jobbole.com/members/weifun">戈饭</a><label class="comment_author_data">&nbsp;（ <a title='声望值' target='_blank' href='http://www.jobbole.com/members/weifun/reputation/'><i class='fa fa-graduation-cap'></i> 1</a> &middot; <a title='微博主页' target='_blank' href='http://weibo.com/weifun'><i class='fa fa-weibo'></i></a>&nbsp; ）</label></span>
+                    <span class="c-title">
+                        &nbsp;                    </span>
+
+                    <span class="c-date">
+                        <a href="http://web.jobbole.com/82204/#comment-95697">06/17</a>
+                    </span>
+
+
+
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>文中的$ $("") 应该修正为$$("") 。<br />
+两个$之间没有空格</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95697voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95697"><i class="fa fa-thumbs-o-up"></i> <span id="95697voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95697voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95697"><i class="fa fa-thumbs-o-down"></i> <span id="95697votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95697#respond' onclick='return addComment.moveForm("comment-95697", "95697", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+</li>
+        <li id="comment-95539"  class="comment cmnt odd">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a class="cmnt-img"><img width="37" height="37" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt=""></a>
+                <div class="cmnt-meta">
+                                        <span>law1024</span>
+                                        <span class="c-title">&nbsp;</span>
+                    <span class="c-date"><a href="http://web.jobbole.com/82204/#comment-95539">04/01</a></span>
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>~~(Math.random()*(1&lt;&lt;24))).toString(16) 这种方式虽然能获取一个 0 ~ ffffff 之间的随机数，但是却不一定能表示一个正确的颜色值，如果随机出来的是0，那么颜色值就是#0，而不会被自动补齐，浏览器会认为这是一个错误的颜色属性而忽略掉，那么这个元素也就不会被加上outline了。个人觉得，是不是随机3个0~255之间的数，然后使用rgb表示法，这样会不会更好，虽然这种方法代码要多写很多。</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95539voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95539"><i class="fa fa-thumbs-o-up"></i> <span id="95539voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95539voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95539"><i class="fa fa-thumbs-o-down"></i> <span id="95539votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95539#respond' onclick='return addComment.moveForm("comment-95539", "95539", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+</li>
+        <li id="comment-95486"  class="comment cmnt even">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a class="cmnt-img"><img width="37" height="37" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt=""></a>
+                <div class="cmnt-meta">
+                                        <span>Will</span>
+                                        <span class="c-title">&nbsp;</span>
+                    <span class="c-date"><a href="http://web.jobbole.com/82204/#comment-95486">03/23</a></span>
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>Sorry that i cannot run the script correctly, did the author ever run the script on the local before before posting the article online??</p>
+<p>Here is what my code looks like:</p>
+<p>[].forEach.call($ $(""),function(a){<br />
+a.style.outline="1px solid #"+(~~(Math.random()(1&lt;&lt;24))).toString(16)<br />
+})</p>
+<p>ABC</p>
+<p>The chrome throw: Uncaught ReferenceError: $$ is not defined</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95486voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95486"><i class="fa fa-thumbs-o-up"></i> <span id="95486voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95486voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95486"><i class="fa fa-thumbs-o-down"></i> <span id="95486votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95486#respond' onclick='return addComment.moveForm("comment-95486", "95486", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+<ul class='children'>
+        <li id="comment-95487"  class="comment cmnt odd">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a class="cmnt-img"><img width="37" height="37" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt=""></a>
+                <div class="cmnt-meta">
+                                        <span>Will</span>
+                                        <span class="c-title">&nbsp;</span>
+                    <span class="c-date"><a href="http://web.jobbole.com/82204/#comment-95487">03/23</a></span>
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>Sorry that it should be run in the console. now running good.</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95487voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95487"><i class="fa fa-thumbs-o-up"></i> <span id="95487voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95487voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95487"><i class="fa fa-thumbs-o-down"></i> <span id="95487votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95487#respond' onclick='return addComment.moveForm("comment-95487", "95487", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+<ul class='children'>
+        <li id="comment-95564"  class="comment cmnt even">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a class="cmnt-img"><img width="37" height="37" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt=""></a>
+                <div class="cmnt-meta">
+                                        <span>ck</span>
+                                        <span class="c-title">&nbsp;</span>
+                    <span class="c-date"><a href="http://web.jobbole.com/82204/#comment-95564">04/07</a></span>
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>hello~how do you solve this problem？</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95564voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95564"><i class="fa fa-thumbs-o-up"></i> <span id="95564voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95564voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95564"><i class="fa fa-thumbs-o-down"></i> <span id="95564votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95564#respond' onclick='return addComment.moveForm("comment-95564", "95564", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+        <li id="comment-95485"  class="comment cmnt odd">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a class="cmnt-img"><img width="37" height="37" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt=""></a>
+                <div class="cmnt-meta">
+                                        <span>修</span>
+                                        <span class="c-title">&nbsp;</span>
+                    <span class="c-date"><a href="http://web.jobbole.com/82204/#comment-95485">03/23</a></span>
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>$ $("")，这个应该是$$('*')这样吧~~</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95485voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95485"><i class="fa fa-thumbs-o-up"></i> <span id="95485voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95485voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95485"><i class="fa fa-thumbs-o-down"></i> <span id="95485votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95485#respond' onclick='return addComment.moveForm("comment-95485", "95485", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+</li>
+        <li id="comment-95481"  class="comment cmnt even">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a class="cmnt-img"><img width="37" height="37" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt=""></a>
+                <div class="cmnt-meta">
+                                        <span>Nine</span>
+                                        <span class="c-title">&nbsp;</span>
+                    <span class="c-date"><a href="http://web.jobbole.com/82204/#comment-95481">03/21</a></span>
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>a.style.outline="1px solid #"+(~~(Math.random()(1&lt;&lt;24))).toString(16)<br />
+→_→ 差了*号<br />
+Math.random()*(1&lt;&lt;24)</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95481voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95481"><i class="fa fa-thumbs-o-up"></i> <span id="95481voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95481voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95481"><i class="fa fa-thumbs-o-down"></i> <span id="95481votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95481#respond' onclick='return addComment.moveForm("comment-95481", "95481", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+<ul class='children'>
+        <li id="comment-95483"  class="comment cmnt odd">
+
+    <div class="cmnt-box">
+        <div class="cmnt-header">
+                            <a href="http://www.jobbole.com/members/huangyuliang" class="cmnt-img"><img width="37" height="37" src="http://www.jobbole.com/wp-content/uploads/avatars/6296/3a54d79dd7b6f3005a3f1b55e66ff2ef-bpfull.jpg" alt=""></a>
+                <div class="cmnt-meta">
+                    <span><a href="http://www.jobbole.com/members/huangyuliang">黄余粮</a><label class="comment_author_data">&nbsp;（ <a title='声望值' target='_blank' href='http://www.jobbole.com/members/huangyuliang/reputation/'><i class='fa fa-graduation-cap'></i> 10</a> &middot; <a title='我的网站' target='_blank' href='http://www.jobbole.com'><i class='fa fa-link'></i></a>&nbsp; ）</label></span>
+                    <span class="c-title">
+                        站长                    </span>
+
+                    <span class="c-date">
+                        <a href="http://web.jobbole.com/82204/#comment-95483">03/22</a>
+                    </span>
+
+
+
+                </div>
+                    </div>
+        <div class="cmnt-body">
+            <p><p>谢谢指正。已代译者修改</p>
+</p>
+                    </div>
+                    <div class="cmnt-footer">
+
+
+                <p class="c-like">
+                    <a title="赞同" alt="赞同" class="95483voteflag  t-up  href-style vote-comment-up  register-user-only   " data-comment-id="95483"><i class="fa fa-thumbs-o-up"></i> <span id="95483voteuptotal">0</span></a>
+                    <a title="反对" alt="反对" class="95483voteflag  t-down  href-style vote-comment-down  register-user-only   " data-comment-id="95483"><i class="fa fa-thumbs-o-down"></i> <span id="95483votedowntotal">0</span></a>
+
+                    <a class='comment-reply-link register-user-only' href='/82204/?replytocom=95483#respond' onclick='return addComment.moveForm("comment-95483", "95483", "respond", "82204")'>回复 <i class='fa fa-reply'></i></a>
+                </p>
+            </div>
+            </div>
+    </li>
+</li>
+</ul>
+</li>
+            </ul>
+
+    </div>
+
+
+
+</div>
+<!-- END .grid-8 -->
+
+<!-- BEGIN #sidebar -->
+<div id="sidebar" class="grid-4">
+
+	    <div class="nav-search-box ">
+                <form method="get" id="searchform" action="http://web.jobbole.com">
+            <select id="searchselect">
+                                    <option  value="http://blog.jobbole.com">博客</option>
+                                    <option  value="http://hao.jobbole.com">资源</option>
+                                    <option  value="http://top.jobbole.com">头条</option>
+                                    <option  value="http://group.jobbole.com">小组</option>
+                                    <option  value="http://date.jobbole.com">面向对象</option>
+                                    <option selected value="http://web.jobbole.com">WEB前端</option>
+                                    <option  value="http://ios.jobbole.com">IOS</option>
+                                    <option  value="http://python.jobbole.com">Python</option>
+                                    <option  value="http://android.jobbole.com">安卓</option>
+                            </select>
+            <div class="input-wrapper">
+                <input type="text" value="" name="s" id="s" placeholder="输入搜索关键字">
+            </div>
+            <input type="submit" id="searchsubmit" value="搜索">
+        </form>
+    </div>
+
+        <h3 class="widget-title">
+            <a target="_blank" href="http://group.jobbole.com">小组话题</a>
+            <span style="float:right;"><a target="_blank" href="http://group.jobbole.com/">更多话题 &raquo;</a></span>
+        </h3>
+
+        <!-- BEGIN .container -->
+        <div class="container">
+
+
+                <!-- BEGIN .grid-4 -->
+                <div class="grid-4 floated-thumb">
+
+
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/sxpujs" ">
+                                    <!-- img src="" alt="" width="34" height="34" / -->
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://group.jobbole.com/6772/">在国内一直做技术真的没前途吗？必须...</a><br />
+                                <a href="http://group.jobbole.com/author/sxpujs/">sxpujs</a> 发起
+                                                                    • 10 回复
+
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/heli1057013796" ">
+                                    <!-- img src="" alt="" width="34" height="34" / -->
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://group.jobbole.com/6588/">如何看待网恋这件事？</a><br />
+                                <a href="http://group.jobbole.com/author/heli1057013796/">Nikita</a> 发起
+                                                                    • 48 回复
+
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/heli1057013796" ">
+                                    <!-- img src="" alt="" width="34" height="34" / -->
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://group.jobbole.com/6601/">亲，来吐槽下你的周末怎么过的吧！</a><br />
+                                <a href="http://group.jobbole.com/author/heli1057013796/">Nikita</a> 发起
+                                                                    • 46 回复
+
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/newseditors" ">
+                                    <!-- img src="" alt="" width="34" height="34" / -->
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://group.jobbole.com/6761/">还有人在用人人网吗？</a><br />
+                                <a href="http://group.jobbole.com/author/newseditors/">小编辑</a> 发起
+                                                                    • 7 回复
+
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/aoi" ">
+                                    <!-- img src="" alt="" width="34" height="34" / -->
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://group.jobbole.com/6795/">有人想用 500 刀做一个这样的Wifi...</a><br />
+                                <a href="http://group.jobbole.com/author/aoi/">aoi</a> 发起
+
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/kekejiang" ">
+                                    <!-- img src="" alt="" width="34" height="34" / -->
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://group.jobbole.com/6774/">感觉好多猿猿缺乏恋爱基本技巧</a><br />
+                                <a href="http://group.jobbole.com/author/kekejiang/">可可酱</a> 发起
+                                                                    • 12 回复
+
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/2699637182" ">
+                                    <!-- img src="" alt="" width="34" height="34" / -->
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://group.jobbole.com/6670/">话说好多人都认为程序媛都是女汉纸？...</a><br />
+                                <a href="http://group.jobbole.com/author/2699637182/">sisteRsummer</a> 发起
+                                                                    • 51 回复
+
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+
+                            <!-- BEGIN .post-thumb -->
+                            <div class="author-thumb">
+
+                                <a target="_blank" href="http://www.jobbole.com/members/wx1814370910" ">
+                                    <!-- img src="" alt="" width="34" height="34" / -->
+                                    <img src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png" alt="" width="34" height="34" />
+                                </a>
+
+                            </div>
+                            <!-- END .post-thumb -->
+
+                        <!-- BEGIN .post-meta -->
+                        <div class="post-meta">
+
+                            <p>
+                                <a class="meta-title" target="_blank" href="http://group.jobbole.com/6792/">申请加入翻译组</a><br />
+                                <a href="http://group.jobbole.com/author/wx1814370910/">HunterLin</a> 发起
+                                                                    • 1 回复
+
+                            </p>
+
+                        </div>
+                        <!-- END .post-meta -->
+
+                        <div class="clear"></div>
+
+
+                </div>
+                <!-- END .grid-4 -->
+
+
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .container -->
+
+        <div id="text-2" class="widget widget_text">			<div class="textwidget"><p><a href='http://blog.jobbole.com/84342/' target='_blank'><img src='http://jbcdn2.b0.upaiyun.com/2015/02/e5689e5b541cf10748fd6aef2a6aedbd.jpg' /></a></p>
+</div>
+		</div><div class="tabs tabbed_widget"><ul class="nav clearfix"><li><a id="link-tab1" href="#tab1" title="本月热门文章">本月热门文章</a></li><li><a id="link-tab2" href="#tab2" title="年度热门文章">年度热门文章</a></li><li><a id="link-tab3" href="#tab3" title="热门标签">热门标签</a></li></ul><div id="tab1" class="tab"><div class="floated-thumb">
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">0</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83207/" title="如何成为一名卓越的前端工程师">如何成为一名卓越的前端工程师</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">1</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83317/" title="CSS 最核心的几个概念 ">CSS 最核心的几个概念 </a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">2</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83162/" title="用手机访问本地环境的利器ngrok ">用手机访问本地环境的利器ngrok </a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">3</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83164/" title="高性能JavaScript 重排与重绘">高性能JavaScript 重排与重绘</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">4</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83277/" title="jQuery编程的最佳实践">jQuery编程的最佳实践</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">5</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83290/" title="网页无图再不是梦想">网页无图再不是梦想</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">6</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83310/" title="Bootstrap 4重大更新，亮点解读">Bootstrap 4重大更新，亮点解读</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">7</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83388/" title="DOM中Property与Attribute的区别">DOM中Property与Attribute的区别</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">8</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83414/" title="谈谈React.js的核心入门知识">谈谈React.js的核心入门知识</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">9</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83181/" title="理解javascript中的策略模式">理解javascript中的策略模式</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                </div></div><div id="tab2" class="tab"><div class="floated-thumb">
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">0</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/82204/" title="通过一行代码学习javascript">通过一行代码学习javascript</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">1</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/81010/" title="谈谈javascript语法里一些难点问题（一）">谈谈javascript语法里一些难点问题（一）</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">2</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/82628/" title="深入浅出 JSONP">深入浅出 JSONP</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">3</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/82437/" title="我的前端学习历程">我的前端学习历程</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">4</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83207/" title="如何成为一名卓越的前端工程师">如何成为一名卓越的前端工程师</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">5</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/82447/" title="逐渐深入地理解Ajax">逐渐深入地理解Ajax</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">6</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/76611/" title="图解 KMP 算法（JavaScript 实现）">图解 KMP 算法（JavaScript 实现）</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta ">
+
+                        <p>
+                            <span class="numb">7</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/82251/" title="这10道javascript笔试题你都会么">这10道javascript笔试题你都会么</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">8</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/83317/" title="CSS 最核心的几个概念 ">CSS 最核心的几个概念 </a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+
+
+                    <!-- BEGIN .post-meta -->
+                    <div class="post-meta  no-thumb">
+
+                        <p>
+                            <span class="numb">9</span>
+                            <a class="meta-title" target="_blank" href="http://web.jobbole.com/82360/" title="一起写一个 Web 服务器（1）">一起写一个 Web 服务器（1）</a><br />
+                        </p>
+
+                    </div>
+                    <!-- END .post-meta -->
+
+                    <div class="clear"></div>
+
+                </div></div><div id="tab3" class="tab"><p><a href='http://web.jobbole.com/tag/3d/' class='tag-link-761' title='1 个话题' style='font-size: 8px;'>3D</a>
+<a href='http://web.jobbole.com/tag/ajax/' class='tag-link-748' title='2 个话题' style='font-size: 9.1351351351351px;'>Ajax</a>
+<a href='http://web.jobbole.com/tag/amd/' class='tag-link-825' title='2 个话题' style='font-size: 9.1351351351351px;'>AMD</a>
+<a href='http://web.jobbole.com/tag/angular/' class='tag-link-737' title='4 个话题' style='font-size: 10.522522522523px;'>angular</a>
+<a href='http://web.jobbole.com/tag/angularjs/' class='tag-link-765' title='6 个话题' style='font-size: 11.468468468468px;'>AngularJS</a>
+<a href='http://web.jobbole.com/tag/attribute/' class='tag-link-936' title='2 个话题' style='font-size: 9.1351351351351px;'>Attribute</a>
+<a href='http://web.jobbole.com/tag/bootstrap/' class='tag-link-752' title='2 个话题' style='font-size: 9.1351351351351px;'>bootstrap</a>
+<a href='http://web.jobbole.com/tag/canvas/' class='tag-link-806' title='2 个话题' style='font-size: 9.1351351351351px;'>Canvas</a>
+<a href='http://web.jobbole.com/tag/chrome/' class='tag-link-757' title='12 个话题' style='font-size: 13.108108108108px;'>Chrome</a>
+<a href='http://web.jobbole.com/tag/cmd/' class='tag-link-826' title='2 个话题' style='font-size: 9.1351351351351px;'>CMD</a>
+<a href='http://web.jobbole.com/tag/codepen/' class='tag-link-778' title='1 个话题' style='font-size: 8px;'>CodePen</a>
+<a href='http://web.jobbole.com/tag/css/' class='tag-link-711' title='87 个话题' style='font-size: 18.342342342342px;'>CSS</a>
+<a href='http://web.jobbole.com/tag/css3/' class='tag-link-500' title='23 个话题' style='font-size: 14.810810810811px;'>CSS3</a>
+<a href='http://web.jobbole.com/tag/css-reset/' class='tag-link-925' title='4 个话题' style='font-size: 10.522522522523px;'>CSS Reset</a>
+<a href='http://web.jobbole.com/tag/dom/' class='tag-link-815' title='6 个话题' style='font-size: 11.468468468468px;'>DOM</a>
+<a href='http://web.jobbole.com/tag/ecmascript-6/' class='tag-link-821' title='3 个话题' style='font-size: 9.8918918918919px;'>ECMAScript 6</a>
+<a href='http://web.jobbole.com/tag/es6/' class='tag-link-731' title='11 个话题' style='font-size: 12.918918918919px;'>es6</a>
+<a href='http://web.jobbole.com/tag/facebook/' class='tag-link-722' title='4 个话题' style='font-size: 10.522522522523px;'>facebook</a>
+<a href='http://web.jobbole.com/tag/featuredpost/' class='tag-link-714' title='5 个话题' style='font-size: 11.027027027027px;'>featuredpost</a>
+<a href='http://web.jobbole.com/tag/fiddler/' class='tag-link-880' title='2 个话题' style='font-size: 9.1351351351351px;'>Fiddler</a>
+<a href='http://web.jobbole.com/tag/flex/' class='tag-link-887' title='2 个话题' style='font-size: 9.1351351351351px;'>Flex</a>
+<a href='http://web.jobbole.com/tag/flow/' class='tag-link-723' title='2 个话题' style='font-size: 9.1351351351351px;'>flow</a>
+<a href='http://web.jobbole.com/tag/foundation/' class='tag-link-754' title='1 个话题' style='font-size: 8px;'>Foundation</a>
+<a href='http://web.jobbole.com/tag/html/' class='tag-link-760' title='2 个话题' style='font-size: 9.1351351351351px;'>HTML</a>
+<a href='http://web.jobbole.com/tag/html5/' class='tag-link-182' title='84 个话题' style='font-size: 18.279279279279px;'>HTML5</a>
+<a href='http://web.jobbole.com/tag/https/' class='tag-link-848' title='2 个话题' style='font-size: 9.1351351351351px;'>HTTPS</a>
+<a href='http://web.jobbole.com/tag/ie/' class='tag-link-762' title='2 个话题' style='font-size: 9.1351351351351px;'>IE</a>
+<a href='http://web.jobbole.com/tag/iframe/' class='tag-link-874' title='2 个话题' style='font-size: 9.1351351351351px;'>iframe</a>
+<a href='http://web.jobbole.com/tag/instanceof/' class='tag-link-789' title='1 个话题' style='font-size: 8px;'>instanceof</a>
+<a href='http://web.jobbole.com/tag/javascrip/' class='tag-link-773' title='1 个话题' style='font-size: 8px;'>JavaScrip</a>
+<a href='http://web.jobbole.com/tag/javascript/' class='tag-link-683' title='328 个话题' style='font-size: 22px;'>Javascript</a>
+<a href='http://web.jobbole.com/tag/jquery/' class='tag-link-733' title='6 个话题' style='font-size: 11.468468468468px;'>jQuery</a>
+<a href='http://web.jobbole.com/tag/jshint/' class='tag-link-767' title='1 个话题' style='font-size: 8px;'>JSHint</a>
+<a href='http://web.jobbole.com/tag/jslint/' class='tag-link-746' title='2 个话题' style='font-size: 9.1351351351351px;'>JSLint</a>
+<a href='http://web.jobbole.com/tag/json/' class='tag-link-830' title='3 个话题' style='font-size: 9.8918918918919px;'>JSON</a>
+<a href='http://web.jobbole.com/tag/kmp/' class='tag-link-774' title='1 个话题' style='font-size: 8px;'>KMP</a>
+<a href='http://web.jobbole.com/tag/line-height/' class='tag-link-950' title='2 个话题' style='font-size: 9.1351351351351px;'>line-height</a>
+<a href='http://web.jobbole.com/tag/mvvm/' class='tag-link-803' title='2 个话题' style='font-size: 9.1351351351351px;'>MVVM</a>
+<a href='http://web.jobbole.com/tag/node-js/' class='tag-link-736' title='2 个话题' style='font-size: 9.1351351351351px;'>node.js</a>
+<a href='http://web.jobbole.com/tag/normalize-css/' class='tag-link-924' title='2 个话题' style='font-size: 9.1351351351351px;'>Normalize.css</a>
+<a href='http://web.jobbole.com/tag/parseint/' class='tag-link-785' title='1 个话题' style='font-size: 8px;'>parseInt</a>
+<a href='http://web.jobbole.com/tag/promise/' class='tag-link-822' title='2 个话题' style='font-size: 9.1351351351351px;'>Promise</a>
+<a href='http://web.jobbole.com/tag/property/' class='tag-link-935' title='2 个话题' style='font-size: 9.1351351351351px;'>Property</a>
+<a href='http://web.jobbole.com/tag/pure/' class='tag-link-755' title='1 个话题' style='font-size: 8px;'>Pure</a>
+<a href='http://web.jobbole.com/tag/react/' class='tag-link-866' title='5 个话题' style='font-size: 11.027027027027px;'>React</a>
+<a href='http://web.jobbole.com/tag/sass/' class='tag-link-946' title='2 个话题' style='font-size: 9.1351351351351px;'>Sass</a>
+<a href='http://web.jobbole.com/tag/semantic-ui/' class='tag-link-753' title='1 个话题' style='font-size: 8px;'>Semantic UI</a>
+<a href='http://web.jobbole.com/tag/settimeout/' class='tag-link-793' title='2 个话题' style='font-size: 9.1351351351351px;'>settimeout</a>
+<a href='http://web.jobbole.com/tag/spa/' class='tag-link-775' title='1 个话题' style='font-size: 8px;'>SPA</a>
+<a href='http://web.jobbole.com/tag/this/' class='tag-link-716' title='2 个话题' style='font-size: 9.1351351351351px;'>this</a>
+<a href='http://web.jobbole.com/tag/uikit/' class='tag-link-756' title='1 个话题' style='font-size: 8px;'>UIkit</a>
+<a href='http://web.jobbole.com/tag/url/' class='tag-link-759' title='2 个话题' style='font-size: 9.1351351351351px;'>URL</a>
+<a href='http://web.jobbole.com/tag/web-components/' class='tag-link-766' title='1 个话题' style='font-size: 8px;'>Web Components</a>
+<a href='http://web.jobbole.com/tag/webpack/' class='tag-link-968' title='2 个话题' style='font-size: 9.1351351351351px;'>webpack</a>
+<a href='http://web.jobbole.com/tag/web%e5%bc%80%e5%8f%91/' class='tag-link-816' title='3 个话题' style='font-size: 9.8918918918919px;'>Web开发</a>
+<a href='http://web.jobbole.com/tag/writable/' class='tag-link-787' title='1 个话题' style='font-size: 8px;'>writable</a>
+<a href='http://web.jobbole.com/tag/%e4%b8%b2/' class='tag-link-772' title='2 个话题' style='font-size: 9.1351351351351px;'>串</a>
+<a href='http://web.jobbole.com/tag/%e4%b9%a6%e7%b1%8d/' class='tag-link-750' title='1 个话题' style='font-size: 8px;'>书籍</a>
+<a href='http://web.jobbole.com/tag/%e4%bb%a3%e7%a0%81%e4%bc%98%e5%8c%96/' class='tag-link-777' title='1 个话题' style='font-size: 8px;'>代码优化</a>
+<a href='http://web.jobbole.com/tag/%e5%86%85%e5%ad%98%e5%88%86%e6%9e%90/' class='tag-link-758' title='1 个话题' style='font-size: 8px;'>内存分析</a>
+<a href='http://web.jobbole.com/tag/%e5%86%85%e5%ad%98%e6%b3%84%e9%9c%b2/' class='tag-link-795' title='2 个话题' style='font-size: 9.1351351351351px;'>内存泄露</a>
+<a href='http://web.jobbole.com/tag/%e5%87%bd%e6%95%b0%e5%90%8d/' class='tag-link-764' title='1 个话题' style='font-size: 8px;'>函数名</a>
+<a href='http://web.jobbole.com/tag/%e5%89%8d%e7%ab%af/' class='tag-link-779' title='4 个话题' style='font-size: 10.522522522523px;'>前端</a>
+<a href='http://web.jobbole.com/tag/%e5%89%8d%e7%ab%af%e5%b7%a5%e7%a8%8b%e5%b8%88/' class='tag-link-871' title='2 个话题' style='font-size: 9.1351351351351px;'>前端工程师</a>
+<a href='http://web.jobbole.com/tag/%e5%89%8d%e7%ab%af%e6%a1%86%e6%9e%b6/' class='tag-link-751' title='1 个话题' style='font-size: 8px;'>前端框架</a>
+<a href='http://web.jobbole.com/tag/%e5%8a%a8%e7%94%bb/' class='tag-link-819' title='3 个话题' style='font-size: 9.8918918918919px;'>动画</a>
+<a href='http://web.jobbole.com/tag/%e5%8c%85%e8%a3%85%e7%b1%bb%e5%9e%8b/' class='tag-link-786' title='1 个话题' style='font-size: 8px;'>包装类型</a>
+<a href='http://web.jobbole.com/tag/%e5%8e%9f%e5%9e%8b/' class='tag-link-792' title='2 个话题' style='font-size: 9.1351351351351px;'>原型</a>
+<a href='http://web.jobbole.com/tag/%e5%8f%98%e9%87%8f/' class='tag-link-782' title='1 个话题' style='font-size: 8px;'>变量</a>
+<a href='http://web.jobbole.com/tag/%e5%90%8e%e7%ab%af/' class='tag-link-780' title='1 个话题' style='font-size: 8px;'>后端</a>
+<a href='http://web.jobbole.com/tag/%e5%93%8d%e5%ba%94%e5%bc%8f/' class='tag-link-817' title='3 个话题' style='font-size: 9.8918918918919px;'>响应式</a>
+<a href='http://web.jobbole.com/tag/%e5%9b%be%e7%89%87/' class='tag-link-739' title='2 个话题' style='font-size: 9.1351351351351px;'>图片</a>
+<a href='http://web.jobbole.com/tag/%e5%ad%97%e4%bd%93/' class='tag-link-831' title='5 个话题' style='font-size: 11.027027027027px;'>字体</a>
+<a href='http://web.jobbole.com/tag/%e5%af%b9%e8%b1%a1/' class='tag-link-781' title='2 个话题' style='font-size: 9.1351351351351px;'>对象</a>
+<a href='http://web.jobbole.com/tag/%e5%b1%85%e4%b8%ad/' class='tag-link-975' title='2 个话题' style='font-size: 9.1351351351351px;'>居中</a>
+<a href='http://web.jobbole.com/tag/%e5%b7%a5%e5%85%b7/' class='tag-link-763' title='2 个话题' style='font-size: 9.1351351351351px;'>工具</a>
+<a href='http://web.jobbole.com/tag/%e5%bc%82%e6%ad%a5%e7%bc%96%e7%a8%8b/' class='tag-link-832' title='2 个话题' style='font-size: 9.1351351351351px;'>异步编程</a>
+<a href='http://web.jobbole.com/tag/%e6%80%a7%e8%83%bd/' class='tag-link-724' title='7 个话题' style='font-size: 11.783783783784px;'>性能</a>
+<a href='http://web.jobbole.com/tag/%e6%80%a7%e8%83%bd%e4%bc%98%e5%8c%96/' class='tag-link-738' title='8 个话题' style='font-size: 12.099099099099px;'>性能优化</a>
+<a href='http://web.jobbole.com/tag/%e6%8f%92%e4%bb%b6/' class='tag-link-878' title='2 个话题' style='font-size: 9.1351351351351px;'>插件</a>
+<a href='http://web.jobbole.com/tag/%e6%95%b0%e7%bb%84/' class='tag-link-783' title='3 个话题' style='font-size: 9.8918918918919px;'>数组</a>
+<a href='http://web.jobbole.com/tag/%e6%a0%87%e5%87%86%e5%87%bd%e6%95%b0/' class='tag-link-749' title='1 个话题' style='font-size: 8px;'>标准函数</a>
+<a href='http://web.jobbole.com/tag/%e6%a0%88/' class='tag-link-769' title='1 个话题' style='font-size: 8px;'>栈</a>
+<a href='http://web.jobbole.com/tag/%e6%a1%86%e6%9e%b6/' class='tag-link-745' title='2 个话题' style='font-size: 9.1351351351351px;'>框架</a>
+<a href='http://web.jobbole.com/tag/%e6%a8%a1%e6%9d%bf%e5%bc%95%e6%93%8e/' class='tag-link-932' title='2 个话题' style='font-size: 9.1351351351351px;'>模板引擎</a>
+<a href='http://web.jobbole.com/tag/%e6%a8%a1%e7%b3%8a%e6%90%9c%e7%b4%a2/' class='tag-link-776' title='1 个话题' style='font-size: 8px;'>模糊搜索</a>
+<a href='http://web.jobbole.com/tag/%e6%b5%8f%e8%a7%88%e5%99%a8/' class='tag-link-814' title='4 个话题' style='font-size: 10.522522522523px;'>浏览器</a>
+<a href='http://web.jobbole.com/tag/%e7%bb%a7%e6%89%bf/' class='tag-link-885' title='3 个话题' style='font-size: 9.8918918918919px;'>继承</a>
+<a href='http://web.jobbole.com/tag/%e7%bc%93%e5%ad%98/' class='tag-link-927' title='2 个话题' style='font-size: 9.1351351351351px;'>缓存</a>
+<a href='http://web.jobbole.com/tag/%e8%81%8c%e5%9c%ba/' class='tag-link-741' title='2 个话题' style='font-size: 9.1351351351351px;'>职场</a>
+<a href='http://web.jobbole.com/tag/%e8%af%ad%e6%b3%95/' class='tag-link-720' title='2 个话题' style='font-size: 9.1351351351351px;'>语法</a>
+<a href='http://web.jobbole.com/tag/%e8%b0%83%e8%af%95/' class='tag-link-788' title='5 个话题' style='font-size: 11.027027027027px;'>调试</a>
+<a href='http://web.jobbole.com/tag/%e8%b4%a8%e9%87%8f%e6%a3%80%e6%9f%a5/' class='tag-link-884' title='2 个话题' style='font-size: 9.1351351351351px;'>质量检查</a>
+<a href='http://web.jobbole.com/tag/%e8%b7%a8%e5%9f%9f/' class='tag-link-834' title='5 个话题' style='font-size: 11.027027027027px;'>跨域</a>
+<a href='http://web.jobbole.com/tag/%e8%bf%90%e7%ae%97%e7%ac%a6/' class='tag-link-784' title='1 个话题' style='font-size: 8px;'>运算符</a>
+<a href='http://web.jobbole.com/tag/%e9%80%89%e6%8b%a9%e5%99%a8/' class='tag-link-727' title='4 个话题' style='font-size: 10.522522522523px;'>选择器</a>
+<a href='http://web.jobbole.com/tag/%e9%93%be%e8%a1%a8/' class='tag-link-771' title='1 个话题' style='font-size: 8px;'>链表</a>
+<a href='http://web.jobbole.com/tag/%e9%97%ad%e5%8c%85/' class='tag-link-791' title='4 个话题' style='font-size: 10.522522522523px;'>闭包</a>
+<a href='http://web.jobbole.com/tag/%e9%98%9f%e5%88%97/' class='tag-link-770' title='1 个话题' style='font-size: 8px;'>队列</a>
+<a href='http://web.jobbole.com/tag/%e9%9d%a2%e8%af%95/' class='tag-link-721' title='3 个话题' style='font-size: 9.8918918918919px;'>面试</a></p></div></div><div id="text-7" class="widget widget_text">			<div class="textwidget"><p><a href='http://date.jobbole.com/' target='_blank'><img src='http://ww2.sinaimg.cn/mw690/bfdcef89gw1esk2g5dvq1j208c03cglu.jpg' /></a></p>
+</div>
+		</div>		<h3 class='widget-title'>最新评论</h3>
+		<ul>
+
+
+			<li id="rc-comment-95790" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/yyz_340427874"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://q.qlogo.cn/qqapp/208656/0EF4EBA296919C427AD50CA2DFE22C1E/100"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://web.jobbole.com/83310/#comment-95790" rel="nofollow">Bootstrap 4重大更新，亮点解读</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				赞~等好久了~哈哈				</div>
+			</li>
+
+
+			<li id="rc-comment-95789" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/q4224290921"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://q.qlogo.cn/qqapp/208656/162C1027748EC33F27251397066FBD78/100"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://web.jobbole.com/83414/#comment-95789" rel="nofollow">谈谈React.js的核心入门知识</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				确实讲解了很多知识 概念 值得一看				</div>
+			</li>
+
+
+			<li id="rc-comment-95788" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/zhoujielun_jay"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://jbcdn2.b0.upaiyun.com/2015/04/8fbdaaa5ea6d3b49c8c1c825aafeb5d9.png"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://web.jobbole.com/83388/#comment-95788" rel="nofollow">DOM中Property与Attribute的区别</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				谁说style属性attribute方式复制不生效，你试试：dom.setAttribute(\"st...				</div>
+			</li>
+
+
+			<li id="rc-comment-95787" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/lee572510582"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://q.qlogo.cn/qqapp/208656/E9E60764689A5328F61A391D303F0B7B/100"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://web.jobbole.com/83317/#comment-95787" rel="nofollow">CSS 最核心的几个概念 </a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				绝对定位和浮动均使元素脱离了文档流，都提升了层级，前者提升至少一层，后者提升了半层。于是乎，绝对定位...				</div>
+			</li>
+
+
+			<li id="rc-comment-95786" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/E m p i r e"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://www.jobbole.com/wp-content/uploads/2015/08/753dc1b36ff2967cdfb176d392e7be75.jpg"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://web.jobbole.com/83290/#comment-95786" rel="nofollow">网页无图再不是梦想</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				效果是有了，但是不怎么好看呀				</div>
+			</li>
+
+
+			<li id="rc-comment-95785" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/tTianmuR"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://q.qlogo.cn/qqapp/208656/C343613F44A1E93768B6D213D40B8AEE/100"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://web.jobbole.com/80564/#comment-95785" rel="nofollow">5个典型的JavaScript面试题</a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				刚开始不信，打开控制台，懂了，good				</div>
+			</li>
+
+
+			<li id="rc-comment-95783" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/E m p i r e"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://www.jobbole.com/wp-content/uploads/2015/08/753dc1b36ff2967cdfb176d392e7be75.jpg"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://web.jobbole.com/83317/#comment-95783" rel="nofollow">CSS 最核心的几个概念 </a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				写的很基础，但是也很实用，总结的很好。赞一个！				</div>
+			</li>
+
+
+			<li id="rc-comment-95781" class="rc-item rc-comment rc-clearfix">
+				<a target="_blank" href="http://www.jobbole.com/members/3823492697"><img class="rc-avatar rc-left" width="34" height="34" alt="" src="http://tp3.sinaimg.cn/3823492697/180/0/1"></a>
+				<div class="rc-info">
+				Re:
+				<a class="rc-post" target="_blank" href="http://web.jobbole.com/83317/#comment-95781" rel="nofollow">CSS 最核心的几个概念 </a>
+				</div>
+				<div class="rc-timestamp"></div>
+				<div class="rc-excerpt">
+				科普的很好，点个赞。但是有一点，在IE中设置的width的宽度虽然包括border+padding是...				</div>
+			</li>
+
+
+		</ul>
+        <div id="text-8" class="widget widget_text">			<div class="textwidget"><p><a href='http://fanyi.jobbole.com/' target='_blank'><img src='http://ww1.sinaimg.cn/mw690/bfdcef89gw1esnyzyrczej208c03cgm3.jpg' /></a></p>
+</div>
+		</div>
+	<!-- BEGIN .container -->
+	<div class="container">
+
+		<!-- BEGIN .grid-2 -->
+		<div class="grid-2">
+
+
+		</div>
+		<!-- END .grid-2 -->
+
+		<!-- BEGIN .grid-2 -->
+		<div class="grid-2">
+
+
+		</div>
+		<!-- END .grid-2 -->
+
+		<div class="clear"></div>
+
+	</div>
+	<!-- END .container -->
+
+</div>
+<!-- END #sidebar -->
+<div class="clear"></div>
+
+
+</div>
+<!-- END #wrapper -->
+
+<!-- BEGIN footer -->
+
+    <footer>
+
+        <!-- BEGIN .container -->
+        <div class="container">
+
+            <!-- BEGIN .grid-4 -->
+            <div class="grid-4">
+
+                <div id="text-3" class="widget widget_text"><h3 class="widget-title">关于伯乐在线-WEB前端</h3>			<div class="textwidget"><p>Web前端频道分享Web前端开发，包括JavaScript，CSS和HTML5开发技术，前端相关的行业动态。欢迎通过<a target='_blank'  href='http://weibo.com/u/5261893910'>微博</a>和微信【 微信号: FrontDev 】关注。</p>
+<div id="aw_socialcounter_widget-2" class="widget aw_socialcounter_widget">
+<ul>
+<li>
+<a target="_blank" href="http://weibo.com/u/5261893910"><img class="alignleft" src="http://blog.jobbole.com/common_images/sina_32.png"  alt="关注我们的新浪微博" title="关注我们的新浪微博" /></a></p>
+<div class="view-rss"><a  target="_blank"  href="http://web.jobbole.com/feed/" class="rss-link"><img class="alignleft" src="http://blog.jobbole.com/common_images/rss_32.png"  alt="RSS订阅" title="RSS订阅" /></a></div>
+</li>
+</ul>
+</div>
+</div>
+		</div>
+            </div>
+            <!-- END .grid-4 -->
+
+            <!-- BEGIN .grid-4 -->
+            <div class="grid-4">
+
+                <div id="text-5" class="widget widget_text"><h3 class="widget-title">欢迎关注更多频道</h3>			<div class="textwidget"><p><a href='http://top.jobbole.com/' target='_blank'>头条</a> &#8211; 分享和发现有价值的内容与观点<br />
+<a href='http://date.jobbole.com/' target='_blank'>相亲</a> &#8211; 为IT单身男女服务的征婚传播平台<br />
+<a href='http://hao.jobbole.com/' target='_blank'>资源</a> &#8211; 优秀的工具资源导航<br />
+<a href='http://fanyi.jobbole.com/' target='_blank'>翻译</a> &#8211; 翻译传播优秀的外文文章<br />
+<a href='http://blog.jobbole.com/' target='_blank'>博客</a> &#8211; 国内外的精选博客文章<br />
+<a href='http://ios.jobbole.com/' target='_blank'>iOS</a> &#8211; 专注iOS技术分享<br />
+<a href='http://android.jobbole.com/' target='_blank'>安卓</a> &#8211; 专注Android技术分享<br />
+<a href='http://web.jobbole.com/' target='_blank'>前端</a> &#8211; JavaScript, HTML5, CSS<br />
+<a href='http://www.importnew.com/' target='_blank'>Java</a> &#8211; 专注Java技术分享<br />
+<a href='http://python.jobbole.com/' target='_blank'>Python</a> &#8211; 专注Python技术分享</p>
+</div>
+		</div>
+            </div>
+            <!-- END .grid-4 -->
+
+            <!-- BEGIN .grid-4 -->
+            <div class="grid-4">
+
+                <div id="text-4" class="widget widget_text"><h3 class="widget-title">联系我们</h3>			<div class="textwidget"><p><strong>商务合作</strong></p>
+<p>Email：<a  href='mailto:bd@jobbole.com'>bd@Jobbole.com</a><br />
+QQ： 2302462408  （加好友请注明来意）</p>
+<p><strong>网站使用问题</strong></p>
+<p>请在<a  href='http://group.jobbole.com/category/feedback/'>站务小组</a>询问或者反馈</p>
+</div>
+		</div>
+            </div>
+            <!-- END .grid-4 -->
+
+            <div class="clear"></div>
+
+        </div>
+        <!-- END .container -->
+
+        <!-- BEGIN #bottom -->
+        <div id="bottom">
+
+            <!-- BEGIN .container -->
+            <div class="container">
+
+                <!-- BEGIN .grid-12 -->
+                <div class="grid-12">
+
+                    <p>&copy; 2015 伯乐在线
+                    <span style="margin-left: 40px;">
+                        <a href="http://www.jobbole.com">首页</a>&nbsp;&nbsp;
+                        <a href="http://top.jobbole.com">头条</a>&nbsp;&nbsp;
+                        <a href="http://blog.jobbole.com">博客</a>&nbsp;&nbsp;
+                        <a href="http://hao.jobbole.com">资源</a>&nbsp;&nbsp;
+                        <a href="http://group.jobbole.com">小组</a>&nbsp;&nbsp;
+                        <i class="fa fa-heart-o pinkiconcolor"></i> <a href="http://date.jobbole.com">相亲</a>
+                    </span>
+                <span style="float:right; ">
+                    本站由 <a href="http://www.ucloud.cn/" target="_blank">UCloud</a> 赞助云主机
+                </span>
+                    </p>
+
+                </div>
+                <!-- END .grid-12 -->
+
+                <div class="clear"></div>
+
+            </div>
+            <!-- END .container -->
+
+        </div>
+        <!-- END #bottom -->
+    </footer>
+
+
+<!-- END footer -->
+
+
+
+<script type='text/javascript'>
+/* <![CDATA[ */
+var thickboxL10n = {"next":"\u4e0b\u4e00\u9875 >","prev":"< \u4e0a\u4e00\u9875","image":"\u56fe\u50cf","of":"\/","close":"\u5173\u95ed","noiframes":"\u8fd9\u4e2a\u529f\u80fd\u9700\u8981 iframe \u7684\u652f\u6301\u3002\u60a8\u53ef\u80fd\u7981\u6b62\u4e86 iframe \u7684\u663e\u793a\uff0c\u6216\u60a8\u7684\u6d4f\u89c8\u5668\u4e0d\u652f\u6301\u6b64\u529f\u80fd\u3002","loadingAnimation":"http:\/\/web.jobbole.com\/wp-includes\/js\/thickbox\/loadingAnimation.gif","closeImage":"http:\/\/web.jobbole.com\/wp-includes\/js\/thickbox\/tb-close.png"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-includes/js/thickbox/thickbox.js?ver=3.1-20121105'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-includes/js/underscore.min.js?ver=1.4.0'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-includes/js/shortcode.min.js?ver=3.5.2'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-admin/js/media-upload.min.js?ver=3.5.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"http:\/\/web.jobbole.com\/wp-admin\/admin-ajax.php","post_id":"82204"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/plugins/wp-postviews/postviews-cache.js?ver=1.68'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/ready.js?ver=1.0'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/easing.js?ver=1.3'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/superfish.js?ver=1.4.8'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/validate.js?ver=1.9.0'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/touchwipe.js?ver=1.1.1'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/caroufredsel.js?ver=5.5.0'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/flexslider.js?ver=2.0'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/jplayer.js?ver=2.1.0'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/fitvids.js?ver=1.0'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/selectnav.js?ver=0.1'></script>
+<script type='text/javascript' src='http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/js/effects.js?ver=1.0'></script>
+
+
+<div id="full-btm" style="position:fixed; left:50%; top:550px;  z-index:100; text-align:center; cursor:pointer;">
+<a><img src="http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/img/back-btm.png" width="20" border=0 alt="跳到底部" title="跳到底部"></a>
+</div>
+
+<script type="text/javascript">
+jQuery('#full-btm').click(function(){
+    jQuery('html, body').animate({scrollTop:jQuery(document).height()}, 'slow');
+    return false;
+});
+</script>
+
+<div id="full-top" style="position:fixed; left:50%; top:520px; margin-left:495px; z-index:100; text-align:center; cursor:pointer;">
+<a><img src="http://web.jobbole.com/wp-content/themes/jobboleblogv3/_assets/img/back-top.png" width="20" border=0 alt="返回顶部" title="返回顶部"></a>
+</div>
+
+<script type="text/javascript">
+jQuery('#full-top').click(function(){
+    jQuery('html, body').animate({scrollTop:0}, 'slow');
+    return false;
+});
+
+</script>
+
+<script type="text/javascript">
+	[].forEach.call($ $(""), function(a) {
+		a.style.outline = "1px solid #" + (~~(Math.random() * (1 << 24))).toString(16)
+	})
+</script>
+
+</body>
+<!-- END body -->
+
+</html>
+<!-- END html -->

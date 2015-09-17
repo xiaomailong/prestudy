@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>面向对象选项卡最简版</title>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a:hover {
+      color: pink;
+    }
+
+    .box {
+      position: relative;
+      width: 600px;
+      height: 100px;
+      margin: 50px auto;
+    }
+
+    .in,
+    .in_active {
+      display: none;
+      width: 600px;
+      height: 100px;
+      background: orange;
+      font-size: 50px;
+      line-height: 100px;
+      text-align: center;
+    }
+
+    .in_active {
+      display: block;
+    }
+
+    .conList {
+      position: absolute;
+      width: 600px;
+      height: 30px;
+      line-height: 30px;
+      background-color: pink;
+      text-align: center;
+    }
+
+    .con,
+    .con_active {
+      color: black;
+      background-color: orange;
+    }
+
+    .con_active {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="box">
+    <ul class="list">
+      <li class="in_active">第一张选项卡</li>
+      <li class="in">第二张选项卡</li>
+      <li class="in">第三张选项卡</li>
+    </ul>
+    <nav class="conList">
+      <a class="con_active" href="javascript:;">第一个控制按钮</a>
+      <a class="con" href="javascript:;">第二个控制按钮</a>
+      <a class="con" href="javascript:;">第三个控制按钮</a>
+    </nav>
+  </div>
+  <script>
+    function Tab(obj) {
+      /*元素获取*/
+      //获取选项卡展示部分
+      this.oList = obj.getElementsByTagName('ul')[0];
+      this.aIn = this.oList.getElementsByTagName('li');
+      //获取选项卡控制部分
+      this.oConList = obj.getElementsByTagName('nav')[0];
+      this.aCon = this.oConList.getElementsByTagName('a');
+      /*变量设置*/
+      //选项卡张数
+      this.count = this.aIn.length;
+      //当前第几张
+      this.cur = 0;
+      var _this = this;
+
+      for (var i = 0; i < this.count; i++) {
+        //设置索引
+        this.aCon[i].index = i;
+        //给按钮添加事件
+        this.aCon[i].onclick = function() {
+          _this.cur = this.index;
+          _this.switch();
+
+        }
+      }
+    }
+    Tab.prototype.switch = function() {
+        //去掉所有
+        for (var i = 0; i < this.count; i++) {
+          this.aIn[i].className = 'in';
+          this.aCon[i].className = 'con';
+        }
+        //显示当前
+        this.aIn[this.cur].className = 'in_active';
+        this.aCon[this.cur].className = 'con_active';
+      }
+      //获取选项卡元素
+    var oBox = document.getElementById('box');
+    //构造选项卡对象
+    var tab1 = new Tab(oBox);
+  </script>
+</body>
+
+</html>

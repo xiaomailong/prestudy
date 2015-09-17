@@ -1,65 +1,213 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>JS判断是什么设备是什么浏览器-webkfa.com</title>
-		<meta charset="utf-8">
-		<meta name="apple-touch-fullscreen" content="YES" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-		<meta name="apple-mobile-web-app-capable" content="yes"/>
-		<meta name="format-detection" content="telephone=no"/>
 
-	</head>
-	<body>
-		<div id="divid">
-		</div>
-		<script type="text/javascript">
-			var os = function() {
-			     var ua = navigator.userAgent,
-			     isQB = /(?:MQQBrowser|QQ)/.test(ua),
-			     isUC = /(?:UCWEB|UCBrowser)/.test(ua),
-			     isFireFox = /(?:Firefox)/.test(ua),
-			     isChrome = /(?:Chrome|CriOS)/.test(ua),
-			     isSafari = /(?:Safari)/.test(ua),
-			     isOpera = /(?:Opera Mini)/.test(ua),
-			     isWindowsPhone = /(?:Windows Phone)/.test(ua),
-			     isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
-			     isAndroid = /(?:Android)/.test(ua),
-			     isIpad = /(?:iPad|PlayBook)/.test(ua),
-			     isTablet = /(?:iPad|PlayBook)/.test(ua)||(isFireFox && /(?:Tablet)/.test(ua)),
-			     isPhone = /(?:iPhone)/.test(ua) && !isTablet,
-			     isPc = !isPhone && !isAndroid && !isSymbian;
-			     return {
-			          isQB: isQB,
-			          isUC: isUC,
-                isFireFox : isFireFox,
-                isChrome : isChrome,
-                isSafari : isSafari,
-			          isOpera : isOpera,
-                isWindowsPhone: isWindowsPhone,
-                isSymbian: isSymbian,
-			          isAndroid : isAndroid,
-			          isIpad : isIpad,
-			          isTablet : isTablet,
-                isPhone : isPhone,
-			          isPc : isPc
-			     };
-			}();
-			var html=[];
-      html[html.length]='navigator.userAgent: '+navigator.userAgent+"<br/>";
-			html[html.length]='是QQ浏览器:'+os.isQB+"<br/>";
-			html[html.length]='是UC浏览器:'+os.isUC+"<br/>";
-			html[html.length]='是Firefox浏览器:'+os.isFireFox+"<br/>";
-			html[html.length]='是Chrome|CriOS浏览器:'+os.isChrome+"<br/>";
-			html[html.length]='是Safari浏览器:'+os.isSafari+"<br/>";
-			html[html.length]='是Opera浏览器:'+os.isOpera+"<br/>";
-			html[html.length]='是Windows Phone:'+os.isWindowsPhone+"<br/>";
-			html[html.length]='是SymbianOS:'+os.isSymbian+"<br/>";
-			html[html.length]='是Android:'+os.isAndroid+"<br/>";
-			html[html.length]='是Ipad:'+os.isIpad+"<br/>";
-			html[html.length]='是Tablet:'+os.isTablet+"<br/>";
-			html[html.length]='是Phone:'+os.isPhone+"<br/>";
-			html[html.length]='是电脑:'+os.isPc+"<br/>";
-			document.getElementById("divid").innerHTML=html.join("");
-		</script>
-	</body>
+<head>
+	<title>JS判断是什么设备是什么浏览器-webkfa.com</title>
+	<meta charset="utf-8">
+	<meta name="apple-touch-fullscreen" content="YES" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="format-detection" content="telephone=no" />
+
+</head>
+
+<body>
+	<div id="divid">
+	</div>
+	<script type="text/javascript">
+		var os = function() {
+			var ua = navigator.userAgent,
+				isQB = /(?:MQQBrowser|QQ)/.test(ua),
+				isUC = /(?:UCWEB|UCBrowser)/.test(ua),
+				isFireFox = /(?:Firefox)/.test(ua),
+				isChrome = /(?:Chrome|CriOS)/.test(ua),
+				isSafari = /(?:Safari)/.test(ua),
+				isOpera = /(?:Opera Mini)/.test(ua),
+				isWindowsPhone = /(?:Windows Phone)/.test(ua),
+				isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+				isAndroid = /(?:Android)/.test(ua),
+				isIpad = /(?:iPad|PlayBook)/.test(ua),
+				isTablet = /(?:iPad|PlayBook)/.test(ua) || (isFireFox && /(?:Tablet)/.test(ua)),
+				isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+				isPc = !isPhone && !isAndroid && !isSymbian;
+			return {
+				isQB: isQB,
+				isUC: isUC,
+				isFireFox: isFireFox,
+				isChrome: isChrome,
+				isSafari: isSafari,
+				isOpera: isOpera,
+				isWindowsPhone: isWindowsPhone,
+				isSymbian: isSymbian,
+				isAndroid: isAndroid,
+				isIpad: isIpad,
+				isTablet: isTablet,
+				isPhone: isPhone,
+				isPc: isPc
+			};
+		}();
+		var html = [];
+		html[html.length] = 'navigator.userAgent: ' + navigator.userAgent + "<br/>";
+		html[html.length] = '是QQ浏览器:' + os.isQB + "<br/>";
+		html[html.length] = '是UC浏览器:' + os.isUC + "<br/>";
+		html[html.length] = '是Firefox浏览器:' + os.isFireFox + "<br/>";
+		html[html.length] = '是Chrome|CriOS浏览器:' + os.isChrome + "<br/>";
+		html[html.length] = '是Safari浏览器:' + os.isSafari + "<br/>";
+		html[html.length] = '是Opera浏览器:' + os.isOpera + "<br/>";
+		html[html.length] = '是Windows Phone:' + os.isWindowsPhone + "<br/>";
+		html[html.length] = '是SymbianOS:' + os.isSymbian + "<br/>";
+		html[html.length] = '是Android:' + os.isAndroid + "<br/>";
+		html[html.length] = '是Ipad:' + os.isIpad + "<br/>";
+		html[html.length] = '是Tablet:' + os.isTablet + "<br/>";
+		html[html.length] = '是Phone:' + os.isPhone + "<br/>";
+		html[html.length] = '是电脑:' + os.isPc + "<br/>";
+
+
+		var client = function() {
+			var engine = {
+				// 呈现引擎
+				ie: 0,
+				gecko: 0,
+				webkit: 0,
+				khtml: 0,
+				opera: 0,
+				//其他版本号
+				ver: null
+			};
+			var browser = {
+				// 浏览器
+				ie: 0,
+				firefox: 0,
+				safari: 0,
+				konq: 0,
+				opera: 0,
+				chrome: 0,
+				// 其他的版本
+				ver: null
+			};
+			var system = {
+				win: false,
+				mac: false,
+				xll: false,
+				// 移动设备
+				iphone: false,
+				ipod: false,
+				ipad: false,
+				ios: false,
+				android: false
+			};
+			// 在此检测呈现引擎，平台和设备
+			return {
+				engine: engine,
+				browser: browser,
+				system: system
+			};
+		}();
+		var engine = client;
+		var browser = client;
+		var ua = navigator.userAgent.toLowerCase();
+		if (ua.match(/opr\/([\d\.]+)/) || window.opera) {
+			var result = ua.match(/opr\/([\d\.]+)/);
+			engine.ver = browser.ver = result[1];
+			engine.opera = browser.opera = parseFloat(engine.ver);
+			if (window.opera) {
+				engine.ver = browser.ver = window.opera.version();
+				engine.opera = browser.opera = parseFloat(engine.ver);
+			}
+		} else if (/applewebkit\/(\S+)/.test(ua)) {
+			engine.ver = RegExp["$1"];
+			engine.webkit = parseFloat(engine.ver);
+			// 确定是chrome还是safari
+			/*
+			 * chrome用户代理字符串
+			 * Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
+			 * Chrome/42.0.2311.152 Safari/537.36
+			 */
+			if (/chrome\/(\S+)/.test(ua)) {
+				browser.ver = RegExp["$1"];
+				browser.chrome = parseFloat(browser.ver);
+			} else if (/version\/(\S+)/.test(ua)) {
+				/*
+				 * safari用户代理字符串
+				 * Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.57.2 (KHTML, like Gecko)
+				 * Version/5.1.7 Safari/534.57.2
+				 */
+				browser.ver = RegExp["$1"];
+				browser.safari = parseFloat(browser.ver);
+			} else {
+				//近似地确定版本号
+				var safariVersion = 1;
+				if (engine.webkit < 100) {
+					safariVersion = 1;
+				} else if (engine.webkit < 312) {
+					safariVersion = 1.2;
+				} else if (engine.webkit < 412) {
+					safariVersion = 1.3;
+				} else {
+					safariVersion = 2;
+				}
+				browser.safari = browser.ver = safariVersion;
+			}
+		} else if (/khtml\/(\S+)/.test(ua) || /konqueror\/([^;]+)/.test(ua)) {
+			engine.ver = browser.ver = RegExp["$1"];
+			engine.khtml = browser.konq = parseFloat(engine.ver);
+
+		} else if (/rv:([^\)]+)\) gecko\/\d{8}/.test(ua)) {
+			engine.ver = RegExp["$1"];
+			engine.gecko = parseFloat(engine.ver);
+			/*
+			 * firefox的用户代理的字符串
+			 * Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0)
+			 * Gecko/20100101 Firefox/38.0
+			 */
+			// 确定是不是firefox
+			if (/firefox\/(\S+)/.test(ua)) {
+				browser.ver = RegExp["$1"];
+				browser.firefox = parseFloat(browser.ver);
+			}
+		} else if (/msie ([^;]+)/.test(ua) || "ActiveXObject" in window) {
+			if ("ActiveXObject" in window) {
+				if (/msie ([^;]+)/.test(ua)) {
+					engine.ver = browser.ver = RegExp["$1"];
+					engine.ie = browser.ie = parseFloat(engine.ver);
+				} else {
+					if (/rv:([^\)]+)\)/.test(ua)) {
+						engine.ver = browser.ver = RegExp["$1"];
+						engine.ie = browser.ie = parseFloat(engine.ver);
+					}
+				}
+			}
+
+		}
+		// 检测平台
+		var system = client;
+		var platform = navigator.platform;
+		system.win = platform.indexOf("Win") == 0;
+		system.mac = platform.indexOf("Mac") == 0;
+		system.x11 = (platform.indexOf("X11") == 0) || (platform.indexOf("Linux") == 0);
+
+		// 移动设备
+		system.iphone = ua.indexOf("iphone") > -1;
+		system.ipod = ua.indexOf("ipod") > -1;
+		system.ipad = ua.indexOf("ipad") > -1;
+		//检测iOS 版本
+		if (system.mac && ua.indexOf("mobile") > -1) {
+			if (/cpu (?:iphone )?os (\d+_\d+)/.test(ua)) {
+				system.ios = parseFloat(RegExp.$1.replace("_", "."));
+			} else {
+				system.ios = 2; //不能真正检测出来，所以只能猜测
+			}
+		}
+		//检测Android 版本
+		if (/android (\d+\.\d+)/.test(ua)) {
+			system.android = parseFloat(RegExp.$1);
+		}
+
+		html[html.length] = client.engine.toString();
+		html[html.length] = client.browser.toString();
+		html[html.length] = client.system.toString();
+		document.getElementById("divid").innerHTML = html.join("");
+	</script>
+</body>
+
 </html>

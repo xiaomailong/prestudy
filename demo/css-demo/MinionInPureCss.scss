@@ -1,0 +1,908 @@
+@import "compass";
+
+:before, :after {
+	content: "";
+	position: absolute;
+}
+
+.container {
+	min-width: 300px;
+	margin: 15px auto;
+	padding: 0 20px;
+	height: 450px;
+	box-sizing: border-box;
+	-webkit-perspective: 800px;
+	-moz-perspective: 800px;
+	-ms-perspective: 800px;
+	-o-perspective: 800px;
+	perspective: 800px;
+	-webkit-perspective-origin: 50% 50%;
+	-moz-perspective-origin: 50% 50%;
+	-ms-perspective-origin: 50% 50%;
+	-o-perspective-origin: 50% 50%;
+	perspective-origin: 50% 50%;
+
+	h1 {
+		font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-weight: 100;
+		letter-spacing: 0.5px;
+		color: #666666;
+		font-size: 40px;
+		text-align: center;
+	}
+}
+
+$minion-skin-color: #FFCB4F;
+$minion-highlight: #FFEEA6;
+$minion-shadow: #F7CA5C;
+
+$dungarees-color: #6D9CC6;
+$dungarees-stitching: #FF862E;
+$dungarees-border: darken($dungarees-color, 10%);
+
+$minion-width: 140px;
+$minion-height: 250px;
+
+.minion {
+	position: relative;
+	height: $minion-height;
+	width: $minion-width;
+	margin: 0 auto;
+
+	@mixin rotate($deg) {
+		-ms-transform: rotate($deg);
+		-webkit-transform: rotate($deg);
+		transform: rotate($deg);
+	}
+
+	* {
+		position: absolute;
+	}
+
+	$hair-color: #333333;
+
+	.hair  {
+		top: -15px;
+		margin: 0;
+		padding: 0;
+
+		&.back {
+
+			li:nth-of-type(1) {
+				@include rotate(-70deg);
+				margin-top: 36px;
+			}
+
+			li:nth-of-type(2) {
+				@include rotate(-50deg);
+				margin-top: 19px;
+			}
+
+			li:nth-of-type(3) {
+				@include rotate(-30deg);
+				margin-top: 12px;
+			}
+
+			li:nth-of-type(4) {
+				@include rotate(-10deg);
+				margin-top: 3px;
+			}
+
+			li:nth-of-type(5) {
+				@include rotate(2deg);
+				border-left: 1px solid $hair-color;
+				border-radius: 80% 0 0 0;
+			}
+
+			li:nth-of-type(6) {
+				@include rotate(10deg);
+				margin-top: 3px;
+			}
+
+			li:nth-of-type(7) {
+				@include rotate(30deg);
+				margin-top: 12px;
+			}
+
+			li:nth-of-type(8) {
+				@include rotate(50deg);
+				margin-top: 19px;
+			}
+
+			li:nth-of-type(9) {
+				@include rotate(70deg);
+				margin-top: 36px;
+			}
+		}
+
+		&.front {
+			margin-top: 3px;
+			z-index: 4;
+
+			li:nth-of-type(1) {
+				@include rotate(-60deg);
+				margin-top: 21px;
+			}
+
+			li:nth-of-type(2) {
+				@include rotate(-46deg);
+				margin-top: 12px;
+			}
+
+			li:nth-of-type(3) {
+				@include rotate(-28deg);
+				margin-top: 7px;
+			}
+
+			li:nth-of-type(4) {
+				@include rotate(-12deg);
+				margin-top: 5px;
+			}
+
+			li:nth-of-type(5) {
+				@include rotate(-2deg);
+				border-right: 1px solid $hair-color;
+				border-radius: 0 80% 0 0;
+				margin-top: 3px;
+			}
+
+			li:nth-of-type(6) {
+				@include rotate(12deg);
+				margin-top: 6px;
+			}
+
+			li:nth-of-type(7) {
+				@include rotate(28deg);
+				margin-top: 7px;
+			}
+
+			li:nth-of-type(8) {
+				@include rotate(46deg);
+				margin-top: 12px;
+			}
+
+			li:nth-of-type(9) {
+				@include rotate(60deg);
+				margin-top: 21px;
+			}
+		}
+
+		li {
+			list-style: none;
+			height: 30px;
+			width: 10px;
+			float: left;
+
+			&:nth-of-type(1) {
+				@include rotate(-70deg);
+				position: absolute;
+				left: 8px;
+				height: 30px;
+			}
+
+			&:nth-of-type(2) {
+				@include rotate(-50deg);
+				left: 18px;
+			}
+
+			&:nth-of-type(3) {
+				@include rotate(-30deg);
+				left: 30px;
+			}
+
+			&:nth-of-type(4) {
+				@include rotate(-10deg);
+				left: 45px;
+			}
+
+			&:nth-of-type(5) {
+				left: 60px;
+			}
+
+			&:nth-of-type(6) {
+				@include rotate(10deg);
+				left: 76px;
+			}
+
+			&:nth-of-type(7) {
+				@include rotate(30deg);
+				left: 93px;
+			}
+
+			&:nth-of-type(8) {
+				@include rotate(50deg);
+				left: 107px;
+			}
+
+			&:nth-of-type(9) {
+				@include rotate(70deg);
+				left: 119px;
+				height: 30px;
+			}
+
+			&:nth-of-type(n+6) {
+				border-left: 1px solid $hair-color;
+				border-radius: 80% 0 0 0;
+			}
+
+			&:nth-of-type(-n+4) {
+				border-right: 1px solid $hair-color;
+				border-radius: 0 80% 0 0;
+			}
+		}
+	}
+
+	.minion-body {
+		position: relative;
+		height: $minion-height;
+		width: $minion-width;
+		border-radius: 80px 80px 50px 50px;
+		background: $minion-skin-color;
+		overflow: hidden;
+
+		&:after, &:before {
+			top: 0;
+			left: 0;
+		}
+
+		&:before {
+			width: 80%;
+			height: 100%;
+			border-radius: 20px;
+			@include filter-gradient(#f4e097, #FFFFFF, horizontal);
+			@include background-image(radial-gradient(40% 30%, ellipse cover, rgba(250,250,250,0.6) 0%,rgba(250,250,250,0) 60%));
+			filter: blur(5px);
+			z-index: 1;
+		}
+
+		&:after {
+			height: $minion-height;
+			width: $minion-width;
+			border-radius: 80px 80px 50px 50px;
+			@include filter-gradient(#000000, #000000, horizontal);
+			@include background-image(linear-gradient(left,  rgba(0,0,0,0) 70%,rgba(0,0,0,0.2) 100%));
+			filter: blur(5px);
+			z-index: 1;
+		}
+
+		.dungarees-front {
+			bottom: 0;
+			height: 90px;
+			width: $minion-width;
+			overflow: hidden;
+			border-top: 1px solid $dungarees-border;
+
+			$dungarees-front-position: -30px;
+
+			&:before {
+				left: $dungarees-front-position;
+				border-radius: 0 0 35% 0;
+				box-shadow: 40px -40px 30px 40px $dungarees-color;
+			}
+
+			&:after {
+				right: $dungarees-front-position;
+				box-shadow: -40px -40px 30px 40px $dungarees-color;
+				border-radius: 0 0 0 35%;
+			}
+
+			&:before,
+			&:after {
+				width: 56px;
+				height: 75%;
+				top: 0;
+				border: 1px solid $dungarees-border;
+			}
+		}
+
+		$pocket-width: 35px;
+		$pocket-height: 35px;
+
+		.dungarees-pocket {
+			bottom: 35px;
+			left: 50%;
+			margin-left: -($pocket-width / 2);
+			height: 35px;
+			width: $pocket-width;
+			border-radius: 0 0 15px 15px;
+			border-left: 1px solid $dungarees-border;
+			border-right: 1px solid $dungarees-border;
+			border-bottom: 1px solid $dungarees-border;
+
+			&:before /*pocket border-top */ {
+				top: -13px;
+				left: -2px;
+				height: 15px;
+				width: $pocket-height + 2px;
+				border-bottom: 1px solid $dungarees-border;
+				border-left: 1px solid transparent;
+				border-right: 1px solid transparent;
+				border-radius: 20px;
+			}
+
+			$logo-size: 25px;
+
+			.logo {
+				top: 50%;
+				left: 50%;
+				margin-left: -($logo-size / 2);
+				margin-top: -($logo-size / 2) + 2px;
+				height: $logo-size;
+				width: $logo-size;
+				background: #333333;
+				border-radius: 50%;
+
+				$g-width: $logo-size - 10px;
+
+				&:before {
+					top: 50%;
+					left: 50%;
+					margin-left: -($g-width / 2);
+					margin-top: -($g-width / 2);
+					height: $g-width;
+					width: $g-width;
+					background: $dungarees-color;
+					@include rotate(45deg);
+				}
+
+				$g-center-width: $g-width - 8px;
+
+				&:after {
+					top: 50%;
+					left: 50%;
+					margin-left: -($g-center-width / 2);
+					margin-top: -($g-center-width / 2);
+					height: $g-center-width;
+					width: $g-center-width;
+					background: #333333;
+					border-radius: 50%;
+					z-index: 5;
+				}
+
+				span {
+					height: 2px;
+					background: #333333;
+					border-bottom: 1px solid $dungarees-color;
+					width: $logo-size / 2;
+					right: 0;
+					top: 48%;
+					margin-top: -1px;
+					z-index: 6;
+				}
+			}
+		}
+
+		.dungarees-bottom {
+			bottom: 0;
+			height: 40px;
+			width: $minion-width;
+			background-color: rgb(109,156,198);
+			@include filter-gradient(#6d9cc6, #4b6587, vertical);
+			@include background-image(linear-gradient(top,  rgba(109,156,198,1) 45%,rgba(75,101,135,1) 100%));
+			border-top: 1px solid $dungarees-border;
+		}
+
+		$strap-width: 12px;
+
+		.dungarees-strap {
+			top: 127px;
+			height: 60px;
+			width: $strap-width;
+			background: $dungarees-color;
+			border: 1px solid $dungarees-border;
+
+			$strap-rotate: 65deg;
+			$strap-position: 5px;
+
+			&.left {
+				left: $strap-position;
+				@include rotate(-$strap-rotate);
+			}
+
+			&.right {
+				right: $strap-position;
+				@include rotate($strap-rotate);
+			}
+
+			$button-position: 2px;
+
+			.button {
+				bottom: 0;
+				left: $button-position;
+				height: $strap-width - ($button-position * 2);
+				width: $strap-width - ($button-position * 2);
+				border-radius: 50%;
+				background: #333333;
+			}
+		}
+	}
+
+	$goggle-strap-width: 16px;
+	$goggle-strap-position: -2px;
+	$goggle-strap-color: #444444;
+	$goggle-dark-line: 3px;
+
+	.goggle-strap {
+		top: 68px;
+		height: $goggle-dark-line;
+		background: darken($goggle-strap-color, 90%);
+		width: 16px;
+		z-index: 6;
+
+		&.left {
+			left: $goggle-strap-position;
+
+			&:before, &:after {
+				border-right: $goggle-strap-width solid $goggle-strap-color;
+			}
+		}
+
+		&.right {
+			right: $goggle-strap-position;
+
+			&:before, &:after {
+				border-left: $goggle-strap-width solid $goggle-strap-color;
+			}
+		}
+
+		&:before,
+		&:after {
+			height: 6px;
+		}
+
+		&:before {
+			top: -7px;
+			border-top: 2px solid transparent;
+		}
+
+		&:after {
+			top: $goggle-dark-line;
+			border-bottom: 2px solid transparent;
+		}
+	}
+
+	.goggle-strap-link {
+		top: 58px;
+		height: 25px;
+		width: 5px;
+		background: #999999;
+		z-index: 7;
+
+		$strap-link-position: 12px;
+
+		&.left {
+			left: $strap-link-position;
+		}
+
+		&.right {
+			right: $strap-link-position;
+		}
+	}
+
+	$goggle-size: 50px;
+	$goggle-border: 5px;
+
+	.goggle-frame {
+		top: 40px;
+		height: $goggle-size;
+		width: $goggle-size;
+		border: $goggle-border solid #CCCCCC;
+		border-radius: 50%;
+		overflow: hidden;
+		z-index: 8;
+
+		$eye-position: 30%;
+		$pupil-position: 40%;
+
+		&.left {
+			left: $eye-position;
+			margin-left: -(($goggle-size + ($goggle-border * 2)) / 2);
+
+			.goggle {
+				left: -1px;
+
+				.pupil {
+					right: $pupil-position;
+				}
+			}
+		}
+
+		&.right {
+			right: $eye-position;
+			margin-right: -(($goggle-size + ($goggle-border * 2)) / 2);
+
+			.goggle {
+				right: -1px;
+
+				.pupil {
+					left: $pupil-position;
+				}
+			}
+		}
+
+		$goggle-border: 3px;
+
+		.goggle {
+			height: $goggle-size;
+			width: $goggle-size;
+			border: $goggle-border solid #666666;
+			border-radius: 50%;
+
+			$eyelid-height: 1px;
+			$eye-height: $goggle-size - $eyelid-height - $goggle-border;
+
+			$eye-shadow-top: inset 0px 2px 10px 0px rgba(#333333,0.5);
+			$eye-shadow-bottom: inset 0px -1px 5px 0px rgba(#333333,0.3);
+
+			.eye {
+				background: whitesmoke;
+				height: $eye-height;
+				width: $goggle-size;
+				border-radius: 50%;
+				margin: $eyelid-height 0;
+				-webkit-box-shadow: $eye-shadow-top, $eye-shadow-bottom;
+				-moz-box-shadow: $eye-shadow-top, $eye-shadow-bottom;
+				box-shadow: $eye-shadow-top, $eye-shadow-bottom;
+
+				$eye-pupil-size: 15px;
+
+				.pupil {
+					top: 50%;
+					margin: -($eye-pupil-size / 2);
+					height: $eye-pupil-size;
+					width: $eye-pupil-size;
+					background-color: #e7a452;
+					@include filter-gradient(#e7a452, #000000, horizontal);
+					@include background-image(radial-gradient(center, ellipse cover,  #e7a452 0%,#91695c 49%,#91695c 74%,#000000 99%));
+					border-radius: 50%;
+
+					$dot-size: 5px;
+
+					.dot {
+						top: 50%;
+						left: 50%;
+						margin-top: -($dot-size / 2);
+						margin-left: -($dot-size / 2);
+						height: $dot-size;
+						width: $dot-size;
+						background: #333333;
+						border-radius: 50%;
+					}
+				}
+			}
+		}
+	}
+
+	.goggle-shadow {
+		height: $goggle-size * 1.5;
+		top: 45px;
+		border-radius: 50%;
+		@include filter-gradient(#000000, #000000, horizontal);
+		@include background-image(radial-gradient(center, ellipse cover,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 50%));
+		z-index: 5;
+
+		$goggle-shadow-position: 5px;
+
+		&.left {
+			left: $goggle-shadow-position;
+			width: $goggle-size * 2.6;
+		}
+
+		&.right {
+			left: $goggle-shadow-position + $goggle-size;
+			width: $goggle-size * 2;
+		}
+	}
+
+	$mouth-width: 60px;
+
+	.mouth {
+		top: 110px;
+		left: 50%;
+		margin-left: -($mouth-width / 2);
+		height: 20px;
+		width: $mouth-width;
+		border-bottom: 2px solid #DE9A33;
+		border-right: 1px solid tranparent;
+		border-left: 1px solid tranparent;
+		border-radius: 70%;
+		z-index: 5;
+		-webkit-box-shadow: inset 0 -1px 2px -1px rgba(0,0,0,0.3);
+		-moz-box-shadow: inset 0 -1px 2px -1px rgba(0,0,0,0.3);
+		box-shadow: inset 0 -1px 2px -1px rgba(0,0,0,0.3);
+	}
+
+	$arm-width: 12px;
+
+	.arm {
+		top: 160px;
+		height: 80px;
+		width: $arm-width;
+		z-index: -1;
+		background: $minion-skin-color;
+		overflow: hidden;
+
+		$arm-position: -$arm-width;
+		$arm-rotate: 0deg;
+
+		&.left {
+			left: $arm-position;
+			border-radius: 20px 0 0 20px / 80px 0 0 20px;
+			@include rotate($arm-rotate);
+
+			&:before {
+				@include background-image(linear-gradient(left,  rgba(250,250,250,0.3) 20%, rgba(0,0,0,0) 100%));
+			}
+		}
+
+		&.right {
+			right: $arm-position;
+			border-radius: 0 20px 20px 0 / 0 80px 20px 0;
+			@include rotate(-$arm-rotate);
+
+			&:before {
+				@include background-image(linear-gradient(left,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 90%));
+			}
+		}
+
+		&:before {
+			height: 100%;
+			width: 100%;
+			@include filter-gradient(#000000, #000000, horizontal);
+		}
+	}
+
+	.arm-shadow {
+		top: 180px;
+		height: 30px;
+		width: 5px;
+		border-radius: 50%;
+
+		$arm-shadow-position: 0px;
+		$arm-shadow-rotate: 5deg;
+
+		&.left {
+			left: $arm-shadow-position;
+			-webkit-box-shadow: inset 2px 0 3px -1px rgba(0,0,0,0.3);
+			-moz-box-shadow: inset 2px 0 3px -1px rgba(0,0,0,0.3);
+			box-shadow: inset 2px 0 3px -1px rgba(0,0,0,0.3);
+			@include rotate($arm-shadow-rotate);
+		}
+
+		&.right {
+			right: $arm-shadow-position;
+			-webkit-box-shadow: inset -2px 0 3px -1px rgba(0,0,0,0.3);
+			-moz-box-shadow: inset -2px 0 3px -1px rgba(0,0,0,0.3);
+			box-shadow: inset -2px 0 3px -1px rgba(0,0,0,0.3);
+			@include rotate(-$arm-shadow-rotate);
+		}
+	}
+
+	.glove {
+		bottom: 0;
+		width: 17px;
+		height: 18px;
+		background: #333333;
+		border-radius: 0 0 30px 30px;
+
+		$glove-position: -14px;
+		$glove-rotate: 10deg;
+		$finger1-position: -2px;
+		$finger1-rotate: 20deg;
+		$finger2-position: 13px;
+		$finger2-rotate: 30deg;
+		$finger3-position: 5px;
+		$finger3-rotate: 0deg;
+
+		&.left {
+			left: $glove-position;
+			@include rotate(-$glove-rotate);
+
+			&:before {
+				left: $finger1-position;
+				@include rotate($finger1-rotate);
+			}
+
+			&:after {
+				left: $finger2-position;
+				@include rotate(-$finger2-rotate);
+			}
+
+			.finger {
+				left: $finger3-position;
+				@include rotate(-$finger3-rotate);
+			}
+		}
+
+		&.right {
+			right: $glove-position;
+			@include rotate($glove-rotate);
+
+			&:before {
+				right: $finger1-position;
+				@include rotate(-$finger1-rotate);
+			}
+
+			&:after {
+				right: $finger2-position;
+				@include rotate($finger2-rotate);
+			}
+
+			.finger {
+				right: $finger3-position;
+				@include rotate($finger3-rotate);
+			}
+		}
+
+		&:before /* finger1 */ {
+			bottom: 0px;
+			height: 20px;
+			width: 10px;
+			background: #333333;
+			border-radius: 0 0 20px 20px;
+		}
+
+		&:after /* finger2 */ {
+			bottom: -4px;
+			height: 20px;
+			width: 10px;
+			background: #333333;
+			border-radius: 0 0 20px 20px;
+		}
+
+		.finger {
+			bottom: -6px;
+			height: 20px;
+			width: 10px;
+			background: #333333;
+			border-radius: 0 0 20px 20px;
+			z-index: 10;
+		}
+	}
+
+	.wrist {
+		height: 30px;
+		width: 16px;
+		border-radius: 40%;
+
+		&.front {
+			bottom: 15px;
+			border-bottom: 5px solid #333333;
+			border-right: 5px solid transparent;
+			border-left: 5px solid transparent;
+		}
+
+		&.back {
+			bottom: -11px;
+			border-top: 5px solid #333333;
+			border-right: 5px solid transparent;
+			border-left: 5px solid transparent;
+			z-index: -2;
+		}
+
+		$wrist-position: -19px;
+
+		&.left {
+			left: $wrist-position;
+		}
+
+		&.right {
+			right: $wrist-position;
+		}
+	}
+
+	.leg {
+		bottom: -15px;
+		height: 15px;
+		width: 25px;
+		background: #4B6587;
+		z-index: -1;
+		border-left: 1px solid $dungarees-border;
+		border-right: 1px solid $dungarees-border;
+
+		$leg-position: 40px;
+		$leg-rotate: 55deg;
+
+		&.left {
+			left: $leg-position;
+			border-radius: 0 0 10% 20% / 0 0 80% 80%;
+
+			&:after {
+				@include rotate($leg-rotate);
+				left: -12px;
+			}
+		}
+
+		&.right {
+			right: $leg-position;
+			border-radius: 0 0 20% 10% / 0 0 80% 80%;
+
+			&:after {
+				@include rotate(-$leg-rotate);
+				right: -12px;
+			}
+		}
+
+		&:after {
+			top: -10px;
+			background: #4B6587;
+			height: 10px;
+			width: 20px;
+			border-bottom: 1px solid $dungarees-border;
+		}
+	}
+
+	$shoe-width: 30px;
+	$shoe-color: #222222;
+
+	.shoe {
+		bottom: -26px;
+		width: $shoe-width;
+		height: 10px;
+		background: $shoe-color;
+		z-index: -2;
+
+		$shoe-position: 74px;
+		$shoe-top-position: 0px;
+		$shoe-rotate: 3deg;
+
+		&.left {
+			right: $shoe-position;
+			border-radius: 50px 20px 15px 10px;
+			@include rotate(-$shoe-rotate);
+
+			&:before {
+				right: $shoe-top-position;
+			}
+
+			&:after {
+				right: 0;
+				border-radius: 10px 0 0 10px;
+			}
+		}
+
+		&.right {
+			left: $shoe-position;
+			border-radius: 20px 50px 10px 15px;
+			@include rotate($shoe-rotate);
+
+			&:before {
+				left: $shoe-top-position;
+			}
+
+			&:after {
+				left: 0;
+				border-radius: 0 10px 10px 0;
+			}
+		}
+
+		&:before {
+			top: -10px;
+			height: 15px;
+			width: 22px;
+			background: $shoe-color;
+		}
+
+		&:after {
+			bottom: -3px;
+			height: 3px;
+			width: $shoe-width;
+			@include filter-gradient(#666666, $shoe-color, vertical);
+			@include background-image(linear-gradient(top, #666666 0%, $shoe-color 58%));
+		}
+	}
+
+	.shadow {
+		bottom: -24px;
+		left: 20px;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+		-webkit-transform: rotateX(90deg) translateZ(-125px);
+		-moz-transform: rotateX(90deg) translateZ(-125px);
+		-ms-transform: rotateX(90deg) translateZ(-125px);
+		-o-transform: rotateX(90deg) translateZ(-125px);
+		transform: rotateX(90deg) translateZ(-125px);
+		z-index: -5;
+	}
+}

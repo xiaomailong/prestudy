@@ -276,3 +276,7 @@ UpgradeLog*.htm
 *.bim_*.settings
 # Microsoft Fakes
 FakesAssemblies/
+
+# Bolik ---------------------------------------------
+# ES6编译好的文件
+demo/es6-example/lib

@@ -1,0 +1,16 @@
+{
+  "name": "javascript-test",
+  "version": "0.1.0",
+  "description": "",
+  "main": "Datetime-Test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "WaterBolik@163.com",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "jsdom": "^6.3.0",
+    "node-jquery": "^0.1.0"
+  }
+}
