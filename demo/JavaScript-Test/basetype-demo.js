@@ -1,3 +1,27 @@
+
+// [1]javascript中的类型系统:原生对象 + 宿主对象 + 浏览器拓展对象
+// [注意]javascript不支持任何创建自定义类型的机制
+// 	　　[1.1]原生对象(15种)：Undefined、Null、Boolean、Number、String、Object、Function、Array、Date、RegExp、Error、Math、JSON、Global、arguments
+// 	　　[1.2]宿主对象：window、document、navigator……
+// 	　　[1.3]浏览器拓展对象：ActiveXObject、XML、Debug、Script、VBArray……
+//
+// [2]原生对象可分为：
+// 	　　[2.1]标准类型(6种)：Undefined、Null、Boolean、Number、String、Object
+// 	　　[2.2]基本包装类型(3种):Boolean、Number、String
+// 	　　[2.3]构造器(9种)：Boolean、Number、String、Object、Function、Array、Date、RegExp、Error
+// 	　　[2.4]标准内置对象(12种)：Boolean、Number、String、Object、Function、Array、Date、RegExp、Error、Math、JSON、Global
+
+// 【目录链接】
+// 　　【1】基本数据类型
+// 　　【2】引用类型中的对象Object
+// 　　【3】引用类型中的数组Array
+// 　　【4】引用类型中的时间Date
+// 　　【5】函数Function
+// 　　【6】正则表达式RegExp
+// 　　【7】包装类型(Boolean、Number、String)
+// 　　【8】单体内置对象(Global、Math)
+
+
 // Javascript类型系统之基本数据类型
 // [0]6种数据类型：
 //     [0.1]基本数据类型：Undefined、Null、Boolean、Number、String
