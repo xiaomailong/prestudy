@@ -153,7 +153,7 @@
 })();
 
 (function() {
-  console.log("\n---DOM Document节点类型详解-document 节点类型");
+  console.log("\n---DOM Document节点类型详解");
   // 1、概况
   // Javascript 通过 Document 类型表示文档。
   // 在浏览器中， document 对象是 HTMLDocument（继承自 Document 类型）的一个实例，表示整个 HTML 页面。
@@ -275,7 +275,7 @@
 })();
 
 (function() {
-  console.log("\n---DOM Element节点类型详解-节点类型 Element");
+  console.log("\n---DOM Element节点类型详解");
 
   var jsdom = require("jsdom").jsdom;
   var document = jsdom("<div id='myDiv' title='Water'>Hello World!</div>" +
