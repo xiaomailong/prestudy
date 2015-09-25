@@ -891,8 +891,105 @@
 })();
 
 (function() {
-  console.log("\n---");
+  console.log("\n---DOM文本节点TEXT");
 
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('hello world' +
+    '<div class="box" id="box" name="box">' +
+    'test' +
+    '</div>');
+  var window = document.defaultView;
+
+  // DOM文本节点TEXT
+  // 定义
+  // 　　文本节点由Text类型表示，包含的是纯文本内容，纯文本内容中的HTML字符会被转义。
+
+  // 特征　
+  // 　　nodeType:3
+  // 　　nodeName:#text
+  // 　　nodeValue:节点所包含的文本
+  // 　　parentNode:Element节点
+  // 　　childNode:没有子节点
+  var oBox = document.getElementById('box');
+  var oTest = oBox.firstChild;
+  console.log(oTest.nodeType, oTest.nodeName, oTest.nodeValue); // 3 #text test
+  console.log(oTest.parentNode.nodeName, oTest.childNodes); // DIV NodeList {}
+  // [注意]每个可以包含内容的元素最多只能有一个文本节点，而且必须确实有内容存在
+  // 　　　　[a]<div></div>(没有内容，也就没有文本节点)
+  // IE8-浏览器为null,因为其不识别空白文本节点；其他浏览器为" "
+  //       [b]<div> </div>(有空格，因此有一个文本节点)
+
+  // 属性
+  // 【data】
+  // 　　文本节点的data属性与nodeValue属性相同
+  console.log(oTest.nodeValue, oTest.data, oTest.data == oTest.nodeValue); // test test true
+
+  // 【length】
+  // 　　文本节点的length属性保存着节点字符的数目，而且nodeValue.length、data.length也保存着相同的值
+  console.log(oTest.length, oTest.nodeValue.length, oTest.data.length); // 4 4 4
+
+  // 方法
+  // 【createTextNode()】
+  // 　　createTextNode()方法用于创建文本节点，这个方法接收一个参数——要插入节点中的文本。
+  //    在创建新文本的同时，也会为其设置ownerDocument属性
+  var oText = document.createTextNode(' hello world!');
+  oBox.appendChild(oText);
+  console.log(oBox.innerHTML); // test hello world!
+
+  // 　　　　[注意]一般情况下，每个元素只有一个文本节点，但在某些情况下也可能包含多个文本子节点。
+  //             如果两个文本节点是相邻的同胞节点，那么这两个节点中的文本就会连起来显示，中间不会有空格。
+  var oText2 = document.createTextNode(' <text2>');
+  oBox.appendChild(oText2);
+  console.log(oBox.innerHTML); // 123hello world! &lt;text2&gt;
+  console.log(oBox.childNodes.length); // 3
+
+  // 【normalize()】
+  // 　　normalize()方法将包含两个或多个文本节点的父元素中的文本节点合并成一个。
+  // 　　[注意]IE9+浏览器无法正常使用该方法，返回的结果是所有的文本节点减1
+  var oText3 = document.createTextNode('3');
+  oBox.appendChild(oText3);
+  console.log(oBox.childNodes.length); // 4
+  oBox.normalize();
+  console.log(oBox.innerHTML); // test hello world! &lt;text2&gt;3
+  //IE9+浏览器返回3,使用该方法时只能将所有的文本节点减1；其他浏览器正常，返回1
+  console.log(oBox.childNodes.length); // 1
+
+  // 【splitText()】
+  // 　　splitText()方法将一个文本节点分成两个文本节点，即按照指定的位置分割nodeValue值。
+  //    原来的文本节点将包含从开始到指定位置之前的内容，新文本节点将包含剩下的文本。
+  //    这个方法会返回一个新文本节点，该节点与原节点的parentNode相同。分割文本节点是从文本节点中提取数据的常用DOM解析技术。
+  var newNode = oBox.firstChild.splitText(1);
+  console.log(newNode.nodeValue); // est hello world! <text2>3
+  console.log(oBox.firstChild.nodeValue); // t
+  console.log(oBox.lastChild.nodeValue); // est hello world! <text2>3
+
+  // 【appendData()】
+  // 　　appendData(text)方法将text添加到节点的末尾
+  console.log(oText.appendData('4')); // undefined
+  console.log(oText.data); //  hello world!4
+  console.log(oBox.childNodes.length); // 2
+
+  // 【deleteData()】
+  // 　　deleteData(offset,count)方法从offset指定的位置开始删除count个字符
+  console.log(oText.deleteData(0, 2)); // undefined
+  console.log(oText.data); // ello world!4
+  console.log(oBox.childNodes.length); // 2
+
+  // 【insertData()】
+  // 　　insertData(offset,text)方法在offset指定的位置插入text
+  console.log(oText.insertData(1, 'test')); // undefined
+  console.log(oText.data); // etestllo world!4
+  console.log(oBox.childNodes.length); // 2
+
+  // 【replaceData()】
+  // 　　replaceData(offset,count,text)方法用text替换从offset指定的位置开始到offset+count处为止处的文本
+  console.log(oText.replaceData(1, 1, "test")); // undefined
+  console.log(oText.data); // etestestllo world!4
+  console.log(oBox.childNodes.length); // 2
+
+  // 【substringData()】
+  // 　　substringData(offset,count)方法提取从offset指定的位置开始到offset+count为止处的字符串
+  console.log(oText.substringData(1, 1)); // t
 })();
 
 (function() {
