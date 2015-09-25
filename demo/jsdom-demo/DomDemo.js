@@ -7,7 +7,6 @@
 
   var jsdom = require("jsdom").jsdom;
   var document = jsdom("hello world<ul><li>apple</li><li>orange</li><li>pear</li></ul>");
-
   var window = document.defaultView;
 
   console.log(window.document.documentElement.outerHTML);
@@ -406,4 +405,502 @@
   // 以上代码，如果是 IE 来解析，那么 <ul> 元素会有 3 个子节点，分别是 3 个 <li> 元素；
   // 而如果是其他浏览器解析，则会有 7 个子节点，包括 3 个 <li> 元素 和 4 个文本节点。
   // 如果像下面这样将元素之间的空白符删除，那么所有浏览器都会返回相同数目的子节点：
+
+})();
+
+(function() {
+  console.log("\n---DOM节点关系");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('hello world' +
+    '<div class="box" id="box" style ="background-color: red; height: 100px; width: 100px">' +
+    '  <ul class="list" id="list">' +
+    '    <li class="in">1</li>' +
+    '    <li class="in" id="test">2</li>' +
+    '    <li class="in">3</li>' +
+    '  </ul>' +
+    '</div>');
+  var window = document.defaultView;
+
+  // 定义
+  // 　　节点中的各种关系可以用传统的家族关系来描述，相当于把文档树比喻成家谱。
+
+  // 属性　　
+  // 【nodeType、nodeName、nodeValue】
+  // 　　每个节点都有这三个属性，且节点类型不同，这三个属性的值不同。
+  //    对于元素节点来说，nodeType的值为1，nodeName保存的始终都是元素的全大小标签名，而nodeValue的值则始终是null
+  var oBox = document.getElementById('box');
+  console.log(oBox.nodeType, oBox.nodeName, oBox.nodeValue); // 1 'DIV' null
+  // 【parentNode】
+  // 　　每个节点都有一个parentNode属性，该属性指向文档树中的父节点
+  console.log(oBox.parentNode.nodeName); // BODY
+  // childNodes】(只计算第一层子节点)
+  // 　　每个节点都有一个childNodes属性，其中保存着一个NodeList对象。
+  // 　　【补充】NodeList  　　　　
+  //         【1】NodeList是一种类数组对象，用于保存一组有序的节点，可以通过位置来访问这些节点。
+  //          NodeList对象的独特之处在于它实际上是基于DOM结构动态执行查询的结果，因此DOM结构的变化能够自动反映在NodeList对象中，
+  //          可以通过方括号[]，也可以通过item()方法来访问保存在NodeList中的节点
+  console.log(oBox.childNodes.length); // 2,在IE8-浏览器返回1，因为不包含空白文本节点
+  oBox.removeChild(oBox.childNodes.item(0));
+  console.log(oBox.childNodes.length); // 1,在IE8-浏览器返回0，因为不包含空白文本节点
+  // 　　　　【2】可以使用Array.prototype.slice.call()方法将NodeList对象转换为数组对象
+  var arrayOfNodes = Array.prototype.slice.call(oBox.childNodes);
+  console.log(oBox.childNodes.constructor); // [Function: NodeList]
+  console.log(arrayOfNodes.constructor); // [Function: Array]
+  // 　　　　　　[注意]但在IE8-下报错，因为IE8-将NodeList实现为一个COM对象，不能使用Array.prototype.slice()方法。
+  // 下面是兼容写法：
+  function convertToArray(nodes) {
+    var array = null;
+    try {
+      array = Array.prototype.slice.call(oBox.childNodes);
+    } catch (ex) {
+      array = [];
+      var len = nodes.length;
+      for (var i = 0; i < len; i++) {
+        array.push(nodes[i]);
+      }
+    }
+    return array;
+  }
+  console.log(convertToArray(oBox.childNodes)); // []
+
+  //   【children】(全兼容，只计算第一层子节点)
+  // 　　这个属性是HTMLCollection的实例，只包含元素中同样还是元素的子节点
+  console.log(oBox.children.length); // 1，在IE8-浏览器下为2，因为还会包括注释节点
+
+  // 【previousSibling、previousElementSibling】
+  // 　　previousSibling:同一节点列表中的前一个节点
+  // 　　previousElementSibling:同一节点列表中的前一个元素节点(IE8-浏览器不支持)
+
+  // 【nextSibling、nextElementSibling】
+  // 　　nextSibling:同一节点列表中的后一个节点
+  // 　　nextElementSibling:同一节点列表中的后一个元素节点(IE8-浏览器不支持)
+
+  // 【firstChild、firstElementChild】
+  // 　　firstChild:节点列表中的第一个子节点
+  // 　　firstElementChild:节点列表中的第一个元素子节点
+
+  // 【lastChild、lastElementChild】
+  // 　　lastChild:节点列表中的最后一个子节点
+  // 　　lastElementChild:节点列表中的最后一个元素子节点
+  var oTest = document.getElementById('test');
+  console.log(oTest.previousSibling.nodeName); // #text,但在IE8-浏览器下返回LI,因为不包含空白文本节点
+  console.log(oTest.previousElementSibling.nodeName); // LI，但在IE8-浏览器下报错
+  console.log(oTest.nextSibling.nodeName); // #text,但在IE8-浏览器下返回LI,因为不包含空白文本节点
+  console.log(oTest.nextElementSibling.nodeName); // LI，但在IE8-浏览器下报错
+
+  var oList = document.getElementById('list');
+  console.log(oList.firstChild.nodeName); // #text,但在IE8-浏览器下返回LI,因为不包含空白文本节点
+  console.log(oList.firstElementChild.nodeName); // LI，但在IE8-浏览器下报错
+  console.log(oList.lastChild.nodeName); // #text,但在IE8-浏览器下返回LI,因为不包含空白文本节点
+  console.log(oList.lastElementChild.nodeName); // LI，但在IE8-浏览器下报错
+
+  //   【childElementCount】(IE8-浏览器不支持)(只包含第一层子元素)
+  // 　　childElementCount返回子元素(不包括文本节点和注释)的个数
+  console.log(oBox.childElementCount); // 1
+
+  // 【ownerDocument】
+  // 　　所有节点都有一个ownerDocument的属性，指向表示整个文档的文档节点
+  console.log(oBox.ownerDocument.nodeName); // #document
+
+  // 方法
+  // 【hasChildNodes()】(全兼容)
+  // 　　hasChildNodes()方法在包含一个或多个节点时返回true，比查询childNodes列表的length属性更简单
+  console.log(oBox.hasChildNodes()); // true
+
+  // 【contains()】(只要是后代即可，不一定是第一级子元素)
+  // 　　contains()方法接收一个参数，即要检测的后代节点，如果是则返回true，如果不是则返回false
+  // 　　　　[注意]IE和safari不支持document.contains()方法，只支持元素节点的contains()方法
+  console.log(document.contains(document.getElementById("box"))); // 在IE和safari中报错，在其他浏览器中返回true
+
+  // 【compareDocumentPostion()】(IE8-浏览器不支持)
+  // 　　compareDocumentPostion()方法能够确定节点间的关系，返回一个表示该关系的位掩码
+  // 掩码    节点关系
+  // 1    无关（给定的节点不在当前文档中）
+  // 2    居前（给定的节点在DOM树中位于参考节点之前）
+  // 4    居后（给定的节点在DOM树中位于参考节点之后）
+  // 8    包含（给定的节点是参考节点的父节点）
+  // 16   被包含（给定的节点是参考节点的子节点）
+  //因为document包含box，所以为16；而又在box之前,所以为4，两者相加为20
+  var result = document.compareDocumentPosition(document.getElementById("box"));
+  console.log(result); // 20
+  //通过按位与，说明20是由16+4组成的，所以box被包含在document中
+  console.log(result & 16); // 16 box被包含在document中
+  console.log(result & 4); // 4 box在document之后
+})();
+
+(function() {
+  console.log("\n---DOM节点操作方法");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('hello world' +
+    '<div class="box" id="box" style ="background-color: red; height: 100px; width: 100px">' +
+    '  <ul class="list" id="list">' +
+    '    <li class="in">1</li>' +
+    '    <li class="in" id="test">2</li>' +
+    '    <li class="in">3</li>' +
+    '    <li class="in">4</li>' +
+    '    <li class="in">5</li>' +
+    '    <li class="in">6</li>' +
+    '  </ul>' +
+    '</div>');
+  var window = document.defaultView;
+
+  // 只读的关系指针
+  // 　　DOM中的关系指针都是只读的
+  var oBox = document.getElementById('box');
+  console.log(oBox.parentNode.nodeName); //BODY
+  // 在IE8-浏览器下会报错，在其他浏览器下忽略此条语句
+  oBox.parentNode = document;
+  console.log(oBox.parentNode.nodeName); //BODY
+
+  // 操作方法
+  // 【appendChild()】
+  // 　　appendChild()方法用于向childNodes列表的末尾添加一个节点，并返回新增节点。
+  //    添加节点后，childNodes中的新增节点、父节点和以前的最后一个子节点的关系指针都会相应地得到更新。
+  var newNode = document.createElement('ul');
+  var returnedNode = oBox.appendChild(newNode);
+  console.log(returnedNode.nodeName); // UL
+  console.log(returnedNode == newNode); // true
+  console.log(returnedNode == oBox.lastChild); // true
+
+  // 【insertBefore()】
+  // insertBefore()方法接收两个参数：要插入的节点和作为参照的节点。
+  // 插入节点后，被插入的节点会变成参照节点的前一个兄弟节点(previousSibling)，同时被方法返回。
+  // 如果参照节点是null，则insertBefore()与appendChild()方法执行相同的操作。
+  var oList = document.getElementById('list');
+  //新增一个li元素
+  var oAdd = document.createElement('li');
+  //设置新增元素的css样式
+  oAdd.className = "in";
+  oAdd.style.cssText = 'background-color:red;border-radius:50%';
+  //添加到oList中
+  oList.insertBefore(oAdd, null);
+  var num = -1;
+  var max = oList.children.length;
+
+  // function incrementNumber() {
+  //   num++;
+  //   //oList.getElementsByTagName('li')[max]相当于null，所以不报错
+  //   oList.insertBefore(oAdd, oList.getElementsByTagName('li')[num]);
+  //   if (num == max) {
+  //     num = -1;
+  //   }
+  //   if (num === 0) {
+  //     num = 1;
+  //   }
+  //   setTimeout(incrementNumber, 1000);
+  // }
+  // setTimeout(incrementNumber, 1000);
+
+  // 【insertAfter()封装】
+  // 　　原生JavaScript中并没有insertAfter()方法，但是可以用insertBefore()和appendChild()封装方法
+  function insertAfter(newElement, targetElement) {
+    var parent = targetElement.parentNode;
+    if (parent.lastChild == targetElement) {
+      parent.appendChild(newElement);
+    } else {
+      parent.insertBefore(newElement, targetElement.nextSibling);
+    }
+  }
+  var oLi2 = oList.getElementsByTagName("li")[1];
+  var newElement = document.createElement("li");
+  insertAfter(newElement, oLi2);
+  console.log(oList.childNodes.length);
+  // 在标准浏览器下返回[text, li.in, text, li.in, li, text],在IE8-浏览器下不包含空白文本节点
+
+  // 【replaceChild()】
+  // 　　replaceChild()接收的两个参数是要插入的节点和要替换的节点，
+  //    要替换的节点将由这个方法返回并从文档树中移除，同时由要插入的节点占据其位置
+  // function incrementNumber() {
+  //   //获取oList中子元素的个数
+  //   var len = oList.getElementsByTagName('li').length;
+  //   //如果长度不为0
+  //   if (len) {
+  //     //删除最后一个子元素
+  //     oList.removeChild(oList.getElementsByTagName('li')[len - 1]);
+  //     //再次调用计时器
+  //     setTimeout(incrementNumber, 1000);
+  //   }
+  // }
+  // //1s后执行函数incrementNumber
+  // setTimeout(incrementNumber, 1000);
+
+  // 【removeChild()】
+  // 　　removeChild()方法接收一个参数，即要移除的节点，被移除的节点成为方法的返回值。
+  // function incrementNumber() {
+  //   //获取oList中子元素的个数
+  //   var len = oList.getElementsByTagName('li').length;
+  //   //如果长度不为0
+  //   if (len) {
+  //     //删除最后一个子元素
+  //     oList.removeChild(oList.getElementsByTagName('li')[len - 1]);
+  //     //再次调用计时器
+  //     setTimeout(incrementNumber, 1000);
+  //   }
+  // }
+  // //1s后执行函数incrementNumber
+  // setTimeout(incrementNumber, 1000);
+
+  //   【cloneNode()】
+  // 　　cloneNode方法用于创建调用这个方法的节点的一个完全相同的副本，该方法接收一个布尔值参数，表示是否执行深复制。
+  // 在参数为true时，执行深复制，也就是复制节点及整个子节点树。在参数为false的情况下，执行浅复制，即复制节点本身。
+  // 复制后返回的节点副本属于文档所有，但并没有为它指定父节点。若参数为空，也相当于false
+  //   　　[注意]cloneNode()方法不会复制添加到DOM节点中的JavaScript属性，例如事件处理程序等。
+  //      这个方法只复制特性、(在明确指定的情况下复制)子节点，其他一切都不会复制。
+  var deepList = oList.cloneNode(true);
+  /*IE8-与其他浏览器在处理空白字符的方式不一样，IE8-不会为空白符创建节点*/
+  console.log(deepList.childNodes.length); //IE8-为6，其他浏览器为11
+  // document.body.insertBefore(deepList, oList);
+  var shallowList = oList.cloneNode();
+  console.log(shallowList.childNodes.length); //0
+
+  // 【insertAdjacentHTML()】
+  // 　　insertAdjacentHTML()方法接收两个参数:插入的位置和要插入的HTML文本。
+  // 　　第一个参数必须是下列值之一，且这些值都必须是小写形式:
+  // 　　"beforebegin",在当前元素之前插入一个紧邻的同辈元素
+  // 　　"afterbegin",在当前元素之下插入一个新的子元素或在第一个子元素之前再插入新的子元素
+  // 　　"beforeend",在当前元素之下插入一个新的子元素或在最后一个子元素之后再插入新的子元素
+  // 　　"afterend",在当前元素之后插入一个紧邻的同辈元素
+  // 　　第二个参数是一个HTML字符串，如果浏览器无法解析字符串，就会抛出错误
+  // oBox.insertAdjacentHTML("beforebegin", "<p>我是新的前兄弟元素</p>");
+  // oBox.insertAdjacentHTML("afterbegin", "<p>我是新的前子元素</p>");
+  // oBox.insertAdjacentHTML("beforeend", "<p>我是新的后子元素</p>");
+  // oBox.insertAdjacentHTML("afterend", "<p>我是新的后兄弟元素</p>");
+  // console.log(oBox.outerHTML);
+
+  // 注意事项
+  // 【注意事项1】如果传入到appendChild()、replaceChild()、insertBefore()中的节点已经是文档的一部分了，
+  //            则将该节点从原来的位置转移到新位置
+  // 【注意事项2】动态性的注意事项
+  // 　　【1】存变量的情况
+  //oIn0指向的是第0个对象，而并不是第0个位置
+  var oIn0 = oList.getElementsByTagName("li")[0];
+  console.log(oIn0.innerHTML); //1
+  //oIn0指向的是原来的第0个对象，只不过从第0个位置变化到第2个位置，
+  oList.appendChild(oIn0);
+  console.log(oIn0.innerHTML); //1
+
+  // 　　【2】不存变量的情况
+  //获取第0个位置的对象
+  console.log(oList.getElementsByTagName("li")[0].innerHTML); //1
+  //将第0个位置的对象变化到第2个位置
+  oList.appendChild(oList.getElementsByTagName("li")[0]);
+  //重新获取第0个位置的对象
+  console.log(oList.getElementsByTagName("li")[0].innerHTML); //2
+})();
+
+(function() {
+  console.log("\n---DOM特性节点ATTRIBUTE");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('hello world' +
+    '<div class="box" id="box" name="abc" index="123" title="test" lang="en" dir="rtl" data-name="a" style="height: 100px; width: 100px;" onclick = "alert(1)">' +
+    '  <ul class="list" id="list">' +
+    '    <li class="in">1</li>' +
+    '    <li class="in" id="test">2</li>' +
+    '    <li class="in">3</li>' +
+    '    <li class="in">4</li>' +
+    '    <li class="in">5</li>' +
+    '    <li class="in">6</li>' +
+    '  </ul>' +
+    '</div>');
+  var window = document.defaultView;
+
+  //   DOM特性节点ATTRIBUTE
+  //   定义
+  //   　　每个元素都有一个或多个特性，这些特性的用途是给出相应元素或内容的附加信息。
+  //      实质上，特性节点就是存在于元素的attributes属性中的节点。
+
+  //   特征　　
+  //   　　nodeType:2
+  //   　　nodeName:特性的名称
+  //   　　nodeValue:特性的值
+  //   　　parentNode:null
+  //   　　childNode:chrome、firefox下为undefined，safari下为Text，IE9+下为子元素的特性名，IE8-下报错
+  //   　　　　[注意]尽管Attribute也是节点，但却不被认为是DOM文档树的一部分，
+  //               开发人员常用getAttribute()、setAttribute()、removeAttribute()，很少直接引用特性节点
+  var oBox = document.getElementById('box');
+  var oAttr = oBox.attributes;
+  // (chrome\safari\IE9+\firefox) 2 id box null
+  // (IE7-) 2 onmsanimationiteration null null
+  console.log(oAttr[0].nodeType, oAttr[0].nodeName, oAttr[0].value, oAttr[0].parentNode);
+  // (chrome\firefox) undefined
+  // (safari) Text
+  // (IE9+) box
+  // (IE8-) 报错
+  console.log(oAttr[0].childNodes[0].nodeType);
+
+  // 特性节点属性
+  // 　　Attr对象有3个属性:name、value和specified
+  // 　　　　【1】name是特性名称(与nodeName的值相同)
+  // 　　　　【2】value是特性的值(与nodeValue的值相同)
+  // 　　　　【3】specified是一个布尔值，用以区别特性是在代码中指定的，还是默认的。
+  //           这个属性的值如果为true，则意味着要么是在HTML中指定了相应特性，要么是通过setAttribute()方法设置了该属性。
+  //           在IE中，所有未设置过的特性的该属性值都为false，而在其他浏览器中根本不会为这类特性生成对应的特性节点
+  // (chrome\safari\IE8+)class class true
+  // (firefox)id id true
+  // (IE7-)onmsanimationiteration onmsanimationiteration true
+  console.log(oAttr[0].name, oAttr[0].nodeName, oAttr[0].name == oAttr[0].nodeName);
+  // IE7- "null" null false
+  // 其他浏览器 box box true
+  console.log(oAttr[0].value, oAttr[0].nodeValue, oAttr[0].value == oAttr[0].nodeValue);
+  // IE7- false
+  // 其他浏览器 true
+  console.log(oAttr[0].specified); // true
+  console.log(oBox.attributes.id.specified); // true
+  // console.log(oBox.attributes.onclick.specified); // 在IE7-浏览器下会返回false，在其他浏览器下会报错
+
+  // 特性属性attributes
+  // 　　Element类型是使用attributes属性的唯一一个DOM节点类型。
+  //    attributes属性中包含一个NamedNodeMap，与NodeList类似，也是一个动态的集合。
+  //    元素的每一个特性都由一个Attr节点表示，每个节点都保存在NamedNodeMap对象中。
+  // 　　【attributes属性的四个方法】
+  // 　　　　[a]getNamedItem(name):返回nodeName属性等于name的节点
+  // 　　　　[b]removeNamedItem(name):从列表中移除nodeName属性等于name的节点
+  // 　　　　[c]setNamedItem(node):向列表中添加节点，以节点的nodeName属性为索引
+  // 　　　　[d]item(pos):返回位于数字pos位置处的节点，也可以用方括号法[]简写
+  console.log(oBox.attributes.length); // NamedNodeMap {0: class, 1: id, 2: name, 3: index, 4: title}
+  var getTest = oBox.attributes.getNamedItem("index");
+  console.log(getTest.value); // index = "123"
+  var removeTest = oBox.attributes.removeNamedItem("class");
+  console.log(removeTest.value); // class = "box"
+  console.log(oBox.attributes.getNamedItem("class")); // null
+  console.log(oBox.attributes.setNamedItem(removeTest)); // null
+  console.log(oBox.attributes.setNamedItem(getTest).value); // index = "123"
+  console.log(oBox.attributes.item(0).nodeType); // id="box"(每个浏览器获取的不一样)
+  console.log(oBox.attributes.item[1]); // id="box"(每个浏览器获取的不一样)
+  // 　　attributes属性中包含一系列节点，每个节点的nodeName就是特性的名称，节点的nodeValue就是特性的值
+  // console.log(oBox.attributes);// NamedNodeMap {0: class, 1: id, 2: name, 3: index, 4: title}
+  console.log(oBox.attributes.id.nodeName); // "id"
+  console.log(oBox.attributes.id.nodeValue); // "box"
+
+  // 【特性遍历】
+  // 　　　　attributes属性主要用于特性遍历。在需要将DOM结构序列化为XML或HTML字符串时，多数都会涉及遍历元素特性
+  function outputAttributes(element) {
+    var pairs = new Array(),
+      attrName, attrValue, i, len;
+    for (i = 0, len = element.attributes.length; i < len; i++) {
+      attrName = element.attributes[i].nodeName;
+      attrValue = element.attributes[i].nodeValue;
+      pairs.push(attrName + "=\"" + attrValue + "\"");
+    }
+    return pairs.join(" ");
+  }
+  // 　　　　[注意1]针对attributes对象中的特性，不同浏览器返回的顺序不同
+  // (chrome\safari)class="box" id="box" name="abc" index="123" title="test"
+  // (firefox)title="test" index="123" name="abc" id="box" class="box"
+  // (IE8+)title="test" class="box" id="box" index="123" name="abc"
+  // (IE7-)输出所有的特性
+  console.log(outputAttributes(oBox));
+  //       [注意2]IE7-浏览器会返回HTML元素中所有可能的特性，包括没有指定的特性
+  // 　　　　【解决】利用特性节点的specified属性
+  function outputAttributes2(element) {
+    var pairs = new Array(),
+      attrName, attrValue, i, len;
+    for (i = 0, len = element.attributes.length; i < len; i++) {
+      attrName = element.attributes[i].nodeName;
+      attrValue = element.attributes[i].nodeValue;
+      if (element.attributes[i].specified) {
+        pairs.push(attrName + "=\"" + attrValue + "\"");
+      }
+    }
+    return pairs.join(" ");
+  }
+  //所有浏览器下都返回title="test" class="box" id="box" index="123" name="abc"(顺序不一样)
+  console.log(outputAttributes(document.getElementById("box")));
+
+  // 特性节点方法
+  // 　　【1】createAttribute()方法传入特性名称并创建新的特性节点
+  // 　　【2】setAttributeNode()方法传入特性节点并将特性添加到元素上
+  // 　　【3】getAttributeNode()方法传入特性名并返回特性节点
+  // 　　【4】removeAttributeNode()方法传入特性名删除并返回删除的特性节点，但IE7-浏览器下无法删除
+  var attr = document.createAttribute('title2');
+  attr.value = "test2";
+  oBox.setAttributeNode(attr);
+  console.log(oBox.getAttributeNode("title2").name, attr.name); // title2 title2
+  console.log(oBox.getAttributeNode("title2").value, attr.value); // test2 test2
+  //返回删除的节点
+  console.log(oBox.removeAttributeNode(attr).name); // title2
+  //IE7-浏览器下无法删除，其他浏览器返回null
+  console.log(oBox.getAttributeNode("title2")); // null
+
+  // 特性方法
+  // 　　操作特性的DOM方法主要有getAttribute()、setAttribute()、removeAttribute()三个，
+  //    可以针对任何特性使用，包括那些以HTMLElement类型属性的形式定义的特性
+  // 　　【1】getAttribute()方法
+  // 　　　　getAttribute()方法用于取得特性的值
+  console.log(oBox.getAttribute("class")); // box
+  console.log(oBox.getAttribute("id")); // box
+  console.log(oBox.getAttribute("title")); // test
+  console.log(oBox.getAttribute("lang")); // en
+  console.log(oBox.getAttribute("dir")); // rtl
+  // 　　　　[注意1]如果给定名称的特性不存在或无参数则返回null
+  console.log(oBox.getAttribute("abc")); // null
+  console.log(oBox.getAttribute("")); // null
+  // 　　　　[注意2]传递给getAttribute()的特性名与实际的特性名相同，因此要得到class特性值，应该传入"class"而不是"className"。但IE7-浏览器却正好相反
+  console.log(oBox.getAttribute("class")); // box,在IE7-浏览器下显示null
+  console.log(oBox.getAttribute("className")); // 在IE7-浏览器下显示box,在其他浏览器下null
+  // 　　　　[注意3]通过getAttribute()可以取得自定义特性，但根据HTML5规范自定义特性应加上data-前缀以便验证
+  console.log(oBox.getAttribute("index")); // 123
+  console.log(oBox.getAttribute("data-name")); // a
+  console.log(oBox.index); // IE7-显示123，其他浏览器显示undefined
+  // console.log(oBox.dataset.name); // IE10-不支持dataset,出错，其他浏览器显示a
+  // 　　　　[注意4]IE8-浏览器不区分对象属性和元素特性。用对象属性的点方法可以获得自定义元素的特性。
+  //             但对于元素特性中间存在中划线的情况，只能用中括号法来取得
+  oBox.index = 2;
+  console.log(oBox.dataName); //在IE8-浏览器下 undefined
+  console.log(oBox["data-name"]); //在IE8-浏览器下 a
+  console.log(oBox.index); // 2
+  console.log(oBox.getAttribute("data-name")); // a
+  // 　　　　[注意5]有两类特殊的特性，它们虽然有对应的属性名，但属性的值与通过getAttribute()返回的值并不相同。
+  //             由于以下这些差别，只有在取得自定义特性值的情况下，才会使用getAttribute()
+  // 　　　　　　[a]第一类特性是style，用于通过CSS为元素指定样式。在通过getAttribute()访问时，返回的style特性值中包含的是CSS文本，
+  //              而通过属性来访问它则会返回一个对象。由于style属性是用于以编程方式访问元素样式的，因此并没有直接映射到style特性。
+  console.log(oBox.style); // CSS2Properties { height: "100px", width: "100px"}
+  // 在IE7-浏览器下返回的是oBox.style所取得的对象值。
+  // [注意]属性的顺序与所写的顺序可以不一致，每个浏览器显示的顺序不一样
+  console.log(oBox.getAttribute("style")); // "height: 100px; width: 100px;"
+  // 　　　　　　[b]第二类特性是onclick这样的事件处理程序。当在元素上使用时，onclick特性中包含的是Javascript代码，
+  //              如果通过getAttribute()访问，则会返回相应代码的字符串。
+  //             而在访问onclick属性时，则会返回一个JavaScript函数(如果未在元素中指定相应特性，则返回null)
+  console.log(oBox.onclick); // function onclick(event){alert(1)}
+  console.log(oBox.getAttribute("onclick")); // "alert(1)"
+  // 　　【2】setAttribute()
+  // 　　　　这个方法接受两个参数:要设置的特性名和值，如果已经存在，则替换现有的值。
+  //        如果特性不存在，setAttribute()则创建该属性并设置相应的值
+  oBox.setAttribute("id", "test");
+  /*注意获取oBox.id时并不会报错，因为oBox保存的是当时id为box的对象，也就是现在id为test的对象*/
+  console.log(oBox.id); // test
+  oBox.setAttribute("id", "box");
+  // 　　　　[注意1]通过setAttrbute()方法设置的特性名会统一转换成小写形式
+  oBox.setAttribute("ABC", "test123");
+  console.log(oBox.getAttribute("ABC")); // test123
+  console.log(oBox.getAttribute("abc")); // test123
+  // 　　　　[注意2]为DOM元素添加一个自定义属性，该属性不会自动成为元素的特性
+  oBox.color = "red";
+  console.log(oBox.getAttribute("color")); // IE8-浏览器返回red，其他浏览器返回null
+  // 　　　　[注意3]IE7-浏览器设置class、style、for、cellspacing、cellpadding、tabindex、readonly、
+  //             maxlength、rowspan、colspan、usemap、frameborder、contnenteditable这13个特性没有任何效果
+  // 　　　　　　【解决】可以利用IE8-浏览器下对象属性和元素特性混淆的bug来设置
+  // 　　【3】removeAttribute()
+  // 　　　　该方法用于彻底删除元素的特性，这个方法不仅会彻底删除元素的特性值，还会删除元素特性
+  console.log(oBox.getAttribute("id")); //box
+  oBox.removeAttribute("id");
+  console.log(oBox.getAttribute("id")); //null
+})();
+
+(function() {
+  console.log("\n---");
+
+})();
+
+(function() {
+  console.log("\n---");
+
+})();
+
+(function() {
+  console.log("\n---");
+
 })();
