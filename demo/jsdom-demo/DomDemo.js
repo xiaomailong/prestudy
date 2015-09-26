@@ -993,11 +993,76 @@
 })();
 
 (function() {
-  console.log("\n---");
+  console.log("\n---DOM注释节点COMMENT");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('hello world!<!--我是注释-->');
+  var window = document.defaultView;
+
+  // DOM注释节点COMMENT
+  // 定义
+  // 　　注释在DOM中是通过Comment类型来表示
+
+  // 特征
+  // 　　nodeType:8
+  // 　　nodeName:#comment
+  // 　　nodeValue:注释的内容
+  // 　　parentNode:Document或Element
+  // 　　childNode:没有子节点
+  var oComment = document.body.firstChild.nextSibling;
+  console.log(oComment.nodeName, oComment.nodeType, oComment.nodeValue); // #comment 8 我是注释
+  console.log(oComment.parentNode.nodeName, oComment.childNodes.length); // BODY 0
+  // 　　[注意1]如果<html>外部上下都有注释，只有firefox可以识别出最下面的注释，其他浏览器都识别不出
+  // 　　[注意2]IE8-浏览器将标签名为"!"的元素视作注释节点，所以文档声明也被视作注释节点<!DOCTYPE html>
+
+  // 属性和方法
+  // 　　Comment类型与Text类型继承自相同的基类，因此拥有相似的字符串操作方法。与Text类型相似，也可以通过nodeValue或data属性来取得注释的内容
+  // 【属性】
+  // 　　【data】
+  // 　　　　注释节点的data属性与nodeValue属性相同　　
+  // 　　【length】
+  // 　　　　注释节点的length属性保存着节点字符的数目，而且nodeValue.length、data.length也保存着相同的值
+  // 我是注释 我是注释  true
+  console.log(oComment.nodeValue, oComment.data, oComment.data == oComment.nodeValue);
+  console.log(oComment.length, oComment.nodeValue.length, oComment.data.length); // 4 4 4
+
+  // 【方法】
+  // 　　【createComment()】
+  // 　　　　createCommente()方法用于创建注释节点，这个方法接收一个参数——要插入节点中的注释文本。
+  //       在创建新注释文本的同时，也会为其设置ownerDocument属性
+  var oNewComment = document.createComment('hello world!');
+  document.body.insertBefore(oNewComment, oComment);
+  console.log(document.body.firstChild.nextSibling.data); // hello world!
+
+  // 【appendData()】
+  // 　　　　appendData(text)方法将text添加到节点的末尾
+  console.log(oComment.appendData('test')); // undefined
+  console.log(oComment.data); // 我是注释test
+
+  // 【deleteData()】
+  // 　　　　deleteData(offset,count)方法从offset指定的位置开始删除count个字符
+  console.log(oComment.deleteData(0, 1)); // undefined
+  console.log(oComment.data); // 是注释test
+
+  // 【insertData()】
+  // 　　　　insertData(offset,text)方法在offset指定的位置插入text
+  console.log(oComment.insertData(1, "test")); // undefined
+  console.log(oComment.data); // 是test注释test
+
+  // 【replaceData()】
+  // 　　　　replaceData(offset,count,text)方法用text替换从offset指定的位置开始到offset+count处为止处的文本
+  console.log(oComment.replaceData(1, 1, "test")); // undefined
+  console.log(oComment.data); // 是testest注释test
+
+  // 【substringData()】
+  // 　　　　substringData(offset,count)方法提取从offset指定的位置开始到offset+count为止处的字符串
+  console.log(oComment.substringData(1,1));// t
+  console.log(oComment.data);// 是testest注释test
 
 })();
 
 (function() {
   console.log("\n---");
+
 
 })();
