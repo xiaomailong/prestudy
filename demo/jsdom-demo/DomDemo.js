@@ -1056,8 +1056,116 @@
 
   // 【substringData()】
   // 　　　　substringData(offset,count)方法提取从offset指定的位置开始到offset+count为止处的字符串
-  console.log(oComment.substringData(1,1));// t
-  console.log(oComment.data);// 是testest注释test
+  console.log(oComment.substringData(1, 1)); // t
+  console.log(oComment.data); // 是testest注释test
+
+})();
+
+(function() {
+  console.log("\n---DocumentFragment类型");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('<ul class="list" id="list"></ul>');
+  var window = document.defaultView;
+
+  // DocumentFragment类型
+  // 【定义】
+  // 　　在所有节点类型中，只有DocumentFragment在文档中没有对应的标记。
+  //    DOM规定文档片段(document fragment)是一种“轻量级”的文档，可以包含和控制节点，但不会像完整的文档那样占用额外的资源。
+
+  // 【特征】
+  // 　　nodeType: 11
+  // 　　nodeName: #document-fragment
+  // 　　nodeValue:null
+  // 　　parentNode: null
+  // 　　childNode:Element、ProcessingInstruction、Comment、Text、CDATASection、EntityReference
+
+  // 【方法及应用】
+  // 　　虽然不能把文档片段直接添加到文档中，但可以将它作为一个“仓库”来使用，即可以在里面保存将来可能会添加到文档中的节点。
+  // 要创建文档片段，可以使用document.createDocumentFragment()方法。
+  // 文档片段继承了Node的所有方法，通常用于执行那些针对文档的DOM操作。
+  // 如果将文档中的节点添加到文档片段中，就会从文档树中移除该节点，也不会从浏览器中再看到该节点。
+  // 添加到文档片段中的新节点同样也不属性文档树。可以通过appendChild()或insertBefore()将文档片段中内容添加到文档中。
+  // 在将文档片段作为参数传递给这两个方法时，实际上只会将文档片段的所有子节点添加到相应位置上；
+  // 文档片段本身永远不会成为文档树的一部分。
+  console.time("time");
+  var oList = document.getElementById('list');
+  var fragment = document.createDocumentFragment();
+  var li = null;
+  for (var i = 0; i < 3000; i++) {
+    li = document.createElement('li');
+    li.appendChild(document.createTextNode("Item" + (i + 1)));
+    fragment.appendChild(li);
+  }
+  oList.appendChild(fragment); //409ms
+  console.timeEnd('time');
+
+  console.time("time");
+  for (var j = 0; j < 3000; j++) {
+    var li2 = document.createElement('li');
+    li2.appendChild(document.createTextNode("Item" + (j + 1)));
+    oList.appendChild(li2);
+  }
+  console.timeEnd('time'); //206ms
+  // 　　　　由以上结果可以看出，向页面加入<li>标签时，使用DocumentFragment的性能更好
+})();
+
+(function() {
+  console.log("\n---DocumentType类型");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('<!DOCTYPE html><html lang="en">');
+  var window = document.defaultView;
+
+  // DocumentType类型
+  // 【定义】
+  // 　　DocumentType类型包含着与文档的doctype有关的所有信息
+
+  // 【特征】
+  // 　　nodeType: 10
+  // 　　nodeName: doctype的名称
+  // 　　nodeValue: null
+  // 　　parentNode: Document
+  // 　　childNode:没有子节点
+  //IE8-浏览器不支持document.doctype
+  var oDoctype = document.doctype;
+  if (oDoctype) {
+    console.log(oDoctype.nodeName, oDoctype.nodeType, oDoctype.nodeValue); // html 10 null
+    console.log(oDoctype.parentNode.nodeName, oDoctype.childNodes.length); // #document 0
+  }
+
+  // 【属性】
+  // 　　DocumentType对象有3个属性:name、entities、notations。
+  //    通常浏览器中的文档使用的都是HTML或XHTML文档类型，因而entites和notations都是空列表(列表中的项来自行内文档类型声明)
+  // 　　name表示文档类型的名称
+  // 　　entities表示由文档类型描述的实体的NamedNodeMap对象
+  // 　　notations表示由文档类型描述的符号的NamedNodeMap对象
+  if (oDoctype) {
+    console.log(oDoctype.name, oDoctype.entities, oDoctype.notations); // html undefined undefined
+  }
+})();
+
+(function() {
+  console.log("\n---");
+
+
+})();
+
+(function() {
+  console.log("\n---");
+
+
+})();
+
+(function() {
+  console.log("\n---");
+
+
+})();
+
+(function() {
+  console.log("\n---");
+
 
 })();
 
