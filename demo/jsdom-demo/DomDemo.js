@@ -1146,8 +1146,1002 @@
 })();
 
 (function() {
-  console.log("\n---");
+  console.log("\n---DOM元素节点ELEMENT");
 
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom(
+    '<div class="boxClass" id="boxId" title="boxTitle" lang="en" dir="rtl" >123</div>' +
+    '<ul class="list" id="list">' +
+    '  <li class="in">1</li>' +
+    '  <li class="in" id="test">2</li>' +
+    '  <li class="in">3</li>' +
+    '  <li class="in">4</li>' +
+    '  <li class="in">5</li>' +
+    '  <li class="in">6</li>' +
+    '</ul>');
+  var window = document.defaultView;
+
+  // DOM元素节点ELEMENT
+  // 定义
+  // 　　Element元素用于表现XML或HTML元素，提供了对元素标签名、子节点及特性的访问
+
+  // 特征
+  // 　　nodeType:1
+  // 　　nodeName:元素的大写标签名
+  // 　　nodeValue:null
+  // 　　parentNode:Document或Element
+  // 　　子节点可能是Element、Text、Comment、ProcessingInstruction、CDATASection、ENtityReference
+  // 　　[注意1]要访问元素的标签名可以使用nodeName，也可以使用tagName属性，这两个属性会返回相同的值
+  var oList = document.getElementById('list');
+  var oTagTest = oList.nodeName;
+  var oNodeTest = oList.tagName;
+  //1 'UL' null 'BODY' '#text'(在IE8-浏览器下不支持空白文本节点)
+  console.log(oList.nodeType, oList.nodeName, oList.nodeValue,
+    oList.parentNode.nodeName, oList.childNodes[0].nodeName);
+  console.log(oTagTest, oNodeTest, oTagTest == oNodeTest); // UL UL true
+  // 　　[注意2]在HTML中，标签名始终以全部大写表示；而在XML(有时候也包括XHTML)中，标签名则始终会与源代码中的保持一致。
+  //          假设不确定自己的脚本将会在HTML还是在XML文档中执行，最好是在比较之前将标签名转换为相同的大小写形式
+
+  // HTML元素
+  // 　　所有的HTML元素都由HTMLElement类型表示，不是直接通过这个类型，也是通过它的子类型来表示，
+  // HTMLElement类型直接继承自Element并添加了以下5个属性，且这些属性是可读可写的。
+  // 　　id:元素在文档中的唯一标识符
+  // 　　title:有关元素的附加说明信息，一般通过工具提示条显示出来
+  // 　　lang:元素内容的语言代码，很少使用
+  // 　　dir:语言的方向，ltr(left to right)从左到右 或 rtl(right to left)从右到左，也很少使用
+  // 　　className:与元素的class特性对应，即为元素指定的CSS类。
+  var oBox = document.getElementById('boxId');
+  console.log(oBox.className, oBox.id, oBox.title, oBox.lang, oBox.dir); // boxClass boxId boxTitle en rtl
+  //[注意]如果text-align和dir同时设置的话，以text-align设置为值为准
+  oBox.dir = "ltr";
+  console.log(oBox.dir); // ltr
+
+  // 创建元素
+  // 　　【createElement()】
+  // 　　使用document.createElement()方法可以创建新元素。 这个方法接受一个参数，即要创建元素的标签名，
+  //    这个标签名在HTML文档中不区分大小写，而在XML(包括XHTML)文档中，则是区分大小写的。
+  //    在使用createElement()方法创建新元素的同时，也为新元素设置了ownerDocument属性
+  var oDiv = document.createElement("div");
+  console.log(oDiv.ownerDocument.nodeName); // #document
+  // 　　IE8-浏览器可以为这个方法传入完整的元素标签，也可以包含属性。
+  // var oDiv2 = document.createElement('<div id="box222"></div>');
+  // document.body.appendChild(oDiv2);
+  // console.log(oDiv2.outerHTML);
+  // 利用这种方法可以避开IE7-浏览器在动态创建元素的某些问题。
+  // 　　　　[a]不能设置动态创建的<iframe>元素的name特性
+  // 　　　　[b]不能通过表单的reset()方法重设动态创建的<input>元素
+  // 　　　　[c]动态创建的type特性值为"reset"的<button>元素重设不了表单
+  // 　　　　[d]动态创建的一批name相同的单选按钮彼此毫无关系。name值相同的一组单选按钮本来应该用于表示同一选项的不同值，
+  //          但动态创建的一批这种单选按钮之间却没有这种关系。
+  // var iframe = document.createElement("<iframe name = 'myframe'></iframe>");
+  // var input = document.createElement("<input type='checkbox'>");
+  // var button = document.createElement("<button type = 'reset'></button>");
+  // var radio1 = document.createElement("<input type='radio' name ='choice' value = '1'>");
+  // var radio2 = document.createElement("<input type='radio' name ='choice' value = '2'>");
+
+  // 元素的子节点
+  // 　　元素可以有任意数目的子节点和后代节点，因为元素可以是其他元素的子节点。
+  // 　　元素的childNodes属性中包含了它的所有子节点，这些子节点可能是元素、文本、注释、处理指令节点。
+  // 　　但不同浏览器在处理空白文本节点上有差异。
+  //IE8-浏览器返回2,其他浏览器返回5。因为IE8-浏览器子节点中不包含空白文本节点
+  console.log(oList.childNodes.length); // 12
+  // 　　【解决】只获取元素节点的兼容写法
+  var children = oList.childNodes;
+  var num = 0;
+  for (var i = 0; i < children.length; i++) {
+    if (children[i].nodeType == 1) {
+      num++;
+    }
+  }
+  console.log(num); // 6
+})();
+
+(function() {
+  console.log("\n---动态脚本");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('');
+  var window = document.defaultView;
+
+  // 动态脚本
+  // 【定义】
+  // 　　在页面加载时不存在，但将来的某一时刻通过修改DOM动态添加的脚本。
+
+  // 【方式】
+  // 　　【1】插入外部文件方式
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src = "js.js";
+  document.body.appendChild(script);
+  // 使用函数封装如下:
+  function loadScript(url) {
+    script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = url;
+    document.body.appendChild(script);
+  }
+  loadScript("js.js");
+
+  // 【2】直接插入JavaScript代码
+  // 　　　　IE8-浏览器下使用appendChild或innerHTML都会报错，
+  // 　　　　因为IE8-浏览器将<script>视为一个特殊的元素，不允许DOM访问其子节点。
+  var script2 = document.createElement("script");
+  script2.type = "text/javascript";
+  //script.innerHTML = "alert('hi');";
+  //script.appendChild(document.createTextNode("alert('hi');"));
+  document.body.appendChild(script2);
+  // 【解决】使用<script>元素的text属性来指定Javascript代码
+  var script3 = document.createElement("script");
+  script3.type = "text/javascript";
+  script3.text = "alert('hi');";
+  document.body.appendChild(script3);
+  // 【完美解决】safari3-浏览器不能正确支持text属性，但却允许使用文本节点，封装兼容函数如下
+  function loadScriptString(code) {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    try {
+      script.appendChild(document.createTextNode(code));
+    } catch (ex) {
+      script.text = code;
+    }
+    document.body.appendChild(script);
+  }
+  loadScriptString("alert('hi!')");
+  console.log(document.body.outerHTML);
+
+  console.log("\n---动态样式");
+  // 动态样式
+  // 【定义】
+  // 　　在页面刚加载时不存在，加载完成后动态添加到页面中的样式。
+
+  // 【方式】
+  // 　　【1】插入外部文件方式
+  var link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.type = "text/css";
+  link.href = "style.css";
+  var head = document.getElementsByTagName('head')[0];
+  head.appendChild(link);
+  console.log(document.head.outerHTML);
+  // 使用函数封装如下：
+  function loadStyles(url) {
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = url;
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(link);
+  }
+  loadStyles("style.css");
+  console.log(document.head.outerHTML);
+
+  // 　　【2】直接插入css嵌入样式
+  var style = document.createElement("style");
+  style.type = "text/css";
+  //style.innerHTML = "body{background-color: red;}";
+  //style.appendChild(document.createTextNode("body{background-color: red;}"));
+  // var head = document.getElementsByTagName('head')[0];
+  head.appendChild(style);
+  console.log(document.head.outerHTML);
+  // 　　　　如<script>标签类似，IE8-浏览器将<style>标签当作特殊的节点，不允许访问其子节点。
+  // 　　　　IE10-浏览器支持使用styleSheet.cssText属性来设置样式。兼容写法如下:
+  function loadStyleString(css) {
+    var style = document.createElement("style");
+    style.type = "text/css";
+    try {
+      style.appendChild(document.createTextNode(css));
+    } catch (ex) {
+      style.styleSheet.cssText = css;
+    }
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(style);
+  }
+  loadStyleString("body{background-color: red;}");
+  console.log(document.head.outerHTML);
+})();
+
+(function() {
+  console.log("\n---DOM选择器API");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom(
+    '<body style="height: 100%;">' +
+    '<div class="boxClass" id="boxId" title="boxTitle" lang="en" dir="rtl" >123</div>' +
+    '<div class="boxClass" id="boxId" title="boxTitle" lang="en" dir="rtl" >321</div>' +
+    '<button name="box">0</button>' +
+    '<div class="box" id="box" style="height: 200px;">1</div>' +
+    '<div class="box" id="box" style="height: 150px;">2</div>' +
+    '<ul class="list" id="list" style="height:100px">' +
+    '  <li class="in" style="height: 30px;">1</li>' +
+    '  <li class="in ab" id="test" title="test" style="height: 30px;">2</li>' +
+    '  <li class="in ab c" style="height: 30px;">3</li>' +
+    '  <li class="ab in c" style="height: 30px;">4</li>' +
+    '  <li class="ab" style="height: 30px;">5</li>' +
+    '  <li class="in" style="height: 30px;">6</li>' +
+    '</ul>');
+  var window = document.defaultView;
+
+  // DOM选择器API
+  // getElementById()
+  // 　　getElementById()方法接收一个参数:要取得元素的ID，若找到相应元素则返回该元素，若不存在则返回null
+  // 　　【IE7-浏览器bug1】ID属性不区分大小写
+  var oBox = document.getElementById('BoxId');
+  console.log(oBox); // IE7-可以找到该元素，但其他浏览器都返回null
+  oBox = document.getElementById('boxId');
+  console.log(oBox.nodeName);
+  // 　　　如果页面中多个元素的ID属性相同，则只返回文档中第一次出现的元素
+  console.log(oBox.innerHTML); // 123
+  // 　　【IE7-浏览器bug2】表单元素的name属性也会被当作ID属性识别出来。
+  // 　　因此为了避免这种问题，最好不让表单元素的name属性和其他元素的ID属性相同
+  var oBox2 = document.getElementById('box');
+  console.log(oBox2.innerHTML); // 1 【IE7-浏览器bug2】0
+
+  // getElementsByTagName()　
+  // 　　getElementsByTagName()该方法接收一个参数，即要取得元素的标签名，而返回的是包含0或多个元素的NodeList。
+  // 　　在HTML文档中，这个方法会返回一个HTMLCollection对象，作为一个动态集合，该对象与NodeList非常类似。
+  // 　　对于HTMLCollection对象而言，我们可以向方括号中传入数值或字符串形式的索引值。
+  // 　　在后台，会对数值索引调用item()方法，对字符串索引调用namedItem()方法。
+  // 　　HTMLCollection对象还有一个方法是namedItem()，可以通过元素的name特性或者直接用方括号来取得集合中的项。
+  // 　　但safari和IE都不支持该方法。
+  var oList = document.getElementById('list');
+  var aIn = oList.getElementsByTagName('li');
+  console.log(aIn.length); // 6
+  console.log(aIn[0].innerHTML); //
+  console.log(aIn.item(0).innerHTML); // 1
+  // console.log(aIn["in3"].innerHTML); // 在safari和IE下报错，在其他浏览器下输出3
+  // console.log(aIn.namedItem("in3").innerHTML); // 在safari和IE下报错，在其他浏览器下输出3
+
+  // 　　要想取得所有的元素，可以向getElementsByTagName传入"*"，表示全部
+  var aAll = document.getElementsByTagName('*');
+  //标准浏览器下结果为[html, head, meta, title, body, script]
+  //IE8-浏览器下结果为7个，由于它把<!DOCTYPE html>识别为注释，且把注释识别为元素，所以多1个
+  console.log(aAll.length); // 15
+
+  // 　　在HTML中getElementsByTagName()里的元素不需要区分大小写，但在XML包括XHTML页面需要区分大小写
+  var aAll2 = document.getElementsByTagName('DIV')[0];
+  console.log(aAll2.innerHTML); //所有浏览器都返回 123
+
+  // getElementsByName()
+  // 　　getElementsByName()该方法会返回带有给定name特性的所有元素，所有浏览器都支持。
+  // 　　最常用的是取得单选按钮。
+
+  // getElementsByClassName()
+  // 　　getElementsByClassName()方法接收一个参数，即一个包含一个或多个类名的字符串，返回带有指定类的所有元素的NodeList。
+  // 　　传入多个类名时，类名的先后顺序不重要。(IE8-浏览器不支持)
+  var oTest = document.getElementsByClassName('in');
+  console.log(oTest.length); // 5
+  oTest = document.getElementsByClassName('ab');
+  console.log(oTest.length); // 4
+  oTest = document.getElementsByClassName('ab in');
+  console.log(oTest.length); // 0
+
+  // classList
+  // 　　在操作类名时，需要通过className属性添加、删除和替换类名。
+  // 　　因为className是一个字符串，所以即使只修改字符串一部分，也必须每次都设置整个字符串的值。
+  // 　　要从className字符串中删除一个类名，需要把类名拆开，删除不想要的那个，再重新拼成一个新字符串。(IE9-浏览器不支持)
+  oTest = document.getElementsByClassName('in')[1];
+
+  function removeClass(obj, str) {
+    var classNames = obj.className.split(/\s+/);
+    var pos = -1;
+    for (var i = 0, len = classNames.length; i < len; i++) {
+      if (classNames[i] == str) {
+        pos = i;
+        break;
+      }
+    }
+    classNames.splice(i, 1);
+    obj.className = classNames.join(' ');
+  }
+  console.log(oTest.className); // in ab
+  removeClass(oTest, 'in');
+  console.log(oTest.className); // ab
+
+  // HTML5为所有元素添加了classList属性，这个classList属性是新集合类型DOMTokenList的实例，
+  // 它有一个表示自己包含多少元素的length属性，而要取得每个元素可以使用item()方法，也可以使用方括号法。
+  // 此外，这个新类型还定义如下方法：
+  // 　　add(value):将给定的字符串值添加到列表中，如果值已存在，则不添加
+  // 　　contains(value):表示列表中是否存在给定的值，如果存在则返回true,否则返回false
+  // 　　remove(value):从列表中删除给定的字符串
+  // 　　toggle(value):如果列表中已经存在给定的值，删除它；如果列表中没有给定的值，添加它。
+  oTest = document.getElementsByTagName('li')[2];
+  console.log(oTest.classList); // DOMTokenList { '0': 'in', '1': 'ab', '2': 'c' }
+  // IE9-浏览器返回null,其他浏览器返回["in", "ab"]
+  // 删除"in"类
+  oTest.classList.remove("in");
+  console.log(oTest.className); // ab c
+  // 添加"x"类
+  oTest.classList.add("x");
+  console.log(oTest.className); // ab c x
+  // 切换"in"类
+  oTest.classList.toggle("in"); // ab c x in
+  console.log(oTest.className);
+  // 切换"in"类
+  oTest.classList.toggle("in"); // ab c x
+  console.log(oTest.className);
+  // 确定是否包含"in"类
+  console.log(oTest.classList.contains("in")); // false
+
+  // querySelector()
+  // 　　querySelector()方法接收一个CSS选择符，返回与该模式匹配的第一个元素，
+  // 　　如果没有找到匹配的元素，返回null(IE7-浏览器不支持)
+  //返回null
+  var oNull = document.querySelector('.null');
+  console.log(oNull); // null
+  // 取得body元素
+  var body = document.querySelector("body");
+  console.log(body.style.height); // 100%
+  // 取得ID为"box"的元素
+  oBox = document.querySelector('#box');
+  console.log(oBox.style.height); // 200px
+  // 取得第一个class为"list"的ul元素
+  oList = document.querySelector('ul.list');
+  console.log(oList.style.height); // 100px
+  // 取得第一个class为"in"的元素
+  var oIn = document.querySelector('.in');
+  console.log(oIn.innerHTML); // 1
+  // 取得第一个title属性为test的元素
+  oTest = body.querySelector('[title="test"]');
+  console.log(oTest.innerHTML); // 2
+
+  // querySelectorAll()
+  // 　　querySelectorAll()接收一个CSS选择符，返回一个NodeList的实例。
+  // 　　具体来说，返回的值实际上是带有所有属性和方法的NodeList，而其底层实现则类似于一组元素的快照，而非不断对文档进行搜索的动态查询。
+  // 　　这样实现可以避免使用NodeList对象通常会引起的大多数性能问题。
+  // 　　只要传给querySelectorAll()方法的CSS选择符有效，该方法都会返回一个NodeList对象，而不管找到多少匹配的元素。
+  // 　　如果没有找到匹配的元素，NodeList就是空的。(IE7-浏览器不支持)
+  // 返回null
+  oNull = document.querySelectorAll('.null');
+  console.log(oNull); // null NodeList { _length: 0 }
+  // 取得body元素
+  body = document.querySelectorAll("body")[0];
+  console.log(body.style.height); // 100%
+  // 取得所有class为"in"的元素
+  oIn = document.querySelectorAll('.in');
+  for (var i = 0; i < oIn.length; i++) {
+    console.log(oIn[i].innerHTML); // 1, 4, 6
+  }
+  // 取得title属性为test的元素
+  oTest = body.querySelectorAll('[title="test"]');
+  console.log(oTest.length); // 1 [li.in]
+
+  // matchesSelector()
+  // 　　matchesSelector()方法接收一个CSS选择符参数，如果调用元素与该选择符相匹配，返回true；否则返回false(暂无浏览器支持)
+  // console.log(document.body.matchesSelector('body')); // true
+  // 　但IE9+浏览器支持msMatchesSelector()方法，firefox支持mozMatchesSelector()方法，
+  // 　safari和chrome支持webkitMatchesSelector()方法。所以兼容写法为:
+  function matchesSelector(element, selector) {
+    if (element.matchesSelector) {
+      return element.matchesSelector(selector);
+    }
+    if (element.msMatchesSelector) {
+      return element.msMatchesSelector(selector);
+    }
+    if (element.mozMatchesSelector) {
+      return element.mozMatchesSelector(selector);
+    }
+    if (element.webkitMatchesSelector) {
+      return element.webkitMatchesSelector(selector);
+    }
+    return null;
+  }
+  console.log(matchesSelector(document.documentElement, 'html')); // true
+})();
+
+(function() {
+  console.log("\n---DOM操作表格实例");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom('');
+  var window = document.defaultView;
+  // DOMcore方法
+  //创建表格
+  var table = document.createElement("table");
+  table.border = "1";
+  table.width = "100%";
+  //创建tbody
+  var tbody = document.createElement("tbody");
+  table.appendChild(tbody);
+  //创建第一行
+  var row1 = document.createElement("tr");
+  tbody.appendChild(row1);
+  var cell1_1 = document.createElement("td");
+  cell1_1.appendChild(document.createTextNode("Cell 1,1"));
+  row1.appendChild(cell1_1);
+  var cell2_1 = document.createElement("td");
+  cell2_1.appendChild(document.createTextNode("Cell 2,1"));
+  row1.appendChild(cell2_1);
+  //创建第二行
+  var row2 = document.createElement("tr");
+  tbody.appendChild(row2);
+  var cell1_2 = document.createElement("td");
+  cell1_2.appendChild(document.createTextNode("Cell 1,2"));
+  row2.appendChild(cell1_2);
+  var cell2_2 = document.createElement("td");
+  cell2_2.appendChild(document.createTextNode("Cell 2,2"));
+  row2.appendChild(cell2_2);
+  //将表格添加到文档主体中
+  document.body.appendChild(table);
+  console.log(document.body.outerHTML);
+
+  // 属性和方法
+  // 　　显然DOM代码很长，为了方便构建表格，HTML DOM为<table>、<tbody>、<tr>元素添加了属性和方法。
+  // 　　【1】为<table>元素添加的属性和方法
+  // caption:保存着对<caption>元素的指针
+  // tBodies:是一个<tbody>元素的HTMLCollection
+  // tFoot:保存着对<tfoot>元素的指针
+  // tHead:保存着对<thead>元素的指针
+  // createTHead():创建<thead>元素，将其放到表格中，返回引用
+  // createTFoot():创建<tfoot>元素，将其放到表格中，返回引用
+  // createCaption():创建<caption>元素，将其放到表格中，返回引用
+  // deleteTHead():删除<thead>元素
+  // deleteTFoot():删除<tfoot>元素
+  // deleteCaption():删除<caption>元素
+  //    【2】为<tbody>元素添加的属性和方法
+  // rows:保存着<tbody>元素中行的HTMLCollection
+  // deleteRow(pos):删除指定位置的行
+  // insertRow(pos):向rows集合中的指定位置插入一行，返回对新插入行的引用
+  // 　　【3】为<tr>元素添加的属性和方法
+  // cells:保存着<tr>元素中单元格的HTMLCollection
+  // deleteCell(pos):删除指定位置的单元格
+  // insertCell(pos):向cells集合中的指定位置插入一个单元格，返回对新插入单元格的引用
+
+  // // 代码重写
+  // //创建表格
+  // var table2 = document.createElement("table");
+  // table2.border = "1";
+  // table2.width = "100%";
+  // //创建tbody
+  // var tbody2 = document.createElement("tbody");
+  // table2.appendChild(tbody2);
+  // //创建第一行
+  // tbody2.insertRow(0);
+  // tbody2.rows[0].insertCell(0);
+  // tbody2.rows[0].cells[0].appendChild(document.createTextNode("Cell 1,1"));
+  // tbody2.rows[0].insertCell(1);
+  // tbody2.rows[0].cells[1].appendChild(document.createTextNode("Cell 2,1"));
+  // //创建第二行
+  // tbody2.insertRow(1);
+  // tbody2.rows[1].insertCell(0);
+  // tbody2.rows[1].cells[0].appendChild(document.createTextNode("Cell 1,2"));
+  // tbody2.rows[1].insertCell(1);
+  // tbody2.rows[1].cells[1].appendChild(document.createTextNode("Cell 2,2"));
+  // //将表格添加到文档主体中
+  // document.body.appendChild(table2);
+  // console.log(document.body.outerHTML);
+})();
+
+(function() {
+  console.log("\n---DOM中文本和标记的插入");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom(
+    '<div class="box" id="box"></div>' +
+    '<ul class="list" id="list" style="height:100px">' +
+    '  <li class="in" style="height: 30px;">1</li>' +
+    '  <li class="in ab" id="test" title="test" style="height: 30px;">2</li>' +
+    '  <li class="in ab c" style="height: 30px;">3</li>' +
+    '  <li class="ab in c" style="height: 30px;">4</li>' +
+    '  <li class="ab" style="height: 30px;">5</li>' +
+    '  <li class="in" style="height: 30px;">6</li>' +
+    '</ul>');
+  var window = document.defaultView;
+
+  // innerHTML
+  // 　　innerHTML在读模式下，返回与调用元素的所有子节点(包括元素、注释和文本节点)对应的HTML标记。
+  // 　　在写模式下，innerHTML会根据指定的值创建新的DOM树，然后用这个DOM树完全替换调用元素原先的所有子节点。
+  　　
+  // 　　[注意]并不是所有元素都支持innerHTML属性，不支持innerHTML的属性有:
+  // 　　<col>、<colgroup>、<frameset>、<head>、<html>、<style>、<table>、<tbody>、<thead>、<tfoot>、<tr>。
+  // 　　在IE8-浏览器中<title>元素也没有该属性
+
+  // IE8-浏览器会将所有标签转换成大写形式，且不包含空白文本节点；而其他浏览器则原样返回
+  var oList = document.getElementById("list");
+  console.log(oList.innerHTML);
+
+  // 　　[a]如果设置的值只是文本，则结果就是设置纯文本
+  var oBox = document.getElementById("box");
+  oBox.innerHTML = "hello world!"; // 页面显示hello world!
+
+  // 　　[b]如果设置的值包含HTML标签，则浏览器会将这个字符串解析成相应的DOM树
+  oBox.innerHTML = "Hello & welcome, <b>'reader'</b>"; //页面显示Hello & welcome, 'reader'
+
+  // 　　无论什么时候，只要使用innerHTML从外部插入HTML，都应该首先以可靠的方式处理HTML。
+  // 　　IE浏览器提供了window.toStaticHTML()方法，这个方法接收一个参数，即一个HTML字符串；
+  // 　　返回一个经过无害处理后的版本——从源HTML中删除所有脚本节点和事件处理程序属性。
+  var text = "<a href='#' onclick = 'alert(\"hi\");'>Click Me</a>";
+  // var sanitized = window.toStaticHTML(text);  // 只有IE支持
+  // console.log(sanitized); // <a href="#">Click Me</a>
+
+  // 【限制】
+  // 　　　　【<script>】
+  // 　　　　大多数浏览器中，通过innerHTML插入<script>元素并不会执行其中的脚本。
+  // 　　　　IE9-浏览器在满足一定条件下可以执行脚本，一是为<script>元素设置defer属性，二是<script>元素必须位于“有作用域的元素”之后。
+  // 　　　　如果通过innerHTML插入的字符串开头就是一个“无作用域的元素”，那么IE会在解析这个字符串前先删除该元素。
+  //innerHTML字符串一开始就是一个无作用域的元素，所以这个字符串会变成空字符串。
+  oBox.innerHTML = "<script defer>alert('hi');<\/script>";
+  console.log(oBox.outerHTML);
+  //     如果想插入这段脚本，必须在前面添加一个有作用域的元素，可以是一个文本节点，也可以是一个没有结束标签的元素如<input>。
+  //     以下这三种方法都可以让页面弹出"hi";
+  oBox.innerHTML = "&nbsp;<script defer>alert('hi');<\/script>";
+  console.log(oBox.outerHTML);
+  oBox.innerHTML = "<div>&nbsp;</div><script defer>alert('hi');<\/script>";
+  console.log(oBox.outerHTML);
+  oBox.innerHTML = "<input type='hidden'><script defer>alert('hi');<\/script>";
+  console.log(oBox.outerHTML);
+  // 　　　　【<style>】
+  // 　　　　　大多数浏览器都支持以直观的方式通过innerHTML插入<script>标签
+  // IE8-浏览器无变化，其他浏览器背景变成红色
+  oBox.innerHTML = "<style type='text\/css'>body{background-color: red;}</style>";
+  //             由于IE8-浏览器中，<style>是一个没有作用域的元素，所以必须设置一个前置的作用域元素
+  oBox.innerHTML = "_<style type='text\/css'>body{background-color: red;}</style>";
+  console.log(oBox.outerHTML);
+  oBox.removeChild(oBox.firstChild);
+
+  // outerHTML
+  // 　　在读模式下outerHTML返回调用它的元素及所有子节点的HTML标签。
+  // 　　在写模式下，outerHTML会根据指定的HTML字符串创建新的DOM子树，然后用这个DOM子树完全替换调用元素。
+  console.log(oList.outerHTML); // IE8-浏览器会将所有标签转换成大写形式，且不包含空白文本节点
+  // 　　写模式下新创建的元素将取代本身
+  oBox.outerHTML = "<div></div>";
+  console.log(document.getElementById('box')); // null
+
+  // innerText
+  // 　　通过innerText属性可以操作元素中包含的所有文本内容，包括子文档树中的文本。
+  // 　　在通过innerText读取值时，它会按照由浅入深地顺序，将子文档树中的所有文本拼接起来。
+  // 　　在通过innerText写入值时，结果会删除元素的所有子节点，插入包含相应文本值的文本节点。(firefox不支持)
+  console.log(oList.innerHTML);
+  console.log(oList.innerText); // 除了firefox，其他浏览器都输出1 2
+  oList.innerText = "hello & welcome <b>reader</b>"; // 页面上显示hello & welcome <b>reader</b>
+  console.log(oList.innerText); // 除了firefox，其他浏览器都输出1 2
+
+  // outerText
+  // 　　除了作用范围扩大到了包含调用它的节点之外，outerText与innerText基本上没有多大区别，
+  // 　　在读取文本值时，outerText与innerText的结果完全一样，但在写模式下，outerText就完全不同了：
+  // 　　outerText不只是替换调用它的元素的子节点，而是会替换整个元素。(firefox不支持)
+  console.log(oList.outerText); //1 2
+  oList.outerText = "hello & welcome <b>reader</b>"; // 页面上显示hello & welcome <b>reader</b>
+  console.log(document.getElementById('list').nodeName); // null
+
+  // textContent
+  // 　　textContent属性与innerText属性类似。但实际上innerText与textContent返回的内容并不完全一样。
+  // 　　innerText会忽略行内的样式和脚本，而textContent则会像返回其他文本一样，返回行内的样式和脚本。
+  // 　　避免跨浏览器兼容的问题的最佳途径，就是从不包含行内样式或行内脚本的DOM子树副本或DOM片段中读取文本(IE8-浏览器不支持)
+  console.log(oList.textContent); //除了IE8-浏览器，其他浏览器都输出   1  2  3  4  5  6
+  oList.textContent = "hello & welcome <b>reader</b>"; // 页面上显示hello & welcome <b>reader</b>
+  console.log(oList.textContent); // hello & welcome <b>reader</b>
+
+  // 　　所以，innerText与textContent的兼容写法为：
+  // var oList = document.getElementById('list');
+
+  function getInnerText(element) {
+    return (typeof element.textContent == "string") ? element.textContent : element.innerText;
+  }
+
+  function setInnerText(element, text) {
+    if (typeof element.textContent == "string") {
+      element.textContent = text;
+    } else {
+      element.innerText = text;
+    }
+  }
+  console.log(getInnerText(oList)); //1 2
+  setInnerText(oList, "hello & welcome <b>reader</b>"); //页面上显示hello & welcome <b>reader</b>
+
+  // 内存与性能
+  // 　　当某个元素有一个事件处理程序，在使用某个属性将该元素从文档树中删除后，
+  // 　　元素与事件处理程序之间的绑定关系在内存中并没有一并删除，如果这种情况频繁出现，页面占用的内在数量就会明显增加。
+  // 　　因此，使用innerHTML、outerHTML属性时，最好先手工删除要被替换元素的所有事件处理程序和JavaScript对象属性。
+  // 最好将设置innerHTML或outerHTML的次数控制在合理的范围内。
+  // for (var i = 0, len = values.length; i < len; i++) {
+  //   //要避免这种频繁操作
+  //   ul.innerHTML += "<li>" + values[i] + "</li>";
+  // }
+  // 　　这种每次循环都设置一次innerHTML的做法效率很低，而且，每次循环还要从innerHTML中读取一次信息，
+  // 　　就意味着每次循环要访问两次innerHTML。最好的做法是单独构建字符串，然后再一次性地将字符串赋值给innerHTML。
+  // var itemsHtml = "";
+  // for (var i = 0, len = values.length; i < len; i++) {
+  //   itemsHtml += "<li>" + values[i] + "</li>";
+  // }
+  // //这种效率要高得多，因为它只对innerHTML执行了一次赋值操作。
+  // ul.innerHTML = itemsHtml;
+})();
+
+
+(function() {
+  console.log("\n---DOM样式操作");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom(
+    '<link rel="stylesheet" href="sheet1.css" media = "all" title="sheet1">' +
+    '<style>@import url(sheet2.css); body{height: 100px; border: 10px solid black;}</style>' +
+    '<style>.box{font: 12px/20px "宋体";height: 20px !important;}' +
+    'a{display: inline-block; height: 100px; width: 100px; background: blue; color: white; border: 1px solid black;}' +
+    'a:after{content:"伪元素"; color: orange;}' +
+    '</style>' +
+    '<div class="box" id="box" style="background-color: red;height: 100px; width: 100px;">123</div>' +
+    '<a class="link" id="link">link</a>');
+  var window = document.defaultView;
+
+  // 元素style属性的定义
+  // 　　任何支持style特性的HTML元素在JavaScript中都有一个对应的style属性。
+  // 　　这个style对象是cssStyleDeclaration的实例，包含着通过HTML的style特性指定的所有样式信息，
+  // 　　但不包含与外部样式表或嵌入样式表经层叠而来的样式。
+  // 　　在style特性中指定的任何 CSS属性都将表现为这个style对象的相应属性。
+  // 　　对于使用中划线的CSS属性名，必须将其转换成驼峰大小写形式，才能通过JavaScript访问。
+  // 　　多数情况下都可以通过简单地转换属性名的格式来实现，但其中一个不能直接转换的CSS属性是float。
+  // 　　因为，float是JavaScript中的保留字，不能用作属性名。
+  // 　　[注意]IE8-浏览器不支持属性名cssFloat,IE浏览器支持属性styleFloat,所有浏览器都支持float属性
+  var oBox = document.getElementById('box');
+  // IE8-浏览器不支持该属性
+  oBox.style.cssFloat = 'right';
+  console.log(oBox.outerHTML);
+  // 所有浏览器都兼容
+  oBox.style.float = 'left';
+  console.log(oBox.outerHTML);
+  // IE浏览器支持该属性 jsDom不支持
+  oBox.style.styleFloat = 'right';
+  console.log(oBox.outerHTML);
+
+  // 元素style属性的属性和方法
+  // 　　【cssText】
+  // 　　cssText:通过它能够访问到style特性中的CSS代码。
+  // 　　在读模式下，cssText返回浏览器对style特性中CSS代码的内部表示；在写模式中，赋给cssText的值会重写整个style特性的值。
+  // 　　设置cssText是为元素应用多项变化最快捷的方法，因为可以一次性应用所有变化。(可读写)
+  console.log(oBox.style.cssText); // background-color: red; height: 100px; width: 100px; float: left;
+  document.onclick = function() {
+    oBox.style.cssText = "height:40px; width:40px; background-color:blue;";
+  };
+
+  //     【item()】
+  // 　　　　item():返回给定位置的CSS属性的名称，也可以使用方括号语法。
+  // 　　【length】
+  // 　　　　length:应用给元素的CSS属性的数量。设计length属性的目的是将其与item()方法配套使用，以便迭代在元素中定义的CSS属性。
+  // 　　　　在使用length和item()时，style对象实际上就相当于一个集合(IE8-不支持)
+  // 　　【getPropertyValue】
+  // 　　　　getPropertyValue():返回给定属性的字符串值(IE8-不支持)
+  // 　　【getPropertyPriority()】
+  // 　　　　getPropertyPriority():如果给定的属性使用了!important设置，则返回"important";否则返回空字符串(IE8-不支持)
+  // IE8-浏览器输出undefined,其他浏览器输出3
+  console.log(oBox.style.length); //3
+  // IE9+浏览器输出width，IE8-浏览器输出大写的WIDTH，其他浏览器输出height
+  console.log(oBox.style[0]);
+  // IE8-浏览器不支持，其他浏览器输出100px
+  console.log(oBox.style.getPropertyValue(oBox.style[0]));
+  // IE8-浏览器不支持，其他浏览器输出空字符串
+  console.log(oBox.style.getPropertyPriority('height'));
+  // IE8-浏览器不支持，其他浏览器输出important
+  console.log(oBox.style.getPropertyPriority('width'));
+
+  //     【getPropertyCSSValue()】
+  // 　　　　getPropertyCSSValue():返回包含两个属性的CSSRule类型，这两个属性分别是cssText和cssValueType。
+  // 　　　　其中cssText属性的值与getPropertyValue()返回的值相同，而cssValueType属性则是一个数值常量，
+  // 　　　　表示值的类型：0表示继承的值，1表示基本的值，2表示值列表，3表示自定义的值。(只有safari支持)
+  // 　　【parentRule】
+  // 　　　　parentRule:表示CSS信息的CSSRule对象(IE不支持)
+  //只有safari支持，返回一个CSSValue对象，firefox返回null，其他浏览器报错
+  if (typeof oBox.style.getPropertyCSSValue == "function" && oBox.style.getPropertyCSSValue(oBox.style[0]) != null) {
+    console.log(oBox.style.getPropertyCSSValue(oBox.style[0]));
+    for (var i = 0, len = oBox.style.length; i < len; i++) {
+      var prop = oBox.style[i];
+      var value = oBox.style.getPropertyCSSValue(prop);
+      //height:100px(1) background-color:red(1) width:100px(1)
+      console.log(prop + ":" + value.cssText + "(" + value.cssValueType + ")");
+    }
+  }
+  //IE浏览器返回undefined，其他浏览器返回null
+  console.log(oBox.style.parentRule);
+
+  //    【removeProperty()】
+  // 　　　　removeProperty():从样式中删除给定属性，并返回被删除属性的属性值(IE8-不支持)
+  // 　　【setProperty()】
+  // 　　　　setProperty(propertyName,value,priority):将给定属性设置为相应的值，
+  // 　　　　并加上优先权标志("important"或一个空字符串)(IE8-不支持)
+  console.log(oBox.style.cssText); //width: 100px !important; height: 100px; background-color: red;
+  //IE8-浏览器不支持，其他浏览器返回100px
+  console.log(oBox.style.removeProperty('height'));
+  console.log(oBox.style.cssText); //width: 100px !important; background-color: red;
+  //IE8-浏览器不支持，其他浏览器返回undefined
+  console.log(oBox.style.setProperty('width', '20px', ''));
+  console.log(oBox.style.cssText); //width: 20px; background-color: red;
+  //IE8-浏览器不支持，其他浏览器返回undefined
+  console.log(oBox.style.setProperty('background-color', 'blue', 'important'));
+  console.log(oBox.style.cssText); //background-color: blue ! important; width: 20px;
+
+  // 计算的样式
+  // 　　【getComputedStyle()】
+  // 　　　　getComputedStyle()方法接收两个参数：要取得计算样式的元素和一个伪元素字符串。
+  // 　　　　如果不需要伪元素信息，第二个参数可以是null。getComputedStyle()方法返回一个CSSStyleDeclaration对象，
+  // 　　　　其中包含当前元素的所有计算的样式(IE8-浏览器不支持)
+  // 　　　　[注意1]对于font/background/border等复合样式，各浏览器处理不一样。
+  // 　　　　      chrome和opera会返回整个复合样式，而IE9+、firefox和safari则什么都不输出
+  // 　　　　[注意2]不论以什么格式设置颜色，浏览器都以rgb()或rgba()的形式输出
+  // 　　　　[注意3]所有计算的样式都是只读的，不能修改计算后样式对象中的CSS属性
+  // 　　　　[注意4]若不需要伪元素信息，该方法有多种省略写法，以获取div的width信息为例
+  // 　　　　　　[a]document.defaultView.getComputedStyle(div,null).width
+  // 　　　　　　[b]document.defaultView.getComputedStyle(div).width
+  // 　　　　　　[c]window.getComputedStyle(div).width
+  // 　　　　　　[d]getComputedStyle(div).width(这种写法最简单)
+  var oLink = document.getElementById("link");
+  //IE8-浏览器不支持
+  console.log(window.getComputedStyle(oBox, null).height); //20px
+  //(chrome/opera)normal normal normal normal 12px / 20px 宋体
+  //(IE9+/safari/firefox)什么都没输出
+  console.log(document.defaultView.getComputedStyle(oBox, null).font);
+  //(chrome/opera)1px solid rgb(0, 0, 0)
+  //(IE9+/safari/firefox)什么都没输出
+  console.log(window.getComputedStyle(oLink).border);
+  //(chrome/opera)rgb(0, 0, 255) none repeat scroll 0% 0% / auto padding-box border-box
+  //(IE9+/safari/firefox)什么都没输出
+  console.log(window.getComputedStyle(oLink).background);
+  //所有浏览器都输出rgb(255, 165, 0)
+  console.log(window.getComputedStyle(oLink, ":after").color);
+  //所有浏览器都输出visible
+  console.log(window.getComputedStyle(oLink, ":after").visibility);
+  //该方法只读不可写，如强行写值会报错
+  //getComputedStyle(oLink,":after").visibility = "hidden";
+
+  // 【currentStyle】
+  // 　　　　虽然IE8-浏览器不支持getComputedStyle()方法，但在IE中每个具有style属性的元素还有一个currentStyle属性，
+  // 　　　　这个属性是CSSStyleDeclaration的实例，包含当前元素全部计算后的样式。
+  // console.log(oBox.currentStyle.height); // 20px
+  //IE8-浏览器输出undefined，而IE9+浏览器什么都不输出
+  // console.log(oBox.currentStyle.font);
+  // console.log(oBox.currentStyle.position); // static
+  // 　　兼容写法如下：
+  function getCSS(obj, style) {
+    if (window.getComputedStyle) {
+      return window.getComputedStyle(obj)[style];
+    }
+    return obj.currentStyle[style];
+  }
+  console.log(getCSS(oBox, "height")); // 20px
+
+  // 操作样式表CSSStyleSheet　　　
+  // 　　CSSStyleSheet类型表示的是样式表，包括通过<link>元素包含的样式表和在<style>元素中定义的样式表。
+  // 　　CSSStyleSheet对象是只读的(属性disabled例外)。
+  // 【继承属性】
+  // 　　【length】
+  // 　　　　表示有多少样式表，外部样式表中一个<link>算一个，内部样式表中一个<style></style>算一个。
+  // 　　【item()】
+  // 　　　　表示第几个样式表，也可以使用方括号法。item()方法中序号的顺序与在解析页面的顺序一致
+  // 　　【href】
+  // 　　　　如果样式表是通过<link>包含的外部样式表，则表示样式表的URL,否则为null
+  // 　　【disabled】
+  // 　　　　表示样式表是否被禁用的布尔值。这个属性值可读写，将这个值设置为true则可以禁用样式表
+  // 　　【media】
+  // 　　　　表示当前样式表支持的所有媒体类型的集合,在IE8-浏览器中输出media特性值的字符串
+  // 　　【ownerNode】(IE8-不支持)
+  // 　　　　表示拥有当前样式表的指针，返回<link>或<style>元素对象
+  // 　　【parentStyleSheet】
+  // 　　　　在当前样式表是通过@import导入的情况下，这个属性是一个指向导入它的样式表的指针，否则为null
+  // 　　【title】
+  // 　　　　ownerNode中title属性的值
+  // 　　【type】(IE8-不支持)
+  // 　　　　表示样式表类型的字符串，对于CSS样式表而言，这个字符串是"text/css"
+  //因为有外部和内部样式表各1个，所以结果为2
+  console.log(document.styleSheets.length); // 2
+  //因为<link>标签在<style>标签上面，所以外部样式表为第0个
+  var oOut = document.styleSheets.item(0);
+  //内部样式表为第1个
+  var oIn = document.styleSheets[1];
+  //disabled属性默认为false
+  console.log(oOut.disabled); //false
+  //若设置disabled为true,则禁用样式表
+  console.log(oOut.disabled = true); //true
+  //外部样式表显示URL
+  console.log(oOut.href); //sheet1.css
+  //IE8-浏览器什么都不输出，其他浏览器输出null
+  console.log(oIn.href); //null
+  //IE8-浏览器输出字符串"all"，其他浏览器输出一个MediaList对象，第0项为all
+  console.log(oOut.media);
+  //IE8-浏览器什么都不输出，其他浏览器输出一个MediaList对象，第0项为undifined
+  console.log(oIn.media);
+  //IE8-返回undefined，其他浏览器输出<link>
+  console.log(oOut.ownerNode);
+  //IE8-返回undefined，其他浏览器输出<style>
+  console.log(oIn.ownerNode);
+  //null
+  console.log(oOut.parentStyleSheet);
+  //null
+  console.log(oIn.parentStyleSheet);
+  //sheet1
+  console.log(oOut.title);
+  //IE浏览器什么都不输出，其他浏览器输出null
+  console.log(oIn.title);
+  //text/css,IE8-浏览器下什么都不输出
+  console.log(oOut.type);
+  //text/css,IE8-浏览器下什么都不输出
+  console.log(oIn.type);
+
+  // 【自有属性和方法】
+  // 　　【cssRules】(IE8-浏览器不支持)
+  // 　　　　表示样式表中包含的样式规则的集合
+  // 　　【rules】(firefox不支持)
+  // 　　　　表示样式表中包含折样式规则的集合
+  // 　　　　[注意]对于rules属性IE8-浏览器不识别@import
+  // 　　兼容写法如下:
+  function rules(sheet) {
+    return sheet.cssRules || sheet.rules;
+  }
+  // 【ownerRule】(IE8-浏览器不支持)
+  // 　　　　如果样式表是通过@import导入的，这个属性就是一个指针，指向表示导入的规则；否则为null
+  // 　　【deleteRule()】(IE8-浏览器不支持)
+  // 　　　　deleteRule(index)方法删除cssRules集合中指定位置的规则,无返回值
+  // 　　【removeRule()】(firefox不支持)
+  // 　　　　removeRule(index)方法删除cssRules集合中指定位置的规则,无返回值
+  // 　　兼容写法如下:
+  function deleteRule(sheet, index) {
+    return (typeof sheet.deleteRule == "function") ? sheet.deleteRule(index) : sheet.removeRule(index);
+  }
+  // 【insertRule()】(IE8-浏览器不支持)
+  // 　　　　insertRule(rule,index)方法表示向cssRules集合中指定的位置插入rule字符串，并返回当前样式表的索引值
+  // 　　【addRule()】(firefox不支持)
+  // 　　　　addRule(ruleKey,ruleValue,index)方法表示向cssRules集合中指定的位置插入rule字符串，并返回-1
+  // 　　兼容写法如下:
+  function insertRule(sheet, ruleKey, ruleValue, index) {
+    return sheet.insertRule ? sheet.insertRule(ruleKey + '{' + ruleValue + '}', index) : sheet.addRule(ruleKey, ruleValue, index);
+  }
+  // //因为有外部和内部样式表各1个，所以结果为2
+  // console.log(document.styleSheets.length);//2
+  // //因为<link>标签在<style>标签上面，所以外部样式表为第0个
+  // oOut = document.styleSheets.item(0);
+  // //内部样式表为第1个
+  // oIn = document.styleSheets[1];
+  // //null
+  // console.log(oOut.cssRules);
+  // //返回一个CSSRuleList对象
+  // console.log(oIn.cssRules);
+  // //null
+  // console.log(oOut.rules);
+  // //返回一个CSSRuleList对象
+  // console.log(oIn.rules);
+  // //null
+  // console.log(oOut.ownerRule);
+  // //null
+  // console.log(oIn.ownerRule);
+  // //undefined
+  // //console.log(oOut.deleteRule(0));
+  // //undefined
+  // //console.log(oIn.deleteRule(1));
+  // //undefined
+  // //console.log(oOut.removeRule(0));
+  // //undefined
+  // //console.log(oIn.removeRule(0));
+  // //0
+  // console.log(oOut.insertRule("body{margin: 20px}",0));
+  // //1
+  // console.log(oIn.insertRule("body{margin: 20px}",1));
+  // //-1
+  // console.log(oOut.addRule('body',"margin: 30px"));
+  // //-1
+  // console.log(oIn.addRule('body','margin: 30px'));
+
+  // CSSStyleSheet对象
+  // 　　【sheet】(IE8-不支持)
+  // 　　　　<link>元素对象和<style>元素对象都有一个sheet属性，保存着与document.styleSheets集合中的样式表相同的对象
+  // 　　【styleSheet】(IE10-支持)
+  // 　　　　<link>元素对象和<style>元素对象都有一个styleSheet属性，保存着与document.styleSheets集合中的样式表相同的对象
+  // 　　兼容写法为:
+  function getSheet(element) {
+    return element.sheet || element.styleSheet;
+  }
+  oOut = document.styleSheets[0];
+  oIn = document.styleSheets[1];
+  oLink = document.getElementsByTagName('link')[0];
+  var oStyle = document.getElementsByTagName('style')[0];
+
+  function getSheet2(element) {
+    return element.sheet || element.styleSheet;
+  }
+  //CSSStyleSheet {} true
+  console.log(getSheet2(oLink), getSheet2(oLink) == oOut);
+  //CSSStyleSheet {} true
+  console.log(getSheet2(oStyle), getSheet2(oStyle) == oIn);
+
+  // CSSStyleRule对象
+  // 　　CSSRule对象表示样式表中的每一条规则。实际上，CSSRule是一个供其他多种类型继承的基类型，
+  // 　　其中最常见的就是CSSStyleRule类型，表示样式信息。CSSStyleRule对象包含下列属性。
+  // 　　【selectorText】
+  // 　　　　返回当前规则的选择符文本
+  // 　　【style】
+  // 　　　　一个CSSStyleDeclaration对象，通过它设置和取得规则中特定的样式值
+  // 　　【cssText】(IE8-不支持)
+  // 　　　　返回整条规则对应的文本。该cssText属性与style.cssText属性相似，但不相同。
+  // 　　　　前者包含选择符文本和围绕样式信息的花括号，而后者只包含样式信息，类似于元素的style.cssText
+  // 　　【parentRule】(IE8-不支持)
+  // 　　　　如果当前规则是导入的规则，这个属性引用的就是导入规则；否则，这个值为null
+  // 　　【parentStyleSheet】(IE8-不支持)
+  // 　　　　当前规则所属的样式表
+  // 　　【type】(IE8-不支持)
+  // 　　　　表示规则类型的常量值，对于样式规则，这个值是1。
+  oOut = document.styleSheets[0];
+  oIn = document.styleSheets[1];
+  oLink = document.getElementsByTagName('link')[0];
+  oStyle = document.getElementsByTagName('style')[0];
+
+  function rules2(sheet) {
+    return sheet.cssRules || sheet.rules;
+  }
+  //取得内部样式表CSSStyleRule对象
+  var oInRule = rules2(oIn)[1] || rules2(oIn)[0];
+  //body
+  console.log(oInRule.selectorText);
+  //body { height: 100px; border: 10px solid black; },IE8-浏览器返回undefined
+  console.log(oInRule.cssText);
+  //height: 100px; border: 10px solid black;IE8-浏览器输出的样式名为大写，且复合属性被拆分。
+  console.log(oInRule.style.cssText);
+  //null,IE8-浏览器返回undefined
+  console.log(oInRule.parentRule);
+  //CSSStyleSheet对象,IE8-浏览器返回undefined
+  console.log(oInRule.parentStyleSheet);
+  //1,IE8-浏览器返回undefined
+  console.log(oInRule.type);
+  //CSSStyleDeclaration对象
+  console.log(oInRule.style);
+  console.log(oInRule.style.border); //10px solid black
+  console.log(oInRule.style.height); //100px
+  oInRule.style.height = "200px";
+
+})();
+
+(function() {
+  console.log("\n---引入CSS");
+
+  var jsdom = require("jsdom").jsdom;
+  var document = jsdom(
+    '<link rel="stylesheet" href="sheet1.css">' +
+    '<link rel="alternate stylesheet" type="text/css" href="sheet2.css" title="sheet2"/>');
+  var window = document.defaultView;
+
+  // 引入CSS
+  // 前面的话
+  // 　　Web早期，HTML是一种很有限的语言，这种语言不关心外观，它只是一种简洁的小型标记机制。
+  // 　　随着Mosaic网页浏览器的出现，网站开始到处涌现。对于页面改变外观的需求增加，于是增加了类似<font>和<big>之类的标记元素。
+  // 　　几年之后，大多数网站标记几乎完全由表格和font元素组成，且对于所要表现的内容不能传达任何实际含义，使文档可用性降低，且不易于维护。
+  // 　　于是1995年，W3C发布了CSS，试图解决结构与样式混杂的问题。
+
+  // 外部样式表
+  // 　　【使用link标记】
+  // 　　　　在link标记中rel和href属性是必须的，type属性和media属性可省略
+  // 　　　　<link rel="stylesheet" type="text/css" href="sheet1.css" media="all" />
+  　　　　
+  // 　　　　[注意]样式表中不能包含HTML标记语言，只能有CSS规则和CSS注释
+  /*若CSS文件中存在除了CSS样式和CSS注释的其他标记，则会导致在该标记后面的CSS样式将无法被识别*/
+
+  // 【多个样式表】
+  // 　　　　一个文档可能关联多个样式表，如果是这样，文档最初显示时只会使用rel为stylesheet的link标记　　
+  // 　　　　　　<link rel="stylesheet" href="sheet1.css" />
+  // 　　　　　　<link rel="stylesheet" href="sheet2.css" />
+
+  // 【候选样式表】　　
+  // 　　　　将rel属性的设置为alternate stylesheet可以定义候选样式表，只有在用户选择这个样式表时才会用于文档表现。
+  // 　　　　如果浏览器能使用候选样式表，它会使用link元素的title属性值生成一个候选样式列表，
+  // 　　　　可在菜单栏中查看->样式中进行选择。(IE和firefox支持)
+  // 　　　　[注意]若一个候选样式表没有设置title，那么它将无法在候选样式列表中出现，则无法被引用　
+  // 　　　　<link rel="stylesheet" type="text/css" href="sheet1.css" />
+  // 　　　　<link rel="alternate stylesheet" type="text/css" href="sheet2.css" title="sheet2"/>
+
+  // 内部样式表
+  // 　　【使用style元素】
+  // 　　　　内部样式表需要使用<style>元素包含样式表，它在文档中单独出现。
+
+  // 【多个style标签】
+  // 　　　　文档中可出现多个style标签，且样式规则与层叠样式规则一致
+
+  // 【使用@import指令】
+  // 　　　　与link类似，@import指令用于指示Web浏览器加载一个外部样式表，并在表现HTML文档时使用其样式。
+  // 　　　　唯一的区别在于命令的具体语法和位置。@import指令常用于样式表需要使用另一个样式表中的样式的情况。
+
+  // 　　　[注意]@import必须出现在style元素中，且要放在其他CSS规则之前，否则将根本不起作用。
+
+  // 【多个@import指令】
+  // 　　　　可以使用@import指令导入多个CSS样式表，且可以使用media来限制应用场景。
+
+  // 行间样式(内联样式)
+  // 　　如果只是想为单个元素指定一些样式，而不需要嵌套或外部样式表，可以使用HTML的style属性来设置一个行间样式。
+
+  // 　　[注意]行间样式若存在多个style属性，只能识别第一个
 
 })();
 
@@ -1156,6 +2150,7 @@
 
 
 })();
+
 
 (function() {
   console.log("\n---");
