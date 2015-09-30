@@ -5,6 +5,8 @@
   "main": "node-demo.js",
   "dependencies": {
     "commander": "^2.8.1",
+    "jsonstream": "^1.0.3",
+    "request": "^2.64.0",
     "soap": "^0.9.4"
   },
   "devDependencies": {},
