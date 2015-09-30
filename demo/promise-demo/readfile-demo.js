@@ -56,8 +56,8 @@ module.exports = function(){
       if (err) {
         reject(err);
       } else {
-        resolve(data)
+        resolve(data);
       }
     });
   });
-}
+};

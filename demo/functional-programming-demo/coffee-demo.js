@@ -74,16 +74,16 @@ var decaf = function(){
 };
 // 为每种size通过字面量创建对象
 var small = {
- getPrice: function(){return this.basePrice + 2},
- getLabel: function(){return this.name + ' small'}
+ getPrice: function(){return this.basePrice + 2;},
+ getLabel: function(){return this.name + ' small';}
 };
 var medium = {
-  getPrice: function(){return this.basePrice + 4},
-  getLabel: function(){return this.name + ' medium'}
+  getPrice: function(){return this.basePrice + 4;},
+  getLabel: function(){return this.name + ' medium';}
 };
 var large = {
-  getPrice: function(){return this.basePrice + 6},
-  getLabel: function(){return this.name + ' large'}
+  getPrice: function(){return this.basePrice + 6;},
+  getLabel: function(){return this.name + ' large';}
 };
 
 var plusMixin = function(current, mixin) {
@@ -96,7 +96,7 @@ var plusMixin = function(current, mixin) {
     }
   }
   return newObj;
-}
+};
 
 // 将所有咖啡的种类和size放到数组里
 var coffeeTypes = [columbian, frenchRoast, decaf];
@@ -122,8 +122,8 @@ var peruvian = function(){
   this.basePrice = 11;
 };
 var extraLarge = {
-  getPrice: function(){return this.basePrice + 10},
-  getLabel: function(){return this.name + ' extra large'}
+  getPrice: function(){return this.basePrice + 10;},
+  getLabel: function(){return this.name + ' extra large';}
 };
 coffeeTypes.push(peruvian);
 coffeeSizes.push(extraLarge);

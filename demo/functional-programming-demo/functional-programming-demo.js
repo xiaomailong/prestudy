@@ -31,7 +31,7 @@ var fn = require('fn.js');
       }
     }
     return merged;
-  };
+  }
 
   // 现在使用函数式技术，可以写成这样：
   // merge2dArrayIntoOne2 = (arrays) ->
@@ -67,7 +67,7 @@ var fn = require('fn.js');
     } else {
       return fibonacci(n - 2) + fibonacci(n - 1);
     }
-  }
+  };
   console.log(fibonacci(8));                    // Output: 34
 
   // 然而，在一个懒执行函数库的辅助下，可以生成一个无穷大的序列，它是通过数学方程来定义整个序列的成员的。
@@ -156,7 +156,7 @@ var fn = require('fn.js');
 // 这些都是与this关键词有关的，当然this指的是函数所属的那个对象。
 
 // call()函数把第一个参数作为this关键字。它是这样工作的：
-console.log(['Hello', 'world'].join(' ')) // 正常方式
+console.log(['Hello', 'world'].join(' ')); // 正常方式
 console.log(Array.prototype.join.call(['Hello', 'world'], ' ')); //使用call
 
 // call()函数可以唤起匿名函数：
@@ -191,7 +191,7 @@ function Drum() {
   this.noise = 'boom';
   this.duration = 1000;
   this.goBoom = function() {
-    console.log(this.noise)
+    console.log(this.noise);
   };
 }
 var drum = new Drum();
@@ -387,11 +387,11 @@ Function.prototype.compose = function(prevFunc) {
   var nextFunc = this;
   return function() {
     return nextFunc.call(this, prevFunc.apply(this, arguments));
-  }
-}
-var roundedSqrt = Math.round.compose(Math.sqrt)
+  };
+};
+var roundedSqrt = Math.round.compose(Math.sqrt);
 console.log(roundedSqrt(17));                      // Returns: 4
-var squaredDate =  roundedSqrt.compose(Date.parse)
+var squaredDate =  roundedSqrt.compose(Date.parse);
 console.log(squaredDate("January 1, 2014"));      // Returns: 1178370 1178349
 function function1(a){
   return a + ' 1';
@@ -411,8 +411,8 @@ Function.prototype.sequence = function(prevFunc) {
   var nextFunc = this;
   return function() {
     return prevFunc.call(this, nextFunc.apply(this, arguments));
-  }
-}
+  };
+};
 var sequences = function3.sequence(function2).sequence(function1);
 console.log(sequences('count')); // returns 'count 3 2 1'
 
@@ -454,12 +454,12 @@ console.log(floorSqrt5(17));
 // 但是，在Javascript里，我们只能把了性签名放在代码注释里。
 // getStringLength :: String -> Int
 function getStringLength(s){
-  return s.length
-};
+  return s.length;
+}
 // concatDates :: Date -> Date -> [Date]
 function concatDates(d1, d2){
-  return [d1, d2]
-};
+  return [d1, d2];
+}
 // pureFunc :: (int -> Bool) -> [int] -> [int]
 function pureFunc(func, arr){
   return arr.filter(func);
@@ -487,7 +487,7 @@ function previousChar(c) {
 function higherColorHex(c) {
   return c >= 'f' ? 'f' :
     c == '9' ? 'a' :
-    nextChar(c)
+    nextChar(c);
 }
 // lowerColorHex :: Char -> Char
 function lowerColorHex(c) {

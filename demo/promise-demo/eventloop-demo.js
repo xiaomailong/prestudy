@@ -12,7 +12,7 @@ MyEmitter.prototype.doStuff = function() {
   console.log('---before');
   this.emit('fire');
   console.log('---after');
-}
+};
 var me = new MyEmitter();
 me.on('fire', function(){
   console.log('---emit fired');
