@@ -138,7 +138,7 @@
     }
   });
   book.year = 2015;
-  console.log(book.year) // 2015
+  console.log(book.year); // 2015
   console.log(book.edition); // 12
 })();
 
@@ -155,7 +155,7 @@
     },
   });
   book.year = 2005;
-  console.log(book.year) // 2004
+  console.log(book.year); // 2004
 })();
 
 // 　　  [注意2]只指定setter意味着属性不能读
@@ -264,7 +264,7 @@
 // 输出对象及其原型链
 function printChain(object) {
   var protoChain = [object];
-  while (object = object.prototype) {
+  while (object == object.prototype) {
     if (object != Object.prototype) {
       protoChain.push(object);
     }
@@ -414,7 +414,7 @@ function printChain(object) {
 (function() {
   console.log("\n---【5.2】解决enumerable问题的原型模式");
 
-  function Person() {};
+  function Person() {}
   Person.prototype = {
     name: "Nicholas",
     age: 29,
@@ -494,7 +494,7 @@ function printChain(object) {
     sayName: function() {
       console.log(this.name);
     }
-  }
+  };
   var person1 = new Person("Nicholas", 29, "Software Engineer");
   var person2 = new Person("Greg", 27, "Doctor");
   person1.friends.push("Van");
@@ -843,7 +843,7 @@ function printChain(object) {
   console.log("\n---4】【原型式继承】");
 
   function object(o) {
-    function F() {};
+    function F() {}
     F.prototype = o;
     return new F();
   }
@@ -872,7 +872,7 @@ function printChain(object) {
   console.log("\n---【4.1】【Object.create()方法】");
 
   function object(o) {
-    function F() {};
+    function F() {}
     F.prototype = o;
     return new F();
   }
@@ -923,7 +923,7 @@ function printChain(object) {
         if (o === null) {
           throw Error("Cannot set a null [[Prototype]]");
         }
-        if ('Object' != (typeof o)) {
+        if ('Object' !== (typeof o)) {
           throw TypeError("Arguments must be an object");
         }
         F.prototype = o;
@@ -939,7 +939,7 @@ function printChain(object) {
   console.log("\n---【5】【寄生式继承】");
 
   function object(o) {
-    function F() {};
+    function F() {}
     F.prototype = o;
     return new F();
   }
@@ -969,7 +969,7 @@ function printChain(object) {
   // 这个例子中的高效率体现在它只调用了一次Super构造函数，并且因此避免了在SubType.prototype上面创建不必要的、多余的属性。
   // 与此同时，原型链还能保持不变。
   function object(o) {
-    function F() {};
+    function F() {}
     F.prototype = o;
     return new F();
   }
@@ -1175,7 +1175,7 @@ this.a = 50000;
       console.log(this.name);
     }
   };
-  a.fn; // 20000[匿名函数中的this指向全局对象]
+  a.fn(); // 20000[匿名函数中的this指向全局对象]
   a.fn1(); // 30000[对象内部函数的this指向调用函数的当前对象]
   console.log(a);
 })();
@@ -1401,7 +1401,7 @@ this.a = 50000;
   var p1 = new Person();
   p1.name = "Rob";
   p1.age = 31;
-  var keys = Object.keys(Person.prototype);
+  keys = Object.keys(Person.prototype);
   console.log(keys); // ["name","age","job","sayName"]
   var p1Keys = Object.keys(p1);
   console.log(p1Keys); // ["name","age"]
@@ -1423,7 +1423,7 @@ this.a = 50000;
   var keys = Object.getOwnPropertyNames(Person.prototype);
   console.log(keys); // ["constructor"]
   var p1 = new Person();
-  var keys = Object.getOwnPropertyNames(Person.prototype);
+  keys = Object.getOwnPropertyNames(Person.prototype);
   console.log(keys); // ["constructor", "name", "age", "job", "sayName"]
 })();
 

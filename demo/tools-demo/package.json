@@ -1,0 +1,19 @@
+{
+  "name": "tools-demo",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bolik@163.com",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.4.2",
+    "baconjs": "^0.7.75",
+    "clipboard": "^1.4.0",
+    "highland": "^2.5.1",
+    "rx": "^4.0.1",
+    "rx-node": "^1.0.1"
+  }
+}

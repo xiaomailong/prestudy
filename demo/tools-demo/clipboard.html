@@ -1,0 +1,54 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>clipboard.js &mdash; Copy to clipboard without Flash</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Copy text to the clipboard shouldn't be hard. It shouldn't require dozens of steps to configure or hundreds of KBs to load. But most of all, it shouldn't depend on Flash or any bloated framework. That's why clipboard.js exists.">
+
+  <meta property="og:title" content="clipboard.js">
+  <meta property="og:description" content="A modern approach to copy text to clipboard. No Flash. No dependencies. Just 2kb">
+  <meta property="og:url" content="https://zenorocha.github.io/clipboard.js/">
+  <meta property="og:image" content="https://zenorocha.github.io/clipboard.js/assets/images/facebook.png">
+
+</head>
+
+<body>
+  <input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
+  <button class="btn" data-clipboard-target="#foo">
+    Copy to clipboard
+  </button>
+  <br/>
+  <br/>
+  <br/>
+
+  <textarea id="bar">Mussum ipsum cacilds...</textarea>
+  <button class="btn" data-clipboard-action="cut" data-clipboard-target="#bar">
+    Cut to clipboard
+  </button>
+  <br/>
+  <br/>
+  <br/>
+
+  <button class="btn" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
+    Copy to clipboard
+  </button>
+
+  <script src="node_modules/clipboard/dist/clipboard.min.js"></script>
+  <script type="text/javascript">
+    var clipboard = new Clipboard('.btn');
+
+    clipboard.on('success', function(e) {
+      console.info('Action:', e.action);
+      console.info('Text:', e.text);
+      console.info('Trigger:', e.trigger);
+
+      e.clearSelection();
+    });
+
+    clipboard.on('error', function(e) {
+      console.error('Action:', e.action);
+      console.error('Trigger:', e.trigger);
+    });
+  </script>
+</body>
