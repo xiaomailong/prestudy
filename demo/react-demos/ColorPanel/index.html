@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel='stylesheet' href='css/style.css' type='text/css' />
+  <script src="../build/react.js"></script>
+  <script src="../build/JSXTransformer.js"></script>
+</head>
+
+<body>
+  <script type="text/jsx" src="jsx/colorBar.jsx"></script>
+  <script type="text/jsx" src="jsx/colorDisplay.jsx"></script>
+  <script type="text/jsx" src="jsx/colorPanel.jsx"></script>
+  <div id="example"></div>
+  <script type="text/jsx">
+    React.render(
+    <ColorPanel/>, document.getElementById('example'));
+  </script>
+</body>
+
+</html>

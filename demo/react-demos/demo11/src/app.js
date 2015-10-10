@@ -6,19 +6,19 @@ module.exports = React.createClass({
     return {
       items: this.props.items,
       disabled: true
-    }
+    };
   },
 
   componentDidMount: function() {
     this.setState({
       disabled: false
-    })
+    });
   },
 
   handleClick: function() {
     this.setState({
       items: this.state.items.concat('Item ' + this.state.items.length)
-    })
+    });
   },
 
   render: function() {
