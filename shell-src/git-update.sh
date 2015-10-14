@@ -62,6 +62,14 @@ echo "Tools 相关开源项目新"
 if [ ! -d "/Users/Bolik/OpenSource/Tools" ]; then
 mkdir "/Users/Bolik/OpenSource/Tools"
 fi
+# amphtml
+if [ -d "/Users/Bolik/OpenSource/Tools/amphtml" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/amphtml"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/ampproject/amphtml.git"
+fi
 # google-hosts
 if [ -d "/Users/Bolik/OpenSource/Tools/google-hosts" ]; then
   cd "/Users/Bolik/OpenSource/Tools/google-hosts"
@@ -88,10 +96,10 @@ else
 fi
 # jekyll
 if [ -d "/Users/Bolik/OpenSource/Tools/jekyll" ]; then
-  cd "/Users/Bolik/OpenSource/Tools/"
+  cd "/Users/Bolik/OpenSource/Tools/jekyll"
   git pull
 else
-  cd "/Users/Bolik/OpenSource/Tools/jekyll"
+  cd "/Users/Bolik/OpenSource/Tools/"
   git clone "git://github.com/jekyll/jekyll.git"
 fi
 # jekyll-bootstrap
@@ -109,6 +117,14 @@ if [ -d "/Users/Bolik/OpenSource/Tools/kramdown" ]; then
 else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "git://github.com/gettalong/kramdown.git"
+fi
+# stackedit
+if [ -d "/Users/Bolik/OpenSource/Tools/stackedit" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/stackedit"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/benweet/stackedit.git"
 fi
 
 echo "Cpp 相关开源项目新"

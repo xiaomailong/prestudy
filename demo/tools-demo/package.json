@@ -13,8 +13,11 @@
     "baconjs": "^0.7.75",
     "clipboard": "^1.4.0",
     "highland": "^2.5.1",
+    "jquery": "^2.1.4",
     "mditor": "^0.1.1",
     "rx": "^4.0.1",
-    "rx-node": "^1.0.1"
+    "rx-node": "^1.0.1",
+    "smartcrop": "0.0.1",
+    "underscore": "^1.8.3"
   }
 }
