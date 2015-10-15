@@ -127,6 +127,27 @@ else
   git clone "https://github.com/benweet/stackedit.git"
 fi
 
+echo "Web 相关开源项目更新"
+if [ ! -d "/Users/Bolik/OpenSource/Web" ]; then
+mkdir "/Users/Bolik/OpenSource/Web"
+fi
+# 18F Pages
+if [ -d "/Users/Bolik/OpenSource/Web/pages" ]; then
+  cd "/Users/Bolik/OpenSource/Web/pages"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/18F/pages"
+fi
+# web-design-standards
+if [ -d "/Users/Bolik/OpenSource/Web/web-design-standards" ]; then
+  cd "/Users/Bolik/OpenSource/Web/web-design-standards"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/18F/web-design-standards.git"
+fi
+
 echo "Cpp 相关开源项目新"
 if [ ! -d "/Users/Bolik/OpenSource/Cpp" ]; then
 mkdir "/Users/Bolik/OpenSource/Cpp"
