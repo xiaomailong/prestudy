@@ -1,7 +1,8 @@
 require("babel/polyfill");
 // import 'core-js/shim';
 
-// Generator 函数
+// Generator函数的含义与用法
+// http://www.ruanyifeng.com/blog/2015/04/generator.html
 
 // 1. 基本概念 -----------------------------------------------------------------------
 // Generator函数是ES6提供的一种异步编程解决方案，语法行为与传统函数完全不同。
