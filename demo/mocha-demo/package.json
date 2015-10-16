@@ -1,0 +1,17 @@
+{
+  "name": "mocha-demo",
+  "version": "0.1.0",
+  "description": "",
+  "main": "sqrt.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha \n istanbul cover _mocha"
+  },
+  "author": "waterbolik@163.com",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.3.0"
+  }
+}
