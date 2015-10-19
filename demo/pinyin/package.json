@@ -1,0 +1,14 @@
+{
+  "name": "pinyin",
+  "version": "1.0.0",
+  "description": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Waterbolik@163.com",
+  "license": "MIT",
+  "dependencies": {
+    "transliteration": "^0.1.1"
+  }
+}
