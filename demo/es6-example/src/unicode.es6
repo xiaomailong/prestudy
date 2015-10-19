@@ -102,3 +102,13 @@ import 'core-js/shim';
   // ES6提供了normalize方法，允许"Unicode正规化"，即将两种方法转为同样的序列。
   console.log('\u01D1'.normalize() === '\u004F\u030C'.normalize()); // true
 })();
+
+(function () {
+  // 打印64卦符号
+  let str = '';
+  for(let i = 19904; i < 19904+64; i++) {
+    str += String.fromCodePoint(i);
+  }
+  console.log(str);
+  //䷀䷁䷂䷃䷄䷅䷆䷇䷈䷉䷊䷋䷌䷍䷎䷏䷐䷑䷒䷓䷔䷕䷖䷗䷘䷙䷚䷛䷜䷝䷞䷟䷠䷡䷢䷣䷤䷥䷦䷧䷨䷩䷪䷫䷬䷭䷮䷯䷰䷱䷲䷳䷴䷵䷶䷷䷸䷹䷺䷻䷼䷽䷾䷿
+})();

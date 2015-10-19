@@ -11,6 +11,15 @@ console.log('\uD83D\uDE80'); // 🚀
 console.log('\u{1F680}'); // 🚀
 
 // 模板字符串 ----------------
+// 模板字符串（template string）是增强版的字符串，用反引号（`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。
+// 如果使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中。
+// 模板字符串中嵌入变量，需要将变量名写在${}之中。
+// 大括号内部可以放入任意的JavaScript表达式，可以进行运算，以及引用对象属性。
+// 模板字符串之中还能调用函数。
+// 如果大括号中的值不是字符串，将按照一般的规则转为字符串。比如，大括号中是一个对象，将默认调用对象的toString方法。
+// 如果模板字符串中的变量没有声明，将报错。
+// 由于模板字符串的大括号内部，就是执行JavaScript代码，因此如果大括号内部是一个字符串，将会原样输出。
+
 // 模板字符串有三个有趣的特性。字符串插值，多行字符串和原始字符串字面值
 // 首先，模板字符串支持字符串插值:
 let first = 'Jane';
@@ -69,6 +78,13 @@ for (let ch of 'x\uD83D\uDE80y') {
 console.log(String.fromCodePoint(0x78, 0x1f680, 0x79) === 'x\uD83D\uDE80y'); // true
 
 // 检查包含和重复字符串 -------------
+// includes(), startsWith(), endsWith()
+// 传统上，JavaScript只有indexOf方法，可以用来确定一个字符串是否包含在另一个字符串中。ES6又提供了三种新方法。
+// includes()：返回布尔值，表示是否找到了参数字符串。
+// startsWith()：返回布尔值，表示参数字符串是否在源字符串的头部。
+// endsWith()：返回布尔值，表示参数字符串是否在源字符串的尾部。
+// 这三个方法都支持第二个参数，表示开始搜索的位置。
+
 // 检查一个字符串是否在另一个字符串中存在，有 3 种方法：
 console.log('hello'.startsWith('hell')); // true
 console.log('hello'.endsWith('ello')); // true
@@ -78,6 +94,14 @@ console.log('hello'.startsWith('ello', 1)); // true
 console.log('hello'.endsWith('hell', 4)); // true
 console.log('hello'.includes('ell', 1)); // true
 console.log('hello'.includes('ell', 2)); // false
+
+// repeat()
+// repeat方法返回一个新字符串，表示将原字符串重复n次。
+// 参数如果是小数，会被取整。
+// 如果repeat的参数是负数或者Infinity，会报错。
+// 但是，如果参数是0到-1之间的小数，则等同于0，这是因为会先进行取整运算。0到-1之间的小数，取整以后等于-0，repeat视同为0。
+// 参数NaN等同于0。
+// 如果repeat的参数是字符串，则会先转换成数字。
 // repeat()方法重复字符串:
 console.log('doo '.repeat(3)); // doo doo doo
 
