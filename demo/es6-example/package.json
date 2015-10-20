@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "lib/person.js",
   "scripts": {
-    "compile": "babel --optional es7.decorators,es7.asyncFunctions -d lib/ src/",
+    "compile": "babel --stage 0 -d lib/ src/",
     "lint": "jshint lib/* --exclude node_modules",
     "prepublish": "npm run compile"
   },
