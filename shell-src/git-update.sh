@@ -147,6 +147,15 @@ else
   cd "/Users/Bolik/OpenSource/Web/"
   git clone "https://github.com/18F/web-design-standards.git"
 fi
+# web-design-standards-assets
+if [ -d "/Users/Bolik/OpenSource/Web/web-design-standards-assets" ]; then
+  cd "/Users/Bolik/OpenSource/Web/web-design-standards-assets"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/18F/web-design-standards-assets.git"
+fi
+
 
 echo "Cpp 相关开源项目新"
 if [ ! -d "/Users/Bolik/OpenSource/Cpp" ]; then
