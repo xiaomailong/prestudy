@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+      ul {
+        list-style: none;
+      }
+
+      .tab1 {
+        border: 1px solid #cccccc;
+        width: 60px;
+        height: 40px;
+      }
+
+      .tab2 {
+        border-width: 1px;
+        border-style: solid;
+        border-color: #cccccc;
+        width: 60px;
+        height: 40px;
+      }
+
+      .Sample1 {
+        display: block;
+        width: 50px;
+        height: 50px;
+        border-style: solid;
+        border-color: #999999 #ff0000 #000000 #4cff00;
+        border-width: 20px;
+      }
+
+      .Sample2 {
+        display: block;
+        width: 2px;
+        height: 2px;
+        border-style: solid;
+        border-color: #999999 #ff0000 #000000 #4cff00;
+        border-width: 20px;
+      }
+
+      .Sample3 {
+        display: block;
+        width: 0px;
+        height: 0px;
+        border-style: solid;
+        border-color: #999999 transparent transparent;
+        border-width: 30px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <ul>
+      <li>
+        灰色的1像素的实线边框
+        <br/> .tab1 {
+        <br/> border: 1px solid #cccccc;
+        <br/> width: 60px;
+        <br/> height: 40px;
+        <br/> }
+      </li>
+      <li class="tab1">
+      </li>
+      <li>
+        灰色的1像素的实线边框
+        <br/> .tab2 {
+        <br/> border-width: 1px;
+        <br/> border-style: solid;
+        <br/> border-color: #cccccc;
+        <br/> width: 60px;
+        <br/> height: 40px;
+        <br/> }
+      </li>
+      <li class="tab2">
+      </li>
+      <li>
+        我们给元素设置边框值
+        <br/> .Sample1 {
+        <br/> display: block;
+        <br/> width: 50px;
+        <br/> height: 50px;
+        <br/> border-style: solid;
+        <br/> border-color: #999999 #ff0000 #000000 #4cff00;
+        <br/> border-width: 20px;
+        <br/> }
+      </li>
+      <li>
+        <a class="Sample1" href="#"></a>
+      </li>
+      <li>
+        在我们的浏览器中，每个边框是以等腰梯形的形式闭合在一起的。
+        <br/> 如果我们要让等腰梯形变成一个三角形。
+        <br/> 那么，我们a元素中间的content内容就要把width和height全部设置为0px.这样的话中间的白色content部分就会消失不见了。只剩下边框了。
+        <br/> .Sample2 {
+        <br/> display: block;
+        <br/> width: 2px;
+        <br/> height: 2px;
+        <br/> border-style: solid;
+        <br/> border-color: #999999 #ff0000 #000000 #4cff00;
+        <br/> border-width: 20px;
+        <br/> }
+      </li>
+      <li>
+        <a class="Sample2" href="#"></a>
+      </li>
+      <li>
+        当width和height为2px时，中间还有一个长宽为2px的正方形。
+        <br/> 当完全为零时，就和我上面说到的一样，变成了一个四个闭合在一起的等边三角形。
+        <br/> 而这个三角形的大小就可以通过border-width这个属性来改变等边三角形的高来进行控制。
+        <br/> 在border-width中还有一个transparent这个值。它是让按照上-右-下-左排序的边框设置为透明色。
+        <br/> 所以我们可以让下-右-左全部为透明色，只留下上面的灰色三角形，这样我们就通过css来完成了一个小三角形的制作。
+        <br/> .Sample3 {
+        <br/> display: block;
+        <br/> width: 0px;
+        <br/> height: 0px;
+        <br/> border-style: solid;
+        <br/> border-color: #999999 transparent transparent;
+        <br/> border-width: 30px;
+        <br/> }
+      </li>
+      <li>
+        <a class="Sample3" href="#"></a>
+      </li>
+    </ul>
+
+
+
+  </body>
+
+</html>

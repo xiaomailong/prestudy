@@ -39,5 +39,5 @@ brew cask install textmate
 brew cask install thunder
 brew cask install vagrant
 brew cask install virtualbox
-brew cask install vscode-osx
+brew cask install visual-studio-code
 brew cask install webstorm
