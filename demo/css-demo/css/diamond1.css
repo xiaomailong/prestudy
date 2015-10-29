@@ -1,0 +1,137 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
+
+/*
+@styleguide
+
+# 1. 裁剪 div
+
+使用 CSS clip-path，该属性允许开发者隐藏元素的特定区域，所有超过该区域的内容都不会被裁减掉。要创建裁剪区域，需要引用 SVG 的路径，或者使用类似于 CSS shapes 中用到的塑形方法(shape method)。不幸的是，任何版本的 IE 浏览器都不支持 CSS clip-path，Firefox 只支持 url() 引用 SVG 的方式，而 Chrome 不支持使用 url() 引用外部 SVG 的方式。所以，我找到了一个用于 CSS clip-path 的脚本(ployfill)，用于解决浏览器的不支持问题。
+
+该想法的实质就是裁剪掉正方形的边角模拟出菱形来，而正方形的边长正好是菱形对角线的长度，稍微加工一下，效果如下：
+
+
+    <div class="grid-wrapper layout-1">
+      <div class="grid-item diamond-small diamond-s1">
+        <div class="diamond__content">
+          <p>small diamond</p>
+        </div>
+      </div>
+      <div class="grid-item diamond-med diamond-m1">
+        <div class="diamond__content">
+          <p>medium diamond</p>
+        </div>
+      </div>
+      <div class="grid-item diamond-large">
+        <div class="diamond__content">
+          <p>large diamond</p>
+        </div>
+      </div>
+      <div class="grid-item diamond-small diamond-s2">
+        <div class="diamond__content">
+          <p>small diamond</p>
+        </div>
+      </div>
+      <div class="grid-item diamond-med diamond-m2">
+        <div class="diamond__content">
+          <p>medium diamond</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-wrapper layout-2">
+      <div class="grid-item diamond-small diamond-s1">
+        <div class="diamond__content">
+          <p>small diamond</p>
+        </div>
+      </div>
+      <div class="grid-item diamond-med diamond-m1">
+        <div class="diamond__content">
+          <p>medium diamond</p>
+        </div>
+      </div>
+      <div class="grid-item diamond-large">
+        <div class="diamond__content">
+          <p>large diamond</p>
+        </div>
+      </div>
+      <div class="grid-item diamond-small diamond-s2">
+        <div class="diamond__content">
+          <p>small diamond</p>
+        </div>
+      </div>
+      <div class="grid-item diamond-med diamond-m2">
+        <div class="diamond__content">
+          <p>medium diamond</p>
+        </div>
+      </div>
+    </div>
+    <svg class="clip-svg">
+      <clipPath id="clip-diamond-demo" clipPathUnits="objectBoundingBox">
+        <polygon points="0.5 0, 1 0.5, 0.5 1, 0 0.5" />
+      </clipPath>
+    </svg>
+
+
+<div class="grid-wrapper layout-1">
+  <div class="grid-item diamond-small diamond-s1">
+<div class="diamond__content">
+  <p>small diamond</p>
+</div>
+  </div>
+  <div class="grid-item diamond-med diamond-m1">
+<div class="diamond__content">
+  <p>medium diamond</p>
+</div>
+  </div>
+  <div class="grid-item diamond-large">
+<div class="diamond__content">
+  <p>large diamond</p>
+</div>
+  </div>
+  <div class="grid-item diamond-small diamond-s2">
+<div class="diamond__content">
+  <p>small diamond</p>
+</div>
+  </div>
+  <div class="grid-item diamond-med diamond-m2">
+<div class="diamond__content">
+  <p>medium diamond</p>
+</div>
+  </div>
+</div>
+
+<div class="grid-wrapper layout-2">
+  <div class="grid-item diamond-small diamond-s1">
+<div class="diamond__content">
+  <p>small diamond</p>
+</div>
+  </div>
+  <div class="grid-item diamond-med diamond-m1">
+<div class="diamond__content">
+  <p>medium diamond</p>
+</div>
+  </div>
+  <div class="grid-item diamond-large">
+<div class="diamond__content">
+  <p>large diamond</p>
+</div>
+  </div>
+  <div class="grid-item diamond-small diamond-s2">
+<div class="diamond__content">
+  <p>small diamond</p>
+</div>
+  </div>
+  <div class="grid-item diamond-med diamond-m2">
+<div class="diamond__content">
+  <p>medium diamond</p>
+</div>
+  </div>
+</div>
+<svg class="clip-svg">
+  <clipPath id="clip-diamond-demo" clipPathUnits="objectBoundingBox">
+<polygon points="0.5 0, 1 0.5, 0.5 1, 0 0.5" />
+  </clipPath>
+</svg>
+
+
+*/p{font-family:Roboto Slab;font-size:82.5%}.grid-wrapper{position:relative;height:65.3125vw}.grid-wrapper:after{content:"";display:table;clear:both}.grid-item{position:absolute;border:1px solid #d3d3d3;-webkit-clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);-webkit-clip-path:url(#clip-diamond-demo);clip-path:url(#clip-diamond-demo)}.diamond-small{background-color:#32cd32}.diamond-small,.diamond-small .diamond__content{height:23.75vw;width:23.75vw}.diamond-med{background-color:orange}.diamond-med,.diamond-med .diamond__content{height:35.625vw;width:35.625vw}.diamond__content{display:table-cell;text-align:center;vertical-align:middle}.layout-1 .diamond-s1{top:5.9375vw;left:11.875vw}.layout-1 .diamond-m1{top:29.6875vw;left:5.9375vw}.layout-1 .diamond-s2{top:29.6875vw;left:59.375vw}.layout-1 .diamond-m2{top:-5.9375vw;left:53.4375vw}.layout-1 .diamond-large{background-color:#ff0;top:5.9375vw;left:23.75vw}.layout-1 .diamond-large,.layout-1 .diamond-large .diamond__content{height:47.5vw;width:47.5vw}.layout-2 .diamond-s1{top:35.625vw;left:11.875vw}.layout-2 .diamond-s2{top:11.875vw;left:59.375vw}.layout-2 .diamond-m1{left:5.9375vw}.layout-2 .diamond-m2{top:35.625vw;left:53.4375vw}.layout-2 .diamond-large{background-color:#ff0;top:11.875vw;left:23.75vw}.layout-2 .diamond-large,.layout-2 .diamond-large .diamond__content{height:47.5vw;width:47.5vw}

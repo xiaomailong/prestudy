@@ -1,0 +1,274 @@
+// @styleguide
+//
+// # 2. 菱形布局
+//
+// <div class="grid-wrapper layout-1">
+//   <div class="grid-item diamond-small diamond-s1">
+// <div class="diamond__content">
+//   <p>small diamond</p>
+// </div>
+//   </div>
+//   <div class="grid-item diamond-med diamond-m1">
+// <div class="diamond__content">
+//   <p>medium diamond</p>
+// </div>
+//   </div>
+//   <div class="grid-item diamond-large diamond-l1">
+// <div class="diamond__content">
+//   <p>large diamond</p>
+// </div>
+//   </div>
+//   <div class="grid-item diamond-small diamond-s2">
+// <div class="diamond__content">
+//   <p>small diamond</p>
+// </div>
+//   </div>
+//   <div class="grid-item diamond-med diamond-m2">
+// <div class="diamond__content">
+//   <p>medium diamond</p>
+// </div>
+//   </div>
+// </div>
+//
+// <div class="grid-wrapper layout-2">
+//   <div class="grid-item diamond-small diamond-s1">
+// <div class="diamond__content">
+//   <p>small diamond</p>
+// </div>
+//   </div>
+//   <div class="grid-item diamond-med diamond-m1">
+// <div class="diamond__content">
+//   <p>medium diamond</p>
+// </div>
+//   </div>
+//   <div class="grid-item diamond-large diamond-l1">
+// <div class="diamond__content">
+//   <p>large diamond</p>
+// </div>
+//   </div>
+//   <div class="grid-item diamond-small diamond-s2">
+// <div class="diamond__content">
+//   <p>small diamond</p>
+// </div>
+//   </div>
+//   <div class="grid-item diamond-med diamond-m2">
+// <div class="diamond__content">
+//   <p>medium diamond</p>
+// </div>
+//   </div>
+// </div>
+//
+//     <div class="grid-wrapper layout-1">
+//       <div class="grid-item diamond-small diamond-s1">
+//         <div class="diamond__content">
+//           <p>small diamond</p>
+//         </div>
+//       </div>
+//       <div class="grid-item diamond-med diamond-m1">
+//         <div class="diamond__content">
+//           <p>medium diamond</p>
+//         </div>
+//       </div>
+//       <div class="grid-item diamond-large diamond-l1">
+//         <div class="diamond__content">
+//           <p>large diamond</p>
+//         </div>
+//       </div>
+//       <div class="grid-item diamond-small diamond-s2">
+//         <div class="diamond__content">
+//           <p>small diamond</p>
+//         </div>
+//       </div>
+//       <div class="grid-item diamond-med diamond-m2">
+//         <div class="diamond__content">
+//           <p>medium diamond</p>
+//         </div>
+//       </div>
+//     </div>
+//
+//     <div class="grid-wrapper layout-2">
+//       <div class="grid-item diamond-small diamond-s1">
+//         <div class="diamond__content">
+//           <p>small diamond</p>
+//         </div>
+//       </div>
+//       <div class="grid-item diamond-med diamond-m1">
+//         <div class="diamond__content">
+//           <p>medium diamond</p>
+//         </div>
+//       </div>
+//       <div class="grid-item diamond-large diamond-l1">
+//         <div class="diamond__content">
+//           <p>large diamond</p>
+//         </div>
+//       </div>
+//       <div class="grid-item diamond-small diamond-s2">
+//         <div class="diamond__content">
+//           <p>small diamond</p>
+//         </div>
+//       </div>
+//       <div class="grid-item diamond-med diamond-m2">
+//         <div class="diamond__content">
+//           <p>medium diamond</p>
+//         </div>
+//       </div>
+//     </div>
+// @import "css3-mixins.sass";
+// @import "bourbon/bourbon";
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
+@mixin cf {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+@mixin center {
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+@function sqrt($r) {
+  $x0: 1;
+  $x1: $x0;
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+    $x0: $x1;
+  }
+  @return $x1;
+}
+body {
+  font-family: 'Roboto Slab';
+  font-size: 82.5%;
+}
+$gridUnit: (100vw / 8);
+$transformUnit: $gridUnit / sqrt(2);
+$small: $transformUnit * 2;
+$med: $transformUnit * 3;
+$large: $transformUnit * 4;
+.grid-wrapper {
+  @include cf;
+  @include center;
+  position: relative;
+  height: $gridUnit * 6;
+  width: $gridUnit * 8;
+}
+.grid-item {
+  position: absolute;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+.diamond-small {
+  background: limegreen;
+  box-shadow: inset 0 0 15px 5px rgba(0,0,0,0.7);
+  height: $small;
+  width: $small;
+  .diamond__content {
+    height: $small;
+    width: $small;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  .diamond__img {
+    width: $gridUnit * 2;
+    -webkit-transform: rotate(-45deg) translateY(-$gridUnit * 0.4);
+    -ms-transform: rotate(-45deg) translateY(-$gridUnit * 0.4);
+    transform: rotate(-45deg) translateY(-$gridUnit * 0.4);
+  }
+}
+.diamond-med {
+  background: orange;
+  box-shadow: inset 0 0 15px 5px rgba(0,0,0,0.7);
+  height: $med;
+  width: $med;
+  .diamond__content {
+    height: $med;
+    width: $med;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  .diamond__img {
+    width: $gridUnit * 3;
+    -webkit-transform: rotate(-45deg) translateY(-$gridUnit * 0.6);
+    -ms-transform: rotate(-45deg) translateY(-$gridUnit * 0.6);
+    transform: rotate(-45deg) translateY(-$gridUnit * 0.6);
+  }
+}
+.diamond-large {
+  background: yellow;
+  height: $large;
+  width: $large;
+  .diamond__content {
+    height: $large;
+    width: $large;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+  .diamond__img {
+    width: $gridUnit * 4;
+    -webkit-transform: rotate(-45deg) translateY(-$gridUnit * 0.85);
+    -ms-transform: rotate(-45deg) translateY(-$gridUnit * 0.85);
+    transform: rotate(-45deg) translateY(-$gridUnit * 0.85);
+  }
+}
+.layout-1 {
+  .diamond-s1 {
+    top: $gridUnit;
+    left: $gridUnit * 2;
+  }
+  .diamond-m1 {
+    top: $gridUnit * 3;
+    left: $gridUnit * 2;
+  }
+  .diamond-s2 {
+    top: $gridUnit * 3;
+    left: $gridUnit * 6;
+  }
+  .diamond-m2 {
+    top: 0;
+    left: $gridUnit * 6;
+  }
+  .diamond-l1 {
+    top: $gridUnit;
+    left: $gridUnit * 4;
+  }
+}
+.layout-2 {
+  .diamond-s1 {
+    top: $gridUnit;
+    left: $gridUnit * 6;
+  }
+  .diamond-s2 {
+    top: $gridUnit * 3;
+    left: $gridUnit * 2;
+  }
+  .diamond-m1 {
+    top: 0;
+    left: $gridUnit * 2;
+  }
+  .diamond-m2 {
+    top: $gridUnit * 3;
+    left: $gridUnit * 6;
+  }
+  .diamond-l1 {
+    top: $gridUnit;
+    left: $gridUnit * 4;
+  }
+}

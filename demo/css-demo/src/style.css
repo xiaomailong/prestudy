@@ -7,6 +7,18 @@
 .autoprefixer {
   display: flex;
 }
+@keyframes animationExample {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+.animateThis {
+  animation: animationExample 2s;
+  display: flex;
+}
 
 /* Testing cssnext */
 
@@ -23,4 +35,170 @@
   @else {
     background: blue;
   }
+}
+.menu {
+  width: 100%;
+  a {
+    text-decoration: none;
+  }
+  &::before {
+    content: '';
+  }
+}
+$text_color: #232323;
+body {
+  color: $text_color;
+}
+/*$column_layout: 2;
+.column {
+  @if $column_layout==2 {
+    width: 50%;
+    float: left;
+  }
+  @else {
+    width: 100%;
+  }
+}*/
+@for $i from 1 to 3 {
+    p:nth-of-type($i) {
+        margin-left: calc( 100% / $i );
+    }
+}
+$social: twitter, facebook, youtube;
+
+@each $icon in ($social){
+    .icon-$(icon) {
+        background: url('img/$(icon).png');
+    }
+}
+@define-mixin icon $network, $color {
+    .button.$(network) {
+        background-image: url('img/$(network).png');
+        background-color: $color;
+    }
+}
+
+@mixin icon twitter, blue;
+
+@mixin icon youtube, red;
+
+@define-mixin icon $network, $color {
+    .button.$(network) {
+        background-image: url('img/$(network).png');
+        background-color: $color;
+        @mixin-content;
+    }
+}
+
+@mixin icon twitter, blue {
+    width: 3rem;
+}
+
+@mixin icon youtube, red {
+    width: 4rem;
+}
+
+@define-extend rounded_button {
+    border-radius: 0.5rem;
+    padding: 1em;
+    border-width: 0.0625rem;
+    border-style: solid;
+}
+
+.blue_button {
+    @extend rounded_button;
+    border-color: #2F74D1;
+    background-color: #3B8EFF;
+}
+
+.red_button {
+    @extend rounded_button;
+    border-color: #C41A1E;
+    background-color: #FF2025;
+}
+
+
+/* Testing grid */
+
+
+/* Columns are created by using the grid-column declaration and passing a /-delimited value. This value contains the number of columns the element should span, separated by the total number of columns in the element's container. */
+
+.element {
+  grid-column: 1/12;
+}
+
+/* You can also use it in conjunction with the !last declaration to make sure that the last element of the row doesn't allocate a gutter, pushing itself to the next row. */
+
+.element2 {
+  grid-column: 1/2 !last;
+}
+
+/* Elements can be offset to the left and the right by using grid-pull and grid-push. */
+
+.push {
+  grid-push: 1/12;
+}
+.pull {
+  grid-pull: 1/12;
+}
+
+/* The width and gutter values can be retrieved by calling grid-width(...) and grid-gutter(...) from a declaration. */
+
+.element3 {
+  width: grid-width(1/12);
+  margin-left: grid-gutter(12);
+}
+
+/* Add Fallback for “will-change” Property */
+
+.thisWillChange {
+  will-change: transform;
+}
+
+/* Create rgba() Color Fallbacks */
+
+.rgbaFallback {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Create opacity Fallbacks */
+
+.opacityFallback {
+  opacity: 0.5;
+}
+
+/* Convert :: into : on Pseudo-elements */
+
+.pseudo-element::before {
+  content: '';
+}
+
+/* Add vm Fallback for vmin */
+
+.vmFallback {
+  width: 50vmin;
+}
+
+/* Add px Fallback for rem Units */
+
+.remFallback {
+  height: 10rem;
+  font: 2rem Arial;
+}
+.remFallback::before {
+  content: '';
+  line-height: 1rem;
+}
+
+.css_nano, .css_nano + p, [class*="css_nano"], .css_nano {
+    /* cssnano will remove this comment */
+    display: flex;
+    font-weight: normal;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 1.5rem;
+    margin-right: 2.5rem;
+    font-weight: normal;
+    padding: 1.75rem;
+    width: calc(50rem - (2 * 1.75rem));
 }
