@@ -1,0 +1,54 @@
+@import 'lib/bourbon/bourbon';
+
+/*
+ @styleguide
+ # Animation
+ The animation mixin supports comma separated lists of values, which allows different transitions for individual properties to be described in a single style rule. Each value in the list corresponds to the value at that same position in the other properties.
+
+ <div id="run-demo" class="box">box</div>
+     <div id="run-demo" class="box"></div>
+ */
+.box:hover {
+  @include animation(scale 1.0s ease-in, slide 2.0s ease);
+  @include animation-name(scale, slide);
+  @include animation-duration(2s);
+  @include animation-timing-function(ease);
+  @include animation-iteration-count(infinite);
+}
+
+/*
+@styleguide
+
+# Button
+
+Deprecation Warning: The button mixin has been deprecated and will be removed in the next major version release. Take a look at Bitters, which includes basic styles for buttons.
+
+The button add-on provides well-designed buttons with a single line in your CSS.
+
+The mixin supports a style parameter and an optional color argument. The available button styles are:
+- simple (default)
+- shiny
+- pill
+
+<button class="button">Simple button</button>
+
+    <button class="button">Simple button</button>
+
+<button class="button-pill">Pill Button</button>
+
+    <button class="button-pill">Pill Button</button>
+
+<button class="button-shiny">Shiny Button</button>
+
+    <button class="button-shiny">Shiny Button</button>
+
+ */
+.button {
+  @include button;
+}
+.button-pill {
+  @include button(pill);
+}
+.button-shiny {
+  @include button(shiny, #ff0000);
+}

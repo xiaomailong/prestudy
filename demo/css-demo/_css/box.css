@@ -1,6 +1,4 @@
 /*
-@styleguide
-
 # WaterBolik's Css Style Guide
 
 # Box盒模型
@@ -26,11 +24,14 @@ html文档中的每个元素都被描绘成矩形盒子，这些矩形盒子通�
 
 ** 主要有下面几种情况： **
 
-*/.parent{width:600px;background:#eeb3b3 none repeat scroll 0 0}
+*/
+
+.parent {
+  width: 600px;
+  background: #eeb3b3 none repeat scroll 0 0;
+}
 
 /*
-@styleguide
-
 ## 1. 一个属性设置成auto
 
 如果三个属性中某个属性设置了auto，其余两个为特定的值，那么设置auto的属性为确定所需的元素，从而使得元素框的宽度等于父级元素的width。
@@ -55,11 +56,19 @@ html文档中的每个元素都被描绘成矩形盒子，这些矩形盒子通�
 >margin-left + border-left + padding-left + width + padding-right + border-right + margin-right =
 >
 >340 + 0 + 30 + 100 + 30 + 0 + 100 = 600
-*/.parent .block1{margin-left:auto}
+*/
+
+.parent .block1 {
+  background: #ffd800 none repeat scroll 0 0;
+  display: block;
+  margin-left: auto;
+  margin-right: 100px;
+  border: 0;
+  padding: 30px;
+  width: 100px;
+}
 
 /*
-@styleguide
-
 ## 2. 总和不等于父级元素的width
 
 使用auto可以弥补实际值与所需总和的差距，如果三个属性都设置了特定值，但是总和不等于父级元素的width。
@@ -85,11 +94,19 @@ html文档中的每个元素都被描绘成矩形盒子，这些矩形盒子通�
 >
 >在Chrome中，margin-right被强制为auto
 
-*/.parent .block1,.parent .block2{background:#ffd800 none repeat scroll 0 0;display:block;margin-right:100px;border:0;padding:30px;width:100px}
+*/
+
+.parent .block2 {
+  background: #ffd800 none repeat scroll 0 0;
+  display: block;
+  margin-left: 100px;
+  margin-right: 100px;
+  border: 0;
+  padding: 30px;
+  width: 100px;
+}
 
 /*
-@styleguide
-
 ## 3. width设置为auto
 
 如果margin-left和margin-right都设置特定值，width设置为auto，则width将会等于某个特定值以达到父级元素的width。
@@ -112,11 +129,19 @@ html文档中的每个元素都被描绘成矩形盒子，这些矩形盒子通�
 </a>
 
 元素的width将被被设定为340px来使总和达到父级元素的width
-*/.parent .block2,.parent .block3{margin-left:100px}.parent .block3{margin-right:100px;width:auto}
+*/
+
+.parent .block3 {
+  background: #ffd800 none repeat scroll 0 0;
+  display: block;
+  margin-left: 100px;
+  margin-right: 100px;
+  border: 0;
+  padding: 30px;
+  width: auto;
+}
 
 /*
-@styleguide
-
 ## 4. margin-left和margin-right设置成auto
 
 如果margin-left和amrgin-right都设置为auto，则它们会设置相等的值，因此元素将在父级元素中居中。这是将块级元素居中的一种方法。
@@ -140,11 +165,18 @@ html文档中的每个元素都被描绘成矩形盒子，这些矩形盒子通�
 </a>
 
 margin-left和margin-right的值会被设置为相等，使得元素居中
-*/.parent .block3,.parent .block4{background:#ffd800 none repeat scroll 0 0;display:block;border:0;padding:30px}.parent .block4{margin:0 auto;width:100px}
+*/
+
+.parent .block4 {
+  background: #ffd800 none repeat scroll 0 0;
+  display: block;
+  margin: 0 auto;
+  border: 0;
+  padding: 30px;
+  width: 100px;
+}
 
 /*
-@styleguide
-
 ## 5. 某个外边距和width设置成auto
 
 如果设置某个外边距和width为auto，则设置为auto的外边距会为0，width会设置为所需的值来填充父级元素。
@@ -166,11 +198,19 @@ margin-left和margin-right的值会被设置为相等，使得元素居中
 </a>
 
 设置margin-left和width为auto，则margin-left将被设置为0，width会被设置为440px来满足父级元素的width
-*/.parent .block5{margin-right:100px}
+*/
+
+.parent .block5 {
+  background: #ffd800 none repeat scroll 0 0;
+  display: block;
+  margin-left: auto;
+  margin-right: 100px;
+  border: 0;
+  padding: 30px;
+  width: auto;
+}
 
 /*
-@styleguide
-
 ## 6. 全设置成auto
 
 如果margin和width都设置为auto，则两个外边距会设置为0，width会尽可能宽。
@@ -192,11 +232,19 @@ margin-left和margin-right的值会被设置为相等，使得元素居中
 </a>
 
 三个值都设置为auto，则两个外边距会设置为0，width会被设置为540px
-*/.parent .block5,.parent .block6{background:#ffd800 none repeat scroll 0 0;display:block;margin-left:auto;border:0;padding:30px;width:auto}.parent .block6{margin-right:auto}
+*/
+
+.parent .block6 {
+  background: #ffd800 none repeat scroll 0 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0;
+  padding: 30px;
+  width: auto;
+}
 
 /*
-@styleguide
-
 ## 7. 负外边距
 
 7个属性只要都是大于等于0的值，总和总是等于父级元素的width，不会超过父级元素的区域
@@ -219,4 +267,14 @@ margin-left和margin-right的值会被设置为相等，使得元素居中
 </a>
 
 设置margin-right为-400px，则元素会大于父级元素width，因为100+0+30+840+30+0-400=600，元素的width为840px
-*/.parent .block7{background:#ffd800 none repeat scroll 0 0;display:block;margin-left:100px;margin-right:-400px;border:0;padding:30px;width:auto}
+*/
+
+.parent .block7 {
+  background: #ffd800 none repeat scroll 0 0;
+  display: block;
+  margin-left: 100px;
+  margin-right: -400px;
+  border: 0;
+  padding: 30px;
+  width: auto;
+}
