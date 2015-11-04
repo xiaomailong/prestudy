@@ -1,0 +1,51 @@
+.div1 {
+  background-color: #aeaeae; }
+
+.div2 {
+  border-left-width: 5px; }
+
+.div3 {
+  margin-left: 32px; }
+
+.div4 .span1 {
+  height: 12px; }
+
+.div4 .div2 {
+  width: 16px; }
+
+.div5:hover {
+  cursor: hand; }
+
+.class71, .class72 {
+  font-size: 19px; }
+
+.class72 {
+  color: black; }
+
+.class771, .class772 {
+  font-size: 19px; }
+
+.class772 {
+  color: black; }
+
+.class771, .class772 {
+  font-weight: bold; }
+
+.class91 {
+  font-size: 16px;
+  display: block;
+  margin: 0 auto; }
+
+.class991 {
+  font-size: 16px;
+  display: block;
+  margin-left: 12px;
+  margin-right: 13px;
+  padding: 15px; }
+
+.class992 {
+  font-size: 16px;
+  display: block;
+  margin-left: 12px;
+  margin-right: 13px;
+  padding: 12px; }

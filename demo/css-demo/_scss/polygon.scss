@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+/*
+@styleguide
+# 用 CSS 实现三角形
+
+hack 出三角形只需要两个条件，第一，元素本身的长宽为0；其次，将不需要的部分通过 border-color 来设置隐藏。
+
+<div class="triangle" id="first"></div>
+<div class="triangle" id="second"></div>
+<div class="triangle" id="third"></div>
+
+    <div id="first"></div>
+    <div id="second"></div>
+    <div id="third"></div>
+
+*/
+.triangle {
+  display: inline-block;
+  margin: 20px 0 0 20px;
+}
+#first {
+  width: 20px;
+  height: 20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: red green blue brown;
+}
+#second {
+  width: 0;
+  height: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: red green blue brown;
+}
+#third {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px;
+  border-color: red transparent transparent transparent;
+}
+
+/*
+@styleguide
+# 用 CSS 实现平行四边形
+
+如何拼接出一个平行四边形？在border法中，它由三部分组成，分别是左三角形、矩形、右三角形。如果每次绘制平行四边形都要创建三个元素显然过于麻烦了，所以在这里:before和:after伪元素是个不错的选择。
+
+需要注意的是，如果通过 $height、$width 设置的三角形斜率太小或太大都有可能造成渲染出锯齿，所以使用起来要多多测试一下不同的宽高所得到的视觉效果如何。
+
+<div class="parallelogram">1</div>
+<div class="parallelogram">2</div>
+<div class="parallelogram">3</div>
+
+    <div class="parallelogram">1</div>
+    <div class="parallelogram">2</div>
+    <div class="parallelogram">3</div>
+
+*/
+$height: 24px;
+$width: 12px;
+@mixin parallelogram-color($color) {
+  background: $color;
+  &:before {
+    border-color: transparent $color $color transparent;
+  }
+  &:after {
+    border-color: $color transparent transparent $color;
+  }
+}
+@mixin triangle() {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-style: solid;
+  border-width: $height/2 $width/2;
+  top: 0;
+}
+.parallelogram {
+  display: inline-block;
+  color: #fff;
+  padding: 0 10px;
+  position: relative;
+  height: $height;
+  line-height: $height;
+  margin-left: $width;
+  &:after {
+    @include triangle();
+    right: -$width;
+  }
+  &:before {
+    @include triangle();
+    left: -$width;
+  }
+  @include parallelogram-color(red);
+}
+
+/*
+@styleguide
+# 使用transform来实现平行四边形
+
+通过 transform: skew 来得到平行四边形。的确是把整个 div 进行了歪曲，导致中间的文字也是倾斜的，而这显然不是我们所要的效果。所以我们需要加一个内层元素，并对内层元素做一次逆向的歪曲，从而得到我们想要的效果
+
+<div class="city"><div>上海</div></div>
+<div class="city"><div>北京</div><div>广州</div></div>
+
+    <div class="city"><div>上海</div></div>
+    <div class="city"><div>北京</div><div>广州</div></div>
+
+*/
+.city {
+  display: inline-block;
+  margin: 20px 0 0 20px;
+  padding: 5px 20px;
+  border: 1px solid #44a5fc;
+  color: #333;
+  transform: skew(-20deg);
+}
+
+.city div {
+  transform: skew(20deg);
+}

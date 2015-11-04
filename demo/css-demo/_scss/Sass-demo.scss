@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+// 1.变量：以$开头。
+$color1: #aeaeae;
+.div1 {
+  background-color: $color1;
+}
+
+// 2.变量嵌套在字符串之中：应该以#{}包裹。
+$left2: left;
+.div2 {
+  border-#{$left2}-width: 5px;
+}
+
+// 3.允许进行计算：
+$left3: 20px;
+.div3 {
+  margin-left: $left3+12px;
+}
+
+// 4.允许选择器嵌套：
+.div4 {
+  .span1 {
+    height: 12px;
+  }
+  .div2 {
+    width: 16px;
+  }
+}
+
+// 5.使用&引用父元素
+.div5 {
+  &:hover {
+    cursor: hand;
+  }
+}
+
+// 6.注释：
+//
+// 有三种形式：
+//
+// （1）//comment：该注释只是在.scss源文件中有，编译后的css文件中没有。
+//
+// （2）/*! */：重要注释，任何style的css文件中都会有，一般放置css文件版权说明等信息。
+//
+// （3）/* */：该注释在compressed的style的css中没有，其他style的css文件都会含有。
+//
+// 备注：平时（1）（2）使用的多些
+// 7.允许继承：@extend 类名
+.class71 {
+  font-size: 19px;
+}
+.class72 {
+  @extend .class71;
+  color: black;
+}
+
+// 注意：如果在class2后面有设置了class1的属性，那么也会影响class2，如下：
+.class771 {
+  font-size: 19px;
+}
+.class772 {
+  @extend .class771;
+  color: black;
+}
+.class771 {
+  font-weight: bold;
+}
+
+// 8.引用外部css文件（Partials）
+// 有时网页的不同部分会分成多个文件来写样式，或者引用通用的一些样式，那么可以使用@import。
+// @import "_test1.scss";
+// @import "_test2.scss";
+// @import "_test3.scss";
+// 其中_test1.scss、_test2.scss、_test3.scss文件分别设置的h1 h2 h3。
+// 一般情况下，复用的文件名如果以下划线_开头的话，Sass会认为该文件是一个partial file，不会将其编译为css文件，主要功能是要通过import引用。
+// 9.mixin和include：
+// mixin类似于C语音的宏，存储通用模块，通过@include引用。
+@mixin common9 {
+  display: block;
+  margin: 0 auto;
+}
+.class91 {
+  font-size: 16px;
+  @include common9;
+}
+
+// 还可以更灵活，像函数一样，如下：
+@mixin common99($value1, $value2, $defaultValue:12px) {
+  display: block;
+  margin-left: $value1;
+  margin-right: $value2;
+  padding: $defaultValue;
+}
+.class991 {
+  font-size: 16px;
+  @include common99(12px,13px,15px);
+}
+.class992 {
+  font-size: 16px;
+  @include common99(12px,13px);
+}
