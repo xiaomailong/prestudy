@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/*
+@styleguide
+# 图片宽度自适应
+
+<div class="img-wrap">
+	<img src="http://sandbox.runjs.cn/uploads/rs/98/jpedwarv/560x200.jpg" alt="">
+</div><br>
+<div class="img-wrap">
+	<img src="http://sandbox.runjs.cn/uploads/rs/98/jpedwarv/440x200.jpg" alt="">
+</div><br>
+<div class="img-wrap">
+	<img src="http://sandbox.runjs.cn/uploads/rs/98/jpedwarv/300x200.jpg" alt="">
+</div>
+
+    <div class="img-wrap">
+    	<img src="http://sandbox.runjs.cn/uploads/rs/98/jpedwarv/560x200.jpg" alt="">
+    </div><br>
+    <div class="img-wrap">
+    	<img src="http://sandbox.runjs.cn/uploads/rs/98/jpedwarv/440x200.jpg" alt="">
+    </div><br>
+    <div class="img-wrap">
+    	<img src="http://sandbox.runjs.cn/uploads/rs/98/jpedwarv/300x200.jpg" alt="">
+    </div>
+
+*/
+.img-wrap {
+  display: inline-block;
+}
+.img-wrap img {
+  width: 100%;
+  vertical-align: middle;
+}

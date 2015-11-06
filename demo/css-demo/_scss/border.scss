@@ -1,0 +1,81 @@
+/*
+@styleguide
+
+# border-radius百分比值
+
+border-radius: 左上角水平圆角半径大小 右上角水平圆角半径大小 右下角水平圆角半径大小 左下角水平圆角半径大小/左上角垂直圆角半径大小 右上角垂直圆角半径大小 右下角垂直圆角半径大小 左下角垂直圆角半径大小;
+
+CSS3圆角除了大值特性，还有一个等比例特性，就是水平半径和垂直半径的比例是恒定不变的。
+
+由于我们的元素占据宽度200像素，高度300像素。所以，根据大值特性，水平方向的300像素只能按照200像素半径渲染；再根据等比例特性，虽然垂直方向理论上的最大半径是300像素，但是受制于当初设定的300px*300px的1:1比例，垂直方向最终渲染的半径大小也是200像素。于是，我们最后得到的只是一个200像素*200像素的圆弧。
+
+<div class="radius-test1"></div>
+
+    <div class="radius-test1"></div>
+
+<div class="radius-test2"></div>
+
+    <div class="radius-test2"></div>
+
+<div class="radius-test3"></div>
+
+    <div class="radius-test3"></div>
+
+<div class="radius-test4"></div>
+
+    <div class="radius-test4"></div>
+
+<div class="radius-test5"></div>
+
+    <div class="radius-test5"></div>
+
+<div class="radius-test6"></div>
+
+    <div class="radius-test6"></div>
+
+<div class="radius-test7"></div>
+
+    <div class="radius-test7"></div>
+
+*/
+.radius-test1 {
+  width: 100px;
+  height: 100px;
+  border: 50px solid #cd0000;
+  border-radius: 50%;
+}
+.radius-test2 {
+  width: 100px;
+  height: 200px;
+  border: 50px solid #cd0000;
+  border-radius: 50%;
+}
+.radius-test3 {
+  width: 100px;
+  height: 200px;
+  border: 50px solid #cd0000;
+  border-radius: 300px;
+}
+.radius-test4 {
+  width: 100px;
+  height: 200px;
+  border: 50px solid #cd0000;
+  border-radius: 400px/600px;
+}
+.radius-test5 {
+  width: 100px;
+  height: 100px;
+  border: 50px solid #cd0000;
+  border-top-left-radius: 200px 100px;
+}
+.radius-test6 {
+  width: 100px;
+  height: 100px;
+  border: 50px solid #cd0000;
+  border-left-top-radius: 200px 100px;
+}
+.radius-test7 {
+  width: 100px;
+  height: 100px;
+  border: 50px solid #cd0000;
+}
