@@ -9,6 +9,10 @@
   "author": "Waterbolik@163.com",
   "license": "MIT",
   "dependencies": {
-    "transliteration": "^0.1.1"
+    "nan": "^2.1.0",
+    "nodejieba": "^1.4.1",
+    "pinyin": "^2.6.2",
+    "request": "^2.65.0",
+    "segment": "^0.1.2"
   }
 }
