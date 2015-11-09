@@ -76,7 +76,7 @@ var option = {
   style: pinyin.STYLE_TONE,      // 设置拼音风格
 }
 
-var str = '了然来了，了凡交还什么，什锦便当很便宜';
+var str = '了然交还什么便宜什锦便当';
 
 console.log(pinyin(str, option));
 
@@ -101,6 +101,6 @@ console.log(result);
 
 var cedict = require('node-cc-cedict');
 
-cedict.searchByChinese('世界', function(words){
+cedict.searchByChinese(str, function(words){
   console.log(words);
 });
