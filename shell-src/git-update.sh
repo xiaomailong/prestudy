@@ -155,6 +155,14 @@ else
   cd "/Users/Bolik/OpenSource/Web/"
   git clone "https://github.com/18F/web-design-standards-assets.git"
 fi
+# netlify-cms
+if [ -d "/Users/Bolik/OpenSource/Web/netlify-cms" ]; then
+  cd "/Users/Bolik/OpenSource/Web/netlify-cms"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/netlify/netlify-cms.git"
+fi
 
 
 echo "Cpp 相关开源项目新"
@@ -217,10 +225,6 @@ else
   cd "/Users/Bolik/OpenSource/Cpp/"
   git clone "https://github.com/svn2github/protobuf.git"
 fi
-
-
-
-
 
 
 # # Sample 相关例程更新

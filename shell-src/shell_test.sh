@@ -1,6 +1,13 @@
 #!/bin/sh
 # 程序必须以上面的行开始（必须放在文件的第一行）
 
+# 子shell进程的PID存储在一个特殊的变量‘$$’中。这个变量只读，你不可以在脚本中修改它
+echo "PID of this script: $$"
+# PPID存储子shell父进程的ID（也就是主shell）
+echo "PPID of this script: $PPID"
+# UID存储了执行这个脚本的当前用户ID
+echo "UID of this script: $UID"
+
 # 判别SHELL环境 流程控制用if
 if [ "$SHELL" = "/bin/bash" ]; then
   echo "your login shell is the bash (bourne again shell)"
