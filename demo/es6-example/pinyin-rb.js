@@ -173,7 +173,11 @@ function single_pinyin(han, options) {
 
     pinyins.push(py);
   }
-  return pinyins;
+  if (PINYIN_STYLE.RUBY == options.style) {
+    return '<ruby>' + han + '<rt>' + pinyins + '</rt></ruby>';
+  } else {
+    return pinyins;
+  }
 }
 
 // 词语注音
@@ -187,9 +191,14 @@ function phrases_pinyin(phrases, options) {
     PHRASES_DICT[phrases].forEach(function (item, idx) {
       py[idx] = [];
       if (options.heteronym) {
+       if (PINYIN_STYLE.RUBY == options.style) {
+             py[idx][0] = '<ruby>' + phrases[idx] + '<rt>' + item.join(",") + '</rt></ruby>';
+       } else {
         item.forEach(function (py_item, py_index) {
           py[idx][py_index] = toFixed(py_item, options.style);
         });
+       }
+
       } else {
         if (PINYIN_STYLE.RUBY == options.style) {
           py[idx][0] = '<ruby>' + phrases[idx] + '<rt>' + item[0] + '</rt></ruby>';

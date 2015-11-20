@@ -3,7 +3,7 @@ require("babel/polyfill");
 var pinyin = require("../pinyin-rb.js");
 
 var option = {
-  heteronym: false, // 启用多音字模式
+  heteronym: true, // 启用多音字模式
   segment: true, // 启用分词，以解决多音字问题。
   style: pinyin.STYLE_RUBY, // 设置拼音风格
 }
