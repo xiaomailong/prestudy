@@ -3,7 +3,7 @@ require("babel/polyfill");
 var pinyin = require("../pinyin-rb.js");
 
 var option = {
-  heteronym: true, // 启用多音字模式
+  heteronym: false, // 启用多音字模式
   segment: true, // 启用分词，以解决多音字问题。
   style: pinyin.STYLE_RUBY, // 设置拼音风格
 }
@@ -32,13 +32,13 @@ var writeFile = function (fileName, data) {
 
 // 写成 async 函数，就是下面这样。
 var pinyinProcess = async function () {
-  var file = await readFile('./经典诵读原版/千字文.txt');
+  var file = await readFile('./经典诵读原版/大学.txt');
   var strFile = file.toString();
   // console.log(strFile);
   var strPinyin = pinyin(strFile, option)
     .join("");
   // console.log(strPinyin);
-  await writeFile('./经典诵读拼音版/千字文拼音版.txt', strPinyin);
+  await writeFile('./经典诵读拼音版/大学拼音版.txt', strPinyin);
 };
 
 pinyinProcess();
