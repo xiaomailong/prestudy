@@ -32,13 +32,13 @@ var writeFile = function (fileName, data) {
 
 // 写成 async 函数，就是下面这样。
 var pinyinProcess = async function () {
-  var file = await readFile('./经典诵读原版/大学.txt');
+  var file = await readFile('./经典诵读原版/道德经.txt');
   var strFile = file.toString();
   // console.log(strFile);
   var strPinyin = pinyin(strFile, option)
     .join("");
   // console.log(strPinyin);
-  await writeFile('./经典诵读拼音版/大学拼音版.txt', strPinyin);
+  await writeFile('./经典诵读拼音版/道德经拼音版.txt', strPinyin);
 };
 
 pinyinProcess();
