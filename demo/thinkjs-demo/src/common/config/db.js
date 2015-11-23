@@ -3,7 +3,7 @@
  * db config
  * @type {Object}
  */
-module.exports = {
+export default {
   type: 'mysql',
   host: '127.0.0.1',
   port: '',

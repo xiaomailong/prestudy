@@ -10,6 +10,6 @@ var instance = new thinkjs({
   env: 'development'
 });
 
-
+instance.compile({retainLines: true, log: true});
 
 instance.run();

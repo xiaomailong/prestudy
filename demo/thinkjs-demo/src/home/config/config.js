@@ -1,8 +1,7 @@
 'use strict';
 /**
  * config
- * @type {Object}
  */
-module.exports = {
+export default {
   //key: value
 };

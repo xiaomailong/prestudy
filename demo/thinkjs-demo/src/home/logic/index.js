@@ -4,12 +4,12 @@
  * @param  {} []
  * @return {}     []
  */
-module.exports = think.logic({
+export default class extends think.logic.base {
   /**
    * index action logic
    * @return {} []
    */
-  indexAction: function(){
-
+  indexAction(){
+   
   }
-});
+}

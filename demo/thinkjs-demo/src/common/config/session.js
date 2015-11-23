@@ -1,9 +1,12 @@
 'use strict';
 
-module.exports = {
+/**
+ * session configs
+ */
+export default {
   name: 'thinkjs',
   type: 'file',
-  secret: 'E$YBGUR6',
+  secret: '`CTL~WH9',
   timeout: 24 * 3600,
   cookie: { // cookie options
     length: 32,
@@ -14,4 +17,4 @@ module.exports = {
       path: think.getPath('common', 'runtime') + '/session',
     }
   }
-}
+};

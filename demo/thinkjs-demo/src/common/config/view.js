@@ -1,9 +1,8 @@
 'use strict';
 /**
  * template config
- * @type {Object}
  */
-module.exports = {
+export default {
   type: 'ejs',
   content_type: 'text/html',
   file_ext: '.html',
