@@ -12,7 +12,7 @@
 
 // 我觉得这段说明也很精彩：js里的函数在运行结束之后，所有的过程中产生的变量都会被销毁（销毁原则是无引用）
 // 但在js的函数A里定义一个函数B并在外部引用时，这条引用链上的变量都不会销毁（即使A已经运行结束），这个函数B就叫做一个闭包。
-(function() {
+(function () {
   console.log("\n---闭包很好地避免了全局变量的使用，避免了全局变量的污染。");
 
   function fn() {
@@ -33,9 +33,9 @@
   // 以上例子很好地避免了全局变量的使用，避免了全局变量的污染。
 
   // 闭包还可用于模块化代码，减少全局变量的污染：
-  var abc = (function() { //abc为外部匿名函数的返回值
+  var abc = (function () { //abc为外部匿名函数的返回值
     var a = 1;
-    return function() {
+    return function () {
       a++;
       console.log(a);
     }
@@ -44,7 +44,7 @@
   abc(); //3
 
   // 闭包还可用于设置私有成员：
-  var obj = function() {
+  var obj = function () {
     var num = 0;
 
     function a() {
@@ -68,7 +68,7 @@
   // 这样就无法修改num的值了，保护了私有成员。
 })();
 
-(function() {
+(function () {
   console.log("\n---闭包很好地避免了全局变量的使用，避免了全局变量的污染。");
 
   function outerFn() {
@@ -95,11 +95,11 @@
   // 即使再次调用相同的构造函数，但只会生成新对象和方法，新的临时变量只是对应新的值，和上次那次调用的是各自独立的。
 })();
 
-(function() {
+(function () {
   console.log("---闭包原理的经典例子");
 
   function createComparison(propertyName) {
-    return function(obj1, obj2) {
+    return function (obj1, obj2) {
       var item1 = obj1[propertyName];
       var item2 = obj2[propertyName];
 
@@ -135,14 +135,14 @@
   // createComparison有一个scope，匿名的compare有一个scope，而且这三个scope还是通过链表链接的
 })();
 
-(function() {
+(function () {
   console.log("---闭包陷阱");
   var arr = new Array();
 
   function Person() {
     for (var i = 0; i < 10; i++) {
       //要记住，这个属性函数申明，只有立即执行才会取scope属性
-      var item = function() {
+      var item = function () {
         return i;
       };
       arr.push(item);
@@ -160,14 +160,14 @@
   // 但是这个时候i已经是10了，然后结束scope查找输出10。
 })();
 
-(function() {
+(function () {
   console.log("---闭包陷阱的解决方案");
   var arr = new Array();
 
   function Person() {
     for (var i = 0; i < 10; i++) {
       //要记住，这个属性函数申明，只有立即执行才会取scope属性
-      var item = function(num) {
+      var item = function (num) {
         return num;
       }(i);
       arr.push(item);
@@ -183,16 +183,16 @@
 // 在JavaScript，作用域的边界检查只在函数被声明的时候。
 // 逐个函数，并且仅仅逐个函数，拥有它们各自的作用域表。
 // （注：在ECMAScript 6中不再是这样，因为let的引入）
-(function() {
+(function () {
   console.log("---证明函数作用域");
   // global scope
   var scope = "global";
 
-  var foo = function() {
+  var foo = function () {
 
     // inner scope 1
     var scope = "inner";
-    var myscope = function() {
+    var myscope = function () {
 
       // inner scope 2
       return scope;
@@ -205,7 +205,7 @@
 
   // 关于作用域还有一些重要的事情需要考虑。例如，我们需要创建一个函数，接受一个数字（0-9），返回该数字相应的英文名称。
   var names = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-  var digit_name1 = function(n) {
+  var digit_name1 = function (n) {
     return names[n];
   };
   // 但是缺点是，names定义在了全局作用域，可能会意外的被修改，这样可能致使digit_name1函数所返回的结果不正确。
@@ -213,17 +213,66 @@
   // 这次把names数组定义成函数digit_name2局部变量.这个函数远离了意外风险，但是带来了性能损失，
   // 由于每次digit_name2被调用的时候，都将重新为names数组定义和分配空间。
   // 换个例子如果names是个非常大的数组，或者可能digit_name2函数在一个循环中被调用多次，这时候性能影响将非常明显。
-  var digit_name2 = function(n) {
+  var digit_name2 = function (n) {
     var names = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     return names[n];
   };
   // 这时候我们面临第三个选择。这里我们实现立即调用的函数表达式，仅仅实例化names变量一次，然后返回digit_name3函数，
   // 在 IIFE (Immediately-Invoked-Function-Expression 立即执行表达式)的闭包函数持有names变量的引用。
   // 这个方案兼具前两个的优点，回避了缺点。搞定！这是一个常用的模式用来创建一个不可被外部环境修改“private”（私有）状态。
-  var digit_name3 = (function() {
+  var digit_name3 = (function () {
     var names = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-    return function(n) {
+    return function (n) {
       return names[n];
     };
   })();
+})();
+
+(function () {
+  console.log("---典型的JS闭包问题，嵌套了三层fun函数");
+
+  function fun(n, o) {
+    console.log(o)
+    return {
+      fun: function (m) {
+        return fun(m, n);
+      }
+    };
+  }
+  var a = fun(0);
+  a.fun(1);
+  a.fun(2);
+  a.fun(3);
+  a.fun(4); // undefined,0,0,0,0
+  var b = fun(0)
+    .fun(1)
+    .fun(2)
+    .fun(3)
+    .fun(4); // undefined,0,1,2,3
+  var c = fun(0)
+    .fun(1);
+  c.fun(2);
+  c.fun(3);
+  c.fun(4); // undefined,0,1,1,1
+  var d = fun(0)
+    .fun(1)
+    .fun(2);
+  d.fun(3);
+  d.fun(4); // undefined,0,1,2,2
+  //问:三行a,b,c的输出分别是什么？
+
+  function getFunctionName(fun) {
+    if (fun.name !== undefined)
+      return fun.name;
+    var ret = fun.toString();
+    ret = ret.substr('function '.length);
+    ret = ret.substr(0, ret.indexOf('('));
+    return ret;
+  }
+
+  console.log(getFunctionName(fun));
+  console.log(getFunctionName(a));
+  console.log(getFunctionName(b));
+  console.log(getFunctionName(c));
+  console.log(getFunctionName(d));
 })();
