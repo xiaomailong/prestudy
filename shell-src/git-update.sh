@@ -163,6 +163,54 @@ else
   cd "/Users/Bolik/OpenSource/Web/"
   git clone "https://github.com/netlify/netlify-cms.git"
 fi
+# Bourbon
+if [ -d "/Users/Bolik/OpenSource/Web/bourbon" ]; then
+  cd "/Users/Bolik/OpenSource/Web/bourbon"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/thoughtbot/bourbon.git"
+fi
+# Neat
+if [ -d "/Users/Bolik/OpenSource/Web/neat" ]; then
+  cd "/Users/Bolik/OpenSource/Web/neat"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/thoughtbot/neat.git"
+fi
+# Bitters
+if [ -d "/Users/Bolik/OpenSource/Web/bitters" ]; then
+  cd "/Users/Bolik/OpenSource/Web/bitters"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/thoughtbot/bitters.git"
+fi
+# Refills
+if [ -d "/Users/Bolik/OpenSource/Web/refills" ]; then
+  cd "/Users/Bolik/OpenSource/Web/refills"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/thoughtbot/refills.git"
+fi
+# normalize.css
+if [ -d "/Users/Bolik/OpenSource/Web/normalize.css" ]; then
+  cd "/Users/Bolik/OpenSource/Web/normalize.css"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/necolas/normalize.css.git"
+fi
+# react-native-web
+if [ -d "/Users/Bolik/OpenSource/Web/react-native-web" ]; then
+  cd "/Users/Bolik/OpenSource/Web/react-native-web"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/necolas/react-native-web.git"
+fi
 
 
 echo "Cpp 相关开源项目新"
@@ -225,6 +273,8 @@ else
   cd "/Users/Bolik/OpenSource/Cpp/"
   git clone "https://github.com/svn2github/protobuf.git"
 fi
+
+
 
 
 # # Sample 相关例程更新
