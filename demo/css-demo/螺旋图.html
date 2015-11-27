@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>在画布中绘制图像--螺旋图</title>
+
+ </head>
+ <body>
+  <canvas id="canvas" width="400" height="400" style="border:1px solid black" ></canvas>
+  <input type="button" id="btn" value="开始">
+
+  <script>
+    var btn=document.getElementById("btn");
+    var canvas=document.getElementById("canvas");
+    var context=canvas.getContext('2d');
+
+     btn.onclick=function(){
+        context.translate(150,50);
+        context.scale(0.95,0.95);
+
+        context.fillStyle="blue";
+        context.globalAlpha=0.5;
+        context.fillRect(0,0,100,50);
+
+        for(var i=1;i<=80;i++){
+            context.translate(15,15);
+            context.scale(0.95,0.95);
+            context.rotate(Math.PI/20);
+            context.fillRect(0,0,100,50);
+        }
+     }
+
+    </script>
+ </body>
+</html>
