@@ -274,7 +274,18 @@ else
   git clone "https://github.com/svn2github/protobuf.git"
 fi
 
-
+# JavaScript 相关例程更新
+if [ ! -d "/Users/Bolik/OpenSource/JavaScript" ]; then
+mkdir "/Users/Bolik/OpenSource/JavaScript"
+fi
+# mojs motion graphics toolbelt for the web http://mojs.io/
+if [ -d "/Users/Bolik/OpenSource/JavaScript/mojs" ]; then
+  cd "/Users/Bolik/OpenSource/JavaScript/mojs"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/JavaScript/"
+  git clone "https://github.com/legomushroom/mojs.git"
+fi
 
 
 # # Sample 相关例程更新
