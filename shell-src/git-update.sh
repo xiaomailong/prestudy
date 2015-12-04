@@ -94,6 +94,14 @@ else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "https://github.com/facebook/react"
 fi
+# flux
+if [ -d "/Users/Bolik/OpenSource/Tools/flux" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/flux"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/facebook/flux"
+fi
 # jekyll
 if [ -d "/Users/Bolik/OpenSource/Tools/jekyll" ]; then
   cd "/Users/Bolik/OpenSource/Tools/jekyll"
@@ -126,6 +134,15 @@ else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "https://github.com/benweet/stackedit.git"
 fi
+# kramdown-with-pygments
+if [ -d "/Users/Bolik/OpenSource/Tools/kramdown-with-pygments" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/kramdown-with-pygments"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/mvdbos/kramdown-with-pygments.git"
+fi
+
 
 echo "Web 相关开源项目更新"
 if [ ! -d "/Users/Bolik/OpenSource/Web" ]; then
