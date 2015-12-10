@@ -1,6 +1,201 @@
 @charset "UTF-8";
 /*
 @styleguide
+# 矩形
+
+<div class="rectangle"></div>
+
+    <div class="rectangle"></div>
+
+*/
+.rectangle {
+  width: 100px;
+  height: 50px;
+  background-color: red; }
+
+/*
+@styleguide
+# 圆形
+
+<div class="circle"></div>
+
+    <div class="circle"></div>
+
+*/
+.circle {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border-radius: 50%; }
+
+/*
+@styleguide
+# 椭圆形
+
+<div class="ellipse"></div>
+
+    <div class="ellipse"></div>
+
+*/
+.ellipse {
+  width: 100px;
+  height: 50px;
+  background-color: red;
+  border-radius: 50%; }
+
+/*
+@styleguide
+# 直角三角形
+
+<div class="right-triangle"></div>
+
+    <div class="right-triangle"></div>
+
+*/
+.right-triangle {
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-bottom-color: red; }
+
+/*
+@styleguide
+# 正三角形
+
+<div class="regular-triangle"></div>
+
+    <div class="regular-triangle"></div>
+
+*/
+.regular-triangle {
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-width: 86.6px 50px;
+  border-bottom-color: red; }
+
+/*
+@styleguide
+# 平行四边形
+
+<div class="parallelogram"></div>
+
+    <div class="parallelogram"></div>
+
+*/
+.parallelogram {
+  margin-left: 50px;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  transform: skew(30deg); }
+
+/*
+@styleguide
+# 梯形
+
+<div class="ladder-shaped"></div>
+
+    <div class="ladder-shaped"></div>
+
+*/
+.ladder-shaped {
+  width: 50px;
+  border: 50px solid transparent;
+  border-bottom-color: red; }
+
+/*
+@styleguide
+# 六角星
+
+两个三角形叠压
+
+<div class="six-angle-star"></div>
+
+    <div class="six-angle-star"></div>
+
+*/
+.six-angle-star {
+  position: relative;
+  width: 0;
+  border: 50px solid transparent;
+  border-width: 50px 43.4px;
+  border-bottom-color: red; }
+
+.six-angle-star:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  border: 50px solid transparent;
+  border-width: 50px 43.4px;
+  border-top-color: red;
+  top: 16px;
+  left: -42px; }
+
+/*
+@styleguide
+# 六边形
+
+两个梯形拼接
+
+<div class="hexagon"></div>
+
+    <div class="hexagon"></div>
+
+*/
+.hexagon {
+  position: relative;
+  width: 50px;
+  border: 50px solid transparent;
+  border-bottom-color: red; }
+
+.hexagon:after {
+  position: absolute;
+  content: "";
+  width: 50px;
+  border: 50px solid transparent;
+  border-top-color: red;
+  top: 50px;
+  left: -50px; }
+
+/*
+@styleguide
+# 五角星
+
+一个大三角形底部掏掉一个小三角形；两个前面的相同图形叠压
+
+<div class="five-pointed-star"></div>
+<div class="five-pointed-star"></div>
+
+    <div class="five-pointed-star"></div>
+    <div class="five-pointed-star"></div>
+
+*/
+.five-pointed-star {
+  margin-left: 100px;
+  position: relative;
+  width: 0;
+  border: 50px solid transparent;
+  border-width: 100px 35px;
+  border-bottom-color: red; }
+
+.five-pointed-star:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border: 100px solid transparent;
+  border-width: 25px 50px;
+  border-bottom-color: white;
+  top: 51px;
+  left: -50px; }
+
+.five-pointed-star:last-child {
+  top: -164px;
+  left: 52px;
+  transform: rotate(72deg); }
+
+/*
+@styleguide
 # 用 CSS 实现三角形
 
 hack 出三角形只需要两个条件，第一，元素本身的长宽为0；其次，将不需要的部分通过 border-color 来设置隐藏。

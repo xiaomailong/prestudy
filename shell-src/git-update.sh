@@ -126,6 +126,22 @@ else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "git://github.com/gettalong/kramdown.git"
 fi
+# GitHub Markup
+if [ -d "/Users/Bolik/OpenSource/Tools/markup" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/markup"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/github/markup.git"
+fi
+# Octopress
+if [ -d "/Users/Bolik/OpenSource/Tools/octopress" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/octopress"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/octopress/octopress.git"
+fi
 # stackedit
 if [ -d "/Users/Bolik/OpenSource/Tools/stackedit" ]; then
   cd "/Users/Bolik/OpenSource/Tools/stackedit"
