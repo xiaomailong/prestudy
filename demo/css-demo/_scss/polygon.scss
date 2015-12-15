@@ -10,9 +10,9 @@
 
 */
 .rectangle {
-    width: 100px;
-    height: 50px;
-    background-color: red;
+  width: 100px;
+  height: 50px;
+  background-color: red;
 }
 
 /*
@@ -25,10 +25,10 @@
 
 */
 .circle {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border-radius: 50%;
 }
 
 /*
@@ -41,10 +41,10 @@
 
 */
 .ellipse {
-    width: 100px;
-    height: 50px;
-    background-color: red;
-    border-radius: 50%;
+  width: 100px;
+  height: 50px;
+  background-color: red;
+  border-radius: 50%;
 }
 
 /*
@@ -57,10 +57,10 @@
 
 */
 .right-triangle {
-    width: 0;
-    height: 0;
-    border: 50px solid transparent;
-    border-bottom-color: red;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-bottom-color: red;
 }
 
 /*
@@ -73,11 +73,142 @@
 
 */
 .regular-triangle {
-    width: 0;
-    height: 0;
-    border: 50px solid transparent;
-    border-width: 86.6px 50px;
-    border-bottom-color: red;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-width: 86.6px 50px;
+  border-bottom-color: red;
+}
+
+/*
+@styleguide
+# 三角形及其原理
+
+CSS中三角形在网页中比较常见，以前是图片，不过现在基本上都是通过CSS可以完成，其实实现起来比较简单，通过空div然后设置宽高为0，之后可以四周border的宽度，控制三角形的形状，四个border可以看成是两横横竖的木头的重叠的效果，两横在两竖上面，三角形就是中间重叠的部分切分出来的。
+
+
+<div class="row">
+  <span>四个三角</span>
+  <div class="triangle-four">
+  </div>
+</div>
+<div class="row">
+  <span>上三角</span>
+  <div class="triangle-up">
+  </div>
+</div>
+<div class="row">
+  <span>下三角</span>
+  <div class="triangle-down">
+  </div>
+</div>
+<div class="row">
+  <span>左三角</span>
+  <div class="triangle-left">
+  </div>
+</div>
+<div class="row">
+  <span>右三角</span>
+  <div class="triangle-right">
+  </div>
+</div>
+<div class="row">
+  <span>左下角</span>
+  <div class="triangle-left-bottom">
+  </div>
+</div>
+<div class="row">
+  <span>右下角</span>
+  <div class="triangle-right-bottom">
+  </div>
+</div>
+
+```
+<div class="row">
+  <span>四个三角</span>
+  <div class="triangle-four">
+  </div>
+</div>
+<div class="row">
+  <span>上三角</span>
+  <div class="triangle-up">
+  </div>
+</div>
+<div class="row">
+  <span>下三角</span>
+  <div class="triangle-down">
+  </div>
+</div>
+<div class="row">
+  <span>左三角</span>
+  <div class="triangle-left">
+  </div>
+</div>
+<div class="row">
+  <span>右三角</span>
+  <div class="triangle-right">
+  </div>
+</div>
+<div class="row">
+  <span>左下角</span>
+  <div class="triangle-left-bottom">
+  </div>
+</div>
+<div class="row">
+  <span>右下角</span>
+  <div class="triangle-right-bottom">
+  </div>
+</div>
+```
+
+*/
+.triangle-four {
+  width: 0;
+  height: 0;
+  border-top: 20px solid #EEB422;
+  border-right: 20px solid #C0FF3E;
+  border-bottom: 20px solid #A020F0;
+  border-left: 20px solid #7CFC00;
+}
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #A020F0;
+  border-left: 20px solid transparent;
+}
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-top: 40px solid #EEB422;
+  border-right: 20px solid transparent;
+  border-left: 20px solid transparent;
+}
+.triangle-left {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 40px solid #7CFC00;
+}
+.triangle-right {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 40px solid #C0FF3E;
+}
+.triangle-left-bottom {
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-left: 40px solid #7CFC00;
+}
+.triangle-right-bottom {
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-right: 40px solid #C0FF3E;
 }
 
 /*
@@ -90,11 +221,11 @@
 
 */
 .parallelogram {
-    margin-left: 50px;
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    transform: skew(30deg);
+  margin-left: 50px;
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  transform: skew(30deg);
 }
 
 /*
@@ -107,9 +238,9 @@
 
 */
 .ladder-shaped {
-    width: 50px;
-    border: 50px solid transparent;
-    border-bottom-color: red;
+  width: 50px;
+  border: 50px solid transparent;
+  border-bottom-color: red;
 }
 
 /*
@@ -118,27 +249,33 @@
 
 两个三角形叠压
 
-<div class="six-angle-star"></div>
+<div class="row">
+  <div class="six-angle-star"></div>
+  <div></div>
+</div>
 
-    <div class="six-angle-star"></div>
+    <div class="row">
+      <div class="six-angle-star"></div>
+      <div></div>
+    </div>
 
 */
 .six-angle-star {
-    position: relative;
-    width: 0;
-    border: 50px solid transparent;
-    border-width: 50px 43.4px;
-    border-bottom-color: red;
+  position: relative;
+  width: 0;
+  border: 50px solid transparent;
+  border-width: 50px 43.4px;
+  border-bottom-color: red;
 }
 .six-angle-star:after {
-    position: absolute;
-    content: "";
-    width: 0;
-    border: 50px solid transparent;
-    border-width: 50px 43.4px;
-    border-top-color: red;
-    top: 16px;
-    left: -42px;
+  position: absolute;
+  content: "";
+  width: 0;
+  border: 50px solid transparent;
+  border-width: 50px 43.4px;
+  border-top-color: red;
+  top: 16px;
+  left: -42px;
 }
 
 /*
@@ -147,25 +284,31 @@
 
 两个梯形拼接
 
-<div class="hexagon"></div>
+<div class="row">
+  <div class="hexagon"></div>
+  <div></div>
+</div>
 
-    <div class="hexagon"></div>
+    <div class="row">
+      <div class="hexagon"></div>
+      <div></div>
+    </div>
 
 */
 .hexagon {
-    position: relative;
-    width: 50px;
-    border: 50px solid transparent;
-    border-bottom-color: red;
+  position: relative;
+  width: 50px;
+  border: 50px solid transparent;
+  border-bottom-color: red;
 }
 .hexagon:after {
-    position: absolute;
-    content: "";
-    width: 50px;
-    border: 50px solid transparent;
-    border-top-color: red;
-    top: 50px;
-    left: -50px;
+  position: absolute;
+  content: "";
+  width: 50px;
+  border: 50px solid transparent;
+  border-top-color: red;
+  top: 50px;
+  left: -50px;
 }
 
 /*
@@ -174,35 +317,39 @@
 
 一个大三角形底部掏掉一个小三角形；两个前面的相同图形叠压
 
-<div class="five-pointed-star"></div>
-<div class="five-pointed-star"></div>
+<div class="row">
+  <div class="five-pointed-star"></div>
+  <div class="five-pointed-star"></div>
+</div>
 
-    <div class="five-pointed-star"></div>
-    <div class="five-pointed-star"></div>
+    <div class="row">
+      <div class="five-pointed-star"></div>
+      <div class="five-pointed-star"></div>
+    </div>
 
 */
 .five-pointed-star {
-    margin-left: 100px;
-    position: relative;
-    width: 0;
-    border: 50px solid transparent;
-    border-width: 100px 35px;
-    border-bottom-color: red;
+  margin-left: 100px;
+  position: relative;
+  width: 0;
+  border: 50px solid transparent;
+  border-width: 100px 35px;
+  border-bottom-color: red;
 }
 .five-pointed-star:after {
-    content: "";
-    position: absolute;
-    width: 0;
-    border: 100px solid transparent;
-    border-width: 25px 50px;
-    border-bottom-color: white;
-    top: 51px;
-    left: -50px;
+  content: "";
+  position: absolute;
+  width: 0;
+  border: 100px solid transparent;
+  border-width: 25px 50px;
+  border-bottom-color: white;
+  top: 51px;
+  left: -50px;
 }
 .five-pointed-star:last-child {
-    top: -164px;
-    left: 52px;
-    transform: rotate(72deg);
+  top: -164px;
+  left: 52px;
+  transform: rotate(72deg);
 }
 
 /*
@@ -221,29 +368,29 @@ hack 出三角形只需要两个条件，第一，元素本身的长宽为0；�
 
 */
 .triangle {
-    display: inline-block;
-    margin: 20px 0 0 20px;
+  display: inline-block;
+  margin: 20px 0 0 20px;
 }
 #first {
-    width: 20px;
-    height: 20px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: red green blue brown;
+  width: 20px;
+  height: 20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: red green blue brown;
 }
 #second {
-    width: 0;
-    height: 0;
-    border-width: 10px;
-    border-style: solid;
-    border-color: red green blue brown;
+  width: 0;
+  height: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: red green blue brown;
 }
 #third {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 10px;
-    border-color: red transparent transparent transparent;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px;
+  border-color: red transparent transparent transparent;
 }
 
 /*
@@ -266,41 +413,41 @@ hack 出三角形只需要两个条件，第一，元素本身的长宽为0；�
 $height: 24px;
 $width: 12px;
 @mixin parallelogram-color($color) {
-    background: $color;
-    &:before {
-        border-color: transparent $color $color transparent;
-    }
-    &:after {
-        border-color: $color transparent transparent $color;
-    }
+  background: $color;
+  &:before {
+    border-color: transparent $color $color transparent;
+  }
+  &:after {
+    border-color: $color transparent transparent $color;
+  }
 }
 @mixin triangle() {
-    content: '';
-    display: block;
-    width: 0;
-    height: 0;
-    position: absolute;
-    border-style: solid;
-    border-width: $height/2 $width/2;
-    top: 0;
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-style: solid;
+  border-width: $height/2 $width/2;
+  top: 0;
 }
 .parallelogram {
-    display: inline-block;
-    color: #fff;
-    padding: 0 10px;
-    position: relative;
-    height: $height;
-    line-height: $height;
-    margin-left: $width;
-    &:after {
-        @include triangle();
-        right: -$width;
-    }
-    &:before {
-        @include triangle();
-        left: -$width;
-    }
-    @include parallelogram-color(red);
+  display: inline-block;
+  color: #fff;
+  padding: 0 10px;
+  position: relative;
+  height: $height;
+  line-height: $height;
+  margin-left: $width;
+  &:after {
+    @include triangle();
+    right: -$width;
+  }
+  &:before {
+    @include triangle();
+    left: -$width;
+  }
+  @include parallelogram-color(red);
 }
 
 /*
@@ -317,13 +464,13 @@ $width: 12px;
 
 */
 .city {
-    display: inline-block;
-    margin: 20px 0 0 20px;
-    padding: 5px 20px;
-    border: 1px solid #44a5fc;
-    color: #333;
-    transform: skew(-20deg);
+  display: inline-block;
+  margin: 20px 0 0 20px;
+  padding: 5px 20px;
+  border: 1px solid #44a5fc;
+  color: #333;
+  transform: skew(-20deg);
 }
 .city div {
-    transform: skew(20deg);
+  transform: skew(20deg);
 }

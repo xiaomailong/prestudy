@@ -76,6 +76,136 @@
 
 /*
 @styleguide
+# 三角形及其原理
+
+CSS中三角形在网页中比较常见，以前是图片，不过现在基本上都是通过CSS可以完成，其实实现起来比较简单，通过空div然后设置宽高为0，之后可以四周border的宽度，控制三角形的形状，四个border可以看成是两横横竖的木头的重叠的效果，两横在两竖上面，三角形就是中间重叠的部分切分出来的。
+
+
+<div class="row">
+  <span>四个三角</span>
+  <div class="triangle-four">
+  </div>
+</div>
+<div class="row">
+  <span>上三角</span>
+  <div class="triangle-up">
+  </div>
+</div>
+<div class="row">
+  <span>下三角</span>
+  <div class="triangle-down">
+  </div>
+</div>
+<div class="row">
+  <span>左三角</span>
+  <div class="triangle-left">
+  </div>
+</div>
+<div class="row">
+  <span>右三角</span>
+  <div class="triangle-right">
+  </div>
+</div>
+<div class="row">
+  <span>左下角</span>
+  <div class="triangle-left-bottom">
+  </div>
+</div>
+<div class="row">
+  <span>右下角</span>
+  <div class="triangle-right-bottom">
+  </div>
+</div>
+
+```
+<div class="row">
+  <span>四个三角</span>
+  <div class="triangle-four">
+  </div>
+</div>
+<div class="row">
+  <span>上三角</span>
+  <div class="triangle-up">
+  </div>
+</div>
+<div class="row">
+  <span>下三角</span>
+  <div class="triangle-down">
+  </div>
+</div>
+<div class="row">
+  <span>左三角</span>
+  <div class="triangle-left">
+  </div>
+</div>
+<div class="row">
+  <span>右三角</span>
+  <div class="triangle-right">
+  </div>
+</div>
+<div class="row">
+  <span>左下角</span>
+  <div class="triangle-left-bottom">
+  </div>
+</div>
+<div class="row">
+  <span>右下角</span>
+  <div class="triangle-right-bottom">
+  </div>
+</div>
+```
+
+*/
+.triangle-four {
+  width: 0;
+  height: 0;
+  border-top: 20px solid #EEB422;
+  border-right: 20px solid #C0FF3E;
+  border-bottom: 20px solid #A020F0;
+  border-left: 20px solid #7CFC00; }
+
+.triangle-up {
+  width: 0;
+  height: 0;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #A020F0;
+  border-left: 20px solid transparent; }
+
+.triangle-down {
+  width: 0;
+  height: 0;
+  border-top: 40px solid #EEB422;
+  border-right: 20px solid transparent;
+  border-left: 20px solid transparent; }
+
+.triangle-left {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 40px solid #7CFC00; }
+
+.triangle-right {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 40px solid #C0FF3E; }
+
+.triangle-left-bottom {
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-left: 40px solid #7CFC00; }
+
+.triangle-right-bottom {
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-right: 40px solid #C0FF3E; }
+
+/*
+@styleguide
 # 平行四边形
 
 <div class="parallelogram"></div>
@@ -110,9 +240,15 @@
 
 两个三角形叠压
 
-<div class="six-angle-star"></div>
+<div class="row">
+  <div class="six-angle-star"></div>
+  <div></div>
+</div>
 
-    <div class="six-angle-star"></div>
+    <div class="row">
+      <div class="six-angle-star"></div>
+      <div></div>
+    </div>
 
 */
 .six-angle-star {
@@ -138,9 +274,15 @@
 
 两个梯形拼接
 
-<div class="hexagon"></div>
+<div class="row">
+  <div class="hexagon"></div>
+  <div></div>
+</div>
 
-    <div class="hexagon"></div>
+    <div class="row">
+      <div class="hexagon"></div>
+      <div></div>
+    </div>
 
 */
 .hexagon {
@@ -164,11 +306,15 @@
 
 一个大三角形底部掏掉一个小三角形；两个前面的相同图形叠压
 
-<div class="five-pointed-star"></div>
-<div class="five-pointed-star"></div>
+<div class="row">
+  <div class="five-pointed-star"></div>
+  <div class="five-pointed-star"></div>
+</div>
 
-    <div class="five-pointed-star"></div>
-    <div class="five-pointed-star"></div>
+    <div class="row">
+      <div class="five-pointed-star"></div>
+      <div class="five-pointed-star"></div>
+    </div>
 
 */
 .five-pointed-star {
