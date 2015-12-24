@@ -19,6 +19,7 @@
     "rx": "^4.0.1",
     "rx-node": "^1.0.1",
     "smartcrop": "0.0.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "utf8": "^2.1.1"
   }
 }

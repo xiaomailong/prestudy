@@ -244,7 +244,14 @@ else
   cd "/Users/Bolik/OpenSource/Web/"
   git clone "https://github.com/necolas/react-native-web.git"
 fi
-
+# lib-flexible
+if [ -d "/Users/Bolik/OpenSource/Web/lib-flexible" ]; then
+  cd "/Users/Bolik/OpenSource/Web/lib-flexible"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/amfe/lib-flexible.git"
+fi
 
 echo "Cpp 相关开源项目新"
 if [ ! -d "/Users/Bolik/OpenSource/Cpp" ]; then

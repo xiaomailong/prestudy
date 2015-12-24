@@ -8,6 +8,7 @@ brew cask install baiducloud
 brew cask install cajviewer
 brew cask install calibre
 brew cask install clion
+brew cask install datagrip
 brew cask install eclipse-cpp
 brew cask install eclipse-ide
 brew cask install eclipse-java
