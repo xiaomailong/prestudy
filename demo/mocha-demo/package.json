@@ -7,11 +7,16 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha \n istanbul cover _mocha"
+    "test": "./node_modules/.bin/mocha 'test/*.js' --timeout 20000",
+    "cover": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -u exports 'test/*.js' --timeout 20000"
   },
   "author": "waterbolik@163.com",
   "license": "ISC",
   "dependencies": {
     "chai": "^3.3.0"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.1",
+    "mocha": "^2.3.4"
   }
 }
