@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# brew update
+brew update
+brew upgrade --all
+
+# brew cask install & update
 brew cask install aliwangwang
 brew cask install appcleaner
 brew cask install atom
@@ -42,3 +47,6 @@ brew cask install vagrant
 brew cask install virtualbox
 brew cask install visual-studio-code
 brew cask install webstorm
+
+# svn update
+svn update /Users/Bolik/Work/SvnWork/*
