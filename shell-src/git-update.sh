@@ -252,6 +252,14 @@ else
   cd "/Users/Bolik/OpenSource/Web/"
   git clone "https://github.com/amfe/lib-flexible.git"
 fi
+# prism
+if [ -d "/Users/Bolik/OpenSource/Web/prism" ]; then
+  cd "/Users/Bolik/OpenSource/Web/prism"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/PrismJS/prism.git"
+fi
 
 echo "Cpp 相关开源项目新"
 if [ ! -d "/Users/Bolik/OpenSource/Cpp" ]; then
