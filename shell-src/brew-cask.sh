@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # brew cask install & update
+brew cask update
 brew cask install aliwangwang
 brew cask install appcleaner
 brew cask install atom

@@ -86,6 +86,14 @@ else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "https://github.com/facebook/react-native"
 fi
+# react-mix
+if [ -d "/Users/Bolik/OpenSource/Tools/react-mix" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/react-mix"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/xueduany/react-mix.git"
+fi
 # react
 if [ -d "/Users/Bolik/OpenSource/Tools/react" ]; then
   cd "/Users/Bolik/OpenSource/Tools/react"
