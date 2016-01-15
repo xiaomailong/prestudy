@@ -1,6 +1,6 @@
 class HtmlCssParser{
 	constructor(){
-		
+
 	}
 	parse(cssObject, tagName){
 		var htmlCssObj = {};
@@ -8,7 +8,11 @@ class HtmlCssParser{
 			var v = cssObject[k];
 			if(/(.+)(rem)/i.test(v)){
 				//
-				v = window.STYLESHEET.baseFontSize * parseFloat(v.match(/(.+)(rem)/)[1]);
+				v = window.STYLESHEET.remUnit * parseFloat(v.match(/(.+)(rem)/)[1]);
+				v = parseFloat(v);
+			}else if(/(.+)(em)/i.test(v)){
+				//
+				v = window.STYLESHEET.emUnit * parseFloat(v.match(/(.+)(em)/)[1]);
 				v = parseFloat(v);
 			}else if(/(.+)(%)/.test(v)){
 				
@@ -51,11 +55,21 @@ class HtmlCssParser{
 		//
 		return htmlCssObj;
 	}
-	removeTextStyleFromViewStyle(m){
+	filterViewStyle(m){
 		var n = {};
-		var textStyle = ['color','lineHeight','textAlign','fontSize'];
+		var removeList = ['fontSize', 'display', 'color', 'textAlign'];
 		for(var p in m){
-			if(textStyle.indexOf(p)==-1){
+			if(removeList.indexOf(p) == -1){
+				n[p] = m[p]
+			}
+		}
+		return n;
+	}
+	filterTextStyle(m){
+		var n = {};
+		var removeList = ['display'];
+		for(var p in m){
+			if(removeList.indexOf(p) == -1){
 				n[p] = m[p]
 			}
 		}

@@ -166,6 +166,14 @@ else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "https://github.com/mvdbos/kramdown-with-pygments.git"
 fi
+# Hosts
+if [ -d "/Users/Bolik/OpenSource/Tools/Hosts" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/Hosts"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/highsea/Hosts.git"
+fi
 
 
 echo "Web 相关开源项目更新"

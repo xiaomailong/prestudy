@@ -34,6 +34,8 @@ Both support ReactNative Android and IOS, more UI component is still in dev!
 ## Getting Started
 
 - 从github上下载工程，然后在根目录执行一遍npm install，再进入reactnative目录执行一遍npm install
+- Mac的同学，可以直接执行install.sh,功能第一条类似，分别在更目录执行npm install和在./reactnative目录执行npm install
+- 根目录的npm主要是用来执行css动态翻译，以及web用的js动态翻译的，./reactnaitve的npm主要用来执行reactnative
 - 从根目录开始，reactnative目录是主要的业务开发代码，web目录是H5相关的代码
 - 我们通过代号为lightningStorm的框架代码使得reactnative支持类似html标签，和模拟css，和模拟dom api，框架地址为./reactnative/common/LightningStorm.js
 - 你可以打开安卓或者ios的reactnative的项目，来查看demo的例子，来了解我们的工作模式
@@ -54,7 +56,22 @@ Both support ReactNative Android and IOS, more UI component is still in dev!
 ## Documentation
 
 第一篇原理揭秘文章在http://www.cnblogs.com/xueduanyang/p/5125781.html
+
+系列学习文章连载中http://www.cnblogs.com/xueduanyang/p/5128690.html
+
 更多的文档和例子正在完善中。。。
+
+## react-native目录主要文件介绍
+
+这里保持和官方的reactnative代码完全一致
+- css目录是存放通过根目录的react.css.build.js脚本同步编译过来的reactjs的css文件
+- 保留了官方原有的index.ios.js做入口
+- common目录是框架文件，以及UI组件的文件
+- index.js是页面入口文件，业务逻辑
+- common/LightningStorm.js是框架文件
+- common/rn目录是reactnative的UI组件文件，适配与native组件
+- 对应的在根目录web目录也有一个叫做common/html对应的是适配与H5的UI组件文件,和common/rn目录的API保持一致，但是不同实现
+- reactnative目录增加了一些demo的例子
 
 ## Demo
 

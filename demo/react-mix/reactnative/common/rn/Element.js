@@ -2,7 +2,6 @@ String.prototype.capitalizeFirstLetter = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-var htmlCssParser = require('./HtmlCssParser');
 var DomEvent = require('../DomEvent');
 
 var UIManager = require('NativeModules').UIManager;
@@ -167,7 +166,7 @@ class Element extends React.Component {
 					onTouchStart={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchStart',reactEvent: e}));}}
 					onTouchMove={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchMove',reactEvent: e}));}}
 					onTouchEnd={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchEnd',reactEvent: e}));}}
-					style={htmlCssParser.removeTextStyleFromViewStyle(this.htmlProps.style)}>
+					style={htmlCssParser.filterViewStyle(this.htmlProps.style)}>
 					<Text style={TemplateFill({
 						color: null,
 						fontFamily: null,
@@ -217,7 +216,7 @@ class Element extends React.Component {
 						onTouchStart={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchStart',reactEvent: e}));}}
 						onTouchMove={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchMove',reactEvent: e}));}}
 						onTouchEnd={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchEnd',reactEvent: e}));}}
-						style={htmlCssParser.removeTextStyleFromViewStyle(this.htmlProps.style)}>{htmlChildren}</View>
+						style={htmlCssParser.filterViewStyle(this.htmlProps.style)}>{htmlChildren}</View>
 					</TouchableWithoutFeedback>
 			);
 		}else{
@@ -229,7 +228,7 @@ class Element extends React.Component {
 					onTouchStart={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchStart',reactEvent: e}));}}
 					onTouchMove={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchMove',reactEvent: e}));}}
 					onTouchEnd={(e)=>{this.handleEvent.call(this, new DomEvent({type: 'touchEnd',reactEvent: e}));}}
-					style={htmlCssParser.removeTextStyleFromViewStyle(this.htmlProps.style)}
+					style={htmlCssParser.filterViewStyle(this.htmlProps.style)}
 				>
 					{this.props.children}
 				</View>
@@ -263,9 +262,13 @@ class Element extends React.Component {
 				self.addEventListener(w, fn);
 			}
 		})
-		this.htmlProps.style = {
-			fontSize: window.STYLESHEET.baseFontSize
-		};
+		/**
+		 * 默认字体使用rem
+		 */
+		this.defaultStyle = this.defaultStyle || {};
+		this.htmlProps.style = Object.assign({
+			fontSize: window.STYLESHEET.remUnit
+		}, this.defaultStyle);
 		this.htmlProps.className = [];
 		//这边是css权重算法
 		if(this.props.className) {
@@ -280,9 +283,9 @@ class Element extends React.Component {
 				/**
 				 * 开始对于className的继承的处理
 				 */
-				Object.assign(self.htmlProps.style, STYLESHEET['.' + i]);
-				if(STYLESHEET['+.' + i]){
-					var css = STYLESHEET['+.' + i].inherit.slice();
+				Object.assign(self.htmlProps.style, STYLESHEET.sheets['.' + i]);
+				if(STYLESHEET.sheets['+.' + i]){
+					var css = STYLESHEET.sheets['+.' + i].inherit.slice();
 					var find = false;
 					var par = self;
 					var maxLoop = 999;
@@ -318,7 +321,7 @@ class Element extends React.Component {
 						}
 					}
 					if(find){
-						Object.assign(self.htmlProps.style, STYLESHEET['+.' + i].css);
+						Object.assign(self.htmlProps.style, STYLESHEET.sheets['+.' + i].css);
 					}
 				}
 			});
@@ -342,8 +345,8 @@ class Element extends React.Component {
 		 * 我觉得这里面还是有问题的，我们应该实现一个linkedHashMap保持原来的css的插入顺序才可以，现在这样的权重还是有点问题
 		 */
 		allEnumClass.forEach(function(item){
-			if(STYLESHEET[item]){
-				Object.assign(self.htmlProps.style, STYLESHEET[item]);
+			if(STYLESHEET.sheets[item]){
+				Object.assign(self.htmlProps.style, STYLESHEET.sheets[item]);
 			}
 		})
 		if(this.props.id){
@@ -351,7 +354,7 @@ class Element extends React.Component {
 			/**
 			 * 权重id的权重大于className
 			 */
-			Object.assign(self.htmlProps.style, STYLESHEET['#' + this.props.id]);
+			Object.assign(self.htmlProps.style, STYLESHEET.sheets['#' + this.props.id]);
 		}
 		/**
 		 * 直接赋值的样式权重最大
