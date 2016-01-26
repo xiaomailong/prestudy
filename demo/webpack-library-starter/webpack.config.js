@@ -3,7 +3,7 @@ var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var env = process.env.WEBPACK_ENV;
 var path = require('path');
 
-var libraryName = 'library';
+var libraryName = 'waterbolik';
 
 var plugins = [], outputFile;
 

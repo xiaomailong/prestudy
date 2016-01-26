@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("library", [], factory);
+		define("waterbolik", [], factory);
 	else if(typeof exports === 'object')
-		exports["library"] = factory();
+		exports["waterbolik"] = factory();
 	else
-		root["library"] = factory();
+		root["waterbolik"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -56,7 +56,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -64,28 +64,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Library = (function () {
-	  function Library() {
-	    _classCallCheck(this, Library);
+	var WaterBolik = function () {
+	  function WaterBolik() {
+	    _classCallCheck(this, WaterBolik);
 	
-	    this._name = 'Library';
+	    this._name = 'WaterBolik';
 	  }
 	
-	  _createClass(Library, [{
+	  _createClass(WaterBolik, [{
 	    key: 'name',
 	    get: function get() {
 	      return this._name;
 	    }
 	  }]);
 	
-	  return Library;
-	})();
+	  return WaterBolik;
+	}();
 	
-	exports.default = Library;
+	exports.default = WaterBolik;
 	module.exports = exports['default'];
 
 /***/ }
 /******/ ])
 });
 ;
-//# sourceMappingURL=library.js.map
+//# sourceMappingURL=waterbolik.js.map

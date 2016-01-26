@@ -1,6 +1,6 @@
-export default class Library {
+export default class WaterBolik {
   constructor() {
-    this._name = 'Library';
+    this._name = 'WaterBolik';
   }
   get name() {
     return this._name;
