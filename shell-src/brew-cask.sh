@@ -25,7 +25,7 @@ brew cask install java6
 brew cask install java7
 brew cask install liteide
 brew cask install mou
-# brew cask install node
+brew cask install mplayerx
 brew cask install nodeclipse
 brew cask install opera
 brew cask install picasa

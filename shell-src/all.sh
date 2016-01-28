@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # brew install
-bash /Users/Bolik/OpenSource/WaterBolik/prestudy/shell-src/brew-install.sh
+# bash /Users/Bolik/OpenSource/WaterBolik/prestudy/shell-src/brew-install.sh
+brew update
+brew upgrade --all
 
 # brew cask install & update
 bash /Users/Bolik/OpenSource/WaterBolik/prestudy/shell-src/brew-cask.sh
@@ -10,7 +12,8 @@ bash /Users/Bolik/OpenSource/WaterBolik/prestudy/shell-src/brew-cask.sh
 bash /Users/Bolik/OpenSource/WaterBolik/prestudy/shell-src/git-update.sh
 
 # npm install -g
-bash /Users/Bolik/OpenSource/WaterBolik/prestudy/shell-src/npm-install.sh
+# bash /Users/Bolik/OpenSource/WaterBolik/prestudy/shell-src/npm-install.sh
+cnpm update -g
 
 # svn cleanup & update
 svn cleanup /Users/Bolik/Work/SvnWork/*

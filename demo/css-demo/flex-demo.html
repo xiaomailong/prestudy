@@ -1,0 +1,33 @@
+
+<style>
+.flex {
+	display: flex;
+	flex-flow: row;
+}
+
+#div-left {
+	background-color: red;
+	width: 150px;
+	/*height: 50px;*/
+}
+
+#div-middle {
+	background-color: #fff9ca;
+	/*width: 100%;*/
+	flex: 1;
+	/* flex中宽度自适应使用该属性，使用100%时其他列的固定宽度会出现问题*/
+	height: 500px;
+}
+
+#div-right {
+	background-color: yellow;
+	width: 200px;
+	/*height: 50px;*/
+}
+</style>
+
+<div class="flex">
+    <div id="div-left"><span>div-left</span></div>
+    <div id="div-middle"><span>div-middle</span></div>
+    <div id="div-right"><span>div-right</span></div>
+</div>
