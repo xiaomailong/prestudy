@@ -28,3 +28,9 @@ dnvm upgrade -r coreclr
 
 # 安装 ICU （在coreclr下，需要这个来避免已知问题）
 brew install icu4c
+
+# Yeoman 是一个创建项目框架的应用，使用它我们可以创建出网站项目的基本框架。
+# 安装 Yeoman 和 bower
+cnpm install -g yo bower grunt-cli gulp
+# 安装 yeoman 之后，还需要安装 OmniSharp ASP.NET generators。
+cnpm install -g generator-aspnet

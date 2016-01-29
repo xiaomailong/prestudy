@@ -11,6 +11,7 @@ brew install colorsvn
 brew install cvs
 brew install git
 brew install hg
+brew install icu4c
 brew install mono
 brew install mysql
 brew install node
