@@ -5,7 +5,7 @@ brew update
 
 brew install android-sdk
 brew install android-ndk
-brew install android-platform-tools
+# brew install android-platform-tools
 brew install cmake
 brew install colorsvn
 brew install cvs

@@ -15,7 +15,7 @@ curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | DNX
 brew untap aspnet/dnx
 brew tap aspnet/dnx
 brew install dnvm
-dnvm upgrade
+dnvm upgrade 
 
 dnvm list
 
