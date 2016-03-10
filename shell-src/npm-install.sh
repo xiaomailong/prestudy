@@ -12,8 +12,10 @@
 cnpm update -g
 
 # npm install -g
+cnpm install -g babel-cli
 cnpm install -g bower
 cnpm install -g browserify
+cnpm install -g browser-sync
 cnpm install -g express
 cnpm install -g forever
 cnpm install -g gitbook-cli

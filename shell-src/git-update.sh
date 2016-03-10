@@ -337,6 +337,14 @@ else
   cd "/Users/Bolik/OpenSource/Cpp/"
   git clone "https://github.com/svn2github/protobuf.git"
 fi
+# Computational Network Toolkit (CNTK)
+if [ -d "/Users/Bolik/OpenSource/Cpp/CNTK" ]; then
+  cd "/Users/Bolik/OpenSource/Cpp/CNTK"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Cpp/"
+  git clone "https://github.com/Microsoft/CNTK.git"
+fi
 
 # JavaScript 相关例程更新
 if [ ! -d "/Users/Bolik/OpenSource/JavaScript" ]; then

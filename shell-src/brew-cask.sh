@@ -24,6 +24,7 @@ brew cask install java
 brew cask install java6
 brew cask install java7
 brew cask install liteide
+brew cask install mactex
 brew cask install mou
 brew cask install mplayerx
 brew cask install nodeclipse
