@@ -45,3 +45,4 @@ brew cask install vagrant
 brew cask install virtualbox
 brew cask install visual-studio-code
 brew cask install webstorm
+brew cask install xquartz

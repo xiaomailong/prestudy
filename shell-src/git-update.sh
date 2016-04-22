@@ -174,6 +174,24 @@ else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "https://github.com/highsea/Hosts.git"
 fi
+# Electronic WeChat
+if [ -d "/Users/Bolik/OpenSource/Tools/electronic-wechat" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/electronic-wechat"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/geeeeeeeeek/electronic-wechat.git"
+fi
+# netdata：实时监视 Linux 系统性能
+# netdata 能够监视 CPU、内存、磁盘、网络、进程、应用程序、Apache、NGINX、MySQL、Postfix、Squid 等总计 2000 多项度量指标，
+# 并提供可视化的实时显示图表，看起来可谓一目了然。
+if [ -d "/Users/Bolik/OpenSource/Tools/netdata" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/netdata"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/firehol/netdata.git"
+fi
 
 
 echo "Web 相关开源项目更新"
