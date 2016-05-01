@@ -29,6 +29,15 @@ cnpm install -g react-native-cli
 cnpm install -g semver
 cnpm install -g strongloop
 cnpm install -g supervisor
+
+# 在Visual Studio Code中通过Typings实现智能提示功能
+cnpm install -g typings
+# 安装相关提示信息文件
+# 安装完成后，我们需要安装相应的需要提示功能库或者框架的类型信息文件，在这里我们新建一个文件夹 NodeSnippet，
+# 使用命令行进入到该目录中，分别输入下面两个命令来安装Node和Lodash的类型接口信息文件：
+typings install node --ambient --save
+typings install lodash --save
+
 cnpm install -g typescript
 cnpm install -g webpack
 

@@ -16,5 +16,5 @@ bash /Users/Bolik/OpenSource/WaterBolik/prestudy/shell-src/git-update.sh
 cnpm update -g
 
 # svn cleanup & update
-svn cleanup /Users/Bolik/百度云同步盘/Bolik-Work/SvnWork/*
-svn update /Users/Bolik/百度云同步盘/Bolik-Work/SvnWork/*
+svn cleanup /Users/Bolik/百度云同步盘/SvnWork/*
+svn update /Users/Bolik/百度云同步盘/SvnWork/*

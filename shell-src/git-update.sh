@@ -192,6 +192,38 @@ else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "https://github.com/firehol/netdata.git"
 fi
+# Atom is a hackable text editor for the 21st century,
+# built on Electron, and based on everything we love about our favorite editors.
+# We designed it to be deeply customizable, but still approachable using the default configuration.
+if [ -d "/Users/Bolik/OpenSource/Tools/atom" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/atom"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/atom/atom.git"
+fi
+# Electron 可以让你使用纯 JavaScript 调用丰富的原生 APIs 来创造桌面应用。
+# 你可以把它看作是专注于桌面应用而不是 web 服务器的，io.js 的一个变体。
+# 这不意味着 Electron 是绑定了 GUI 库的 JavaScript。
+# 相反，Electron 使用 web 页面作为它的 GUI，所以你能把它看作成一个被 JavaScript 控制的，精简版的 Chromium 浏览器。
+if [ -d "/Users/Bolik/OpenSource/Tools/electron" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/electron"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/electron/electron.git"
+fi
+# CopyQ：跨平台的高级剪贴板管理器
+# 对于频繁的做剪切、拷贝、粘贴之类的操作，有一款剪贴板管理器将会方便不少。
+# CopyQ 支持 Linux、Windows、Mac OS X 10.9+ 系统，可跨平台运行。
+# 同时，它还具有编辑及脚本化等高级功能，实为不二之选。
+if [ -d "/Users/Bolik/OpenSource/Tools/CopyQ" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/CopyQ"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/hluk/CopyQ.git"
+fi
 
 
 echo "Web 相关开源项目更新"
@@ -362,6 +394,16 @@ if [ -d "/Users/Bolik/OpenSource/Cpp/CNTK" ]; then
 else
   cd "/Users/Bolik/OpenSource/Cpp/"
   git clone "https://github.com/Microsoft/CNTK.git"
+fi
+# juCi++
+# a lightweight, platform independent C++-IDE with support for C++11, C++14, and experimental C++17 features
+# depending on libclang version.
+if [ -d "/Users/Bolik/OpenSource/Cpp/jucipp" ]; then
+  cd "/Users/Bolik/OpenSource/Cpp/jucipp"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/jucipp/"
+  git clone "https://github.com/cppit/jucipp"
 fi
 
 # JavaScript 相关例程更新

@@ -17,3 +17,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 # curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/local --strip 1
 # homebrew-cask
 brew tap phinze/homebrew-cask && brew install brew-cask
+
+# Mac App Store下载最新版的Xcode，然后使用下面的命令安装Xcode command line tools，
+# 这将为你安装很多终端下面常用的命令，将来很可能会使用到：
+xcode-select --install
