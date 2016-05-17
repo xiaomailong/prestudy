@@ -15,6 +15,9 @@ brew install android-sdk
 # 这意味着，你也可以使用 aria2 来下载 torrent 文件。
 brew install aria2
 
+# Archey for OS X 命令行中显示计算机的基本信息
+brew install archey
+
 brew install cmake
 brew install colorsvn
 brew install cvs
@@ -51,7 +54,11 @@ brew install node
 
 brew install phantomjs
 brew install postgresql
+
+# python
 brew install python
+brew install python3
+
 brew install qt
 # brew install qt5
 brew install ruby

@@ -34,6 +34,10 @@ brew cask install clion
 brew cask install copyq
 
 brew cask install datagrip
+
+# The Docker Toolbox is an installer to quickly and easily install and setup a Docker environment on your computer.
+brew cask install dockertoolbox
+
 brew cask install eclipse-cpp
 brew cask install eclipse-ide
 brew cask install eclipse-java

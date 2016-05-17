@@ -1,5 +1,10 @@
 #!/bin/bash
 
+brew update
+brew install openssl
+brew link --force openssl
+
+
 # 安装 mono
 brew install mono
 
@@ -15,7 +20,7 @@ curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | DNX
 brew untap aspnet/dnx
 brew tap aspnet/dnx
 brew install dnvm
-dnvm upgrade 
+dnvm upgrade
 
 dnvm list
 

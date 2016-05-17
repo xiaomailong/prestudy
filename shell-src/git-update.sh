@@ -326,6 +326,14 @@ else
   cd "/Users/Bolik/OpenSource/Web/"
   git clone "https://github.com/PrismJS/prism.git"
 fi
+# typo.css
+if [ -d "/Users/Bolik/OpenSource/Web/typo.css" ]; then
+  cd "/Users/Bolik/OpenSource/Web/typo.css"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Web/"
+  git clone "https://github.com/sofish/typo.css.git"
+fi
 
 echo "Cpp 相关开源项目新"
 if [ ! -d "/Users/Bolik/OpenSource/Cpp" ]; then
@@ -402,7 +410,7 @@ if [ -d "/Users/Bolik/OpenSource/Cpp/jucipp" ]; then
   cd "/Users/Bolik/OpenSource/Cpp/jucipp"
   git pull
 else
-  cd "/Users/Bolik/OpenSource/jucipp/"
+  cd "/Users/Bolik/OpenSource/Cpp/"
   git clone "https://github.com/cppit/jucipp"
 fi
 

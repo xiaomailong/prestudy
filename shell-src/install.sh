@@ -21,3 +21,14 @@ brew tap phinze/homebrew-cask && brew install brew-cask
 # Mac App Store下载最新版的Xcode，然后使用下面的命令安装Xcode command line tools，
 # 这将为你安装很多终端下面常用的命令，将来很可能会使用到：
 xcode-select --install
+
+# gitsome：非常棒的 Git/Shell 自动补全工具
+# gitsome 不仅能够为你补全 Git 命令、选项、分支、标签，而且也支持补全 Shell 命令、文件、目录、环境变量、manpages 等。
+# 甚至更好的是，gitsome 还集成了对于 GitHub 的支持，这样你不用在命令行与浏览器之间进行切换便可完成各种操作。
+# gitsome 所具有的类似 Fish 的自动建议用起来十分方便，此外，它也包含命令历史，以及可定制语法着色等其他特色。
+# gitsome 使用 Python 编写，只需通过 pip 即可安装：
+pip3 install gitsome
+# 与 GitHub 集成使用前，需先按提示配置：
+gh configure
+# 执行
+gitsome
