@@ -86,7 +86,7 @@ brew cask install skype
 brew cask install sourcetree
 brew cask install teamviewer
 brew cask install textmate
-brew cask install thunder
+# brew cask install thunder
 brew cask install vagrant
 brew cask install virtualbox
 brew cask install visual-studio-code
