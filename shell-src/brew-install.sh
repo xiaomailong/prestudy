@@ -74,3 +74,9 @@ brew install wget
 
 # brew upgrade
 brew upgrade --all
+
+# There is a cross-platform flock command here:
+# https://github.com/discoteq/flock
+# Is there a flock command on Mac OS X that manages file lock?
+brew tap discoteq/discoteq
+brew install flock
