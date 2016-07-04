@@ -91,6 +91,13 @@ apm install minimap-linter
 
 # Facebook专门为React开发的IDE
 apm install nuclide
+# apm install nuclide-installer
+
+# atom-terminal：适合 Mac OSX 10.9 （Mavericks） 及以下的操作系统；
+# atomerinal：atom-terminal 在 Mac OSX Yosmite 和 EI Capitan 下不能准确定位路径，
+# 这个插件是对 atom-terminal 的 fork 和修改，适合版本更高的操作系统；
+# apm install atom-terminal
+apm install atomerinal
 
 # apm install nucleus-dark-ui
 

@@ -21,6 +21,9 @@ brew install archey
 brew install cmake
 brew install colorsvn
 brew install cvs
+brew install curl
+
+brew install flow
 
 # GCC 是 GNU 编译器套件（GNU Compiler Collection）
 # 包括 C、C++、Objective-C、Fortran、Java、Ada 和 Go 语言的前端，

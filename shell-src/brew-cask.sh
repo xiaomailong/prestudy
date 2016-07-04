@@ -69,8 +69,6 @@ brew cask install haroopad
 
 brew cask install mactex
 
-
-
 brew cask install mou
 brew cask install mplayerx
 brew cask install nodeclipse

@@ -224,7 +224,20 @@ else
   cd "/Users/Bolik/OpenSource/Tools/"
   git clone "https://github.com/hluk/CopyQ.git"
 fi
-
+# TensorFlow is an open source software library for numerical computation using data flow graphs.
+# Nodes in the graph represent mathematical operations,
+# while the graph edges represent the multidimensional data arrays (tensors) that flow between them.
+# This flexible architecture lets you deploy computation to one or more CPUs or GPUs
+# in a desktop, server, or mobile device without rewriting code.
+# TensorFlow also includes TensorBoard, a data visualization toolkit.
+# Computation using data flow graphs for scalable machine learning http://tensorflow.org
+if [ -d "/Users/Bolik/OpenSource/Tools/tensorflow" ]; then
+  cd "/Users/Bolik/OpenSource/Tools/tensorflow"
+  git pull
+else
+  cd "/Users/Bolik/OpenSource/Tools/"
+  git clone "https://github.com/tensorflow/tensorflow.git"
+fi
 
 echo "Web 相关开源项目更新"
 if [ ! -d "/Users/Bolik/OpenSource/Web" ]; then
