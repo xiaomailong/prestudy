@@ -48,17 +48,25 @@ apm install expose
 # file-icons:左边工程目录的每一个文件，如果有一个小图标表示就漂亮了，没错，就需要这个插件了。
 apm install file-icons
 
+# apm install grunt-runner
+
+apm install git-plus
+
 apm install html-to-string
 
 # apm install idiomatic-dark-syntax
 
 apm install jquery-snippets
+apm install javascript-snippets
 
-apm install language-babel
+# apm install language-babel
 
 apm install language-diff
-
+apm install language-docker
 apm install language-javascript-jsx
+apm install language-powershell
+apm install language-batch
+apm install language-unix-shell
 
 # 代码校验 自动提示你代码中不规范的地方，让你拥有更加规范的代码习惯。如果你想得到完整的信息提示，则推荐这个插件linter-jshint
 apm install linter
@@ -67,6 +75,8 @@ apm install linter-eslint
 apm install linter-jscs
 apm install linter-jshint
 apm install linter-tslint
+apm install linter-docker
+# apm install linter-shellcheck
 # markdown-format，markdown-writer：欢使用markdown来写东西的话，那么你一定会爱上在Atom上写markdown的感觉~~
 apm install markdown-format
 apm install markdown-writer

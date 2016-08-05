@@ -3,7 +3,10 @@
 # brew update
 brew update
 
-brew install android-sdk
+# homebrew-cask
+# brew tap phinze/homebrew-cask && brew install brew-cask
+
+# brew install android-sdk
 # brew install android-ndk
 # brew install android-platform-tools
 
@@ -13,67 +16,67 @@ brew install android-sdk
 # aria2 也具有断点续传功能，这使你随时能够恢复已经中断的文件下载。
 # 除了支持一般的 http(s) 和 ftp 协议外，aria2 还支持 BitTorrent 协议。
 # 这意味着，你也可以使用 aria2 来下载 torrent 文件。
-brew install aria2
+# brew install aria2
 
 # Archey for OS X 命令行中显示计算机的基本信息
-brew install archey
+# brew install archey
 
-brew install cmake
-brew install colorsvn
+brew install wget
+# brew install curl
+
+# python
+# brew install python
+# brew install python3
+
+# brew install ruby
+
+# brew install tmux
+
+# Wine是一个非常伟大的项目，能够让用户在Linux、Mac设备上运行Windows应用程序。
+# brew install wine
+# brew cask install xquartz
+
 brew install cvs
-brew install curl
+brew install subversion
+brew install colorsvn
+brew install git
+brew install hg
 
-brew install flow
+# brew install flow
 
 # GCC 是 GNU 编译器套件（GNU Compiler Collection）
 # 包括 C、C++、Objective-C、Fortran、Java、Ada 和 Go 语言的前端，
 # 也包括了这些语言的库（如 libstdc++、libgcj 等等）。
-brew install gcc
-
+# brew install gcc
 brew install gdb
-brew install git
-brew install hg
-brew install icu4c
-
+brew install cmake
 # LLVM
-brew install llvm
+# brew install llvm
 # brew install --with-clang --with-lldb llvm
 # brew install cmake pkg-config boost homebrew/x11/gtksourceviewmm3 aspell clang-format
+# brew install qt
+# brew install qt5
 
-brew install maven
+brew install go
 
-brew install mono
+# brew install docker
+
+# brew install maven
 
 # mysql
-brew install mysql
+# brew install mysql
 # MyCli 是一个 MySQL 命令行工具，支持自动补全和语法高亮。也可用于 MariaDB 和 Percona。
 #
-brew install mycli
+# brew install mycli
+# brew install postgresql
 
 brew install node
 
 # Pidgin 流行的跨平台即时通讯软件
 # brew install pidgin
 
-brew install phantomjs
-brew install postgresql
+# brew install phantomjs
 
-# python
-brew install python
-brew install python3
-
-brew install qt
-# brew install qt5
-brew install ruby
-
-brew install subversion
-
-
-brew install tmux
-# Wine是一个非常伟大的项目，能够让用户在Linux、Mac设备上运行Windows应用程序。
-# brew cask install xquartz
-brew install wine
-brew install wget
 
 # brew upgrade
 brew upgrade --all
@@ -81,5 +84,5 @@ brew upgrade --all
 # There is a cross-platform flock command here:
 # https://github.com/discoteq/flock
 # Is there a flock command on Mac OS X that manages file lock?
-brew tap discoteq/discoteq
-brew install flock
+# brew tap discoteq/discoteq
+# brew install flock

@@ -1,69 +1,60 @@
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/update.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 
 choco upgrade chocolatey
 
+choco update vcredist2005 -y
+choco update vcredist2008 -y
+choco update vcredist2010 -y
+choco update vcredist2012 -y
+choco update vcredist2013 -y
+choco update vcredist2015 -y
 
-choco install vcredist2005
- -y
-choco install vcredist2008 -y
-choco install vcredist2010 -y
-choco install vcredist2012 -y
-choco install vcredist2013 -y
-choco install vcredist2015 -y
+REM choco update dotnet3.5 -y
+REM choco update dotnet4.0 -y
+REM choco update dotnet4.6 -y
 
-choco install dotnet3.5 -y
-choco install dotnet4.0 -y
-choco install dotnet4.6 -y
+REM choco update jdk7 -y
+REM choco update jdk8 -y
 
-choco install jdk6 -y
+choco update flashplayerplugin -y
+choco update flashplayeractivex -y
 
-choco install jdk7 -y
+choco update 7zip -y
 
-choco install jdk8 -y
+REM choco update k-litecodecpackmega -y
 
+REM choco update googlechrome -y
+REM choco update firefox -y
+REM choco update opera -y
 
-choco install flashplayerplugin -y
-choco install flashplayeractivex -y
+choco update cmder -y
+choco update totalcommander -y
+choco update sysinternals -y
 
+REM choco update rapidee -y
+REM choco update autohotkey -y
 
+choco update everything -y
 
-choco install k-litecodecpackmega -y
+REM choco update teamviewer -y
 
-choco install googlechrome -y
-choco install firefox -y
-choco install opera -y
+REM choco update nodejs -y
 
-choco install cmder -y
-choco install totalcommander -y
-choco install sysinternals -y
-choco install rapidee -y
-choco install 7zip -y
-choco install autohotkey -y
-choco install everything -y
+REM choco update ruby -y
+REM choco update ruby2.devkit -y
+REM choco update python2 -y
+REM choco update pip -y
 
-choco install teamviewer -y
+REM choco update atom -y
 
-choco install nodejs -y
+REM choco update sourcetree -y
 
+choco update tortoisesvn -y
 
+REM choco update ynote -y
 
-choco install ruby -y
-choco install ruby2.devkit -y
-choco install python2 -y
-choco install pip -y
-
-
-
-choco install atom -y
-
-
-choco install sourcetree -y
-choco install tortoisesvn -y
-
-
-choco install ynote -y
-
-choco install picasa -y
+REM choco update picasa -y
 
 @echo off
 echo    Press any key to exit ...
