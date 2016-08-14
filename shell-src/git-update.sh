@@ -247,6 +247,15 @@ else
   git clone "https://github.com/ahangchen/GDLnotes.git"
 fi
 
+# StuQ 程序员技能图谱 http://skill-map.stuq.org/
+if [ -d "/Volumes/Work/OpenSource/Tools/skill-map" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/skill-map"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/TeamStuQ/skill-map.git"
+fi
+
 echo "Web 相关开源项目更新"
 if [ ! -d "/Volumes/Work/OpenSource/Web" ]; then
 mkdir "/Volumes/Work/OpenSource/Web"
@@ -542,6 +551,14 @@ else
   git clone "https://github.com/coreos/coreos-vagrant.git"
 fi
 
+# Apache Spark™
+if [ -d "/Volumes/Work/OpenSource/Hadoop/spark" ]; then
+  cd "/Volumes/Work/OpenSource/Hadoop/spark"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Hadoop/"
+  git clone "https://github.com/apache/spark.git"
+fi
 
 # # Sample 相关例程更新
 # if [ ! -d "/Volumes/Work/OpenSource/Sample" ]; then

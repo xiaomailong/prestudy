@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# brew cask install & update
+# brew cask install & install
 brew cask update
 
 # 阿里旺旺

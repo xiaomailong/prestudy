@@ -1,6 +1,6 @@
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/update.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+REM @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/update.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 
-choco upgrade chocolatey
+choco upgrade chocolatey -y
 
 choco update vcredist2005 -y
 choco update vcredist2008 -y
@@ -13,7 +13,7 @@ REM choco update dotnet3.5 -y
 REM choco update dotnet4.0 -y
 REM choco update dotnet4.6 -y
 
-REM choco update jdk7 -y
+choco update jdk7 -y
 REM choco update jdk8 -y
 
 choco update flashplayerplugin -y
