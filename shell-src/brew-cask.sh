@@ -1,106 +1,106 @@
 #!/bin/bash
 
-# brew cask install & install
+# brew cask install & update
 brew cask update
 
 # 阿里旺旺
-brew cask install aliwangwang
+brew cask update aliwangwang
 
-# brew cask install appcleaner
+# brew cask update appcleaner
 
 # Github 开源编辑器
-brew cask install atom
+brew cask update atom
 
-# brew cask install android-studio
-# brew cask install baiducloud
-brew cask install cajviewer
+# brew cask update android-studio
+# brew cask update baiducloud
+brew cask update cajviewer
 
 # 电子书管理
-brew cask install calibre
+brew cask update calibre
 
-# brew cask install clion
+# brew cask update clion
 
 # CornerStone是Mac OS X系统下非常好用的一款svn工具. 打开后点击左下角+号添加Repositorys. 收费软件！
-# brew cask install cornerstone
-# brew cask install svnx
+# brew cask update cornerstone
+# brew cask update svnx
 
 # CopyQ：跨平台的高级剪贴板管理器
 # 对于频繁的做剪切、拷贝、粘贴之类的操作，有一款剪贴板管理器将会方便不少。
 # CopyQ 支持 Linux、Windows、Mac OS X 10.9+ 系统，可跨平台运行。
 # 同时，它还具有编辑及脚本化等高级功能，实为不二之选。
-# brew cask install copyq
+# brew cask update copyq
 
-# brew cask install datagrip
+# brew cask update datagrip
 
-# The Docker Toolbox is an installer to quickly and easily install and setup a Docker environment on your computer.
-# brew cask install virtualbox
-# brew cask install vagrant
+# The Docker Toolbox is an updateer to quickly and easily update and setup a Docker environment on your computer.
+# brew cask update virtualbox
+# brew cask update vagrant
 
 # Docker is an open platform for developing, shipping, and running applications.
-# brew install docker
-brew cask install docker
-# brew cask install dockertoolbox
-brew cask install kitematic
+# brew update docker
+brew cask update docker
+# brew cask update dockertoolbox
+brew cask update kitematic
 
 # Hyper_ is a secure container cloud service.
-# brew install hyper
-# brew cask install hypercli
+# brew update hyper
+# brew cask update hypercli
 
-# brew cask install eclipse-cpp
-# brew cask install eclipse-ide
-# brew cask install eclipse-java
-# brew cask install electron
-# brew cask install flash-player
+# brew cask update eclipse-cpp
+# brew cask update eclipse-ide
+# brew cask update eclipse-java
+# brew cask update electron
+# brew cask update flash-player
 
 # Franz：聊天应用全家桶
 # Franz 目前支持 Slack、WhatsApp、HipChat、Messenger、Telegram、Hangouts、Skype、微信等，
 # 可以多次添加同一个服务，能够在 Linux、Windows、Mac OS X 等系统运行。
-# brew cask install franz
+# brew cask update franz
 
-# brew cask install google-chrome
-# brew cask install google-earth
-brew cask install ichm
+# brew cask update google-chrome
+# brew cask update google-earth
+brew cask update ichm
 
 # IntelliJ IDEA作为最智能的Java IDE，推荐所有Java开发人员使用
-# brew cask install intellij-idea
+# brew cask update intellij-idea
 
-brew cask install iterm2
-# brew cask install java
-# brew cask install java6
-# brew cask install java7
-# brew cask install liteide
+brew cask update iterm2
+# brew cask update java
+# brew cask update java6
+# brew cask update java7
+# brew cask update liteide
 
 # MacDown：The open source Markdown editor for OS X
-# brew cask install macdown
+# brew cask update macdown
 # Haroopad：is a markdown enabled document processor for creating web-friendly documents.
-# brew cask install haroopad
+# brew cask update haroopad
 
-# brew cask install mactex
+# brew cask update mactex
 
-brew cask install mou
-# brew cask install mplayerx
-# brew cask install nodeclipse
-# brew cask install opera
-brew cask install picasa
-# brew cask install pycharm
+brew cask update mou
+# brew cask update mplayerx
+# brew cask update nodeclipse
+# brew cask update opera
+brew cask update picasa
+# brew cask update pycharm
 
-brew cask install qq
-brew cask install qqinput
-brew cask install qqmacmgr
-# brew cask install qqmusic
+brew cask update qq
+brew cask update qqinput
+brew cask update qqmacmgr
+# brew cask update qqmusic
 
-# brew cask install qt-creator
-# brew cask install rstudio
-brew cask install rtx
-# brew cask install rubymine
-# brew cask install skype
-brew cask install sourcetree
-# brew cask install teamviewer
-# brew cask install textmate
+# brew cask update qt-creator
+# brew cask update rstudio
+brew cask update rtx
+# brew cask update rubymine
+# brew cask update skype
+brew cask update sourcetree
+# brew cask update teamviewer
+# brew cask update textmate
 #
-brew cask install thunder
+brew cask update thunder
 #
 
-# brew cask install visual-studio-code
-# brew cask install webstorm
-# brew cask install xquartz
+# brew cask update visual-studio-code
+# brew cask update webstorm
+# brew cask update xquartz

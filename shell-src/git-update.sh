@@ -238,6 +238,21 @@ else
   cd "/Volumes/Work/OpenSource/Tools/"
   git clone "https://github.com/tensorflow/tensorflow.git"
 fi
+
+# FastText是一个旨在协助创建文本表达和分类的可伸缩解决方案的资料库。
+# 它最主要的一个优势是适用于非常大的数据库、某种深度神经网络--其中一种经常被拿来解决文本分类问题的解决方案，这意味着它能用于协助文本处理。
+# FAIR指出，深度学习方法通常都需要缓慢的训练和测试才能实现。
+# FastText能够在几秒钟或几分钟内完成某一个大型数据库的培训。
+# 类似于它这样的系统已经在网络的垃圾邮件过滤中得到运用，相信伴随着fastText的开源，像Siri、Google Now等这样的语音助手将能更有效地对自然语言展开解析。
+# fastText is a library for efficient learning of word representations and sentence classification.
+if [ -d "/Volumes/Work/OpenSource/Tools/fastText" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/fastText"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/facebookresearch/fastText.git"
+fi
+
 # Google 深度学习笔记
 if [ -d "/Volumes/Work/OpenSource/Tools/GDLnotes" ]; then
   cd "/Volumes/Work/OpenSource/Tools/GDLnotes"

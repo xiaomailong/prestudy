@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apm update -y
+# apm update -y
 
 # brew install
 # bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/brew-install.sh
