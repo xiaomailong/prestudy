@@ -129,3 +129,4 @@ apm install atom-material-ui
 apm install atom-material-syntax
 apm install seti-ui
 apm install slack-ui
+apm install dracula-theme 

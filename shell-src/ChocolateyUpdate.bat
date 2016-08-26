@@ -1,25 +1,24 @@
-REM @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/update.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+REM @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+choco upgrade all
 
 choco upgrade chocolatey -y
 
-choco update vcredist2005 -y
-choco update vcredist2008 -y
-choco update vcredist2010 -y
-choco update vcredist2012 -y
-choco update vcredist2013 -y
-choco update vcredist2015 -y
+choco install vcredist2005 vcredist2008 vcredist2010 vcredist2012 vcredist2013 vcredist2015 -y
+
+choco install tortoisesvn -y
 
 REM choco update dotnet3.5 -y
 REM choco update dotnet4.0 -y
 REM choco update dotnet4.6 -y
 
-choco update jdk7 -y
+REM choco update jdk7 -y
 REM choco update jdk8 -y
 
-choco update flashplayerplugin -y
-choco update flashplayeractivex -y
+REM choco update flashplayerplugin -y
+REM choco update flashplayeractivex -y
 
-choco update 7zip -y
+REM choco update 7zip -y
 
 REM choco update k-litecodecpackmega -y
 
@@ -27,14 +26,14 @@ REM choco update googlechrome -y
 REM choco update firefox -y
 REM choco update opera -y
 
-choco update cmder -y
-choco update totalcommander -y
-choco update sysinternals -y
+REM choco update cmder -y
+REM choco update totalcommander -y
+REM choco update sysinternals -y
 
 REM choco update rapidee -y
 REM choco update autohotkey -y
 
-choco update everything -y
+REM choco update everything -y
 
 REM choco update teamviewer -y
 
@@ -49,7 +48,7 @@ REM choco update atom -y
 
 REM choco update sourcetree -y
 
-choco update tortoisesvn -y
+REM choco update tortoisesvn -y
 
 REM choco update ynote -y
 

@@ -3,6 +3,9 @@
 # brew cask install & update
 brew cask update
 
+# Cakebrew - Homebrew 的客户端软件。摆脱命令方便安装、查看、卸载软件。
+brew cask update cakebrew
+
 # 阿里旺旺
 brew cask update aliwangwang
 
@@ -42,6 +45,11 @@ brew cask update docker
 # brew cask update dockertoolbox
 brew cask update kitematic
 
+# HBuilder是DCloud（数字天堂）推出的一款支持HTML5的Web开发IDE。
+brew cask update hbuilder
+# DiffMerge - 可视化的文件比较（也可进行目录比较）与合并工具。
+brew cask update diffmerge
+
 # Hyper_ is a secure container cloud service.
 # brew update hyper
 # brew cask update hypercli
@@ -65,9 +73,12 @@ brew cask update ichm
 # brew cask update intellij-idea
 
 brew cask update iterm2
-# brew cask update java
-# brew cask update java6
-# brew cask update java7
+brew cask update java
+brew cask update java6
+brew cask update java7
+
+brew cask install jdownloader
+
 # brew cask update liteide
 
 # MacDown：The open source Markdown editor for OS X

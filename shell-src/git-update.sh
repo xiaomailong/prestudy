@@ -239,6 +239,25 @@ else
   git clone "https://github.com/tensorflow/tensorflow.git"
 fi
 
+# A tiny style-controlled SVG iconset
+if [ -d "/Volumes/Work/OpenSource/Tools/bytesize-icons" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/bytesize-icons"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/danklammer/bytesize-icons.git"
+fi
+
+#  这个仓库主要是收集非常好用的Mac应用程序、软件以及工具，主要面向开发者和设计师。
+if [ -d "/Volumes/Work/OpenSource/Tools/awesome-mac" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/awesome-mac"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/jaywcjlove/awesome-mac.git"
+fi
+
+
 # FastText是一个旨在协助创建文本表达和分类的可伸缩解决方案的资料库。
 # 它最主要的一个优势是适用于非常大的数据库、某种深度神经网络--其中一种经常被拿来解决文本分类问题的解决方案，这意味着它能用于协助文本处理。
 # FAIR指出，深度学习方法通常都需要缓慢的训练和测试才能实现。
