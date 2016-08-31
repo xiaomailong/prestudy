@@ -4,7 +4,7 @@
 brew cask update
 
 # Cakebrew - Homebrew 的客户端软件。摆脱命令方便安装、查看、卸载软件。
-brew cask update cakebrew
+# brew cask update cakebrew
 
 # 阿里旺旺
 brew cask update aliwangwang
@@ -114,4 +114,4 @@ brew cask update thunder
 
 # brew cask update visual-studio-code
 # brew cask update webstorm
-# brew cask update xquartz
+brew cask update xquartz

@@ -6,7 +6,7 @@ choco upgrade chocolatey -y
 
 choco install vcredist2005 vcredist2008 vcredist2010 vcredist2012 vcredist2013 vcredist2015 -y
 
-choco install tortoisesvn -y
+choco install tortoisesvn sourcetree -y
 
 REM choco update dotnet3.5 -y
 REM choco update dotnet4.0 -y

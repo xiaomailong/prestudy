@@ -33,8 +33,8 @@ brew install wget
 # brew install tmux
 
 # Wine是一个非常伟大的项目，能够让用户在Linux、Mac设备上运行Windows应用程序。
-# brew install wine
-# brew cask install xquartz
+brew cask install xquartz
+brew install wine
 
 brew install cvs
 brew install subversion
