@@ -1,5 +1,7 @@
 @echo off
 
+apm upgrade -c false
+
 REM chocolatey upgrade
 choco upgrade all -y
 
