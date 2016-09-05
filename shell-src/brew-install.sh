@@ -35,6 +35,7 @@ brew install wget
 # Wine是一个非常伟大的项目，能够让用户在Linux、Mac设备上运行Windows应用程序。
 brew cask install xquartz
 brew install wine
+brew install geckodriver
 
 brew install cvs
 brew install subversion

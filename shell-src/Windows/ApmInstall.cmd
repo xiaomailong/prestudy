@@ -69,7 +69,7 @@ apm install linter-tslint
 apm install linter-docker
 apm install linter-shellcheck
 REM markdown-format，markdown-writer：欢使用markdown来写东西的话，那么你一定会爱上在Atom上写markdown的感觉~~
-apm install markdown-format
+REM apm install markdown-format
 apm install markdown-writer
 REM merge
 apm install merge-conflicts
