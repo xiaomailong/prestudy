@@ -18,8 +18,6 @@ REM JS代码智能提示补全
 apm install atom-ternjs
 REM typescript
 apm install atom-typescript
-REM git 可视化
-apm install atomatigit
 REM Web前端
 apm install autoclose-html
 REM 目录自动完成 输入.或者/的时候，会自动提示路径和路径下的文件。非常好用！
@@ -44,7 +42,9 @@ apm install file-icons
 
 REM apm install grunt-runner
 
-apm install git-plus
+REM git 可视化
+REM apm install atomatigit
+REM apm install git-plus
 
 apm install html-to-string
 
@@ -94,37 +94,36 @@ apm install minimap-linter
 
 REM Facebook专门为React开发的IDE
 apm install nuclide
-apm install nuclide-installer
 
 REM atom-terminal：适合 Mac OSX 10.9 （Mavericks） 及以下的操作系统；
 REM atomerinal：atom-terminal 在 Mac OSX Yosmite 和 EI Capitan 下不能准确定位路径，
 REM 这个插件是对 atom-terminal 的 fork 和修改，适合版本更高的操作系统；
-apm install atom-terminal
-apm install atomerinal
+REM apm install atom-terminal
+REM apm install atomerinal
 REM 直接在atom里面写命令
-apm install terminal-panel
+REM apm install terminal-panel
 
 REM 颜色显示插件
 apm install pigments
 
-apm install project-manager
+REM apm install project-manager
 REM react
-apm install react
+REM apm install react
 REM SVG预览
 apm install svg-preview
 
 REM 主题插件
-apm install atom-gooey-syntax
-apm install atom-material-ui
-apm install atom-material-syntax
-apm install seti-ui
-apm install slack-ui
-apm install dracula-theme
-apm install nucleus-dark-ui
-apm install idiomatic-dark-syntax
-apm install batman-syntax
-apm install colorblind-syntax
-apm install native-ui
+REM apm install atom-gooey-syntax
+REM apm install atom-material-ui
+REM apm install atom-material-syntax
+REM apm install seti-ui
+REM apm install slack-ui
+REM apm install dracula-theme
+REM apm install nucleus-dark-ui
+REM apm install idiomatic-dark-syntax
+REM apm install batman-syntax
+REM apm install colorblind-syntax
+REM apm install native-ui
 
 echo    Press any key to exit ...
 Pause>nul
