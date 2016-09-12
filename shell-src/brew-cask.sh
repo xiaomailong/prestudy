@@ -77,7 +77,7 @@ brew cask update java
 brew cask update java6
 brew cask update java7
 
-brew cask install jdownloader
+brew cask update jdownloader
 
 # brew cask update liteide
 
@@ -85,10 +85,10 @@ brew cask install jdownloader
 # brew cask update macdown
 # Haroopad：is a markdown enabled document processor for creating web-friendly documents.
 # brew cask update haroopad
-
+brew cask update mou
+brew cask update typora
 # brew cask update mactex
 
-brew cask update mou
 # brew cask update mplayerx
 # brew cask update nodeclipse
 # brew cask update opera

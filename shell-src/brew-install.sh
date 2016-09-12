@@ -64,6 +64,10 @@ brew install go
 
 # brew install maven
 
+# If you need to convert files from one markup format into another, pandoc is your swiss-army knife.
+# Pandoc can convert documents in markdown, reStructuredText, textile, HTML, DocBook, LaTeX and many others.
+brew install pandoc
+
 # mysql
 # brew install mysql
 # MyCli 是一个 MySQL 命令行工具，支持自动补全和语法高亮。也可用于 MariaDB 和 Percona。
