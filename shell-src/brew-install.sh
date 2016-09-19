@@ -43,6 +43,9 @@ brew install colorsvn
 brew install git
 brew install hg
 
+# Convert text between DOS, UNIX, and Mac formats
+brew install dos2unix
+
 # brew install flow
 
 # GCC 是 GNU 编译器套件（GNU Compiler Collection）
@@ -63,10 +66,6 @@ brew install go
 # brew install docker
 
 # brew install maven
-
-# If you need to convert files from one markup format into another, pandoc is your swiss-army knife.
-# Pandoc can convert documents in markdown, reStructuredText, textile, HTML, DocBook, LaTeX and many others.
-brew install pandoc
 
 # mysql
 # brew install mysql

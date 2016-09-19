@@ -18,7 +18,7 @@ svn update B:/SvnWork/SourceCode
 svn update B:/SvnWork/WeiDianWang
 svn update B:/SvnWork/TuZhiCangKu
 
-echo    Press any key to exit ...
+echo Press any key to exit ...
 Pause>nul
 echo on
 exit

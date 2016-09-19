@@ -12,10 +12,10 @@ choco install vcredist2013 -y
 choco install vcredist2015 -y
 
 echo .Net Framework
-choco install dotnet3.5 -y
-choco install dotnet4.0 -y
-choco install dotnet4.5.2 -y
-choco install dotnet4.6.1 -y
+REM choco install dotnet3.5 -y
+REM choco install dotnet4.0 -y
+REM choco install dotnet4.5.2 -y
+REM choco install dotnet4.6.1 -y
 
 echo Java JDK & JRE
 REM choco install jdk7 -y
@@ -53,18 +53,18 @@ choco install autohotkey.portable -y
 choco install totalcommander -y
 choco install cmder -y
 choco install sysinternals -y
-choco install rapidee -y
-choco install powershell -y
+REM choco install rapidee -y
+REM choco install powershell -y
 REM choco install winrar -y
 REM choco install everything -y
 REM choco install teamviewer -y
-choco install chocolateygui -y
+REM choco install chocolateygui -y
 REM choco install cpu-z -y
 REM choco install gpu-z -y
 REM choco install crystaldiskmark -y
 
 echo Version Control
-REM choco install tortoisesvn -y
+choco install tortoisesvn -y
 REM choco install sourcetree -y
 
 echo Ruby & Python
@@ -111,7 +111,7 @@ REM choco install mariadb -y
 REM choco install redis -y
 
 echo Note
-REM choco install ynote -y
+choco install ynote -y
 REM choco install xmind -y
 
 echo Skype

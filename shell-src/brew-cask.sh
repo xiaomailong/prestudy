@@ -85,8 +85,11 @@ brew cask update jdownloader
 # brew cask update macdown
 # Haroopad：is a markdown enabled document processor for creating web-friendly documents.
 # brew cask update haroopad
-brew cask update mou
+# brew cask update mou
 brew cask update typora
+# If you need to convert files from one markup format into another, pandoc is your swiss-army knife.
+# Pandoc can convert documents in markdown, reStructuredText, textile, HTML, DocBook, LaTeX and many others.
+# brew install pandoc
 # brew cask update mactex
 
 # brew cask update mplayerx

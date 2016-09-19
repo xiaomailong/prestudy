@@ -490,6 +490,14 @@ else
   cd "/Volumes/Work/OpenSource/JavaScript/"
   git clone "https://github.com/legomushroom/mojs.git"
 fi
+# Sorts JavaScript 十大经典排序算法
+if [ -d "/Volumes/Work/OpenSource/JavaScript/Sorts" ]; then
+  cd "/Volumes/Work/OpenSource/JavaScript/Sorts"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/JavaScript/"
+  git clone "https://github.com/damonare/Sorts.git"
+fi
 
 # Hadoop 生态更新
 if [ ! -d "/Volumes/Work/OpenSource/Hadoop" ]; then
