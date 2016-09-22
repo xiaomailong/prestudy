@@ -6,17 +6,17 @@ REM chocolatey upgrade
 choco upgrade all -y
 
 REM svn update
-svn update B:/SvnWork/ChangYongWenDang
-svn update B:/SvnWork/DocLib
-svn update B:/SvnWork/GuangFuXiTong
-svn update B:/SvnWork/GuiDaoJiaoTong
-svn update B:/SvnWork/KeYanGuanLi
-svn update B:/SvnWork/PeiXunZiLiao
-svn update B:/SvnWork/Solar
-svn update B:/SvnWork/SolarLib
-svn update B:/SvnWork/SourceCode
-svn update B:/SvnWork/WeiDianWang
-svn update B:/SvnWork/TuZhiCangKu
+REM svn update B:/SvnWork/ChangYongWenDang
+REM svn update B:/SvnWork/DocLib
+REM svn update B:/SvnWork/GuangFuXiTong
+REM svn update B:/SvnWork/GuiDaoJiaoTong
+REM svn update B:/SvnWork/KeYanGuanLi
+REM svn update B:/SvnWork/PeiXunZiLiao
+REM svn update B:/SvnWork/Solar
+REM svn update B:/SvnWork/SolarLib
+REM svn update B:/SvnWork/SourceCode
+REM svn update B:/SvnWork/WeiDianWang
+REM svn update B:/SvnWork/TuZhiCangKu
 
 echo Press any key to exit ...
 Pause>nul

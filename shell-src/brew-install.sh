@@ -90,3 +90,5 @@ brew upgrade --all
 # Is there a flock command on Mac OS X that manages file lock?
 # brew tap discoteq/discoteq
 # brew install flock
+
+ brew install apr geckodriver libpng nettle subversion apr-util git libtasn1 node webp colorsvn gmp libtiff openssl wget cvs gnutls libtool pandoc wine dos2unix go libusb pkg-config xz fontconfig jasper libusb-compat python freetype jpeg little-cms2 readline gd libgphoto2 makedepend sane-backends gdbm libicns mercurial sqlite net-snmp --force

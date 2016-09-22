@@ -99,8 +99,8 @@ brew cask update picasa
 # brew cask update pycharm
 
 brew cask update qq
-brew cask update qqinput
-brew cask update qqmacmgr
+# brew cask update qqinput
+# brew cask update qqmacmgr
 # brew cask update qqmusic
 
 # brew cask update qt-creator

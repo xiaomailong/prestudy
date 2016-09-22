@@ -17,13 +17,13 @@ REM choco install dotnet4.0 -y
 REM choco install dotnet4.5.2 -y
 REM choco install dotnet4.6.1 -y
 
-echo Java JDK & JRE
+echo Java JDK JRE
 REM choco install jdk7 -y
 REM choco install jre8 -y
 REM choco install jdk8 -y
 REM choco install jre8 -y
 
-echo Flash & Media & Picture
+echo Flash Media Picture
 REM choco install flashplayerplugin -y
 REM choco install flashplayeractivex -y
 REM choco install k-litecodecpackmega -y
@@ -58,7 +58,7 @@ REM choco install powershell -y
 REM choco install winrar -y
 REM choco install everything -y
 REM choco install teamviewer -y
-REM choco install chocolateygui -y
+choco install chocolateygui -y
 REM choco install cpu-z -y
 REM choco install gpu-z -y
 REM choco install crystaldiskmark -y
@@ -67,7 +67,7 @@ echo Version Control
 choco install tortoisesvn -y
 REM choco install sourcetree -y
 
-echo Ruby & Python
+echo Ruby Python
 REM choco install ruby -y
 REM choco install ruby2.devkit -y
 REM choco install python2 -y
@@ -90,7 +90,7 @@ REM choco install android-sdk -y
 REM choco install tomcat -y
 REM choco install scala -y
 
-echo Docker & Virtual Environment
+echo Docker Virtual Environment
 REM choco install docker -y
 REM choco install virtualbox -y
 REM choco install vagrant -y
