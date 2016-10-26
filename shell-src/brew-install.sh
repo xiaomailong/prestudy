@@ -75,6 +75,7 @@ brew install go
 # brew install postgresql
 
 brew install node
+brew install yarn
 
 # Pidgin 流行的跨平台即时通讯软件
 # brew install pidgin

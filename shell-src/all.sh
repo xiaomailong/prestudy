@@ -5,7 +5,7 @@ apm upgrade -c false
 # brew install
 # bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/brew-install.sh
 brew update
-brew upgrade --all
+brew upgrade
 
 # brew cask install & update
 bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/brew-cask.sh

@@ -78,6 +78,14 @@ else
   cd "/Volumes/Work/OpenSource/Tools/"
   git clone "https://github.com/txthinking/google-hosts"
 fi
+# 最新可用的google hosts文件。
+if [ -d "/Volumes/Work/OpenSource/Tools/hosts" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/hosts"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/racaljk/hosts.git"
+fi
 # react-native
 if [ -d "/Volumes/Work/OpenSource/Tools/react-native" ]; then
   cd "/Volumes/Work/OpenSource/Tools/react-native"
@@ -271,6 +279,26 @@ else
   cd "/Volumes/Work/OpenSource/Tools/"
   git clone "https://github.com/facebookresearch/fastText.git"
 fi
+
+# artistic QR Code in Python （Animated GIF qr code）
+# Python 艺术二维码生成器 （GIF动态二维码、图片二维码）
+if [ -d "/Volumes/Work/OpenSource/Tools/qrcode" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/qrcode"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/sylnsfar/qrcode.git"
+fi
+
+# 悟空全文搜索引擎
+if [ -d "/Volumes/Work/OpenSource/Tools/wukong" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/wukong"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/huichen/wukong.git"
+fi
+
 
 # Google 深度学习笔记
 if [ -d "/Volumes/Work/OpenSource/Tools/GDLnotes" ]; then
@@ -497,6 +525,14 @@ if [ -d "/Volumes/Work/OpenSource/JavaScript/Sorts" ]; then
 else
   cd "/Volumes/Work/OpenSource/JavaScript/"
   git clone "https://github.com/damonare/Sorts.git"
+fi
+# nodePPT - 让你爱上做分享！
+if [ -d "/Volumes/Work/OpenSource/JavaScript/nodePPT" ]; then
+  cd "/Volumes/Work/OpenSource/JavaScript/nodePPT"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/JavaScript/"
+  git clone "https://github.com/ksky521/nodePPT.git"
 fi
 
 # Hadoop 生态更新
