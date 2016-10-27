@@ -29,7 +29,11 @@ cnpm update -g
 # cnpm install -g semver
 # cnpm install -g strongloop
 # cnpm install -g supervisor
-# npm install -g yarn
+npm install -g yarn
+
+# GitBook 
+yarn global add gitbook-cli
+
 
 # 在Visual Studio Code中通过Typings实现智能提示功能
 # cnpm install -g typings

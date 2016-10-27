@@ -265,6 +265,14 @@ else
   git clone "https://github.com/jaywcjlove/awesome-mac.git"
 fi
 
+# CommAI，Facebook的AI训练和测试系统
+if [ -d "/Volumes/Work/OpenSource/Tools/CommAI-env" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/CommAI-env"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "htthttps://github.com/facebookresearch/CommAI-env.git"
+fi
 
 # FastText是一个旨在协助创建文本表达和分类的可伸缩解决方案的资料库。
 # 它最主要的一个优势是适用于非常大的数据库、某种深度神经网络--其中一种经常被拿来解决文本分类问题的解决方案，这意味着它能用于协助文本处理。
@@ -504,6 +512,15 @@ if [ -d "/Volumes/Work/OpenSource/Cpp/jucipp" ]; then
 else
   cd "/Volumes/Work/OpenSource/Cpp/"
   git clone "https://github.com/cppit/jucipp"
+fi
+
+# ZeroMQ core engine in C++, implements ZMTP/3.0 http://www.zeromq.org
+f [ -d "/Volumes/Work/OpenSource/Cpp/libzmq" ]; then
+  cd "/Volumes/Work/OpenSource/Cpp/libzmq"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Cpp/"
+  git clone "https://github.com/zeromq/libzmq.git"
 fi
 
 # JavaScript 相关例程更新
