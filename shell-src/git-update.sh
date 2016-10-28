@@ -326,6 +326,17 @@ else
   git clone "https://github.com/TeamStuQ/skill-map.git"
 fi
 
+# 中国人的数据库分支AliSQL开放源代码下载 功能新增秒杀场景优化、TokuDB
+if [ -d "/Volumes/Work/OpenSource/Tools/AliSQL" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/AliSQL"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/alibaba/AliSQL.git"
+fi
+
+
+
 echo "Web 相关开源项目更新"
 if [ ! -d "/Volumes/Work/OpenSource/Web" ]; then
 mkdir "/Volumes/Work/OpenSource/Web"
