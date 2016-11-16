@@ -482,6 +482,14 @@ else
   cd "/Volumes/Work/OpenSource/Cpp/"
   git clone "https://github.com/svn2github/googlemock.git"
 fi
+# The C based gRPC (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)
+if [ -d "/Volumes/Work/OpenSource/Cpp/grpc" ]; then
+  cd "/Volumes/Work/OpenSource/Cpp/grpc"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Cpp/"
+  git clone "https://github.com/grpc/grpc.git"
+fi
 # googletest
 if [ -d "/Volumes/Work/OpenSource/Cpp/googletest" ]; then
   cd "/Volumes/Work/OpenSource/Cpp/googletest"
