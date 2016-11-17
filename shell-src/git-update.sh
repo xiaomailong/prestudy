@@ -57,6 +57,15 @@ else
   cd "/Volumes/Work/OpenSource/ES6/"
   git clone "https://github.com/addyosmani/es6-tools"
 fi
+# 全栈工程师培训材料，帮助学习者掌握全栈开发的基本知识，承担简单 Web 应用的前后端开发。
+# 一共四讲，适合两天的训练营，请先阅读《培训准备》。培训时，需要完成课堂练习。
+if [ -d "/Volumes/Work/OpenSource/ES6/jstraining" ]; then
+  cd "/Volumes/Work/OpenSource/ES6/jstraining"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/ES6/"
+  git clone "https://github.com/ruanyf/jstraining.git"
+fi
 
 echo "Tools 相关开源项目新"
 if [ ! -d "/Volumes/Work/OpenSource/Tools" ]; then
