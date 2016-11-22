@@ -280,7 +280,7 @@ if [ -d "/Volumes/Work/OpenSource/Tools/CommAI-env" ]; then
   git pull
 else
   cd "/Volumes/Work/OpenSource/Tools/"
-  git clone "htthttps://github.com/facebookresearch/CommAI-env.git"
+  git clone "https://github.com/facebookresearch/CommAI-env.git"
 fi
 
 # FastText是一个旨在协助创建文本表达和分类的可伸缩解决方案的资料库。
@@ -535,7 +535,7 @@ else
 fi
 
 # ZeroMQ core engine in C++, implements ZMTP/3.0 http://www.zeromq.org
-f [ -d "/Volumes/Work/OpenSource/Cpp/libzmq" ]; then
+if [ -d "/Volumes/Work/OpenSource/Cpp/libzmq" ]; then
   cd "/Volumes/Work/OpenSource/Cpp/libzmq"
   git pull
 else

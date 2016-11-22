@@ -9,6 +9,7 @@ brew link --force openssl
 brew install mono
 
 # Install Visual Studio Code
+# brew cask install visual-studio
 brew cask install visual-studio-code
 
 # 安装 .NET 版本管理器（DNVM）

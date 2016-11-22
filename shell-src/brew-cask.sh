@@ -14,7 +14,8 @@ brew cask update aliwangwang
 # Github 开源编辑器
 brew cask update atom
 
-# brew cask update android-studio
+brew cask update android-studio
+
 # brew cask update baiducloud
 brew cask update cajviewer
 
@@ -115,6 +116,7 @@ brew cask update sourcetree
 brew cask update thunder
 #
 
-# brew cask update visual-studio-code
+brew cask update visual-studio
+brew cask update visual-studio-code
 # brew cask update webstorm
 brew cask update xquartz
