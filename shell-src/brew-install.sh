@@ -27,6 +27,7 @@ brew install wget
 # python
 # brew install python
 # brew install python3
+brew install python numpy scipy matplotlib
 
 # brew install ruby
 

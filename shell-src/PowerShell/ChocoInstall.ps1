@@ -1,9 +1,9 @@
-# �����ȴ�PowerShell�����ļ�Ȩ��
+﻿# 请首先打开PowerShell运行文件权限
 #Get-ExecutionPolicy -List
 #Get-ExecutionPolicy -Scope CurrentUser
 #Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
-# ��װChocolate
+# 安装Chocolate
 # PowerShell.exe (Ensure Get-ExecutionPolicy is at least RemoteSigned)
 #iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 # PowerShell v3+ (Ensure Get-ExecutionPolicy is at least RemoteSigned)
@@ -79,9 +79,24 @@ choco install sourcetree -y
 # Ruby Python
 # choco install ruby -y
 # choco install ruby2.devkit -y
-# choco install python2 -y
 # choco install python -y
-# choco install pip -y
+choco install python2 -y
+#choco install pip -y
+python -m pip install --upgrade pip
+# Numpy是Python中用于科学计算的核心库。它提供了高性能的多维数组对象，以及相关工具。
+pip install NumPy
+# SciPy基于Numpy，提供了大量的计算和操作数组的函数，这些函数对于不同类型的科学和工程计算非常有用。
+pip install atlas
+pip install scipy
+# Pillow 是 PIL 的替代版本，PIL 软件包提供了基本的图像处理功能，
+# 如：改变图像大小，旋转图像，图像格式转换，色场空间转换，图像增强，直方图处理，插值和滤波等等。
+pip install Pillow
+# 
+pip install Matplotlib
+# 
+pip install IPython
+# Installing Jupyter Notebook
+pip install jupyter
 
 # Develop Tools
 choco install nodejs -y
