@@ -6,9 +6,7 @@ brew update
 # homebrew-cask
 # brew tap phinze/homebrew-cask && brew install brew-cask
 
-# brew install android-sdk
-# brew install android-ndk
-# brew install android-platform-tools
+
 
 # Aria2 是 Mac/Linux 下一个不错的高速下载工具。
 # 由于它具有分段下载引擎，所以支持从多个地址或者从一个地址的多个连接来下载同一个文件。

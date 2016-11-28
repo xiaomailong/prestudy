@@ -14,6 +14,8 @@ brew cask update aliwangwang
 # Github 开源编辑器
 brew cask update atom
 
+# The Android Platform-Tools need to be installed as part of the SDK
+# brew install android-sdk android-ndk
 brew cask update android-studio
 
 # brew cask update baiducloud
