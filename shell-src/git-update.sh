@@ -350,7 +350,7 @@ if [ -d "/Volumes/Work/OpenSource/Tools/md2googleslides" ]; then
   git pull
 else
   cd "/Volumes/Work/OpenSource/Tools/"
-  git clone "https://github.com/alibaba/md2googleslides.git"
+  git clone "https://github.com/googlesamples/md2googleslides.git"
 fi
 
 echo "Web 相关开源项目更新"

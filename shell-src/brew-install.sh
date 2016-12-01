@@ -6,7 +6,13 @@ brew update
 # homebrew-cask
 # brew tap phinze/homebrew-cask && brew install brew-cask
 
-
+# bash-completion
+brew install bash-completion
+brew tap homebrew/completions
+# add to ~/.bash_profile
+# if [ -f $(brew --prefix)/etc/bash_completion ]; then
+# . $(brew --prefix)/etc/bash_completion
+# fi
 
 # Aria2 是 Mac/Linux 下一个不错的高速下载工具。
 # 由于它具有分段下载引擎，所以支持从多个地址或者从一个地址的多个连接来下载同一个文件。
