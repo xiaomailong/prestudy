@@ -55,7 +55,18 @@ Notepad Dockerfile
 docker build -t docker-whale .
 
 # 搜索docker镜像
-docker search coreos
+docker search centos
 # 拉取一个镜像
-docker pull steigr/coreos
 docker pull centos
+# docker 支持最好的
+docker pull ubuntu
+docker pull nginx
+# 
+docker pull postgres
+
+# 启动Linux版 SQL Server
+docker pull microsoft/mssql-server-linux
+docker pull microsoft/mssql-server-windows
+docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Pass@word8' -p 1433:1433 -v /B/mssql -d microsoft/mssql-server-linux
+# 使用sqlcmd连接数据库
+sqlcmd -S localhost -U SA -P 'Pass@word8'
