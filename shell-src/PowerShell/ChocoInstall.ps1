@@ -113,6 +113,7 @@ choco install atom -y
 # choco install android-sdk -y
 # choco install tomcat -y
 # choco install scala -y
+choco install pycharm -y
 
 # Docker Virtual Environment
 # choco install docker -y

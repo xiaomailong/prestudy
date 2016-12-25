@@ -59,3 +59,12 @@ docker search coreos
 # 拉取一个镜像
 docker pull steigr/coreos
 docker pull centos
+
+# 运行Python交互环境
+docker run -it --rm python:alpine
+docker run -it --rm python:2-alpine
+
+# 运行Python3脚本
+docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:alpine python your-daemon-or-script.py
+# 运行Python2脚本
+docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:2-alpine python your-daemon-or-script.py
