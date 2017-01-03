@@ -99,7 +99,7 @@ brew cask update typora
 # brew cask update nodeclipse
 # brew cask update opera
 brew cask update picasa
-# brew cask update pycharm
+brew cask update pycharm
 
 brew cask update qq
 # brew cask update qqinput
