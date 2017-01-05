@@ -704,6 +704,15 @@ else
   git clone "https://github.com/apache/spark.git"
 fi
 
+# Apache CarbonData (Incubating)
+if [ -d "/Volumes/Work/OpenSource/Hadoop/incubator-carbondata" ]; then
+  cd "/Volumes/Work/OpenSource/Hadoop/incubator-carbondata"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Hadoop/"
+  git clone "https://github.com/apache/incubator-carbondata.git"
+fi
+
 # # Sample 相关例程更新
 # if [ ! -d "/Volumes/Work/OpenSource/Sample" ]; then
 # mkdir "/Volumes/Work/OpenSource/Sample"
