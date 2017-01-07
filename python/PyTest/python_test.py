@@ -26,3 +26,17 @@ def test_eq_vs_is():
     assert 1000 is 1000         # 引用相同
     assert 1000 == 10**3        # 值相同
     assert 1000 is not 10**3    # 通过计算得到的赋值，不会使用缓存区
+
+
+# “Make a script both importable and executable”
+# 如果我们是直接执行某个.py文件的时候，该文件中"__name__ == '__main__'"，
+# 如果从另一个.py文件通过import导入该文件的时候，"__name__ != '__main__'"
+# 这时__name__ == py文件的名字。
+# 这个功能还有一个用处：
+#     调试代码的时候，在”if __name__ == '__main__'“中加入一些我们的调试代码，
+#     我们可以让外部模块调用的时候不执行我们的调试代码，
+#     但是如果我们想排查问题的时候，直接执行该模块文件，调试代码能够正常运行！
+def main():
+    print("we are in %s"%__name__)
+    if __name__ == '__main__':
+        main()
