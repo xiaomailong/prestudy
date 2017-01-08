@@ -72,6 +72,6 @@ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/sr
 # 构建deepleaning
 cd B:\OpenSource\WaterBolik\prestudy\docker\deepleaning\
 docker build -t deeplearning .
-docker run -it -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest deeplearing sh
+docker run -it -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest deeplearning sh
 
 
