@@ -87,7 +87,7 @@ apm install minimap-highlight-selected
 apm install minimap-linter
 
 # Facebook专门为React开发的IDE
-apm install nuclide
+# apm install nuclide
 
 # 颜色显示插件
 apm install pigments

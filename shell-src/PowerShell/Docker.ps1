@@ -70,8 +70,8 @@ docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/sr
 docker run -it --rm --name my-running-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp python:2-alpine python your-daemon-or-script.py
 
 # 构建deepleaning
-cd B:\OpenSource\WaterBolik\prestudy\docker\deepleaning\
-docker build -t deeplearning .
-docker run -it -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest deeplearning sh
+cd B:\OpenSource\WaterBolik\prestudy\docker\python\
+docker build -t bpython .
+docker run -it --rm  -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython 
 
 

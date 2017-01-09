@@ -1,20 +1,28 @@
-FROM alpine
+FROM alpine:latest
 
 MAINTAINER Bolik WaterBolik@163.com
 
-RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main" > /etc/apk/repositories
+ENV LANG C.UTF-8
 
-RUN apk add --update \
+RUN set -ex \
+  # 使用清华apk镜像
+  && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main" > /etc/apk/repositories \
+  && apk add --update --no-cache \
+    # install ca-certificates so that HTTPS works consistently
+    ca-certificates \
     bash \
     python \
-    # python-dev \
+    python-dev \
     py-pip \
-    gcc \
-    # mysql-dev \
     build-base \
-  # && pip install Flask \
-  # && pip install MySQL-python \
-  && pip install \
+    gcc \
+    freetype-dev \
+    gfortran \
+    musl-dev \
+    g++ \
+  && ln -s /usr/include/locale.h /usr/include/xlocale.h \
+  && pip install --upgrade pip \
     pytest \
-    numpy \
-  && rm -rf /var/cache/apk/*
+    numpy 
+
+CMD ["bash"]
