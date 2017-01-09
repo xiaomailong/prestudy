@@ -1,5 +1,5 @@
 # FROM python:3.6-alpine
-FROM alpine
+# FROM alpine
 
 MAINTAINER Bolik WaterBolik@163.com
 

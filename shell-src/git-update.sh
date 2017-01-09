@@ -572,6 +572,16 @@ else
   git clone "https://github.com/zeromq/libzmq.git"
 fi
 
+# NN++ NNplusplus
+# A small and easy to use neural net implementation for C++. Just download and #include!
+if [ -d "/Volumes/Work/OpenSource/Cpp/NNplusplus" ]; then
+  cd "/Volumes/Work/OpenSource/Cpp/NNplusplus"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Cpp/"
+  git clone "https://github.com/stagadish/NNplusplus.git"
+fi
+
 # JavaScript 相关例程更新
 if [ ! -d "/Volumes/Work/OpenSource/JavaScript" ]; then
 mkdir "/Volumes/Work/OpenSource/JavaScript"
