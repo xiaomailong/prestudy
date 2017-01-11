@@ -2,6 +2,11 @@ FROM alpine:3.5
 
 MAINTAINER Bolik WaterBolik@163.com
 
+# ensure local python is preferred over distribution python
+ENV PATH /usr/local/bin:$PATH
+
+# http://bugs.python.org/issue19846
+# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
 ENV LANG C.UTF-8
 
 # alpine 3.5 defaule apk list
@@ -44,18 +49,23 @@ ENV LANG C.UTF-8
     #   * gdal: For some Geo capabilities
     #   * geos: For some Geo capabilities
 
+# apk 镜像服务器地址
+    # https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/main
+    # https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/community
+    # default repositories 
+    # http://dl-cdn.alpinelinux.org/alpine/v3.5/testing
+    # http://dl-cdn.alpinelinux.org/alpine/v3.5/community
+    # http://dl-cdn.alpinelinux.org/alpine/v3.5/main
+# pip 镜像服务器地址
+    # https://pypi.tuna.tsinghua.edu.cn/simple    
+    # 修改或创建配置文件'~/.pip/pip.conf'，内容如下：
+    #     [global]
+    #     index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+
 RUN set -ex \
   # 使用清华apk镜像
-  && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/main" >> /etc/apk/repositories \
-
-  # replacing default repositories with edge ones
-  # && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" > /etc/apk/repositories \
-  # && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-  # && echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
-
-  # Add the packages, with a CDN-breakage fallback if needed
-  # && apk add --no-cache $PACKAGES || \
-  #   (sed -i -e 's/dl-cdn/dl-4/g' /etc/apk/repositories && apk add --no-cache $PACKAGES) \
+  && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/main" > /etc/apk/repositories \
+  && echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/community" >> /etc/apk/repositories \
 
   && apk update \
   && apk add --update --no-cache \
@@ -66,29 +76,29 @@ RUN set -ex \
     #   * bash: so we can access /bin/bash
     bash \
     #   * python2: the binaries themselves
-    python \
     #   * python2-dev: are used for gevent e.g.
-    python-dev \
-    py-pip \
+    python2 \
+    python2-dev \
+    py2-pip \
     #   * build-base: used so we include the basic development packages (gcc)
     build-base \
+    g++ \
     #   * linux-headers: commonly needed, and an unusual package name from Alpine.
     linux-headers \
     #   * musl: standard C library
-    musl \
-    # lapack-dev \ 
-    #   * freetype-dev: For Pillow: TrueType support
+    musl-dev \
+    #   * lapack-dev: For scipy
+    lapack-dev \ 
+    #   * freetype-dev: For matplotlib
     freetype-dev \
     gfortran \
-    # g++ \
   # for install numpy 
   && ln -s /usr/include/locale.h /usr/include/xlocale.h \
-  && pip install --no-cache-dir --upgrade --force-reinstall pip \
-  && pip install --no-cache-dir --upgrade --force-reinstall \
-    numpy \
-    scipy \
-    pandas \
-    matplotlib \
-    pytest 
+  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip \
+  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir numpy \
+  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir scipy \
+  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pandas \
+  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir matplotlib \
+  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pytest 
 
 CMD ["bash"]

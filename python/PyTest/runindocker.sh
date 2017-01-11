@@ -7,4 +7,4 @@
 # docker build -t bpython .
 
 # 执行docker
-docker run -it --rm  -v /Volumes/Work/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython 
+docker run -it --rm  -v /Volumes/Work/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest cpython 
