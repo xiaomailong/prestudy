@@ -7,7 +7,7 @@
 
 import numpy as numpy
 
-def testArray():
+def test_Array():
     a = [1, 2, 3, 4]
     b = numpy.array(a)                         # array([1, 2, 3, 4])
     assert type(b) == numpy.ndarray   # <type 'numpy.ndarray'>
