@@ -77,9 +77,9 @@ RUN set -ex \
     bash \
     #   * python2: the binaries themselves
     #   * python2-dev: are used for gevent e.g.
-    python2 \
-    python2-dev \
-    py2-pip \
+    python3 \
+    python3-dev \
+    py3-pip \
     #   * build-base: used so we include the basic development packages (gcc)
     build-base \
     g++ \
@@ -94,11 +94,15 @@ RUN set -ex \
     gfortran \
   # for install numpy 
   && ln -s /usr/include/locale.h /usr/include/xlocale.h \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir numpy \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir scipy \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pandas \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir matplotlib \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pytest 
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir numpy \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir scipy \
+  # pre request for pandas for python3   
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pytz \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pandas \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir matplotlib \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir nose 
+  # && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pytest 
+
 
 CMD ["bash"]
