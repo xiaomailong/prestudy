@@ -95,14 +95,14 @@ RUN set -ex \
   # for install numpy 
   && ln -s /usr/include/locale.h /usr/include/xlocale.h \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir numpy \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir scipy \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade numpy \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade scipy \
   # pre request for pandas for python3   
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pytz \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pandas \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir matplotlib \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir nose 
-  # && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir pytest 
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytz \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pandas \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade matplotlib \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade nose \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytest 
 
 
 CMD ["bash"]
