@@ -94,6 +94,14 @@ def test_list_generator():
 #   使用循环对生成器对象进行遍历（推荐，不会抛出StopIeration异常）
 #   调用生成器对象的send()方法，可以给yield传值（第一次必须是None），其他功能同next()方法
 
+# generator函数和普通函数的区别
+#   generator函数包含一个以上的yield声明
+#   generator函数被调用的时候，会返回一个iterator对象，但是函数并不会立即开始执行
+#   __iter__()和__next__()方法被自动实现，所以可以使用next()函数对返回的此iterator对象进行迭代
+#   一旦一个generator 执行到yield语句，generator函数暂停，程序控制流被转移到调用方
+#   在对generator的连续调用之间，generator的本地变量和状态会被保存
+#   最终，generator函数终止，再调用generator会引发StopIteration异常
+
 ret = ''
 def test_yield_generator():
     # 使用类似列表生成式的方式构造生成器
@@ -168,8 +176,8 @@ def test_list_vs_yield():
     print('生成器返回结果花费的时间： %s' % t2)
     print('生成器返回结果占用内存大小：%s' % m2)
     
-    assert t1 > t2 * 100000
-    assert m1 > m2 * 900000
+    assert t1 > t2 * 80000
+    assert m1 > m2 * 800000
 
 from collections import Iterable
 from collections import Iterator
