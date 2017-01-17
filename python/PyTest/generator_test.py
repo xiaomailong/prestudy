@@ -4,11 +4,11 @@
 import pytest
 
 # Iterable、Iterator与Generator之间的关系
-# 生成器对象既是可迭代对象，也是生成器： 
+# 生成器对象既是可迭代对象，也是生成器：
 #   生成器不但可以作用与for循环，还可以被next()函数不断调用并返回下一个值，
 #   直到最后抛出StopIteration错误表示无法继续返回下一个值了。
 #   生成器同时满足可迭代对象和迭代器的定义；
-# 迭代器对象一定是可迭代对象，反之则不一定： 
+# 迭代器对象一定是可迭代对象，反之则不一定：
 #   例如list、dict、str等集合数据类型是可迭代对象，但不是迭代器，但是它们可以通过iter()函数生成一个迭代器对象。
 # 也就是说：迭代器、生成器和可迭代对象都可以用for循环去迭代，生成器和迭代器还可以被next()方函数调用并返回下一个值。
 
@@ -103,6 +103,8 @@ def test_list_generator():
 #   最终，generator函数终止，再调用generator会引发StopIteration异常
 
 ret = ''
+
+
 def test_yield_generator():
     # 使用类似列表生成式的方式构造生成器
     g1 = (2 * n + 1 for n in range(3, 6))
@@ -115,12 +117,12 @@ def test_yield_generator():
     assert list(g1) == list(g2)
     # 使用next()方法遍历生成器
     for x1 in g1:
-        assert x1 == next(g2)    
+        assert x1 == next(g2)
     # 生成器在语境中只能被循环调用一次
     # 如果在调用会抛出StopIteration异常
     with pytest.raises(StopIteration):
         next(g1)
-    
+
     # 调用生成器对象的send()方法
     #   next()会调用yield，但不给它传值
     #   send()会调用yield，也会给它传值（该值将成为当前yield表达式的结果值）
@@ -128,7 +130,7 @@ def test_yield_generator():
     #      当然也可以在调用send()方法之前先调用一次next()方法，目的是让生成器先进入yield表达式。
     def my_range3(start, end):
         for n in range(start, end):
-            ret = yield 2*n + 1
+            ret = yield 2 * n + 1
             print(ret)
 
     g3 = my_range3(3, 6)
@@ -143,8 +145,8 @@ def test_yield_generator():
     assert next(g4) == 9
     assert next(g4) == 11
     # assert ret == 'test'
-   
-    
+
+
 # List生成式与yield生成器区别
 # 列表生成式是直接创建一个新的list，它会一次性地把所有数据都存放到内存中，这会存在以下几个问题：
 #   内存容量有限，因此列表容量是有限的；
@@ -156,6 +158,8 @@ def test_yield_generator():
 
 import time
 import sys
+
+
 def test_list_vs_yield():
     time_start1 = time.time()
     g1 = [x for x in range(10000000)]
@@ -175,7 +179,7 @@ def test_list_vs_yield():
     m2 = sys.getsizeof(g2)
     print('生成器返回结果花费的时间： %s' % t2)
     print('生成器返回结果占用内存大小：%s' % m2)
-    
+
     assert t1 > t2 * 80000
     assert m1 > m2 * 800000
 
@@ -186,9 +190,12 @@ from collections import Iterator
 # 直到没有数据可以返回时抛出StopIteration异常错误。
 # 可以把这个数据流看做一个有序序列，但我们无法提前知道这个序列的长度。
 # 同时，Iterator的计算是惰性的，只有通过next()函数时才会计算并返回下一个数据。
+
+
 def test_iterator():
     assert isinstance([], Iterable)
     assert isinstance((x for x in range(5)), Iterator)
+
     def my_range(start, end):
         for x in range(start, end):
             yield x

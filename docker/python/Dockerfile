@@ -75,11 +75,6 @@ RUN set -ex \
     ca-certificates \
     #   * bash: so we can access /bin/bash
     bash \
-    #   * python2: the binaries themselves
-    #   * python2-dev: are used for gevent e.g.
-    python3 \
-    python3-dev \
-    py3-pip \
     #   * build-base: used so we include the basic development packages (gcc)
     build-base \
     g++ \
@@ -92,6 +87,12 @@ RUN set -ex \
     #   * freetype-dev: For matplotlib
     freetype-dev \
     gfortran \
+    #   * python2: the binaries themselves
+    #   * python2-dev: are used for gevent e.g.
+    python3 \
+    python3-dev \
+    py3-pip \
+    py3-pillow \
   # for install numpy 
   && ln -s /usr/include/locale.h /usr/include/xlocale.h \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip \

@@ -21,6 +21,8 @@ array([1, 2, 3, 4])
 <type 'numpy.ndarray'>
 >>>
 '''
+
+
 def numpy_test():
     import numpy as np
     a = [1, 2, 3, 4]
