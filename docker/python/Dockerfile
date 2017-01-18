@@ -52,12 +52,12 @@ ENV LANG C.UTF-8
 # apk 镜像服务器地址
     # https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/main
     # https://mirror.tuna.tsinghua.edu.cn/alpine/v3.5/community
-    # default repositories 
+    # default repositories
     # http://dl-cdn.alpinelinux.org/alpine/v3.5/testing
     # http://dl-cdn.alpinelinux.org/alpine/v3.5/community
     # http://dl-cdn.alpinelinux.org/alpine/v3.5/main
 # pip 镜像服务器地址
-    # https://pypi.tuna.tsinghua.edu.cn/simple    
+    # https://pypi.tuna.tsinghua.edu.cn/simple
     # 修改或创建配置文件'~/.pip/pip.conf'，内容如下：
     #     [global]
     #     index-url = https://pypi.tuna.tsinghua.edu.cn/simple
@@ -83,7 +83,7 @@ RUN set -ex \
     #   * musl: standard C library
     musl-dev \
     #   * lapack-dev: For scipy
-    lapack-dev \ 
+    lapack-dev \
     #   * freetype-dev: For matplotlib
     freetype-dev \
     gfortran \
@@ -93,17 +93,21 @@ RUN set -ex \
     python3-dev \
     py3-pip \
     py3-pillow \
-  # for install numpy 
+  # for install numpy
   && ln -s /usr/include/locale.h /usr/include/xlocale.h \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade numpy \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade scipy \
-  # pre request for pandas for python3   
+  # pre request for pandas for python3
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytz \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pandas \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade matplotlib \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade nose \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytest 
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytest
 
 
 CMD ["bash"]
+
+# $ cd /Volumes/Work/OpenSource/WaterBolik/prestudy/docker/python
+# $ docker build -t bpython3 .
+# $ docker run -it --rm  -v /Volumes/Work/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3
