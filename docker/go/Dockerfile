@@ -11,12 +11,16 @@ RUN set -ex \
 
   && apk update \
   && apk add --update --no-cache \
+    ca-certificates \
     bash \
-    musl-dev \
-    go 
+		gcc \
+		musl-dev \
+		openssl \
+		go 
 
 CMD ["bash"]
 
 # $ cd /Volumes/Work/OpenSource/WaterBolik/prestudy/docker/go
 # $ docker build -t go .
 # $ docker run -it --rm  -v /Volumes/Work/OpenSource/WaterBolik/prestudy/go-src:/go-src go
+# docker run -it --rm  -v /B/OpenSource/WaterBolik/prestudy/go-src:/go-src go
