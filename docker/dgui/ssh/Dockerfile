@@ -1,16 +1,16 @@
 # https://github.com/rogaha/docker-desktop
 
-# FROM ubuntu
+FROM ubuntu
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV HOME /home/ubuntu
+ENV DEBIAN_FRONTEND noninteractive \
+    HOME /home/ubuntu
 
 RUN set -ex \
   # 使用阿里apk镜像
-  && echo "deb http://mirrors.aliyun.com/ubuntu trusty main universe" > /etc/apt/sources.list \
-  && echo "deb http://mirrors.aliyun.com/ubuntu trusty-updates main universe" >> /etc/apt/sources.list \
+  # && echo "deb http://mirrors.aliyun.com/ubuntu trusty main universe" > /etc/apt/sources.list \
+  # && echo "deb http://mirrors.aliyun.com/ubuntu trusty-updates main universe" >> /etc/apt/sources.list \
   && apt-get update \
 
   # Installing the environment required: xserver, xdm, flux box, roc-filer and ssh
@@ -42,7 +42,7 @@ RUN set -ex \
   && apt-get install -y libreoffice-base firefox libreoffice-gtk libreoffice-calc xterm \
 
   # Set locale (fix the locale warnings)
-  && localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 || : \
+  && localedef -v -c -i en_US -f UTF-8 en_US.UTF-8 || : 
 
 # Copy the files into the container
 ADD . /src

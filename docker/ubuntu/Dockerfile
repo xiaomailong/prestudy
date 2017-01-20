@@ -58,14 +58,14 @@ RUN set -ex \
   
   # -qq隐藏更新Apt缓存过程中打印的日志
   # -y参数来消除更新过程中所有向用户提问的部分
-  && apt-get update -qqy \
+  && apt-get update -y \
+  && apt-get upgrade -y \
 
   # 配置中文语言 --no-install-recommends
   && /usr/share/locales/install-language-pack zh_CN \
   && locale-gen zh_CN.UTF-8 \
   && dpkg-reconfigure --frontend noninteractive locales \
   && apt-get -qqy install language-pack-zh-hans \
-
   # 安装基本字体 --no-install-recommends
   && apt-get -qqy install \
     fonts-ipafont-gothic \
@@ -76,7 +76,6 @@ RUN set -ex \
   # 安装文泉驿微米黑字体
   && apt-get -qqy install ttf-wqy-microhei \
   && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
-
   # 设置时区
   && echo "Asia/Shanghai" | tee /etc/timezone \
   && dpkg-reconfigure --frontend noninteractive tzdata \
@@ -88,7 +87,7 @@ RUN set -ex \
   && echo 'bolik:pass@word8' | chpasswd \
 
   # 安装其他基础软件 --no-install-recommends 
-  && apt-get -qqy install \
+  && apt-get -y install \
     curl \
     wget \
     # Xvfb的全称是“X virtual frame buffer”，是一种X11服务端的特殊实现。

@@ -41,6 +41,7 @@ brew install python numpy scipy matplotlib
 brew cask install xquartz
 brew install wine
 brew install geckodriver
+brew install gtkglext
 
 brew install cvs
 brew install subversion
