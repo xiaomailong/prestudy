@@ -22,8 +22,12 @@ RUN set -ex \
   && apt-get update -y \
 
   # 安装软件 eclipse
-  && apt-get -y --fix-missing install \     
-    firefox \
+  && apt-get -y --fix-missing install \  
+    firefox \   
+    x11-xserver-utils \
+  
+  # 允许所有用户访问X11服务
+  && xhost + \
 
   # $ id $User
   # 用你自己的 uid gid 替换下面的值

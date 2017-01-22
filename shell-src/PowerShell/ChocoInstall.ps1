@@ -141,3 +141,10 @@ choco install pycharm -y
 
 # Skype
 # choco install skype -y
+
+# MobaXterm 远程计算的终极工具箱
+# MobaXterm 提供了所有重要的远程网络工具 （如SSH、 X11、 RDP、 VNC、 FTP、 MOSH 等等），以及 Windows 桌面上的 Unix 命令（bash、 ls、 cat、sed、 grep、 awk、 rsync等等），
+choco install mobaxterm -y
+
+# Cygwin 是一款GNU和开源工具的集合，提供类似一个Windows平台下Linux的功能。
+choco install cygwin -y
