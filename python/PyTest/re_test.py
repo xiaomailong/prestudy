@@ -2,6 +2,12 @@
 # -*- coding:utf-8 -*-
 
 import re
+# import regex as re
+
+# re 模块的一般使用步骤如下：
+#   使用 compile 函数将正则表达式的字符串形式编译为一个 Pattern
+#   对象通过 Pattern 对象提供的一系列方法对文本进行匹配查找，获得匹配结果（一个 Match 对象）
+#   最后使用 Match 对象提供的属性和方法获得信息，根据需要进行其他的操作
 
 
 def test_re_compile():
@@ -48,14 +54,19 @@ def test_re_pattern():
     #       flags: 编译时用的匹配模式。数字形式。
     #       groups: 表达式中分组的数量。
     #       groupindex: 以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。
-    p = re.compile(r'(\w+) (\w+)(?P<sign>.*)', re.DOTALL)
-    assert p.pattern == '(\w+) (\w+)(?P<sign>.*)'
+    p = re.compile(r'(\w+) (\w+)(?P<sign>.*)', re.S)
+    assert p.pattern == r'(\w+) (\w+)(?P<sign>.*)'
+    # 48 = re.compile('(\\w+) (\\w+)(?P<sign>.*)', re.S).flags
     assert p.flags == 48
+    # 8240 = regex.Regex('(\\w+) (\\w+)(?P<sign>.*)', flags=regex.S | regex.V0).flags
+    # assert p.flags == 8240
     assert p.groups == 3
     assert p.groupindex == {'sign': 3}
 
 
 def test_re_match():
+    # match 方法用于查找字符串的头部（也可以指定起始位置），
+    #   它是一次匹配，只要找到了一个匹配的结果就返回，而不是查找所有匹配的结果。
     # match(string[, pos[, endpos]]) | re.match(pattern, string[, flags]):
     #   这个方法将从string的pos下标处起尝试匹配pattern；
     #   如果pattern结束时仍可匹配，则返回一个Match对象；
@@ -111,7 +122,10 @@ def test_re_match():
     #   \id与\g<id>是等价的；但\10将被认为是第10个分组，如果你想表达\1之后是字符'0'，只能使用\g<1>0。
     assert m.expand(r'\2 \1\3') == 'world hello!'
 
+
 def test_re_search():
+    # search 方法用于查找字符串的任何位置，
+    #   它也是一次匹配，只要找到了一个匹配的结果就返回，而不是查找所有匹配的结果
     # search(string[, pos[, endpos]]) | re.search(pattern, string[, flags]):
     #   这个方法用于查找字符串中可以匹配成功的子串。
     #   从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；
@@ -131,16 +145,8 @@ def test_re_search():
     assert m.span() == (0, 4)
 
 
-def test_re_split():
-    # split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
-    #   按照能够匹配的子串将string分割后返回列表。
-    #       maxsplit用于指定最大分割次数，不指定将全部分割。
-    p = re.compile(r'\d+')
-    assert p.split(r'one1two2three3four4') == [
-        'one', 'two', 'three', 'four', '']
-
-
 def test_re_findall():
+    # 搜索整个字符串，获得所有匹配的结果。
     # findall(string[, pos[, endpos]]) | re.findall(pattern, string[, flags]):
     #   搜索string，以列表形式返回全部能匹配的子串。
     p = re.compile(r'\d+')
@@ -148,6 +154,8 @@ def test_re_findall():
 
 
 def test_re_finditer():
+    # finditer 方法的行为跟 findall 的行为类似，也是搜索整个字符串，获得所有匹配的结果。
+    #   但它返回一个顺序访问每一个匹配结果（Match 对象）的迭代器。
     # finditer(string[, pos[, endpos]]) | re.finditer(pattern, string[, flags]):
     #   搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。
     p = re.compile(r'\d+')
@@ -157,7 +165,18 @@ def test_re_finditer():
     assert r == ['1', '2', '3', '4']
 
 
+def test_re_split():
+    # split方法按照能够匹配的子串将字符串分割后返回列表
+    # split(string[, maxsplit]) | re.split(pattern, string[, maxsplit]):
+    #   按照能够匹配的子串将string分割后返回列表。
+    #       maxsplit用于指定最大分割次数，不指定将全部分割。
+    p = re.compile(r'\d+')
+    assert p.split(r'one1two2three3four4') == [
+        'one', 'two', 'three', 'four', '']
+
+
 def test_re_sub():
+    # sub 方法用于替换。
     # sub(repl, string[, count]) | re.sub(pattern, repl, string[, count]):
     #   使用repl替换string中每一个匹配的子串后返回替换后的字符串。
     #   当repl是一个字符串时，可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。
@@ -176,6 +195,7 @@ def test_re_sub():
 
 
 def test_re_subn():
+    # subn 方法跟 sub 方法的行为类似，也用于替换。
     # subn(repl, string[, count]) |re.sub(pattern, repl, string[, count]):
     #   返回 (sub(repl, string[, count]), 替换次数)。
     p = re.compile(r'(\w+) (\w+)')
@@ -188,5 +208,14 @@ def test_re_subn():
 
     assert p.subn(func, s) == ('I Say, Hello World!', 2)
 
-def test_re_scanner():
+
+# def test_re_scanner():
     # scanner
+
+def test_re_chinese():
+    # 中文的 unicode 编码范围 主要在 [u4e00-u9fa5]，这里说主要是因为这个范围并不完整，比如没有包括全角（中文）标点，不过，在大部分情况下，应该是够用的。
+
+    # 假设现在想把字符串 title = u'你好，hello，世界' 中的中文提取出来，可以这么做：
+    title = u'你好，hello，世界'
+    pattern = re.compile(r'[\u4e00-\u9fa5]+')
+    assert pattern.findall(title) == [u'\u4f60\u597d', u'\u4e16\u754c']
