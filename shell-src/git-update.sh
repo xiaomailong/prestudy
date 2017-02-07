@@ -610,6 +610,15 @@ else
   cd "/Volumes/Work/OpenSource/JavaScript/"
   git clone "https://github.com/ksky521/nodePPT.git"
 fi
+# MathJax
+if [ -d "/Volumes/Work/OpenSource/JavaScript/MathJax" ]; then
+  cd "/Volumes/Work/OpenSource/JavaScript/MathJax"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/JavaScript/"
+  git clone "https://github.com/mathjax/MathJax.git"
+fi
+
 
 # Hadoop 生态更新
 if [ ! -d "/Volumes/Work/OpenSource/Hadoop" ]; then

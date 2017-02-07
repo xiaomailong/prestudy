@@ -65,4 +65,4 @@ CMD ["/bin/bash", "/src/startup.sh"]
 
 # CONTAINER_ID=$(docker run -d -p 2222:22 ssh-xpra)
 # echo $(docker logs $CONTAINER_ID | sed -n 1p)
-# ssh docker@localhost -p 2222 "sh -c './docker-desktop -s 800x600 -d 10 > /dev/null 2>&1 &'"
+# ssh docker@localhost -p 2222 "sh -c './ssh-xpra -s 800x600 -d 10 > /dev/null 2>&1 &'"

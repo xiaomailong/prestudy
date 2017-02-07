@@ -1,21 +1,12 @@
 # $ docker pull registry.cn-hangzhou.aliyuncs.com/acs/ubuntu
 # FROM registry.cn-hangzhou.aliyuncs.com/acs/ubuntu:16.04
-FROM ubuntu:16.04
+FROM ubuntu:latest
 
 MAINTAINER Bolik WaterBolik@163.com
 
 RUN set -ex \
-  # 使用apk镜像
-  # && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty main restricted universe multiverse" > /etc/apt/sources.list \
-  # && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list \
-  # && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list \
-  # && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list \
-  # && echo "deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty-proposed main restricted universe multiverse" >> /etc/apt/sources.list \
-  # && echo "deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty main restricted universe multiverse" >> /etc/apt/sources.list \
-  # && echo "deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty-security main restricted universe multiverse" >> /etc/apt/sources.list \
-  # && echo "deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty-updates main restricted universe multiverse" >> /etc/apt/sources.list \
-  # && echo "deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list \
-  # && echo "deb-src http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ trusty-proposed main restricted universe multiverse" >> /etc/apt/sources.list \
+  # 采用查找替换法修改镜像源
+  && sed -i 's/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/' /etc/apt/sources.list \
    
   # -qq隐藏更新Apt缓存过程中打印的日志
   # -y参数来消除更新过程中所有向用户提问的部分
@@ -27,7 +18,7 @@ RUN set -ex \
     x11-xserver-utils \
   
   # 允许所有用户访问X11服务
-  && xhost + \
+  && xhost + |: \
 
   # $ id $User
   # 用你自己的 uid gid 替换下面的值
