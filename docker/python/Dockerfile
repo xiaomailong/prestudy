@@ -93,9 +93,12 @@ RUN set -ex \
     python3-dev \
     py3-pip \
     py3-pillow \
+    py3-pytest \
+    libxml \
+    perl-xml-xpath \
   # for install numpy
   && ln -s /usr/include/locale.h /usr/include/xlocale.h \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip \
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip3 \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade numpy \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade scipy \
   # pre request for pandas for python3
@@ -103,8 +106,11 @@ RUN set -ex \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pandas \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade matplotlib \
   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade regex \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade nose \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytest
+  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade lxml \
+#   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade nose \
+#   && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytest \
+
+  && echo "end"
 
 
 CMD ["bash"]

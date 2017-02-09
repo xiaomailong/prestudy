@@ -180,8 +180,8 @@ def test_list_vs_yield():
     print('生成器返回结果花费的时间： %s' % t2)
     print('生成器返回结果占用内存大小：%s' % m2)
 
-    assert t1 > t2 * 80000
-    assert m1 > m2 * 800000
+    assert t1 > t2 * 10000
+    assert m1 > m2 * 100000
 
 from collections import Iterable
 from collections import Iterator

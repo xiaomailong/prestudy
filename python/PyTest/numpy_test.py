@@ -606,4 +606,4 @@ def test_numpy_random():
             n_tests, change_mind_wins, insist_wins
         )
     )
-    assert change_mind_wins / insist_wins > 2
+    assert change_mind_wins / insist_wins > 1.9
