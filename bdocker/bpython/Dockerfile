@@ -27,16 +27,14 @@ RUN set -ex \
   && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pandas \
   && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade matplotlib \
   && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade regex \
-  && pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytest \
+  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytest \
 
   && echo "end"
 
 
 CMD ["bash"]
 
-# $ cd /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bpython
-# $ docker build -t bpython .
+# $ docker build -t bpython /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bpython/.
 # $ docker run -it --rm  -v /Volumes/Work/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython
-# cd B:\OpenSource\WaterBolik\prestudy\bdocker\bpython\
-# docker build -t bpython .
+# docker build -t bpython B:\OpenSource\WaterBolik\prestudy\bdocker\bpython\
 # docker run -it --rm  -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython 

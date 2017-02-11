@@ -115,9 +115,7 @@ RUN set -ex \
 
 CMD ["bash"]
 
-# $ cd /Volumes/Work/OpenSource/WaterBolik/prestudy/docker/python
-# $ docker build -t bpython3 .
+# $ docker build -t bpython3 /Volumes/Work/OpenSource/WaterBolik/prestudy/docker/python/
 # $ docker run -it --rm  -v /Volumes/Work/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3
-# cd B:\OpenSource\WaterBolik\prestudy\docker\python\
-# docker build -t bpython3 .
+# docker build -t bpython3 B:\OpenSource\WaterBolik\prestudy\docker\python\
 # docker run -it --rm  -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3 
