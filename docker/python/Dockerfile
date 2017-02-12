@@ -119,3 +119,15 @@ CMD ["bash"]
 # $ docker run -it --rm  -v /Volumes/Work/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3
 # docker build -t bpython3 B:\OpenSource\WaterBolik\prestudy\docker\python\
 # docker run -it --rm  -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3 
+
+# python开发环境
+# 安装工具和必备依赖
+# apt-get install gcc gdb binutils make git dstat sysstat htop curl wget
+# apt-get install libjpeg-dev
+# apt-get install net-tools
+# apt-get install libffi-dev
+# apt-get install bzip2
+# apt-get install libssl
+# apt-get install libssl-dev
+# 如需要sqlit支持需要先装如下库，再安装python：
+# sudo apt-get install sqlite3 libsqlite3-dev

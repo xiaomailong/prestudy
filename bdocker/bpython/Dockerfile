@@ -2,8 +2,6 @@ FROM balpine
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV LANG C.UTF-8
-
 RUN set -ex \
   # 安装python2及其常用库
   && apk add --update --no-cache \   
@@ -14,6 +12,7 @@ RUN set -ex \
     lapack-dev \
     freetype-dev \
     gfortran \
+    python \
     python2-dev \
     py2-pip \
     # py2-pytest \

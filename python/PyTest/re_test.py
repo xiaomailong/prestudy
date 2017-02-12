@@ -57,7 +57,11 @@ def test_re_pattern():
     p = re.compile(r'(\w+) (\w+)(?P<sign>.*)', re.S)
     assert p.pattern == r'(\w+) (\w+)(?P<sign>.*)'
     # 48 = re.compile('(\\w+) (\\w+)(?P<sign>.*)', re.S).flags
-    assert p.flags == 48
+    import sys
+    if (sys.version_info.major == 2):
+        assert p.flags == 16 # python2
+    elif (sys.version_info.major == 3):
+        assert p.flags == 48 # python3
     # 8240 = regex.Regex('(\\w+) (\\w+)(?P<sign>.*)', flags=regex.S | regex.V0).flags
     # assert p.flags == 8240
     assert p.groups == 3
@@ -216,9 +220,9 @@ def test_re_chinese():
     # 中文的 unicode 编码范围 主要在 [u4e00-u9fa5]，这里说主要是因为这个范围并不完整，比如没有包括全角（中文）标点，不过，在大部分情况下，应该是够用的。
 
     # 假设现在想把字符串 title = u'你好，hello，世界' 中的中文提取出来，可以这么做：
-    title = u'你好，hello，世界'
-    pattern = re.compile(r'[\u4e00-\u9fa5]+')
-    assert pattern.findall(title) == [u'\u4f60\u597d', u'\u4e16\u754c']
+    title = u'你好hello世界'
+    pattern = re.compile(u'[\u4e00-\u9fa5]+')
+    assert pattern.findall(title) == [u'你好', u'世界']
 
 def test_re_ip():
     # 匹配 ip 地址

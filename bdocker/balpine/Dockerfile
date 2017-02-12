@@ -2,13 +2,15 @@ FROM alpine:3.5
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV LANG C.UTF-8 \
-    # 配置中文语言
-    LANG zh_CN.UTF-8 \
-    LANGUAGE zh_CN.UTF-8 \
-    LC_ALL=zh_CN.UTF-8 \
-    # 设置时区 TZ=Asia/Shanghai
-    TZ "PRC" 
+ENV LANG C.UTF-8 
+
+# 配置中文语言
+ENV LANG zh_CN.UTF-8 
+ENV LANGUAGE zh_CN.UTF-8 
+ENV LC_ALL=zh_CN.UTF-8 
+
+# 设置时区 
+ENV TZ=Asia/Shanghai
 
 RUN set -ex \
     # 使用清华apk镜像
@@ -16,6 +18,8 @@ RUN set -ex \
     && apk update \
     # 使用apk安装必备软件 
     && apk add --update --no-cache \
+      ca-certificates \
+      tzdata \
       bash \
 
      # 配置中文语言
@@ -36,7 +40,8 @@ RUN set -ex \
   # 将文泉驿微米黑设置为系统默认字体
   # && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
     # 设置时区
-    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone \
     # 安装及设置结束
     && echo "end"
 
