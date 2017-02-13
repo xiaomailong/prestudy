@@ -14,7 +14,7 @@ RUN { \
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
 
-ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
+ENV PATH ${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin
 
 ENV JAVA_VERSION 8u111
 

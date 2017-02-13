@@ -21,6 +21,7 @@ RUN set -ex \
       ca-certificates \
       tzdata \
       bash \
+      curl \
 
      # 配置中文语言
   # && /usr/share/locales/install-language-pack zh_CN \
