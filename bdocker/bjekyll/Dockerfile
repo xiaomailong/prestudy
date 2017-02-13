@@ -13,21 +13,37 @@ RUN set -ex \
         ruby-irb \
         ruby-json \
         ruby-bundler \
+        ruby-rdoc \
         libffi-dev \
+#     && echo "end"    
+# RUN set -ex \
     # 淘宝镜像
-    # && gem sources -r https://rubygems.org/ \
+    # && gem sources --remove https://rubygems.org/ \
     && gem source -a https://ruby.taobao.org/ \
     && gem update --system \
-    # 安装jekyll
-    && gem install --no-rdoc --no-ri jekyll \
 
-  && echo "end"
+#     && echo "end"    
+# RUN set -ex \
+    # 安装jekyll --no-rdoc --no-ri
+    && gem install \
+        jekyll \
+        jekyll-feed \
+        minima \
+        json \
+        rouge \
+        redcarpet \
+        go_script \
+    && echo "end"
 
 VOLUME /data
 VOLUME /var/www/html
 WORKDIR /data
 
-ENTRYPOINT [ "jekyll", "build", "--destination=/var/www/html" ]
+EXPOSE 4000
+
+# ENTRYPOINT [ "jekyll", "build", "--destination=/var/www/html" ]
+
+ENTRYPOINT [ "jekyll", "serve" , "--incremental"]
 
 # CMD ["bash"]
 
@@ -36,8 +52,12 @@ ENTRYPOINT [ "jekyll", "build", "--destination=/var/www/html" ]
 # docker build -t bjekyll B:\OpenSource\WaterBolik\prestudy\bdocker\bjekyll\
 # docker run -it --rm bjekyll 
 
-# docker run -v /Volumes/Work/OpenSource/WaterBolik/waterbolik.github.io/:/data/ --name titusblog titushuang/jekyll
+# docker run -v /Volumes/Work/OpenSource/WaterBolik/waterbolik.github.io/:/data/ --name bblog bjekyll
+# docker run -v /B/OpenSource/WaterBolik/waterbolik.github.io/:/data/ --name bblog bjekyll
+# docker run -d -P --volumes-from bblog bapache 
 
+
+# docker run -it -p 4000:4000 --rm -v /B/OpenSource/WaterBolik/waterbolik.github.io/:/data/ bjekyll
 # docker run -d -P --volumes-from titusblog titushuang/apache
 
 # 构建 Jeyll 容器

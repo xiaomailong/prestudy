@@ -25,9 +25,11 @@ RUN mkdir -p $APAHCE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
 EXPOSE 80
 
-ENTRYPOINT [ "/usr/sbin/apache2" ]
+ENTRYPOINT [ "/usr/sbin/httpd" ]
 
 CMD ["-D", "FOREGROUND"]
+
+# CMD ["bash"]
 
 # $ docker build -t bapache /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bapache/
 # $ docker run -it --rm bapache
