@@ -18,8 +18,9 @@ RUN set -ex \
 #     && echo "end"    
 # RUN set -ex \
     # 淘宝镜像
-    # && gem sources --remove https://rubygems.org/ \
-    && gem source -a https://ruby.taobao.org/ \
+    && gem sources --remove https://rubygems.org/ |: \
+    && gem sources -a https://ruby.taobao.org/ \
+    # && gem sources -a http://ruby.sdutlinux.org/ \
     && gem update --system \
 
 #     && echo "end"    
@@ -56,8 +57,8 @@ ENTRYPOINT [ "jekyll", "serve" , "--incremental"]
 # docker run -v /B/OpenSource/WaterBolik/waterbolik.github.io/:/data/ --name bblog bjekyll
 # docker run -d -P --volumes-from bblog bapache 
 
-
-# docker run -it -p 4000:4000 --rm -v /B/OpenSource/WaterBolik/waterbolik.github.io/:/data/ bjekyll
+# docker run -it --rm -p 4000:4000 -v /Volumes/Work/OpenSource/WaterBolik/waterbolik.github.io/:/data/ bjekyll
+# docker run -it --rm -p 4000:4000 -v /B/OpenSource/WaterBolik/waterbolik.github.io/:/data/ bjekyll
 # docker run -d -P --volumes-from titusblog titushuang/apache
 
 # 构建 Jeyll 容器

@@ -22,15 +22,16 @@ RUN set -ex \
       tzdata \
       bash \
       curl \
+      openssh \
 
      # 配置中文语言
-  # && /usr/share/locales/install-language-pack zh_CN \
-  # && locale-gen zh_CN.UTF-8 \
-  # && dpkg-reconfigure --frontend noninteractive locales \
-  # && apt-get -qqy install \
-    # 安装中文包
-    # language-pack-zh-hans \
-    # 安装基本字体
+    # && /usr/share/locales/install-language-pack zh_CN \
+    # && locale-gen zh_CN.UTF-8 \
+    # && dpkg-reconfigure --frontend noninteractive locales \
+    # && apt-get -qqy install \
+      # 安装中文包
+      # language-pack-zh-hans \
+      # 安装基本字体
     # fonts-ipafont-gothic \
     # xfonts-100dpi \
     # xfonts-75dpi \
@@ -43,9 +44,17 @@ RUN set -ex \
     # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
+
+    # 生成 rsa key
+    # && ssh-keygen -A \
+    # && ls 
+    # && cat $HOME/.ssh/*.pub > $HOME/.ssh/authorized_keys \
+
     # 安装及设置结束
     && echo "end"
 
+# 容器需要开放SSH 22端口
+EXPOSE 22
 
 CMD ["bash"]
 
