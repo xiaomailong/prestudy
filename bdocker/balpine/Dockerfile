@@ -18,11 +18,20 @@ RUN set -ex \
     && apk update \
     # 使用apk安装必备软件 
     && apk add --update --no-cache \
-      ca-certificates \
-      tzdata \
-      bash \
-      curl \
-      openssh \
+        # Common CA certificates PEM files
+        ca-certificates \
+        # Timezone data
+        tzdata \
+        # The GNU Bourne Again shell
+        bash \
+        # An URL retrival utility and library
+        curl \
+        # Port of OpenBSD's free SSH release
+        openssh \
+        # OpenRC manages the services, startup and shutdown of a host
+        openrc \
+        # Linux networking base tools
+        net-tools \
 
      # 配置中文语言
     # && /usr/share/locales/install-language-pack zh_CN \
@@ -50,11 +59,24 @@ RUN set -ex \
     # && ls 
     # && cat $HOME/.ssh/*.pub > $HOME/.ssh/authorized_keys \
 
-    # 安装及设置结束
+    # && mkdir $HOME/.ssh \
+    # && chmod 700 $HOME/.ssh \
+    # 创建SSH密钥并将其拷贝到远程主机
+    # && ssh-keygen -A \
+    # && cat /etc/ssh/*.pub > $HOME/.ssh/authorized_keys \
+    # && chmod 600 $HOME/.ssh/authorized_keys \
+
+    # && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    # && sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    # && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
+
     && echo "end"
 
 # 容器需要开放SSH 22端口
 EXPOSE 22
+
+#Auto running sshd service
+# CMD ["/usr/sbin/sshd","-D"]
 
 CMD ["bash"]
 
