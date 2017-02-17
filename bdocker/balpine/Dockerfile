@@ -32,6 +32,12 @@ RUN set -ex \
         openrc \
         # Linux networking base tools
         net-tools \
+        # pluggable authentication modules for linux
+        linux-pam \
+        # PAM-using login and passwd utilities (usermod, useradd, ...)
+        shadow \
+        # Access control list utilities
+        acl \
 
      # 配置中文语言
     # && /usr/share/locales/install-language-pack zh_CN \
