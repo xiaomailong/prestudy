@@ -3,13 +3,17 @@ FROM bnodejs
 MAINTAINER Bolik WaterBolik@163.com
 
 RUN set -ex \
+    && apk add --update --no-cache \   
+        # Netwide Assembler
+        nasm \
+        imagemagick \
+
     # Gatsby 使用 React 生态系统来生成静态 html 文件。
-    # 事实上，您可以组合 React 组件，Markdown 文件和服务器端渲染使它非常强大。
     && cnpm install -g gatsby \
     && echo "end"
 
-VOLUME /web
-WORKDIR /web
+VOLUME /blog
+WORKDIR /blog
 
 EXPOSE 8000
 

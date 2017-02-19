@@ -35,6 +35,6 @@ RUN set -ex \
 CMD ["bash"]
 
 # $ docker build -t bpython3 /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/python3/
-# $ docker run -it --rm  -v /Volumes/Work/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3
+# $ docker run -it --rm -v /Volumes/Work/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3
 # docker build -t bpython3 B:\OpenSource\WaterBolik\prestudy\bdocker\bpython3\
-# docker run -it --rm  -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3 
+# docker run -it --rm -v /B/OpenSource/WaterBolik/prestudy/python/PyTest:/pytest bpython3 
