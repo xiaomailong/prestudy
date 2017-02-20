@@ -29,13 +29,13 @@ RUN set -ex \
     && cnpm install -g electron \
     # JavaScript Standard Style 
     && cnpm install -g standard \
-    && cnpm install -g phantomjs \
+    # && cnpm install -g phantomjs \
     # && npm install -g phantomjs --ignore-scripts \
     # GitBook 是一项致力于文档编制、数码写作和出版的新型、简单的解决方案。
     && cnpm install -g gitbook-cli \
     # && cnpm install -g phantomjs-prebuilt --ignore-scripts \
-    && cnpm install -g gitbook-pdf \
-    # && npm install -g gitbook-pdf --ignore-scripts \
+    # && cnpm install -g gitbook-pdf \
+    && npm install -g gitbook-pdf --ignore-scripts \
     # 安装vue
     && cnpm install -g vue-cli \
     && echo "end"

@@ -38,6 +38,14 @@ RUN set -ex \
         shadow \
         # Access control list utilities
         acl \
+        # The ISC DNS server
+        # bind \
+        # The ISC DNS tools
+        bind-tools \
+        # Give certain users the ability to run some commands as root
+        sudo \
+        # An arbitrary precision numeric processing language (calculator)
+        bc \
 
      # 配置中文语言
     # && /usr/share/locales/install-language-pack zh_CN \
