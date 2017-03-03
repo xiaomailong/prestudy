@@ -367,12 +367,22 @@ fi
 #   不开放注册，仅限个人或小团体使用。
 #   提供dokuwiki to markdown转换脚本
 #   其他
+if [ -d "/Volumes/Work/OpenSource/Tools/mdwiki2" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/mdwiki2"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/xbynet/mdwiki.git" mdwiki2
+fi
+
+# MDwiki 是一个完全使用 HTML5/Javascript 技术构建，完全运行在客户端的 Wiki/CMS 系统。
+# 无需专门的服务器软件，只需将 mdwiki.html 上传到你存放 markdown 文件的目录。
 if [ -d "/Volumes/Work/OpenSource/Tools/mdwiki" ]; then
   cd "/Volumes/Work/OpenSource/Tools/mdwiki"
   git pull
 else
   cd "/Volumes/Work/OpenSource/Tools/"
-  git clone "https://github.com/xbynet/mdwiki.git"
+  git clone "https://github.com/Dynalon/mdwiki.git"
 fi
 
 echo "Web 相关开源项目更新"
@@ -796,6 +806,7 @@ else
   cd "/Volumes/Work/OpenSource/GitBook/"
   git clone "https://github.com/qyuhen/book.git"
 fi
+
 
 
 
