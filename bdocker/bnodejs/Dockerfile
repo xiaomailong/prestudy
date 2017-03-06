@@ -6,7 +6,6 @@ MAINTAINER Bolik WaterBolik@163.com
 
 RUN set -ex \
     && apk add --update --no-cache \   
-        build-base \
         autoconf \
         automake \
         libpng-dev \

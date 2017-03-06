@@ -6,9 +6,7 @@ RUN set -ex \
   # 安装python2及其常用库
   && apk add --update --no-cache \   
     build-base \
-    g++ \
     linux-headers \
-    musl-dev \
     lapack-dev \
     freetype-dev \
     gfortran \
@@ -19,14 +17,13 @@ RUN set -ex \
     py2-pillow \
     py2-lxml \
   && ln -s /usr/include/locale.h /usr/include/xlocale.h \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade --force-reinstall pip \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade numpy \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade scipy \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytz \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pandas \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade matplotlib \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade regex \
-  && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --no-cache-dir --upgrade pytest \
+  && pip install --no-cache-dir --upgrade numpy \
+  && pip install --no-cache-dir --upgrade scipy \
+  && pip install --no-cache-dir --upgrade pytz \
+  && pip install --no-cache-dir --upgrade pandas \
+  && pip install --no-cache-dir --upgrade matplotlib \
+  && pip install --no-cache-dir --upgrade regex \
+  && pip install --no-cache-dir --upgrade pytest \
 
   && echo "end"
 

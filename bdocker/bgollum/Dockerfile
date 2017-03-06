@@ -2,16 +2,8 @@ FROM balpine
 
 MAINTAINER Bolik WaterBolik@163.com
 
-# jekyll 基本运行环境搭建
-
 RUN set -ex \
-    # 安装jeykll依赖项
     && apk add --update --no-cache \   
-        # Meta package for build base
-        build-base \
-        # An object-oriented language for quick and easy programming
-        ruby \
-        ruby-dev \
         # The Interactive Ruby
         ruby-irb \
         # JSON implementation as a Ruby extension in C
@@ -19,32 +11,7 @@ RUN set -ex \
         # Manage an application's gem dependencies
         ruby-bundler \
         # Ruby documentation tool
-        ruby-rdoc \
-        # A portable, high level programming interface to various calling conventions.
-        libffi-dev \
-        # International Components for Unicode library
-        icu-dev \
-        # Larry Wall's Practical Extraction and Report Language
-        perl \
-        # A compression/decompression Library
-        zlib \
-    && echo "end"
-
-
-RUN set -ex \
-    # 淘宝镜像
-    # && gem sources --remove https://rubygems.org/ \
-    && gem sources -a https://ruby.taobao.org/ \
-    && gem update --system \
-    && echo "end"    
-
-
-RUN set -ex \
-    && apk add --update --no-cache \   
-        linux-headers \
-        musl-dev \
-        lapack-dev \
-        freetype-dev \
+        ruby-rdoc \  
     && echo "end"
 
 RUN set -ex \
@@ -62,6 +29,7 @@ RUN set -ex \
         # MediaWiki 
         wikicloth \
         # perlpod
+        # Pod::Simple::HTML comes with Perl >= 5.10. Lower versions should install Pod::Simple from CPAN.
         # pod \
         # ReStructuredText 
         # ReStructuredText \

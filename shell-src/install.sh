@@ -16,6 +16,13 @@
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/local --strip 1
 
+#  Homebrew 镜像
+cd "$(brew --repo)"
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+brew update
+
 # Mac App Store下载最新版的Xcode，然后使用下面的命令安装Xcode command line tools，
 # 这将为你安装很多终端下面常用的命令，将来很可能会使用到：
 xcode-select --install
