@@ -20,7 +20,7 @@ RUN set -ex \
     # 使用apk安装必备软件 
     && apk add --update --no-cache \
 
-        # alpine 3.5 defaule apk list
+        # alpine(11): alpine 3.5 defaule apk list
         #   musl:                     the musl c library (libc) implementation
         #   busybox:                  Size optimized toolbox of many common UNIX utilities
         #   alpine-baselayout:        Alpine base dir structure and init scripts
@@ -89,12 +89,6 @@ RUN set -ex \
         lapack \
         lapack-dev \
 
-        # freetype: TrueType font rendering library
-        #   libbz2:                  Shared library for bz2
-        #   libpng:                  Portable Network Graphics library  
-        freetype \
-        freetype-dev \
-
         # icu: International Components for Unicode library
         #   libgcc libstdc++
         #   icu-libs:                 International Components for Unicode library (libraries)
@@ -111,9 +105,32 @@ RUN set -ex \
         #   libxml2:                  XML parsing library, version 2
         libxslt \
 
-        # python: A high-level scripting language
-        #   libbz2:                   Shared library for bz2
+        # imagemagick(26): A collection of tools and libraries for many image formats
+        #   libgcc gmp libffi libstdc++ libxml2
         #   expat:                    An XML Parser library written in C
+        #   libbz2:                   Shared library for bz2
+        #   libpng:                   Portable Network Graphics library  
+        #   freetype:                 TrueType font rendering library
+        #   fontconfig:               The Fontconfig package is a library for configuring and customizing font access.
+        #   dbus-libs:                Libraries for acces D-BUS
+        #   libintl:                  GNU gettext runtime library
+        #   avahi-libs:               Libraries for avahi run-time use
+        #   nettle:                   A low-level cryptographic library        
+        #   libtasn1:                 The ASN.1 library used in GNUTLS          
+        #   p11-kit:                  Library for loading and sharing PKCS#11 modules
+        #   gnutls:                   A TLS protocol implementation
+        #   cups-libs:                CUPS libraries
+        #   jbig2dec:                 JBIG2 image compression format decoder   
+        #   libjpeg-turbo:            accelerated baseline JPEG compression and decompression library
+        #   lcms2:                    Color Management Engine
+        #   tiff:                     Provides support for the Tag Image File Format or TIFF
+        #   ghostscript:              An interpreter for the PostScript language and for PDF
+        #   libltdl:                  Runtime libraries for GNU Libtool Dynamic Module Loade
+        #   libwebp:                  Libraries for working with WebP images
+        imagemagick \
+
+        # python: A high-level scripting language
+        #   libbz2 expat libffi ncurses-terminfo-base ncurses-terminfo ncurses-libs readline
         #   gdbm:                     GNU dbm is a set of database routines that use extensible hashing
         #   sqlite-libs:              Sqlite3 library
         python \
@@ -134,6 +151,14 @@ RUN set -ex \
         #   libgmpxx:                 C++ support for gmp
         #   gmp-dev:                  A free library for arbitrary precision arithmetic (development files)
         ruby-dev \
+         # The Interactive Ruby
+        ruby-irb \
+        # Manage an application's gem dependencies
+        #   ruby-io-console:          Ruby simple console IO library
+        ruby-bundler \
+        # Ruby documentation tool
+        #   ruby-json:                JSON implementation as a Ruby extension in C
+        ruby-rdoc \  
 
         # Larry Wall's Practical Extraction and Report Language
         perl \ 
@@ -149,8 +174,36 @@ RUN set -ex \
         # git: A distributed version control system
         #   ca-certificates expat
         #   pcre:                     Perl-compatible regular expression library
-        git \
-      
+        git \      
+
+        # openjdk8(39): OpenJDK 8 provided by IcedTea
+        #   libffi ca-certificates libbz2 libpng freetype libgcc giflib libjpeg-turbo libstdc++ sqlite-libs 
+        #   libtasn1:                 The ASN.1 library used in GNUTLS
+        #   p11-kit:                  Library for loading and sharing PKCS#11 modules
+        #   p11-kit-trust:            System trust module from p11-kit
+        #   java-cacerts:             Script to update java cacerts store
+        #   libxau:                   X11 authorisation library
+        #   libxdmcp:                 X11 Display Manager Control Protocol library
+        #   libxcb:                   X11 client-side library
+        #   libx11:                   X11 client-side library
+        #   libxcomposite:            X11 Composite extension library
+        #   libxext:                  X11 miscellaneous extensions library
+        #   libxi:                    X11 Input extension library
+        #   libxrender:               X Rendering Extension client library
+        #   libxtst:                  X11 Testing -- Resource extension library
+        #   alsa-lib:                 An alternative implementation of Linux sound support    
+        #   giflib:                   A library for reading and writing gif images    
+        #   openjdk8-jre-lib:         OpenJDK 8 Java Runtime (class libraries)
+        #   java-common:              Java common (updates java links)
+        #   krb5-conf:                Shared krb5.conf for both MIT krb5 and heimdal
+        #   libcom_err:               Common error description library
+        #   nspr:                     Netscape Portable Runtime
+        #   nss:                      Mozilla Network Security Services
+        #   pcsc-lite-libs:           Middleware to access a smart card using SCard API (PC/SC) (libraries)
+        #   lksctp-tools:             User-space access to Linux Kernel SCTP
+        #   openjdk8-jre-base:        OpenJDK 8 Java Runtime (no GUI support)
+        #   openjdk8-jre:             OpenJDK 8 Java Runtime
+        openjdk8 \
        
         # OpenRC manages the services, startup and shutdown of a host
         openrc \

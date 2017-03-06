@@ -8,21 +8,6 @@ RUN set -ex \
     && apk add --update --no-cache \   
         autoconf \
         automake \
-        libpng-dev \
-        python2 \
-        python2-dev \
-        nodejs \
-        nodejs-dev \
-    # 淘宝 npm 镜像 cnpm
-    && echo "registry=https://registry.npm.taobao.org/" > /root/.npmrc \
-    && echo "sass_binary_site=https://npm.taobao.org/mirrors/node-sass/" >> /root/.npmrc \
-    && echo "phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs/" >> /root/.npmrc \
-    && echo "ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/" >> /root/.npmrc \
-    && npm install -g cnpm --registry=https://registry.npm.taobao.org \
-    # 安装 yarn 淘宝镜像 tyarn
-    && npm install yarn -g --registry=https://registry.npm.taobao.org \
-    && yarn config set registry https://registry.npm.taobao.org \
-    && cnpm install yarn tyarn -g --registry=https://registry.npm.taobao.org \
     && cnpm install -g coffee-script \
     && cnpm install -g webpack \
     && cnpm install -g electron \
