@@ -18,10 +18,24 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 #  Homebrew 镜像
 cd "$(brew --repo)"
-git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
+# git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+# git remote set-url origin https://github.com/Homebrew/brew.git
 cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
+# git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+# git remote set-url origin https://github.com/Homebrew/homebrew-core.git
+cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
+git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
+# git remote set-url origin https://github.com/caskroom/homebrew-cask
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.zshrc
+source ~/.zshrc
+
 brew update
+
+gem sources  #列出默认源
+gem sources --remove https://rubygems.org/  #移除默认源
+gem sources -a https://mirrors.ustc.edu.cn/rubygems/  #添加科大源
 
 # Mac App Store下载最新版的Xcode，然后使用下面的命令安装Xcode command line tools，
 # 这将为你安装很多终端下面常用的命令，将来很可能会使用到：

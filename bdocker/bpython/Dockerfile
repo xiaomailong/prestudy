@@ -17,6 +17,7 @@ RUN set -ex \
     py2-pillow \
     py2-lxml \
   && ln -s /usr/include/locale.h /usr/include/xlocale.h \
+  # pip install -i https://pypi.tuna.tsinghua.edu.cn/simple some-package
   && pip install --no-cache-dir --upgrade numpy \
   && pip install --no-cache-dir --upgrade scipy \
   && pip install --no-cache-dir --upgrade pytz \

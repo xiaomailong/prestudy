@@ -5,9 +5,6 @@ MAINTAINER Bolik WaterBolik@163.com
 # nodejs 基础架构及模块学习
 
 RUN set -ex \
-    && apk add --update --no-cache \   
-        autoconf \
-        automake \
     && cnpm install -g coffee-script \
     && cnpm install -g webpack \
     && cnpm install -g electron \

@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM debian
 
 MAINTAINER Bolik WaterBolik@163.com
 
@@ -15,10 +15,10 @@ ENV APT_MIRROR    mirrors.ustc.edu.cn
 
 RUN set -ex \
   # 使用apt镜像
-  && sed -i "s/archive.ubuntu.com/${APT_MIRROR}/" /etc/apt/sources.list \
-  
-  # -qq隐藏更新Apt缓存过程中打印的日志
-  # -y参数来消除更新过程中所有向用户提问的部分
+  && sed -i "s/httpredir.debian.org/${APT_MIRROR}/" /etc/apt/sources.list \
+  && sed -i 's|security.debian.org|${APT_MIRROR}/debian-security|g' /etc/apt/sources.list \
+  # -qq 隐藏更新Apt缓存过程中打印的日志
+  # -y  参数来消除更新过程中所有向用户提问的部分
   && apt-get -qqy update \
   && apt-get -qqy upgrade \
 
@@ -26,7 +26,6 @@ RUN set -ex \
   && /usr/share/locales/install-language-pack zh_CN \
   && locale-gen zh_CN.UTF-8 \
   && dpkg-reconfigure --frontend noninteractive locales \
-  
   && apt-get -qqy install \
     # 安装中文包
     language-pack-zh-hans \
@@ -58,6 +57,6 @@ RUN set -ex \
 
 CMD ["bin/bash"]  
 
-# $ docker build -t bubuntu /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bubuntu/
-# docker build -t bubuntu B:\OpenSource\WaterBolik\prestudy\bdocker\bubuntu\
-# docker run -it --rm bubuntu 
+# $ docker build -t bdebian /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bdebian/
+# docker build -t bdebian B:\OpenSource\WaterBolik\prestudy\bdocker\bdebian\
+# docker run -it --rm bdebian 

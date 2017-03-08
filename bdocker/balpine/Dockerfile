@@ -2,19 +2,31 @@ FROM alpine:3.5
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV LANG C.UTF-8 
+# 中文语言
+ENV LANG        zh_CN.UTF-8 
+ENV LANGUAGE    zh_CN.UTF-8:zh_CN:en_US.UTF-8:C.UTF-8 
+ENV LC_ALL      zh_CN.UTF-8 
+# 时区 
+ENV TZ          Asia/Shanghai 
+# JAVA_HOME & PATH
+ENV JAVA_HOME   /usr/lib/jvm/java-1.8-openjdk 
+ENV PATH        ${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin
 
-# 配置中文语言
-ENV LANG zh_CN.UTF-8 
-ENV LANGUAGE zh_CN.UTF-8 
-ENV LC_ALL=zh_CN.UTF-8 
+# 清华镜像:       
+# ENV APK_MIRROR  mirror.tuna.tsinghua.edu.cn
+# 中科大镜像:     
+ENV APK_MIRROR  mirrors.ustc.edu.cn
 
-# 设置时区 
-ENV TZ=Asia/Shanghai
+# 淘宝
+# ENV GEM_MIRROR  https://ruby.taobao.org/ 
+# 清华
+# ENV GEM_MIRROR  https://mirrors.tuna.tsinghua.edu.cn/rubygems/
+# 中科大
+ENV GEM_MIRROR  https://mirrors.ustc.edu.cn/rubygems/
 
 RUN set -ex \
-    # 使用清华apk镜像
-    && sed -i 's/dl-cdn.alpinelinux.org/mirror.tuna.tsinghua.edu.cn/' /etc/apk/repositories \
+    # 使用apk镜像
+    && sed -i "s/dl-cdn.alpinelinux.org/${APK_MIRROR}/" /etc/apk/repositories \    
     && apk update \
     && apk upgrade \
     # 使用apk安装必备软件 
@@ -33,30 +45,40 @@ RUN set -ex \
         #   musl-utils:               the musl c library (libc) implementation
         #   libc-utils:               Meta package to pull in correct libc
         
-        # Timezone data
+        # tzdata: Timezone data
         tzdata \
   
-        # curl: An URL retrival utility and library        
+        # curl(4-10): An URL retrival utility and library        
         #   ca-certificates:          Common CA certificates PEM files
         #   libssh2:                  library for accessing ssh1/ssh2 protocol servers
         #   libcurl:                  The multiprotocol file transfer library
+        #   zlib-dev:                 A compression/decompression Library (development files)
+        #   libressl2.4-libtls:       libressl libtls library
+        #   libressl-dev:             Version of the TLS/crypto stack forked from OpenSSL (development files)
+        #   libssh2-dev:              library for accessing ssh1/ssh2 protocol servers (development files)
         curl \
+        curl-dev \
 
-        # The GNU Bourne Again shell
+        # bash: The GNU Bourne Again shell
         #   ncurses-terminfo-base:    Descriptions of common terminals
         #   ncurses-terminfo:         Console display library
         #   ncurses-libs:             Ncurses libraries
         #   readline:                 GNU readline library
         bash \
 
-        # openssl: Toolkit for SSL v2/v3 and TLS v1
+        # openssl(3-5): Toolkit for SSL v2/v3 and TLS v1
         #   libcrypto1.0:             Crypto library from openssl
         #   libssl1.0:                SSL shared libraries
+        #   openssl:                  Toolkit for SSL v2/v3 and TLS v1
         openssl \
+        # openssl-dev \
 
-        # openssh: Port of OpenBSD's free SSH release
+        # openssh(1-3): Port of OpenBSD's free SSH release
         #   openssh-client:           OpenBSD's SSH client 
+        #   openssh-keysign:          ssh helper program for host-based authentication
         #   openssh-sftp-server:      ssh sftp server module
+        openssh-client \
+        openssh-keysign \
         openssh \
 
         # build-base: Meta package for build base
@@ -79,34 +101,55 @@ RUN set -ex \
         #   g++:                      GNU C++ standard library and compiler    
         build-base \
 
-        # Linux system headers
+        # autoconf(3): A GNU tool for automatically configuring source code
+        #   m4:                       GNU macro processor
+        #   perl:                     Larry Wall's Practical Extraction and Report Language
+        autoconf \
+        # automake(2): A GNU tool for automatically creating Makefiles
+        #   perl
+        automake \
+
+        # cmake(15): CMake is a cross-platform open-source make system
+        #   libattr libacl libbz2 expat xz-libs libarchive ca-certificates
+        #   libssh2 libcurl ncurses-terminfo-base ncurses-terminfo ncurses-libs
+        #   libgcc libstdc++ cmake
+        #   libarchive:               library that can create and read several streaming archive formats
+        #   xz-libs:                  Library and command line tools for XZ and LZMA compressed files (libraries)
+        cmake \
+
+        # linux-headers: Linux system headers
         linux-headers \
 
-        # Linear Algebra PACKage
-        #   libgcc
+        # lapack(4-6): Linear Algebra PACKage  
+        #   libgcc:                   GNU C compiler runtime libraries    
         #   libquadmath:              128-bit math library for GCC
         #   libgfortran:              Fortran runtime library for GCC
+        #   lapack:                   Linear Algebra PACKage  
         lapack \
         lapack-dev \
 
-        # icu: International Components for Unicode library
-        #   libgcc libstdc++
+        # icu(4-6): International Components for Unicode library
+        #   libgcc:                   GNU C compiler runtime libraries    
+        #   libstdc++:                GNU C++ standard runtime library         
         #   icu-libs:                 International Components for Unicode library (libraries)
         icu \
         icu-dev \
 
-        # A portable, high level programming interface to various calling conventions.
+        # libffi: A portable, high level programming interface to various calling conventions.
         libffi \
         libffi-dev \     
 
-        # libxslt: XML stylesheet transformation library
+        # libxslt(4-7): XML stylesheet transformation library
         #   libgpg-error:             Support library for libgcrypt
         #   libgcrypt:                general purpose crypto library based on the code used in GnuPG
         #   libxml2:                  XML parsing library, version 2
+        #   libxslt:                  XML stylesheet transformation library
+        #   zlib-dev:                 A compression/decompression Library (development files)
         libxslt \
+        libxslt-dev \
 
-        # imagemagick(26): A collection of tools and libraries for many image formats
-        #   libgcc gmp libffi libstdc++ libxml2
+        # imagemagick(26-29): A collection of tools and libraries for many image formats
+        #   libgcc gmp libffi libstdc++ libxml2 pkgconf
         #   expat:                    An XML Parser library written in C
         #   libbz2:                   Shared library for bz2
         #   libpng:                   Portable Network Graphics library  
@@ -127,41 +170,37 @@ RUN set -ex \
         #   ghostscript:              An interpreter for the PostScript language and for PDF
         #   libltdl:                  Runtime libraries for GNU Libtool Dynamic Module Loade
         #   libwebp:                  Libraries for working with WebP images
+        #   imagemagick:              A collection of tools and libraries for many image formats
+        #   imagemagick-c++:          ImageMagick Magick++ library (C++ bindings)
         imagemagick \
+        imagemagick-dev \
 
-        # python: A high-level scripting language
+        # python(12-14): A high-level scripting language
         #   libbz2 expat libffi ncurses-terminfo-base ncurses-terminfo ncurses-libs readline
         #   gdbm:                     GNU dbm is a set of database routines that use extensible hashing
         #   sqlite-libs:              Sqlite3 library
-        python \
-        # py2-pip: A tool for installing and managing Python packages
         #   py-setuptools:            A collection of enhancements to the Python distutils
+        #   py2-pip:                  A tool for installing and managing Python packages
+        python \
         py2-pip \
-        # python-dev: A high-level scripting language (development files)
-        #   pkgconf
         python-dev \
-
-        # ruby: An object-oriented language for quick and easy programming
+  
+        # ruby(10-16): An object-oriented language for quick and easy programming
         #   libffi gdbm gmp ncurses-terminfo-base ncurses-terminfo ncurses-libs readline
         #   yaml:                     YAML 1.1 parser and emitter written in C
         #   ruby-libs:                Libraries necessary to run Ruby
-        ruby \
-        # ruby-dev: An object-oriented language for quick and easy programming (development files)
-        #   libgcc libstdc++ pkgconf
         #   libgmpxx:                 C++ support for gmp
         #   gmp-dev:                  A free library for arbitrary precision arithmetic (development files)
-        ruby-dev \
-         # The Interactive Ruby
-        ruby-irb \
-        # Manage an application's gem dependencies
+        #   ruby-irb:                 The Interactive Ruby
+        #   ruby-bundler:             Manage an application's gem dependencies
         #   ruby-io-console:          Ruby simple console IO library
-        ruby-bundler \
-        # Ruby documentation tool
+        #   ruby-rdoc:                Ruby documentation tool
         #   ruby-json:                JSON implementation as a Ruby extension in C
+        ruby \
+        ruby-dev \
+        ruby-irb \
+        ruby-bundler \
         ruby-rdoc \  
-
-        # Larry Wall's Practical Extraction and Report Language
-        perl \ 
 
         # nodejs: JavaScript runtime built on V8 engine - LTS version
         #   ca-certificates libcrypto1.0 libssl1.0 libgcc libstdc++ ncurses-terminfo-base ncurses-terminfo ncurses-libs readline
@@ -205,7 +244,7 @@ RUN set -ex \
         #   openjdk8-jre:             OpenJDK 8 Java Runtime
         openjdk8 \
        
-        # OpenRC manages the services, startup and shutdown of a host
+        # openrc: OpenRC manages the services, startup and shutdown of a host
         openrc \
 
         # net-tools: Linux networking base tools
@@ -221,55 +260,61 @@ RUN set -ex \
         #   libacl:                 Dynamic library for access control list support
         acl \
 
-        # The ISC DNS tools
+        # bind-tools: The ISC DNS tools
         #   libgcc libxml2 bind-libs
         bind-tools \
-        # The ISC DNS server
+        # bind: The ISC DNS server
         #   libgcc libxml2 bind-libs
         #   libcap:                 POSIX 1003.1e capabilities
         # bind \
 
-        # Give certain users the ability to run some commands as root
+        # sudo: Give certain users the ability to run some commands as root
         sudo \
 
-        # An arbitrary precision numeric processing language (calculator)
+        # bc: An arbitrary precision numeric processing language (calculator)
         bc \
 
     && echo "end"
-
-RUN set -ex \
-    # pip 清华镜像更新
-    && mkdir -p ~/.pip \
-    && echo "[global]" > ~/.pip/pip.conf \
-    && echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple" >> ~/.pip/pip.conf \
-    && pip install --no-cache-dir --upgrade --force-reinstall pip \
-    && echo "end"
-
-RUN set -ex \
-    # npm 淘宝镜像 cnpm
-    && echo "registry=https://registry.npm.taobao.org/" > ~/.npmrc \
-    && echo "sass_binary_site=https://npm.taobao.org/mirrors/node-sass/" >> ~/.npmrc \
-    && echo "phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs/" >> ~/.npmrc \
-    && echo "ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/" >> ~/.npmrc \
-    && npm install -g cnpm --registry=https://registry.npm.taobao.org \
-    # yarn 淘宝镜像 tyarn
-    && npm install yarn tyarn -g --registry=https://registry.npm.taobao.org \
-    && yarn config set registry https://registry.npm.taobao.org \
-    && echo "end"
-
-RUN set -ex \
-    # ruby 淘宝镜像
-    && gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/ \
-    # && gem sources --remove https://rubygems.org/ \
-    # && gem sources -a https://ruby.taobao.org/ \
-    && gem update --system \
-    && echo "end"    
 
 RUN set -ex \    
     # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
     && echo "end"
+
+RUN set -ex \
+    # pip 清华镜像更新
+    && mkdir -p ~/.pip \
+
+    &&  { \
+		        echo "[global]"; \
+            echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple"; \
+	      } > ~/.pip/pip.conf \
+
+    && pip install --no-cache-dir --upgrade --force-reinstall pip \
+    && echo "end"
+
+RUN set -ex \
+    # npm 淘宝镜像 cnpm
+    &&  { \
+            echo "registry=https://registry.npm.taobao.org/"; \ 
+            echo "sass_binary_site=https://npm.taobao.org/mirrors/node-sass/"; \
+            echo "phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs/"; \
+            echo "ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/"; \
+        } > ~/.npmrc \
+
+    && npm install -g cnpm --registry=https://registry.npm.taobao.org \
+
+    # yarn 淘宝镜像 tyarn
+    && npm install yarn tyarn -g --registry=https://registry.npm.taobao.org \
+    && yarn config set registry https://registry.npm.taobao.org \
+    && echo "end"
+
+RUN set -ex \
+    # ruby 淘宝镜像 
+    && gem sources --remove https://rubygems.org/ --add ${GEM_MIRROR} \
+    && gem update --system \
+    && echo "end"    
 
     # 生成 rsa key
     # && ssh-keygen -A \

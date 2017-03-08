@@ -3,21 +3,17 @@ FROM balpine
 MAINTAINER Bolik WaterBolik@163.com
 
 RUN set -ex \
-    && apk add --update --no-cache \   
-        # The Interactive Ruby
-        ruby-irb \
-        # JSON implementation as a Ruby extension in C
-        ruby-json \
-        # Manage an application's gem dependencies
-        ruby-bundler \
-        # Ruby documentation tool
-        ruby-rdoc \  
+    && apk add --update --no-cache \
+        cmake \
     && echo "end"
 
 RUN set -ex \
-    && gem install --no-document \
+    # --no-document
+    && gem install \
+        nokogiri \
         # A simple, Git-powered wiki with a sweet API and local frontend.
         gollum \
+        gollum-rugged_adapter \
         # Markdown
         github-markdown \
         # Org 
@@ -35,6 +31,12 @@ RUN set -ex \
         # ReStructuredText \
         # Textile 
         RedCloth \
+        redcarpet \
+    && echo "end"
+
+RUN set -ex \
+    rm -fr /usr/local/bundle/cache ~/.gem/ ~/.gemrc ~/.ash_history && \
+    find /usr/local/bundle/ \( -name 'gem_make.out' -o -name 'mkmf.log' \) -delete \
     && echo "end"
 
 VOLUME /wiki
