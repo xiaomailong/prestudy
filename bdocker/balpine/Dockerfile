@@ -13,16 +13,16 @@ ENV JAVA_HOME   /usr/lib/jvm/java-1.8-openjdk
 ENV PATH        ${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin
 
 # 清华镜像:       
-# ENV APK_MIRROR  mirror.tuna.tsinghua.edu.cn
+ENV APK_MIRROR  mirror.tuna.tsinghua.edu.cn
 # 中科大镜像:     
-ENV APK_MIRROR  mirrors.ustc.edu.cn
+# ENV APK_MIRROR  mirrors.ustc.edu.cn
 
 # 淘宝
 # ENV GEM_MIRROR  https://ruby.taobao.org/ 
 # 清华
-# ENV GEM_MIRROR  https://mirrors.tuna.tsinghua.edu.cn/rubygems/
+ENV GEM_MIRROR  https://mirrors.tuna.tsinghua.edu.cn/rubygems/
 # 中科大
-ENV GEM_MIRROR  https://mirrors.ustc.edu.cn/rubygems/
+# ENV GEM_MIRROR  https://mirrors.ustc.edu.cn/rubygems/
 
 RUN set -ex \
     # 使用apk镜像
@@ -287,7 +287,7 @@ RUN set -ex \
     && mkdir -p ~/.pip \
 
     &&  { \
-		        echo "[global]"; \
+		    echo "[global]"; \
             echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple"; \
 	      } > ~/.pip/pip.conf \
 
@@ -316,9 +316,43 @@ RUN set -ex \
     && gem update --system \
     && echo "end"    
 
-    # 生成 rsa key
-    # && ssh-keygen -A \
-    # && ls 
+RUN set -ex \
+    # 配置ssh
+    # 创建 /var/run/sshd/目录，不然sshd服务启动会报错
+    && mkdir -p /var/run/sshd \
+    && mkdir -p $HOME/.ssh \
+    && chmod 700 $HOME/.ssh \
+    &&  { \
+            echo '#!/bin/bash'; \ 
+            echo '/usr/sbin/sshd -D'; \
+        } > /auto_sshd.sh \
+    && cat /auto_sshd.sh \
+    && chmod +x /auto_sshd.sh \
+    # 生成ssh访问秘钥 /etc/ssh/
+    && ssh-keygen -A \
+    # && ls /etc/ssh/ \
+    # && cat /etc/ssh/ssh_host_rsa_key \
+    # && cat /etc/ssh/ssh_host_rsa_key.pub \
+    # && cat /etc/ssh/sshd_config \
+    # 将本机加入访问列表
+    && cat /etc/ssh/*.pub > $HOME/.ssh/authorized_keys \
+    && chmod 600 $HOME/.ssh/authorized_keys \
+    # 免密访问设置
+    # && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    # && sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    # && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
+    && sed -i \
+        -e 's~^PasswordAuthentication yes~PasswordAuthentication no~g' \
+        -e 's~^#PermitRootLogin yes~PermitRootLogin no~g' \
+        -e 's~^#UseDNS yes~UseDNS no~g' \
+        -e 's~^\(.*\)/usr/libexec/openssh/sftp-server$~\1internal-sftp~g' \
+        /etc/ssh/sshd_config \
+
+    # 修改root用户密码 
+    && echo "root:root" | chpasswd \
+
+    && echo "end"
+
     # && cat $HOME/.ssh/*.pub > $HOME/.ssh/authorized_keys \
 
     # && mkdir $HOME/.ssh \
@@ -328,13 +362,10 @@ RUN set -ex \
     # && cat /etc/ssh/*.pub > $HOME/.ssh/authorized_keys \
     # && chmod 600 $HOME/.ssh/authorized_keys \
 
-    # && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
-    # && sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
-    # && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
 
 
 # 容器需要开放SSH 22端口
-# EXPOSE 22
+EXPOSE 22
 
 #Auto running sshd service
 # CMD ["/usr/sbin/sshd","-D"]

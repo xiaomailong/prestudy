@@ -16,7 +16,7 @@ ENV APT_MIRROR    mirrors.ustc.edu.cn
 RUN set -ex \
   # 使用apt镜像
   && sed -i "s/httpredir.debian.org/${APT_MIRROR}/" /etc/apt/sources.list \
-  && sed -i 's|security.debian.org|${APT_MIRROR}/debian-security|g' /etc/apt/sources.list \
+  && sed -i "s|security.debian.org|${APT_MIRROR}/debian-security|g" /etc/apt/sources.list \
   # -qq 隐藏更新Apt缓存过程中打印的日志
   # -y  参数来消除更新过程中所有向用户提问的部分
   && apt-get -qqy update \

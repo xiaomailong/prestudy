@@ -33,9 +33,34 @@ source ~/.zshrc
 
 brew update
 
-gem sources  #列出默认源
-gem sources --remove https://rubygems.org/  #移除默认源
-gem sources -a https://mirrors.ustc.edu.cn/rubygems/  #添加科大源
+# npm 淘宝镜像 cnpm
+{ 
+  echo "registry=https://registry.npm.taobao.org/";  
+  echo "sass_binary_site=https://npm.taobao.org/mirrors/node-sass/"; 
+  echo "phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs/"; 
+  echo "ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/"; 
+} > ~/.npmrc 
+npm install -g cnpm --registry=https://registry.npm.taobao.org 
+# yarn 淘宝镜像 tyarn
+npm install yarn tyarn -g --registry=https://registry.npm.taobao.org 
+yarn config set registry https://registry.npm.taobao.org \
+
+# 移除默认源
+gem sources --remove https://rubygems.org/ 
+# 中科大
+gem sources --add https://mirrors.ustc.edu.cn/rubygems/  
+# 清华镜像
+gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ 
+# 淘宝镜像
+gem sources --add https://ruby.taobao.org/ 
+
+# pip 清华镜像更新
+mkdir -p ~/.pip 
+{
+  echo "[global]"; 
+  echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple"; 
+} > ~/.pip/pip.conf 
+pip install --no-cache-dir --upgrade --force-reinstall pip 
 
 # Mac App Store下载最新版的Xcode，然后使用下面的命令安装Xcode command line tools，
 # 这将为你安装很多终端下面常用的命令，将来很可能会使用到：
@@ -54,5 +79,4 @@ xcode-select --install
 
 # oh-my-zsh配置
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-
 chsh -s /usr/local/bin/zsh
