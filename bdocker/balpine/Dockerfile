@@ -4,10 +4,12 @@ MAINTAINER Bolik WaterBolik@163.com
 
 # 中文语言
 ENV LANG        zh_CN.UTF-8 
-ENV LANGUAGE    zh_CN.UTF-8:zh_CN:en_US.UTF-8:C.UTF-8 
+ENV LANGUAGE    zh_CN.UTF-8:zh_CN:en_US.UTF-8:en_US:C.UTF-8 
 ENV LC_ALL      zh_CN.UTF-8 
 # 时区 
 ENV TZ          Asia/Shanghai 
+# Shell
+ENV SHELL       /usr/bin/zsh
 # JAVA_HOME & PATH
 ENV JAVA_HOME   /usr/lib/jvm/java-1.8-openjdk 
 ENV PATH        ${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin
@@ -24,6 +26,7 @@ ENV GEM_MIRROR  https://mirrors.tuna.tsinghua.edu.cn/rubygems/
 # 中科大
 # ENV GEM_MIRROR  https://mirrors.ustc.edu.cn/rubygems/
 
+# 安装程序包
 RUN set -ex \
     # 使用apk镜像
     && sed -i "s/dl-cdn.alpinelinux.org/${APK_MIRROR}/" /etc/apk/repositories \    
@@ -58,13 +61,21 @@ RUN set -ex \
         #   libssh2-dev:              library for accessing ssh1/ssh2 protocol servers (development files)
         curl \
         curl-dev \
+        # wget: A network utility to retrieve files from the Web
+        wget \
 
-        # bash: The GNU Bourne Again shell
+
+        # bash(5): The GNU Bourne Again shell
         #   ncurses-terminfo-base:    Descriptions of common terminals
         #   ncurses-terminfo:         Console display library
         #   ncurses-libs:             Ncurses libraries
         #   readline:                 GNU readline library
         bash \
+        # zsh(4): A very advanced and programmable command interpreter (shell)
+        #   ncurses-terminfo-base:    Descriptions of common terminals
+        #   ncurses-terminfo:         Console display library
+        #   ncurses-libs:             Ncurses libraries
+        zsh \
 
         # openssl(3-5): Toolkit for SSL v2/v3 and TLS v1
         #   libcrypto1.0:             Crypto library from openssl
@@ -106,7 +117,7 @@ RUN set -ex \
         #   perl:                     Larry Wall's Practical Extraction and Report Language
         autoconf \
         # automake(2): A GNU tool for automatically creating Makefiles
-        #   perl
+        #   perl:                     Larry Wall's Practical Extraction and Report Language
         automake \
 
         # cmake(15): CMake is a cross-platform open-source make system
@@ -276,14 +287,14 @@ RUN set -ex \
 
     && echo "end"
 
+# 配置时区
 RUN set -ex \    
-    # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
     && echo "end"
 
+# 配置pip镜像
 RUN set -ex \
-    # pip 清华镜像更新
     && mkdir -p ~/.pip \
 
     &&  { \
@@ -294,8 +305,9 @@ RUN set -ex \
     && pip install --no-cache-dir --upgrade --force-reinstall pip \
     && echo "end"
 
+# 配置npm与yarn镜像
 RUN set -ex \
-    # npm 淘宝镜像 cnpm
+    # cnpm
     &&  { \
             echo "registry=https://registry.npm.taobao.org/"; \ 
             echo "sass_binary_site=https://npm.taobao.org/mirrors/node-sass/"; \
@@ -310,14 +322,21 @@ RUN set -ex \
     && yarn config set registry https://registry.npm.taobao.org \
     && echo "end"
 
+# 配置ruby镜像 
 RUN set -ex \
-    # ruby 淘宝镜像 
     && gem sources --remove https://rubygems.org/ --add ${GEM_MIRROR} \
     && gem update --system \
     && echo "end"    
 
+# 配置Shell
+RUN set -ex \    
+    && chsh -s /bin/zsh \
+    && echo "end"    
+
+COPY ./.zshrc $HOME/.zshrc
+
+# 配置ssh
 RUN set -ex \
-    # 配置ssh
     # 创建 /var/run/sshd/目录，不然sshd服务启动会报错
     && mkdir -p /var/run/sshd \
     && mkdir -p $HOME/.ssh \
@@ -328,16 +347,29 @@ RUN set -ex \
         } > /auto_sshd.sh \
     && cat /auto_sshd.sh \
     && chmod +x /auto_sshd.sh \
+    &&  { \
+            echo 'Host *'; \ 
+            echo '  UserKnownHostsFile /dev/null'; \
+            echo '  StrictHostKeyChecking no'; \ 
+            echo '  LogLevel quiet'; \
+            echo '  Port 2122'; \ 
+        } > $HOME/.ssh/config \ 
+    && chmod 600 $HOME/.ssh/config \
     # 生成ssh访问秘钥 /etc/ssh/
     && ssh-keygen -A \
+    # passwordless ssh
+    # && ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key \
+    # && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key \
+    && ssh-keygen -q -N "" -t rsa -f $HOME/.ssh/id_rsa \
+    && cp $HOME/.ssh/id_rsa.pub $HOME/.ssh/authorized_keys \
     # && ls /etc/ssh/ \
     # && cat /etc/ssh/ssh_host_rsa_key \
     # && cat /etc/ssh/ssh_host_rsa_key.pub \
     # && cat /etc/ssh/sshd_config \
     # 将本机加入访问列表
-    && cat /etc/ssh/*.pub > $HOME/.ssh/authorized_keys \
+    # && cat /etc/ssh/*.pub > $HOME/.ssh/authorized_keys \
     && chmod 600 $HOME/.ssh/authorized_keys \
-    # 免密访问设置
+    # 免密访问配置
     # && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
     # && sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
     # && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
@@ -348,21 +380,14 @@ RUN set -ex \
         -e 's~^\(.*\)/usr/libexec/openssh/sftp-server$~\1internal-sftp~g' \
         /etc/ssh/sshd_config \
 
+    # fix the 254 error code
+    && sed  -i "/^[^#]*UsePAM/ s/.*/#&/"  /etc/ssh/sshd_config \
+    # && echo "UsePAM no" >> /etc/ssh/sshd_config \
+    && echo "Port 2122" >> /etc/ssh/sshd_config \
+
     # 修改root用户密码 
     && echo "root:root" | chpasswd \
-
-    && echo "end"
-
-    # && cat $HOME/.ssh/*.pub > $HOME/.ssh/authorized_keys \
-
-    # && mkdir $HOME/.ssh \
-    # && chmod 700 $HOME/.ssh \
-    # 创建SSH密钥并将其拷贝到远程主机
-    # && ssh-keygen -A \
-    # && cat /etc/ssh/*.pub > $HOME/.ssh/authorized_keys \
-    # && chmod 600 $HOME/.ssh/authorized_keys \
-
-
+    && echo "end"    
 
 # 容器需要开放SSH 22端口
 EXPOSE 22
@@ -370,7 +395,7 @@ EXPOSE 22
 #Auto running sshd service
 # CMD ["/usr/sbin/sshd","-D"]
 
-CMD ["bash"]
+CMD ["zsh"]
 
 # 编译及执行方法如下: 
 #     $ docker build -t balpine /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/balpine/

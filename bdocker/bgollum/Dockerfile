@@ -3,11 +3,6 @@ FROM balpine
 MAINTAINER Bolik WaterBolik@163.com
 
 RUN set -ex \
-    && apk add --update --no-cache \
-        cmake \
-    && echo "end"
-
-RUN set -ex \
     # --no-document
     && gem install \
         nokogiri \
@@ -32,11 +27,9 @@ RUN set -ex \
         # Textile 
         RedCloth \
         redcarpet \
-    && echo "end"
-
-RUN set -ex \
-    rm -fr /usr/local/bundle/cache ~/.gem/ ~/.gemrc ~/.ash_history && \
-    find /usr/local/bundle/ \( -name 'gem_make.out' -o -name 'mkmf.log' \) -delete \
+    # 清除缓存
+    && rm -fr /usr/local/bundle/cache ~/.gem/ ~/.gemrc ~/.ash_history \
+    # && find /usr/local/bundle/ \( -name 'gem_make.out' -o -name 'mkmf.log' \) -delete \
     && echo "end"
 
 VOLUME /wiki
@@ -49,7 +42,6 @@ CMD ["gollum", "--port", "80"]
 # CMD ["bash"]
 
 # $ docker build -t bgollum /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bgollum/
-# $ docker run -it --rm bgollum
 # docker build -t bgollum B:\OpenSource\WaterBolik\prestudy\bdocker\bgollum\
 # docker run -it --rm bgollum 
 
