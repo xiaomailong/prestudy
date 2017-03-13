@@ -8,7 +8,7 @@ brew update
 brew upgrade
 
 # brew cask install & update
-bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/brew-cask.sh
+# bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/brew-cask.sh
 
 # git clone & update
 bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/git-update.sh

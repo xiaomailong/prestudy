@@ -6,27 +6,14 @@ MAINTAINER Bolik WaterBolik@163.com
 ENV LANG        zh_CN.UTF-8 
 ENV LANGUAGE    zh_CN.UTF-8:zh_CN:en_US.UTF-8:en_US:C.UTF-8 
 ENV LC_ALL      zh_CN.UTF-8 
-# 时区 
-ENV TZ          Asia/Shanghai 
-# Shell
-ENV SHELL       /usr/bin/zsh
+
 # JAVA_HOME & PATH
 ENV JAVA_HOME   /usr/lib/jvm/java-1.8-openjdk 
 ENV PATH        ${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin
 
-# 清华镜像:       
-ENV APK_MIRROR  mirror.tuna.tsinghua.edu.cn
-# 中科大镜像:     
-# ENV APK_MIRROR  mirrors.ustc.edu.cn
-
-# 淘宝
-# ENV GEM_MIRROR  https://ruby.taobao.org/ 
-# 清华
-ENV GEM_MIRROR  https://mirrors.tuna.tsinghua.edu.cn/rubygems/
-# 中科大
-# ENV GEM_MIRROR  https://mirrors.ustc.edu.cn/rubygems/
-
-# 安装程序包
+# 安装程序包 
+# ENV APK_MIRROR  mirror.tuna.tsinghua.edu.cn
+ENV APK_MIRROR  mirrors.ustc.edu.cn
 RUN set -ex \
     # 使用apk镜像
     && sed -i "s/dl-cdn.alpinelinux.org/${APK_MIRROR}/" /etc/apk/repositories \    
@@ -91,6 +78,8 @@ RUN set -ex \
         openssh-client \
         openssh-keysign \
         openssh \
+        # acf-openssh: A web-based system administration interface for openssh
+        # acf-opebssh \
 
         # build-base: Meta package for build base
         #   binutils-libs:            Runtime libraries from binutils - libbfd and libopcodes 
@@ -207,11 +196,14 @@ RUN set -ex \
         #   ruby-io-console:          Ruby simple console IO library
         #   ruby-rdoc:                Ruby documentation tool
         #   ruby-json:                JSON implementation as a Ruby extension in C
+        #   An implementation of Ruby on the JVM
         ruby \
         ruby-dev \
         ruby-irb \
         ruby-bundler \
         ruby-rdoc \  
+        # jruby(27): An implementation of Ruby on the JVM
+        jruby \
 
         # nodejs: JavaScript runtime built on V8 engine - LTS version
         #   ca-certificates libcrypto1.0 libssl1.0 libgcc libstdc++ ncurses-terminfo-base ncurses-terminfo ncurses-libs readline
@@ -288,47 +280,54 @@ RUN set -ex \
     && echo "end"
 
 # 配置时区
+ENV TZ          Asia/Shanghai 
 RUN set -ex \    
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
     && echo "end"
 
 # 配置pip镜像
+ENV PIP_MIRROR  pypi.tuna.tsinghua.edu.cn
 RUN set -ex \
     && mkdir -p ~/.pip \
 
     &&  { \
 		    echo "[global]"; \
-            echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple"; \
+            echo "index-url = https://${PIP_MIRROR}/simple"; \
 	      } > ~/.pip/pip.conf \
 
     && pip install --no-cache-dir --upgrade --force-reinstall pip \
     && echo "end"
 
 # 配置npm与yarn镜像
+ENV NPM_MIRROR  npm.taobao.org
 RUN set -ex \
     # cnpm
     &&  { \
-            echo "registry=https://registry.npm.taobao.org/"; \ 
-            echo "sass_binary_site=https://npm.taobao.org/mirrors/node-sass/"; \
-            echo "phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs/"; \
-            echo "ELECTRON_MIRROR=http://npm.taobao.org/mirrors/electron/"; \
+            echo "registry=https://registry.${NPM_MIRROR}/"; \ 
+            echo "sass_binary_site=https://${NPM_MIRROR}/mirrors/node-sass/"; \
+            echo "phantomjs_cdnurl=http://${NPM_MIRROR}/mirrors/phantomjs/"; \
+            echo "ELECTRON_MIRROR=http://${NPM_MIRROR}/mirrors/electron/"; \
         } > ~/.npmrc \
 
-    && npm install -g cnpm --registry=https://registry.npm.taobao.org \
+    && npm install -g cnpm --registry=https://registry.${NPM_MIRROR}/ \
 
     # yarn 淘宝镜像 tyarn
-    && npm install yarn tyarn -g --registry=https://registry.npm.taobao.org \
-    && yarn config set registry https://registry.npm.taobao.org \
+    && npm install yarn tyarn -g --registry=https://registry.${NPM_MIRROR}/ \
+    && yarn config set registry https://registry.${NPM_MIRROR}/ \
     && echo "end"
 
 # 配置ruby镜像 
+ENV GEM_MIRROR  ruby.taobao.org 
+# ENV GEM_MIRROR  mirrors.tuna.tsinghua.edu.cn
+# ENV GEM_MIRROR  mirrors.ustc.edu.cn
 RUN set -ex \
-    && gem sources --remove https://rubygems.org/ --add ${GEM_MIRROR} \
+    && gem sources --remove https://rubygems.org/ --add https://${GEM_MIRROR}/ \
     && gem update --system \
     && echo "end"    
 
 # 配置Shell
+ENV SHELL       /bin/zsh
 RUN set -ex \    
     && chsh -s /bin/zsh \
     && echo "end"    
@@ -338,23 +337,23 @@ COPY ./.zshrc $HOME/.zshrc
 # 配置ssh
 RUN set -ex \
     # 创建 /var/run/sshd/目录，不然sshd服务启动会报错
-    && mkdir -p /var/run/sshd \
-    && mkdir -p $HOME/.ssh \
-    && chmod 700 $HOME/.ssh \
-    &&  { \
-            echo '#!/bin/bash'; \ 
-            echo '/usr/sbin/sshd -D'; \
-        } > /auto_sshd.sh \
-    && cat /auto_sshd.sh \
-    && chmod +x /auto_sshd.sh \
-    &&  { \
-            echo 'Host *'; \ 
-            echo '  UserKnownHostsFile /dev/null'; \
-            echo '  StrictHostKeyChecking no'; \ 
-            echo '  LogLevel quiet'; \
-            echo '  Port 2122'; \ 
-        } > $HOME/.ssh/config \ 
-    && chmod 600 $HOME/.ssh/config \
+    # && mkdir -p /var/run/sshd \
+    # && mkdir -p $HOME/.ssh \
+    # && chmod 700 $HOME/.ssh \
+    # &&  { \
+    #         echo '#!/bin/bash'; \ 
+    #         echo '/usr/sbin/sshd -D'; \
+    #     } > /auto_sshd.sh \
+    # && cat /auto_sshd.sh \
+    # && chmod +x /auto_sshd.sh \
+    # &&  { \
+    #         echo 'Host *'; \ 
+    #         echo '  UserKnownHostsFile /dev/null'; \
+    #         echo '  StrictHostKeyChecking no'; \ 
+    #         echo '  LogLevel quiet'; \
+    #         echo '  Port 2122'; \ 
+    #     } > $HOME/.ssh/config \ 
+    # && chmod 600 $HOME/.ssh/config \
     # 生成ssh访问秘钥 /etc/ssh/
     && ssh-keygen -A \
     # passwordless ssh
@@ -370,31 +369,43 @@ RUN set -ex \
     # && cat /etc/ssh/*.pub > $HOME/.ssh/authorized_keys \
     && chmod 600 $HOME/.ssh/authorized_keys \
     # 免密访问配置
-    # && sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
-    # && sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
-    # && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config \
     && sed -i \
-        -e 's~^PasswordAuthentication yes~PasswordAuthentication no~g' \
-        -e 's~^#PermitRootLogin yes~PermitRootLogin no~g' \
-        -e 's~^#UseDNS yes~UseDNS no~g' \
-        -e 's~^\(.*\)/usr/libexec/openssh/sftp-server$~\1internal-sftp~g' \
+        -e 's~^#PermitRootLogin prohibit-password~PermitRootLogin yes~g' \
+        -e 's~^#PasswordAuthentication yes~PasswordAuthentication no~g' \
+        -e 's~^#UseDNS no~UseDNS no~g' \
+        -e 's~^#Port 22~Port 2222~g' \
         /etc/ssh/sshd_config \
 
     # fix the 254 error code
-    && sed  -i "/^[^#]*UsePAM/ s/.*/#&/"  /etc/ssh/sshd_config \
+    # && sed  -i "/^[^#]*UsePAM/ s/.*/#&/"  /etc/ssh/sshd_config \
     # && echo "UsePAM no" >> /etc/ssh/sshd_config \
-    && echo "Port 2122" >> /etc/ssh/sshd_config \
+    # && echo "Port 2122" >> /etc/ssh/sshd_config \
 
     # 修改root用户密码 
-    && echo "root:root" | chpasswd \
+    # && echo "root:root" | chpasswd \
+
+    # 配置sshd服务
+    && rc-update add sshd \
+    && mkdir -p /lib64/rc/init.d \
+    && ln -s /lib64/rc/init.d /run/openrc \
+    && touch /run/openrc/softlevel \
+    && sed -i \
+        -e 's~#rc_sys=""~rc_sys="docker"~g' \
+        -e 's~#rc_crashed_start=YES~rc_crashed_start=YES~g' \
+        /etc/rc.conf \
+    # && sudo openrc \
+    # && rc-status \
+    # && /etc/init.d/sshd start \
+
     && echo "end"    
 
-# 容器需要开放SSH 22端口
-EXPOSE 22
+# 容器需要开放SSH 2222端口
+EXPOSE 2222
 
 #Auto running sshd service
-# CMD ["/usr/sbin/sshd","-D"]
+# ENTRYPOINT "/etc/init.d/sshd" "start"
 
+# CMD ["/usr/sbin/sshd", "-D"]
 CMD ["zsh"]
 
 # 编译及执行方法如下: 
