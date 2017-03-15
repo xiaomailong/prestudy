@@ -2,60 +2,126 @@ FROM debian
 
 MAINTAINER Bolik WaterBolik@163.com
 
-# 配置中文语言
-ENV LANG          zh_CN.UTF-8 
-ENV LANGUAGE      zh_CN.UTF-8:zh_CN:en_US.UTF-8:C.UTF-8 
-ENV LC_ALL        zh_CN.UTF-8 
+
+ENV LANG          C.UTF-8
+
+# ENV APT_MIRROR    mirrors.ustc.edu.cn
+# ENV APT_MIRROR    mirrors.tuna.tsinghua.edu.cn
+ENV APT_MIRROR    mirrors.aliyun.com
+RUN set -ex \
+    # 使用apt镜像
+    && sed -i \
+            -e "s|deb.debian.org|${APT_MIRROR}|g" \
+            -e "s|security.debian.org|${APT_MIRROR}/debian-security|g" \   
+            # -e "s|http|https|g" \
+        /etc/apt/sources.list \
+    && cat /etc/apt/sources.list \
+    # -qq 隐藏更新Apt缓存过程中打印的日志
+    # -y  参数来消除更新过程中所有向用户提问的部分
+    && apt-get -y update \
+    && apt-get -y upgrade \
+
+    && apt-get -y install \
+        # 区域设置
+        locales \
+        # 常用的中文字体、SCIM输入法框架和拼音输入法
+        scim-pinyin \
+        openssh-server \
+        openssh-client \
+        sshpass \
+        tzdata \
+
+
+    # 配置中文语言
+    # && /usr/share/locales/install-language-pack zh_CN \
+    # && locale-gen zh_CN.UTF-8 \
+    # && dpkg-reconfigure --frontend noninteractive locales \
+    # && apt-get -qqy install \
+    #     # 安装中文包
+    #     language-pack-zh-hans \
+    #     # 安装基本字体
+    #     fonts-ipafont-gothic \
+    #     xfonts-100dpi \
+    #     xfonts-75dpi \
+    #     xfonts-cyrillic \
+    #     xfonts-scalable \
+    #     # 安装文泉驿微米黑字体
+    #     ttf-wqy-microhei \
+    #     # 安装时区数据
+    #     tzdata \
+    # # 将文泉驿微米黑设置为系统默认字体
+    # && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
+    && echo "end"
+
 # 设置时区 
 ENV TZ            Asia/Shanghai
-# 中科大镜像
-ENV APT_MIRROR    mirrors.ustc.edu.cn
-# 清华镜像
-# ENV APT_MIRROR    mirrors.tuna.tsinghua.edu.cn
-
 RUN set -ex \
-  # 使用apt镜像
-  && sed -i "s/httpredir.debian.org/${APT_MIRROR}/" /etc/apt/sources.list \
-  && sed -i "s|security.debian.org|${APT_MIRROR}/debian-security|g" /etc/apt/sources.list \
-  # -qq 隐藏更新Apt缓存过程中打印的日志
-  # -y  参数来消除更新过程中所有向用户提问的部分
-  && apt-get -qqy update \
-  && apt-get -qqy upgrade \
+    # 设置时区
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone \
+    && dpkg-reconfigure -f noninteractive tzdata \
 
-  # 配置中文语言
-  && /usr/share/locales/install-language-pack zh_CN \
-  && locale-gen zh_CN.UTF-8 \
-  && dpkg-reconfigure --frontend noninteractive locales \
-  && apt-get -qqy install \
-    # 安装中文包
-    language-pack-zh-hans \
-    # 安装基本字体
-    fonts-ipafont-gothic \
-    xfonts-100dpi \
-    xfonts-75dpi \
-    xfonts-cyrillic \
-    xfonts-scalable \
-    # 安装文泉驿微米黑字体
-    ttf-wqy-microhei \
-    # 安装时区数据
-    tzdata \
-  # 将文泉驿微米黑设置为系统默认字体
-  && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
-  
-  # 设置时区
-  && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-  && echo $TZ > /etc/timezone \
-  && dpkg-reconfigure -f noninteractive tzdata \
+    # 删除不必要的软件和Apt缓存包列表
+    # && apt-get autoclean  \
+    # && apt-get autoremove  \
+    # && rm -rf /var/lib/apt/lists/* \
 
-  # 删除不必要的软件和Apt缓存包列表
-  && apt-get autoclean  \
-  && apt-get autoremove  \
-  && rm -rf /var/lib/apt/lists/* \
+    # 命令执行结束
+    && echo "end"
 
-  # 命令执行结束
-  && echo "end"
+# 配置中文语言
+ENV LANG          zh_CN.UTF-8
+ENV LANGUAGE      zh_CN.UTF-8:zh_CN:zh:en_US.UTF-8:en_US:en:C.UTF-8 
+ENV LC_ALL        zh_CN.UTF-8
+ENV SUPPORTED     zh_CN.UTF-8:zh_CN:zh:en_US.UTF-8:en_US:en:C.UTF-8 
+ENV SYSFONT       lat0-sun16
+RUN set -ex \
+    && echo "end"
 
-CMD ["bin/bash"]  
+# 配置ssh
+RUN set -ex \
+    # && mkdir -p /var/run/sshd \
+    # 生成ssh访问秘钥 /etc/ssh/
+    && ssh-keygen -A \
+    # 免密访问配置
+    && sed -i \
+        -e 's~^#PermitRootLogin prohibit-password~PermitRootLogin yes~g' \
+        -e 's~^#HostKey /etc/ssh/ssh_host_rsa_key~HostKey /etc/ssh/ssh_host_rsa_key~g' \
+        -e 's~^#PubkeyAuthentication yes~PubkeyAuthentication yes~g' \
+        -e 's~^#PasswordAuthentication yes~PasswordAuthentication yes~g' \
+        -e 's~^#PermitEmptyPasswords no~PermitEmptyPasswords yes~g' \
+        -e 's~^#UseDNS no~UseDNS no~g' \
+        -e 's~^#Port 22~Port 2222~g' \
+        /etc/ssh/sshd_config \
+    && cat /etc/ssh/sshd_config \
+   
+    # 客户端配置
+    && mkdir -p $HOME/.ssh \
+    && chmod 700 $HOME/.ssh \
+    &&  { \
+            echo 'Host *'; \ 
+            echo '  UserKnownHostsFile /dev/null'; \
+            echo '  StrictHostKeyChecking no'; \ 
+            echo '  LogLevel quiet'; \
+            echo '  Port 2222'; \ 
+        } > $HOME/.ssh/config \ 
+    && chmod 600 $HOME/.ssh/config \
+    && cat $HOME/.ssh/config \
+    && ssh-keygen -q -N "" -t rsa -f $HOME/.ssh/id_rsa \
+    && cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys \
+    && chmod 600 $HOME/.ssh/authorized_keys \   
+
+    # 配置sshd服务
+    && rc-update add sshd sysinit\
+    && rc-status \
+    && touch /run/openrc/softlevel \
+
+    && echo "end"    
+
+EXPOSE 2222
+
+CMD openrc && bash
+# CMD ["bin/bash"]  
 
 # $ docker build -t bdebian /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bdebian/
 # docker build -t bdebian B:\OpenSource\WaterBolik\prestudy\bdocker\bdebian\

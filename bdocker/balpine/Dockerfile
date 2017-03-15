@@ -1,4 +1,8 @@
 FROM alpine:3.5
+# Linux 01562754130f 4.9.4-moby #1 SMP Wed Jan 18 17:04:43 UTC 2017 x86_64 Linux
+
+# FROM scratch
+# ADD alpine-minirootfs-3.5.2-x86_64.tar.gz /
 
 MAINTAINER Bolik WaterBolik@163.com
 
@@ -13,7 +17,8 @@ ENV PATH        ${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin
 
 # 安装程序包 
 # ENV APK_MIRROR  mirror.tuna.tsinghua.edu.cn
-ENV APK_MIRROR  mirrors.ustc.edu.cn
+# ENV APK_MIRROR  mirrors.ustc.edu.cn
+ENV APK_MIRROR  mirrors.aliyun.com
 RUN set -ex \
     # 使用apk镜像
     && sed -i "s/dl-cdn.alpinelinux.org/${APK_MIRROR}/" /etc/apk/repositories \    
@@ -75,9 +80,11 @@ RUN set -ex \
         #   openssh-client:           OpenBSD's SSH client 
         #   openssh-keysign:          ssh helper program for host-based authentication
         #   openssh-sftp-server:      ssh sftp server module
+        #   sshpass:                  Non-interactive SSH authentication utility
         openssh-client \
         openssh-keysign \
         openssh \
+        sshpass \
         # acf-openssh: A web-based system administration interface for openssh
         # acf-opebssh \
 
@@ -288,6 +295,7 @@ RUN set -ex \
 
 # 配置pip镜像
 ENV PIP_MIRROR  pypi.tuna.tsinghua.edu.cn
+# ENV PIP_MIRROR  mirrors.aliyun.com/pypi
 RUN set -ex \
     && mkdir -p ~/.pip \
 
@@ -318,11 +326,11 @@ RUN set -ex \
     && echo "end"
 
 # 配置ruby镜像 
-ENV GEM_MIRROR  ruby.taobao.org 
+# ENV GEM_MIRROR  mirrors.aliyun.com 
 # ENV GEM_MIRROR  mirrors.tuna.tsinghua.edu.cn
-# ENV GEM_MIRROR  mirrors.ustc.edu.cn
+ENV GEM_MIRROR  mirrors.ustc.edu.cn
 RUN set -ex \
-    && gem sources --remove https://rubygems.org/ --add https://${GEM_MIRROR}/ \
+    && gem sources --remove https://rubygems.org/ --add https://${GEM_MIRROR}/rubygems/ \
     && gem update --system \
     && echo "end"    
 
@@ -336,14 +344,7 @@ COPY ./.zshrc $HOME/.zshrc
 
 # 配置ssh
 RUN set -ex \
-    # 创建 /var/run/sshd/目录，不然sshd服务启动会报错
     # && mkdir -p /var/run/sshd \
-    # &&  { \
-    #         echo '#!/bin/bash'; \ 
-    #         echo '/usr/sbin/sshd -D'; \
-    #     } > /auto_sshd.sh \
-    # && cat /auto_sshd.sh \
-    # && chmod +x /auto_sshd.sh \
     # 生成ssh访问秘钥 /etc/ssh/
     && ssh-keygen -A \
     # 免密访问配置
@@ -356,14 +357,8 @@ RUN set -ex \
         -e 's~^#UseDNS no~UseDNS no~g' \
         -e 's~^#Port 22~Port 2222~g' \
         /etc/ssh/sshd_config \
-    # &&  { \
-    #         echo 'AllowUsers: root'; \ 
-    #         echo 'AllowGroups: root'; \
-    #         echo 'DenyUsers: '; \ 
-    #         echo 'DenyGroups: '; \
-    #     } >> /etc/ssh/sshd_config \ 
-    # 从容器中拷贝出配置文件
-    # scp -P 2222 root@127.0.0.1:/etc/ssh/sshd_config ./
+    && cat /etc/ssh/sshd_config \
+   
     # 客户端配置
     && mkdir -p $HOME/.ssh \
     && chmod 700 $HOME/.ssh \
@@ -375,35 +370,31 @@ RUN set -ex \
             echo '  Port 2222'; \ 
         } > $HOME/.ssh/config \ 
     && chmod 600 $HOME/.ssh/config \
+    && cat $HOME/.ssh/config \
     && ssh-keygen -q -N "" -t rsa -f $HOME/.ssh/id_rsa \
-    && cp $HOME/.ssh/id_rsa.pub $HOME/.ssh/authorized_keys \
+    && cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys \
     && chmod 600 $HOME/.ssh/authorized_keys \   
 
     # 配置sshd服务
-    && rc-update add sshd \
-    && mkdir -p /lib64/rc/init.d \
-    && ln -s /lib64/rc/init.d /run/openrc \
+    && rc-update add sshd sysinit\
+    && rc-status \
     && touch /run/openrc/softlevel \
-    && sed -i \
-        -e 's~#rc_sys=""~rc_sys="docker"~g' \
-        -e 's~#rc_crashed_start=YES~rc_crashed_start=YES~g' \
-        /etc/rc.conf \
-    # && sudo openrc \
-    # && rc-status \
-    # && /etc/init.d/sshd start \
 
     && echo "end"    
 
-# 容器需要开放SSH 2222端口
 EXPOSE 2222
 
-#Auto running sshd service
-# ENTRYPOINT "/etc/init.d/sshd" "start"
+# 将物理机本地的~/.ssh/id_rsa.pub拷贝到容器里
+# COPY /Users/Bolik/.ssh/id_rsa.pub $HOME/.ssh/authorized_keys
+# docker cp ~/.ssh/id_rsa.pub containerid:/root/.ssh/authorized_keys
 
 # CMD ["/usr/sbin/sshd", "-D"]
-CMD ["zsh"]
+CMD openrc && bash
 
 # 编译及执行方法如下: 
 #     $ docker build -t balpine /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/balpine/
 #     docker build -t balpine B:\OpenSource\WaterBolik\prestudy\bdocker\balpine\
 #     docker run -it --rm balpine 
+
+# 从容器中拷贝出配置文件
+# scp -P 2222 root@127.0.0.1:/etc/ssh/sshd_config ./
