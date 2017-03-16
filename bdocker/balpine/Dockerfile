@@ -20,6 +20,8 @@ ENV PATH        ${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin
 # ENV APK_MIRROR  mirrors.ustc.edu.cn
 ENV APK_MIRROR  mirrors.aliyun.com
 RUN set -ex \
+    # 查看系统版本
+    && cat /etc/issue \
     # 使用apk镜像
     && sed -i "s/dl-cdn.alpinelinux.org/${APK_MIRROR}/" /etc/apk/repositories \    
     && apk update \
@@ -85,8 +87,22 @@ RUN set -ex \
         openssh-keysign \
         openssh \
         sshpass \
+        # screen: A window manager that multiplexes a physical terminal
+        screen \
+        # sshfs: FUSE client based on the SSH File Transfer Protocol 
+        #   fuse:                     A library that makes it possible to implement a filesystem in a userspace program.
+        #   libuuid:                  DCE compatible Universally Unique Identifier library
+        #   libblkid:                 Block device identification library from util-linux
+        #   libmount:                 Block device identification library from util-linux
+        #   glib:                     Common C routines used by Gtk+ and other libs
+        sshfs \
         # acf-openssh: A web-based system administration interface for openssh
         # acf-opebssh \
+        # rsync: A file transfer program to keep remote files in sync
+        #   libattr:                  Dynamic library for extended attribute support
+        #   libacl:                   Dynamic library for access control list support
+        #   popt:                     A commandline option parser
+        rsync \
 
         # build-base: Meta package for build base
         #   binutils-libs:            Runtime libraries from binutils - libbfd and libopcodes 
@@ -256,6 +272,12 @@ RUN set -ex \
        
         # openrc: OpenRC manages the services, startup and shutdown of a host
         openrc \
+
+        # supervisor(13): A system for controlling process state under UNIX
+        #   libbz2 expat libffi gdbm ncurses-terminfo-base ncurses-terminfo ncurses-libs readline
+        #   sqlite-libs python2 py-setuptools
+        #   py-meld3:                 An HTML/XML templating engine
+        supervisor \
 
         # net-tools: Linux networking base tools
         #   mii-tool:                 media-independent interface (MII) tool

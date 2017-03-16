@@ -11,6 +11,8 @@ ENV LANG          C.UTF-8
 # ENV APT_MIRROR    mirrors.tuna.tsinghua.edu.cn
 ENV APT_MIRROR    mirrors.aliyun.com
 RUN set -ex \
+    # 查看系统版本
+    && cat /etc/issue \
     # 使用apt镜像
     && sed -i \
         -e "s|archive.ubuntu.com|${APT_MIRROR}|g" \    
@@ -45,6 +47,8 @@ RUN set -ex \
         openssh \
         openssh-server \
         openssh-clients \
+        sshpass \
+        openrc \
     # 将文泉驿微米黑设置为系统默认字体
     && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
   

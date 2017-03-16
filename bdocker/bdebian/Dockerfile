@@ -9,6 +9,8 @@ ENV LANG          C.UTF-8
 # ENV APT_MIRROR    mirrors.tuna.tsinghua.edu.cn
 ENV APT_MIRROR    mirrors.aliyun.com
 RUN set -ex \
+    # 查看系统版本
+    && cat /etc/issue \
     # 使用apt镜像
     && sed -i \
             -e "s|deb.debian.org|${APT_MIRROR}|g" \
@@ -29,6 +31,7 @@ RUN set -ex \
         openssh-server \
         openssh-client \
         sshpass \
+        openrc \
         tzdata \
 
 

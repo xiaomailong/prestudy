@@ -11,6 +11,10 @@ ENV LANG          C.UTF-8
 ENV YUM_MIRROR    mirrors.aliyun.com
 
 RUN set -ex \
+    # 查看系统版本
+    && cat /etc/issue \
+    && rpm -qi centos-release \
+    && lsb_release -a \
     # 使用镜像源 cat /etc/yum.repos.d/CentOS-Base.repo
     # CentOS-Base.repo CentOS-Debuginfo.repo CentOS-Media.repo CentOS-Vault.repo CentOS-fasttrack.repo
     && sed -i \
@@ -41,6 +45,8 @@ RUN set -ex \
         openssh \
         openssh-server \
         openssh-clients \
+        sshpass \
+        openrc \
 
     # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
