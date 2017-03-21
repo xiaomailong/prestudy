@@ -302,9 +302,28 @@ RUN set -ex \
 
         # sudo: Give certain users the ability to run some commands as root
         sudo \
+        # su-exec: switch user and group id, setgroups and exec
+        su-exec \
 
         # bc: An arbitrary precision numeric processing language (calculator)
         bc \
+
+        # gnupg(15): GNU Privacy Guard 1 - a PGP replacement tool
+        #   libgpg-error:           Support library for libgcrypt
+        #   libassuan:              A IPC library used by some GnuPG related software
+        #   libcap:                 POSIX 1003.1e capabilities
+        #   ncurses-terminfo-base:  Descriptions of common terminals
+        #   ncurses-terminfo:       Console display library
+        #   ncurses-libs:           Ncurses libraries
+        #   pinentry:               Collection of simple PIN or passphrase entry dialogs which utilize the Assuan protocol
+        #   libbz2:                 Shared library for bz2  
+        #   libgcrypt:              general purpose crypto library based on the code used in GnuPG  
+        #   libksba:                Libksba is a CMS and X.509 access library  
+        #   db:                     The Berkeley DB embedded database system
+        #   libsasl:                Cyrus Simple Authentication and Security Layer (SASL) library
+        #   libldap:                OpenLDAP libraries
+        #   npth:                   The New GNU Portable Threads library
+        gnupg \
 
     && echo "end"
 
