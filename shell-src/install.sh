@@ -13,7 +13,7 @@
 # pip install voltron
 
 # Homebrew OS X 不可或缺的套件管理器
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # curl -LsSf http://github.com/mxcl/homebrew/tarball/master | sudo tar xvz -C/usr/local --strip 1
 
 #  Homebrew 镜像
@@ -28,8 +28,8 @@ git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
 cd "$(brew --repo)"/Library/Taps/caskroom/homebrew-cask
 git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-cask.git
 # git remote set-url origin https://github.com/caskroom/homebrew-cask
-echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.zshrc
-source ~/.zshrc
+# echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.zshrc
+# source ~/.zshrc
 
 brew update
 
@@ -50,9 +50,9 @@ gem sources --remove https://rubygems.org/
 # 中科大
 gem sources --add https://mirrors.ustc.edu.cn/rubygems/  
 # 清华镜像
-gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ 
+# gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ 
 # 淘宝镜像
-gem sources --add https://ruby.taobao.org/ 
+# gem sources --add https://ruby.taobao.org/ 
 
 # pip 清华镜像更新
 mkdir -p ~/.pip 
@@ -64,7 +64,7 @@ pip install --no-cache-dir --upgrade --force-reinstall pip
 
 # Mac App Store下载最新版的Xcode，然后使用下面的命令安装Xcode command line tools，
 # 这将为你安装很多终端下面常用的命令，将来很可能会使用到：
-xcode-select --install
+# xcode-select --install
 
 # gitsome：非常棒的 Git/Shell 自动补全工具
 # gitsome 不仅能够为你补全 Git 命令、选项、分支、标签，而且也支持补全 Shell 命令、文件、目录、环境变量、manpages 等。
@@ -78,5 +78,5 @@ xcode-select --install
 # gitsome
 
 # oh-my-zsh配置
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
-chsh -s /usr/local/bin/zsh
+# wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+# chsh -s /usr/local/bin/zsh

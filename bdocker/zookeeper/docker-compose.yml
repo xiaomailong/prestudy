@@ -7,7 +7,7 @@ services:
             - 2181:2181
         environment:
             ZOO_MY_ID: 1
-            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888 server.4=zoo4:2888:3888 server.5=zoo5:2888:3888
 
     zoo2:
         image: zookeeper
@@ -16,7 +16,7 @@ services:
             - 2182:2181
         environment:
             ZOO_MY_ID: 2
-            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888 server.4=zoo4:2888:3888 server.5=zoo5:2888:3888
 
     zoo3:
         image: zookeeper
@@ -25,4 +25,22 @@ services:
             - 2183:2181
         environment:
             ZOO_MY_ID: 3
-            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888 server.4=zoo4:2888:3888 server.5=zoo5:2888:3888
+
+    zoo4:
+        image: zookeeper
+        restart: always
+        ports:
+            - 2184:2181
+        environment:
+            ZOO_MY_ID: 4
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888 server.4=zoo4:2888:3888 server.5=zoo5:2888:3888
+
+    zoo5:
+        image: zookeeper
+        restart: always
+        ports:
+            - 2185:2181
+        environment:
+            ZOO_MY_ID: 5
+            ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888 server.4=zoo4:2888:3888 server.5=zoo5:2888:3888
