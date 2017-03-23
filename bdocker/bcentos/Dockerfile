@@ -1,4 +1,5 @@
-FROM centos
+FROM centos:7.3.1611
+# https://hub.docker.com/_/centos/
 
 MAINTAINER Bolik WaterBolik@163.com
 
@@ -30,7 +31,6 @@ RUN set -ex \
     # && yum -y install epel-release \
     # && wget -O /etc/yum.repos.d/epel.repo http://${YUM_MIRROR}/repo/epel-7.repo \
     # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://${YUM_MIRROR}/repo/Centos-7.repo \
-    && yum clean all \
     && yum makecache \
 
     # && yum -y update \
@@ -47,6 +47,7 @@ RUN set -ex \
         openssh-clients \
         sshpass \
         openrc \
+    && yum clean all \
 
     # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \

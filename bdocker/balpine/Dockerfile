@@ -1,4 +1,6 @@
 FROM alpine:3.5
+# https://hub.docker.com/_/alpine/
+
 # Linux 01562754130f 4.9.4-moby #1 SMP Wed Jan 18 17:04:43 UTC 2017 x86_64 Linux
 
 # FROM scratch
@@ -439,3 +441,27 @@ CMD openrc && bash
 
 # 从容器中拷贝出配置文件
 # scp -P 2222 root@127.0.0.1:/etc/ssh/sshd_config ./
+
+# 生成ssl证书
+# 创建私钥和证书签署请求
+# docker run -v $PWD:/work -it balpine openssl req -out /work/CSR.csr -new -newkey rsa:2048 -nodes -keyout /work/privateKey.key
+
+# 创建自签名的证书
+# docker run -v $PWD:/work -it balpine openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout privateKey.key -out /work/certificate.crt
+
+# 如何用正确的姿势查看 主机系统的CPU信息
+
+# 查看cpu颗数
+cat /proc/cpuinfo |grep "physical id" | sort -u |wc -l
+# 查看cpu核心数
+cat /proc/cpuinfo |grep "cpu cores"|sort -u
+# 逻辑cpu总数
+cat /proc/cpuinfo |grep "core id"|wc -l
+# 查看是否开启了超线程
+grep -E "cpu cores|siblings|physical id" /proc/cpuinfo |xargs -n 11 |sort -u
+
+# 快速查看主机上总逻辑CPU数量
+nproc --all
+getconf _NPROCESSORS_ONLN
+cat /sys/devices/system/cpu/online
+lscpu

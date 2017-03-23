@@ -1,4 +1,8 @@
-FROM debian
+FROM debian:jessie
+# https://hub.docker.com/_/debian/
+
+# 8.7, 8, jessie, latest 
+# 7.11, 7, wheezy 
 
 MAINTAINER Bolik WaterBolik@163.com
 
