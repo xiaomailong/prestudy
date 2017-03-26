@@ -8,19 +8,22 @@ FROM alpine:3.5
 
 MAINTAINER Bolik WaterBolik@163.com
 
-# 中文语言
-ENV LANG        zh_CN.UTF-8 
-ENV LANGUAGE    zh_CN.UTF-8:zh_CN:en_US.UTF-8:en_US:C.UTF-8 
-ENV LC_ALL      zh_CN.UTF-8 
+ENV TZ=Asia/Shanghai \
+    # JAVA_HOME & PATH
+    JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
+    PATH=${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin \
+    # 安装程序包 
+    # APK_MIRROR=mirror.tuna.tsinghua.edu.cn \
+    # APK_MIRROR=mirrors.ustc.edu.cn \
+    APK_MIRROR=mirrors.aliyun.com \
+    # 配置中文语言
+    LANG=zh_CN.UTF-8 \
+    LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
+    SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
+    SYSFONT=lat0-sun16 \
+    LC_ALL=C.UTF-8 
+    # LC_ALL=zh_CN.UTF-8 
 
-# JAVA_HOME & PATH
-ENV JAVA_HOME   /usr/lib/jvm/java-1.8-openjdk 
-ENV PATH        ${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin
-
-# 安装程序包 
-# ENV APK_MIRROR  mirror.tuna.tsinghua.edu.cn
-# ENV APK_MIRROR  mirrors.ustc.edu.cn
-ENV APK_MIRROR  mirrors.aliyun.com
 RUN set -ex \
     # 查看系统版本
     && cat /etc/issue \
@@ -330,7 +333,6 @@ RUN set -ex \
     && echo "end"
 
 # 配置时区
-ENV TZ          Asia/Shanghai 
 RUN set -ex \    
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
@@ -378,12 +380,12 @@ RUN set -ex \
     && echo "end"    
 
 # 配置Shell
-ENV SHELL       /bin/zsh
-RUN set -ex \    
-    && chsh -s /bin/zsh \
-    && echo "end"    
+# ENV SHELL       /bin/zsh
+# RUN set -ex \    
+#     && chsh -s /bin/zsh \
+#     && echo "end"    
 
-COPY ./.zshrc $HOME/.zshrc
+# COPY ./.zshrc $HOME/.zshrc
 
 # 配置ssh
 RUN set -ex \
@@ -448,20 +450,3 @@ CMD openrc && bash
 
 # 创建自签名的证书
 # docker run -v $PWD:/work -it balpine openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout privateKey.key -out /work/certificate.crt
-
-# 如何用正确的姿势查看 主机系统的CPU信息
-
-# 查看cpu颗数
-cat /proc/cpuinfo |grep "physical id" | sort -u |wc -l
-# 查看cpu核心数
-cat /proc/cpuinfo |grep "cpu cores"|sort -u
-# 逻辑cpu总数
-cat /proc/cpuinfo |grep "core id"|wc -l
-# 查看是否开启了超线程
-grep -E "cpu cores|siblings|physical id" /proc/cpuinfo |xargs -n 11 |sort -u
-
-# 快速查看主机上总逻辑CPU数量
-nproc --all
-getconf _NPROCESSORS_ONLN
-cat /sys/devices/system/cpu/online
-lscpu

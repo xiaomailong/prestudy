@@ -3,14 +3,18 @@ FROM centos:6
 
 MAINTAINER Bolik WaterBolik@163.com
 
-# 设置时区 
-ENV TZ            Asia/Shanghai
-ENV LANG          C.UTF-8
-
-# 中科大镜像
-ENV YUM_MIRROR    mirrors.ustc.edu.cn
-# 阿里
-# ENV YUM_MIRROR    mirrors.aliyun.com
+ENV TZ=Asia/Shanghai \
+    # 安装包源镜像请任选其一   
+    # YUM_MIRROR=mirrors.ustc.edu.cn \
+    # YUM_MIRROR=mirror.tuna.tsinghua.edu.cn \
+    YUM_MIRROR=mirrors.aliyun.com \
+    # 配置中文语言
+    LANG=zh_CN.UTF-8 \
+    LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
+    SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
+    SYSFONT=lat0-sun16 \
+    LC_ALL=C.UTF-8 
+    # LC_ALL=zh_CN.UTF-8 
 
 RUN set -ex \
   # 使用镜像源 cat /etc/yum.repos.d/CentOS-Base.repo
@@ -49,13 +53,6 @@ RUN set -ex \
 
   # 命令执行结束
   && echo "end"
-
-# 配置中文语言
-ENV LANG          zh_CN.UTF-8
-ENV LANGUAGE      zh_CN.UTF-8:zh_CN:zh:en_US.UTF-8:en_US:en:C.UTF-8 
-ENV LC_ALL        zh_CN.UTF-8
-ENV SUPPORTED     zh_CN.UTF-8:zh_CN:zh:en_US.UTF-8:en_US:en:C.UTF-8 
-ENV SYSFONT       lat0-sun16
 
 CMD ["bin/bash"]
 

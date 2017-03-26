@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:8.7
 # https://hub.docker.com/_/debian/
 
 # 8.7, 8, jessie, latest 
@@ -6,12 +6,19 @@ FROM debian:jessie
 
 MAINTAINER Bolik WaterBolik@163.com
 
+ENV TZ=Asia/Shanghai \
+    # 安装包源镜像请任选其一   
+    APT_MIRROR=mirrors.ustc.edu.cn \
+    # APT_MIRROR=mirrors.tuna.tsinghua.edu.cn \
+    # APT_MIRROR=mirrors.aliyun.com \
+    # 配置中文语言
+    LANG=zh_CN.UTF-8 \
+    LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
+    SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
+    SYSFONT=lat0-sun16 \
+    # LC_ALL=C.UTF-8 
+    LC_ALL=zh_CN.UTF-8 
 
-ENV LANG          C.UTF-8
-
-# ENV APT_MIRROR    mirrors.ustc.edu.cn
-# ENV APT_MIRROR    mirrors.tuna.tsinghua.edu.cn
-ENV APT_MIRROR    mirrors.aliyun.com
 RUN set -ex \
     # 查看系统版本
     && cat /etc/issue \
@@ -28,16 +35,16 @@ RUN set -ex \
     && apt-get -y upgrade \
 
     && apt-get -y install \
+        apt-utils \
         # 区域设置
         locales \
         # 常用的中文字体、SCIM输入法框架和拼音输入法
-        scim-pinyin \
+        # scim-pinyin \
         openssh-server \
         openssh-client \
         sshpass \
         openrc \
         tzdata \
-
 
     # 配置中文语言
     # && /usr/share/locales/install-language-pack zh_CN \
@@ -58,31 +65,20 @@ RUN set -ex \
     #     tzdata \
     # # 将文泉驿微米黑设置为系统默认字体
     # && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
+    
+    # 删除不必要的软件和Apt缓存包列表
+    && apt-get autoclean  \
+    && apt-get autoremove  \
+    # && rm -rf /var/lib/apt/lists/* \
     && echo "end"
 
 # 设置时区 
-ENV TZ            Asia/Shanghai
 RUN set -ex \
     # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
     && dpkg-reconfigure -f noninteractive tzdata \
-
-    # 删除不必要的软件和Apt缓存包列表
-    # && apt-get autoclean  \
-    # && apt-get autoremove  \
-    # && rm -rf /var/lib/apt/lists/* \
-
     # 命令执行结束
-    && echo "end"
-
-# 配置中文语言
-ENV LANG          zh_CN.UTF-8
-ENV LANGUAGE      zh_CN.UTF-8:zh_CN:zh:en_US.UTF-8:en_US:en:C.UTF-8 
-ENV LC_ALL        zh_CN.UTF-8
-ENV SUPPORTED     zh_CN.UTF-8:zh_CN:zh:en_US.UTF-8:en_US:en:C.UTF-8 
-ENV SYSFONT       lat0-sun16
-RUN set -ex \
     && echo "end"
 
 # 配置ssh
@@ -119,16 +115,16 @@ RUN set -ex \
     && chmod 600 $HOME/.ssh/authorized_keys \   
 
     # 配置sshd服务
-    && rc-update add sshd sysinit\
-    && rc-status \
-    && touch /run/openrc/softlevel \
+    # && rc-update add sshd sysinit\
+    # && rc-status \
+    # && touch /run/openrc/softlevel \
 
     && echo "end"    
 
 EXPOSE 2222
 
-CMD openrc && bash
-# CMD ["bin/bash"]  
+# CMD openrc && bash
+CMD ["bin/bash"]  
 
 # $ docker build -t bdebian /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bdebian/
 # docker build -t bdebian B:\OpenSource\WaterBolik\prestudy\bdocker\bdebian\
