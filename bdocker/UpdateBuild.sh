@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # base image pull -------------------------------------------------------------
 docker pull alpine:latest
@@ -14,22 +15,22 @@ docker pull centos:7
 
 
 # alpine base images ----------------------------------------------------------
-docker build -t balpine B:\OpenSource\WaterBolik\prestudy\bdocker\balpine\
-docker build -t bgollum B:\OpenSource\WaterBolik\prestudy\bdocker\bgollum\
-docker build -t bnodejs B:\OpenSource\WaterBolik\prestudy\bdocker\bnodejs\
-docker build -t bpython B:\OpenSource\WaterBolik\prestudy\bdocker\bpython\
-docker build -t zookeeper B:\OpenSource\WaterBolik\prestudy\bdocker\zookeeper\
+docker build -t balpine /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/balpine/
+docker build -t bgollum /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bgollum/
+docker build -t bnodejs /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bnodejs/
+docker build -t bpython /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bpython/
+docker build -t zookeeper /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/zookeeper/
 
 # centos base images ----------------------------------------------------------
-docker build -t bcentos B:\OpenSource\WaterBolik\prestudy\bdocker\bcentos\
+docker build -t bcentos /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bcentos/
 
 
 # debian base images ----------------------------------------------------------
-docker build -t bdebian B:\OpenSource\WaterBolik\prestudy\bdocker\bdebian\
+docker build -t bdebian /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bdebian/
 
 
 # ubuntu base images ----------------------------------------------------------
-docker build -t bubuntu B:\OpenSource\WaterBolik\prestudy\bdocker\bubuntu\
+docker build -t bubuntu /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bubuntu/
 
 
 # 删除pull过程或者create过程产生的临时镜像
