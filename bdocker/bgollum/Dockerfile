@@ -38,7 +38,7 @@ RUN set -ex \
         # A fast, safe and extensible Markdown to (X)HTML parser
         redcarpet \
     # 清除缓存
-    && rm -fr /usr/local/bundle/cache ~/.gem/ ~/.gemrc ~/.ash_history \
+    && rm -fr /usr/local/bundle/cache ${HOME}/.gem/ ${HOME}/.gemrc ${HOME}/.ash_history \
     # && find /usr/local/bundle/ \( -name 'gem_make.out' -o -name 'mkmf.log' \) -delete \
     && echo "end"
 

@@ -1,36 +1,11 @@
-FROM alpine:3.5
-# https://hub.docker.com/_/alpine/
-
-# Linux 01562754130f 4.9.4-moby #1 SMP Wed Jan 18 17:04:43 UTC 2017 x86_64 Linux
-
-# FROM scratch
-# ADD alpine-minirootfs-3.5.2-x86_64.tar.gz /
+FROM alpine_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV TZ=Asia/Shanghai \
-    # JAVA_HOME & PATH
-    JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
-    PATH=${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin \
-    # 安装程序包 
-    # APK_MIRROR=mirror.tuna.tsinghua.edu.cn \
-    # APK_MIRROR=mirrors.ustc.edu.cn \
-    APK_MIRROR=mirrors.aliyun.com \
-    # 配置中文语言
-    LANG=zh_CN.UTF-8 \
-    LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
-    SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
-    SYSFONT=lat0-sun16 \
-    LC_ALL=C.UTF-8 
-    # LC_ALL=zh_CN.UTF-8 
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
+    PATH=${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin 
 
-RUN set -ex \
-    # 查看系统版本
-    && cat /etc/issue \
-    # 使用apk镜像
-    && sed -i "s/dl-cdn.alpinelinux.org/${APK_MIRROR}/" /etc/apk/repositories \    
-    && apk update \
-    && apk upgrade \
+RUN set -ex \   
     # 使用apk安装必备软件 
     && apk add --update --no-cache \
 
@@ -332,49 +307,41 @@ RUN set -ex \
 
     && echo "end"
 
-# 配置时区
-RUN set -ex \    
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-    && echo $TZ > /etc/timezone \
-    && echo "end"
-
-# 配置pip镜像
-ENV PIP_MIRROR  pypi.tuna.tsinghua.edu.cn
-# ENV PIP_MIRROR  mirrors.aliyun.com/pypi
 RUN set -ex \
-    && mkdir -p ~/.pip \
-
+    # 配置pip镜像
+    && PIP_MIRROR=pypi.tuna.tsinghua.edu.cn \
+    # && PIP_MIRROR=mirrors.aliyun.com/pypi \
+    && mkdir -p ${HOME}/.pip \
     &&  { \
 		    echo "[global]"; \
             echo "index-url = https://${PIP_MIRROR}/simple"; \
-	      } > ~/.pip/pip.conf \
-
+	      } > ${HOME}/.pip/pip.conf \
+    && cat ${HOME}/.pip/pip.conf \
     && pip install --no-cache-dir --upgrade --force-reinstall pip \
     && echo "end"
 
-# 配置npm与yarn镜像
-ENV NPM_MIRROR  npm.taobao.org
 RUN set -ex \
+    # 配置npm与yarn镜像
+    && NPM_MIRROR=npm.taobao.org \
     # cnpm
     &&  { \
             echo "registry=https://registry.${NPM_MIRROR}/"; \ 
             echo "sass_binary_site=https://${NPM_MIRROR}/mirrors/node-sass/"; \
             echo "phantomjs_cdnurl=http://${NPM_MIRROR}/mirrors/phantomjs/"; \
             echo "ELECTRON_MIRROR=http://${NPM_MIRROR}/mirrors/electron/"; \
-        } > ~/.npmrc \
-
+        } > ${HOME}/.npmrc \
+    && cat ${HOME}/.npmrc \
     && npm install -g cnpm --registry=https://registry.${NPM_MIRROR}/ \
-
     # yarn 淘宝镜像 tyarn
     && npm install yarn tyarn -g --registry=https://registry.${NPM_MIRROR}/ \
     && yarn config set registry https://registry.${NPM_MIRROR}/ \
     && echo "end"
 
-# 配置ruby镜像 
-# ENV GEM_MIRROR  mirrors.aliyun.com 
-# ENV GEM_MIRROR  mirrors.tuna.tsinghua.edu.cn
-ENV GEM_MIRROR  mirrors.ustc.edu.cn
 RUN set -ex \
+    # 配置ruby镜像 
+    # && GEM_MIRROR=mirrors.aliyun.com \
+    && GEM_MIRROR=mirrors.tuna.tsinghua.edu.cn \
+    # && GEM_MIRROR=mirrors.ustc.edu.cn \
     && gem sources --remove https://rubygems.org/ --add https://${GEM_MIRROR}/rubygems/ \
     && gem update --system \
     && echo "end"    
@@ -387,8 +354,8 @@ RUN set -ex \
 
 # COPY ./.zshrc $HOME/.zshrc
 
-# 配置ssh
 RUN set -ex \
+    # 配置ssh
     # && mkdir -p /var/run/sshd \
     # 生成ssh访问秘钥 /etc/ssh/
     && ssh-keygen -A \
@@ -437,8 +404,8 @@ EXPOSE 2222
 CMD openrc && bash
 
 # 编译及执行方法如下: 
-#     $ docker build -t balpine /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/balpine/
-#     docker build -t balpine B:\OpenSource\WaterBolik\prestudy\bdocker\balpine\
+#     $ docker build -t balpine /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/balpine/
+#     docker build -t balpine /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/balpine/
 #     docker run -it --rm balpine 
 
 # 从容器中拷贝出配置文件

@@ -1,42 +1,11 @@
-FROM ubuntu:16.04
-# https://hub.docker.com/_/ubuntu/
-# 12.04.5, 12.04, precise-20170214, precise (precise/Dockerfile)
-# 14.04.5, 14.04, trusty-20170214, trusty (trusty/Dockerfile)
-# 16.04, xenial-20170214, xenial, latest (xenial/Dockerfile)
-# 16.10, yakkety-20170224, yakkety, rolling (yakkety/Dockerfile)
-# 17.04, zesty-20170224, zesty, devel (zesty/Dockerfile)
+FROM ubuntu_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-
-ENV TZ=Asia/Shanghai \
-    # 安装包源镜像请任选其一   
-    APT_MIRROR=mirrors.ustc.edu.cn \
-    # APT_MIRROR=mirrors.tuna.tsinghua.edu.cn \
-    # APT_MIRROR=mirrors.aliyun.com \   
-    # 配置中文语言
-    LANG=zh_CN.UTF-8 \
-    LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
-    SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
-    SYSFONT=lat0-sun16 \
-    # LC_ALL=C.UTF-8 
-    LC_ALL=zh_CN.UTF-8 
+ENV LC_ALL=zh_CN.UTF-8 \
+    SYSFONT=lat0-sun16    
     
-RUN set -ex \
-    # 查看系统版本
-    && cat /etc/issue \
-    # 使用apt镜像
-    && sed -i \
-        -e "s|archive.ubuntu.com|${APT_MIRROR}|g" \    
-        # -e "s|http|https|g" \
-        /etc/apt/sources.list \
-    && cat /etc/apt/sources.list \
-    # -qq隐藏更新Apt缓存过程中打印的日志
-    # -y参数来消除更新过程中所有向用户提问的部分
-    && apt-get -y update \
-    && apt-get -y install apt-utils \
-    && apt-get -y upgrade \
-
+RUN set -ex \   
     # 配置中文语言
     && /usr/share/locales/install-language-pack zh_CN \
     && locale-gen zh_CN.UTF-8 \
@@ -64,11 +33,6 @@ RUN set -ex \
     # 将文泉驿微米黑设置为系统默认字体
     && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
   
-    # 设置时区
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-    && echo $TZ > /etc/timezone \
-    # && dpkg-reconfigure -f noninteractive tzdata \
-
     # 删除不必要的软件和Apt缓存包列表
     && apt-get autoclean  \
     && apt-get autoremove  \
@@ -76,7 +40,6 @@ RUN set -ex \
 
     # 命令执行结束
     && echo "end"
-
 
 # 配置ssh
 RUN set -ex \
@@ -121,6 +84,6 @@ EXPOSE 2222
 CMD ["bin/bash"]  
 # CMD openrc && bash
 
-# $ docker build -t bubuntu /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bubuntu/
-# docker build -t bubuntu B:\OpenSource\WaterBolik\prestudy\bdocker\bubuntu\
+# $ docker build -t bubuntu /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
+# docker build -t bubuntu /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
 # docker run -it --rm bubuntu 

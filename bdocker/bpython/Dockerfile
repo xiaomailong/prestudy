@@ -5,14 +5,14 @@ MAINTAINER Bolik WaterBolik@163.com
 RUN set -ex \
   # 安装python2及其常用库
   && apk add --update --no-cache \   
-    build-base \
-    linux-headers \
-    lapack-dev \
-    freetype-dev \
-    gfortran \
-    python \
-    python2-dev \
-    py2-pip \
+    # build-base \
+    # linux-headers \
+    # lapack-dev \
+    # freetype-dev \
+    # gfortran \
+    # python \
+    # python2-dev \
+    # py2-pip \
     # py2-pytest \
     py2-pillow \
     py2-lxml \

@@ -1,44 +1,11 @@
-FROM centos:7
-# https://hub.docker.com/_/centos/
+FROM centos_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV TZ=Asia/Shanghai \
-    # 安装包源镜像请任选其一    
-    YUM_MIRROR=mirrors.ustc.edu.cn \
-    # YUM_MIRROR=mirror.tuna.tsinghua.edu.cn \
-    # YUM_MIRROR=mirrors.aliyun.com \
-    # 配置中文语言
-    LANG=zh_CN.UTF-8 \
-    LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
-    # SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
-    # SYSFONT=lat0-sun16 \
-    LC_ALL=C 
-    # LC_ALL=zh_CN.UTF-8 
-
+ENV LC_ALL=zh_CN.UTF-8 
 
 RUN set -ex \
-    # 查看系统版本
-    # && cat /etc/issue \
-    && rpm -qi centos-release \
-    # && lsb_release -a \
-    # 使用镜像源 cat /etc/yum.repos.d/CentOS-Base.repo
-    # CentOS-Base.repo CentOS-Debuginfo.repo CentOS-Media.repo CentOS-Vault.repo CentOS-fasttrack.repo
-    && sed -i \
-        -e "s|mirror.centos.org|${YUM_MIRROR}|g" \    
-        -e "s|vault.centos.org|${YUM_MIRROR}|g" \    
-        -e "s|#baseurl=|baseurl=|g" \    
-        -e "s|mirrorlist=|#mirrorlist=|g" \    
-        -e "s|http|https|g" \
-        /etc/yum.repos.d/* \ 
-    && cat /etc/yum.repos.d/CentOS-Base.repo \
-    # 安装 epel repo 源
-    # && yum -y install wget \
-    # && yum -y install epel-release \
-    # && wget -O /etc/yum.repos.d/epel.repo http://${YUM_MIRROR}/repo/epel-7.repo \
-    # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://${YUM_MIRROR}/repo/Centos-7.repo \
-    && yum makecache \
-
+   
     # && yum -y update \
     # && yum -y reinstall glibc-common \
     # && yum -y install kde-l10n-Chinese \
@@ -54,12 +21,6 @@ RUN set -ex \
         sshpass \
         openrc \
     && yum clean all \
-
-    # 设置时区
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-    && echo $TZ > /etc/timezone \
-
-    # && locale-gen en_US.UTF-8 \
 
     # 命令执行结束
     && echo "end"
@@ -107,6 +68,6 @@ EXPOSE 2222
 # CMD openrc && bash
 CMD ["bin/bash"]
 
-# $ docker build -t bcentos /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bcentos/
-# docker build -t bcentos B:\OpenSource\WaterBolik\prestudy\bdocker\bcentos\
+# $ docker build -t bcentos /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
+# docker build -t bcentos /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
 # docker run -it --rm bcentos 

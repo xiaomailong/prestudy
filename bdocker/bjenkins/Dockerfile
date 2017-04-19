@@ -1,4 +1,7 @@
-FROM bopenjdk
+# https://hub.docker.com/_/jenkins/
+# https://github.com/jenkinsci/docker/blob/6bb01b6a218e0d9618faf7ce80c4b5bfa9331545/Dockerfile
+
+FROM balpine
 
 MAINTAINER Bolik WaterBolik@163.com
 

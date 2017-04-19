@@ -1,12 +1,12 @@
+# https://hub.docker.com/_/zookeeper
+# https://github.com/31z4/zookeeper-docker/blob/7e7eac6d6c11428849ec13bb7d240e4cfa21b2e7/3.4.9/Dockerfile
+
 FROM balpine
 
 MAINTAINER Bolik WaterBolik@163.com
 
 ENV ZOOKEEPER_VERSION=3.4.9 \
-	PATH=$PATH:/opt/zookeeper/bin/ \
-	# APACHE_MIRROT=mirror.tuna.tsinghua.edu.cn/apache/ \
-	# APACHE_MIRROT=mirrors.ustc.edu.cn/apache/ \
-	APACHE_MIRROT=mirrors.aliyun.com/apache/ \
+	PATH=$PATH:/opt/zookeeper/bin/ \	
 	# ZOO_USER=zookeeper \
     ZOO_CONF_DIR=/conf \
 	ZOOCFGDIR=/conf \
@@ -28,6 +28,9 @@ RUN set -x \
     # && chown "$ZOO_USER:$ZOO_USER" "$ZOO_DATA_LOG_DIR" "$ZOO_DATA_DIR" "$ZOO_CONF_DIR" \
 	# 下载并安装zookeeper到/opt/zookeeper/目录下
 	&& mkdir -p /opt \
+	# && APACHE_MIRROT=mirror.tuna.tsinghua.edu.cn/apache/ \
+	# && APACHE_MIRROT=mirrors.ustc.edu.cn/apache/ \
+	&& APACHE_MIRROT=mirrors.aliyun.com/apache/ \
 	&& curl -sSL https://${APACHE_MIRROT}/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz | tar -xzf - -C /opt \
 	&& mv /opt/zookeeper-${ZOOKEEPER_VERSION} /opt/zookeeper \
 	&& mv "/opt/zookeeper/conf/"* "$ZOO_CONF_DIR" \
@@ -45,27 +48,27 @@ ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["zkServer.sh", "start-foreground"]
 
 # 编译及执行方法如下: 
-# docker build -t zookeeper /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/zookeeper/
-# docker build -t zookeeper B:\OpenSource\WaterBolik\prestudy\bdocker\zookeeper\
+# docker build -t bzookeeper /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bzookeeper/
+# docker build -t bzookeeper B:\OpenSource\WaterBolik\prestudy\bdocker\bzookeeper\
 
 
 # 启动单实例
-# docker run -it --rm --name zookeeperserver -p 2181:2181 zookeeper
+# docker run -it --rm --name zookeeperserver -p 2181:2181 bzookeeper
 
 # 通过容器应用连接
-# docker run --name some-app --link zookeeperserver:zookeeper -d application-that-uses-zookeeper
+# docker run --name some-app --link zookeeperserver:bzookeeper -d application-that-uses-zookeeper
 
 # 通过临时容器连接
-# docker run -it --rm --link zookeeperserver:zookeeper zookeeper zkCli.sh -server zookeeper
+# docker run -it --rm --link zookeeperserver:zookeeper bzookeeper zkCli.sh -server bzookeeper
 
 # 覆盖zk配置
-# docker run --name zookeeperserver --restart always -d -v $(pwd)/zoo.cfg:/conf/zoo.cfg zookeeper
+# docker run --name zookeeperserver --restart always -d -v $(pwd)/zoo.cfg:/conf/zoo.cfg bzookeeper
 
 # 运行集群
 # COMPOSE_PROJECT_NAME=zk_test docker-compose up -d
 
 # 通过临时容器连接集群
-# docker run -it --rm --link zoo1:zk1 --link zoo2:zk2 --link zoo3:zk3 --net zktest_default zookeeper zkCli.sh -server zk1:2181,zk2:2181,zk3:2181
+# docker run -it --rm --link zoo1:zk1 --link zoo2:zk2 --link zoo3:zk3 --net zktest_default bzookeeper zkCli.sh -server zk1:2181,zk2:2181,zk3:2181
 
 # 主机连接集群
 # zkCli.sh -server localhost:2181,localhost:2182,localhost:2183

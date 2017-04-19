@@ -1,4 +1,6 @@
 
+ROOTPATH=/B/OpenSource/WaterBolik/prestudy/bdocker
+
 # base image pull -------------------------------------------------------------
 docker pull alpine:latest
 docker pull alpine:3.5
@@ -12,24 +14,23 @@ docker pull ubuntu:16.04
 docker pull centos:latest
 docker pull centos:7
 
+# os base images
+docker build -t alpine_base ${ROOTPATH}/os_base/alpine_base/
+docker build -t centos_base ${ROOTPATH}/os_base/centos_base/
+docker build -t debian_base ${ROOTPATH}/os_base/debian_base/
+docker build -t ubuntu_base ${ROOTPATH}/os_base/ubuntu_base/
+docker build -t balpine ${ROOTPATH}/os_base/balpine/
+docker build -t bcentos ${ROOTPATH}/os_base/bcentos/
+docker build -t bdebian ${ROOTPATH}/os_base/bdebian/
+docker build -t bubuntu ${ROOTPATH}/os_base/bubuntu/
 
-# alpine base images ----------------------------------------------------------
-docker build -t balpine B:\OpenSource\WaterBolik\prestudy\bdocker\balpine\
-docker build -t bgollum B:\OpenSource\WaterBolik\prestudy\bdocker\bgollum\
-docker build -t bnodejs B:\OpenSource\WaterBolik\prestudy\bdocker\bnodejs\
-docker build -t bpython B:\OpenSource\WaterBolik\prestudy\bdocker\bpython\
-docker build -t zookeeper B:\OpenSource\WaterBolik\prestudy\bdocker\zookeeper\
+docker build -t bgollum ${ROOTPATH}/bgollum/
 
-# centos base images ----------------------------------------------------------
-docker build -t bcentos B:\OpenSource\WaterBolik\prestudy\bdocker\bcentos\
+docker build -t bnodejs ${ROOTPATH}/bnodejs/
 
+docker build -t bpython ${ROOTPATH}/bpython/
 
-# debian base images ----------------------------------------------------------
-docker build -t bdebian B:\OpenSource\WaterBolik\prestudy\bdocker\bdebian\
-
-
-# ubuntu base images ----------------------------------------------------------
-docker build -t bubuntu B:\OpenSource\WaterBolik\prestudy\bdocker\bubuntu\
+docker build -t bzookeeper ${ROOTPATH}/bzookeeper/
 
 
 # 删除pull过程或者create过程产生的临时镜像
