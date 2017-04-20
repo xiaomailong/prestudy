@@ -131,6 +131,32 @@ RUN set -ex \
         lapack \
         lapack-dev \
 
+        # gfortran(15): GNU Fortran Compiler
+        #   binutils-libs:          Runtime libraries from binutils - libbfd and libopcodes
+        #   binutils:               Tools necessary to build programs
+        #   gmp:                    A free library for arbitrary precision arithmetic
+        #   isl:                    An Integer Set Library for the Polyhedral Model
+        #   libgomp:                GCC shared-memory parallel programming API library
+        #   libatomic:              GCC Atomic library
+        #   pkgconf:                development framework configuration tools
+        #   libgcc:                 GNU C compiler runtime libraries
+        #   mpfr3:                  multiple-precision floating-point library
+        #   mpc1:                   Multiprecision C library
+        #   libstdc++:              GNU C++ standard runtime library
+        #   gcc:                    The GNU Compiler Collection
+        #   libquadmath:            128-bit math library for GCC
+        #   libgfortran:            Fortran runtime library for GCC
+        gfortran \
+
+        # freetype(3~7): 
+        #   libbz2:                 Shared library for bz2
+        #   libpng:                 Portable Network Graphics library
+        #   pkgconf:                development framework configuration tools
+        #   zlib-dev:               A compression/decompression Library (development files)
+        #   libpng-dev:             Portable Network Graphics library (development files)
+        freetype \
+        freetype-dev \
+
         # icu(4-6): International Components for Unicode library
         #   libgcc:                   GNU C compiler runtime libraries    
         #   libstdc++:                GNU C++ standard runtime library         

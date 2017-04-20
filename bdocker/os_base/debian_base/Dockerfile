@@ -11,6 +11,7 @@ ENV TZ=Asia/Shanghai \
     LANG=zh_CN.UTF-8 \
     LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
     SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
+    # LC_ALL=C.UTF-8 
     LC_ALL=zh_CN.UTF-8 
 
 RUN set -ex \
@@ -28,13 +29,43 @@ RUN set -ex \
     && cat /etc/apt/sources.list \
     # -qq 隐藏更新Apt缓存过程中打印的日志
     # -y  参数来消除更新过程中所有向用户提问的部分
-    && apt-get -y update \
+    && apt-get -y update --fix-missing \
+    && apt-get -y install \
+        apt-utils \
+        locales \
+        tzdata \
     && apt-get -y upgrade \
-
+   
     # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
-    # && dpkg-reconfigure -f noninteractive tzdata \
+    && dpkg-reconfigure -f noninteractive tzdata \
+
+    # 配置中文语言
+    # && /usr/share/locales/install-language-pack zh_CN \
+    && sed -i \
+        -e 's~^# zh_CN.UTF-8~zh_CN.UTF-8~g' \
+        -e 's~^# en_US.UTF-8~en_US.UTF-8~g' \
+        /etc/locale.gen \
+    && cat /etc/locale.gen \
+    && locale-gen \
+    && dpkg-reconfigure --frontend noninteractive locales \
+
+# dpkg-reconfigure dash 
+# 设置默认的shell为bash
+# dpkg-reconfigure locales 
+# 本地化语言设置
+# dpkg-reconfigure tzdata 
+# 设置时区
+# dpkg-reconfigure console-setup 
+# 设置控制台选项
+# dpkg-reconfigure openssh-server 
+# 生新生成ssh服务的RSA的DSA key
+
+    # 删除不必要的软件和Apt缓存包列表
+    && apt-get autoclean  \
+    && apt-get autoremove  \
+    
     # 命令执行结束
     && echo "end"
 

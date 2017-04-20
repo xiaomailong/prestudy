@@ -8,8 +8,8 @@ ENV TZ=Asia/Shanghai \
     LANG=zh_CN.UTF-8 \
     LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
     SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
-    LC_ALL=C 
-    # LC_ALL=zh_CN.UTF-8 
+    # LC_ALL=C.UTF-8 
+    LC_ALL=zh_CN.UTF-8 
 
 RUN set -ex \
     # 查看系统版本
@@ -40,6 +40,25 @@ RUN set -ex \
     # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
+
+    # 命令执行结束
+    && echo "end"
+
+RUN set -ex \
+
+    # 配置中文语言
+    && yum -y groupinstall chinese-support \
+    && yum -y install fonts-chinese \ 
+    # && /usr/share/locales/install-language-pack zh_CN \
+    # && sed -i \
+    #     -e 's~^# zh_CN.UTF-8~zh_CN.UTF-8~g' \
+    #     -e 's~^# en_US.UTF-8~en_US.UTF-8~g' \
+    #     /etc/locale.gen \
+    # && cat /etc/locale.gen \
+    # && locale-gen \
+    && cat /etc/locale.conf \
+    # && cat /etc/sysconfig/i18n \
+    # && dpkg-reconfigure --frontend noninteractive locales \
 
     # 命令执行结束
     && echo "end"

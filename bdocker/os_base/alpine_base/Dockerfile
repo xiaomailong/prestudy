@@ -14,6 +14,7 @@ ENV TZ=Asia/Shanghai \
     LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
     SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
     LC_ALL=C.UTF-8 
+    # LC_ALL=zh_CN.UTF-8 
 
 RUN set -ex \
     # 查看系统版本
@@ -25,10 +26,12 @@ RUN set -ex \
     && sed -i "s/dl-cdn.alpinelinux.org/${APK_MIRROR}/" /etc/apk/repositories \    
     && apk update \
     && apk upgrade \
-
+    && apk add --update --no-cache \
+        tzdata \
     # 配置时区
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-    && echo $TZ > /etc/timezone \
+    && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
+    && echo ${TZ} > /etc/timezone \
+    && apk del tzdata \
     && echo "end"
 
 CMD sh

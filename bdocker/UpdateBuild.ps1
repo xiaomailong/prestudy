@@ -32,10 +32,16 @@ docker build -t bpython ${ROOTPATH}/bpython/
 
 docker build -t bzookeeper ${ROOTPATH}/bzookeeper/
 
+# 查看Docker的磁盘使用情况
+docker system df
+
+# 清理dangling镜像(参考What are Docker : images?)和容器，以及失效的数据卷和网络。
+docker system prune -f
+
+# 查看Docker的磁盘使用情况
+docker system df
 
 # 删除pull过程或者create过程产生的临时镜像
-docker stop $(docker ps -a -f status=exited -q)
-
-docker rm $(docker ps -a -f status=exited -q)
-
-docker rmi $(docker images --filter dangling=true -q)
+# docker stop $(docker ps -a -f status=exited -q)
+# docker rm $(docker ps -a -f status=exited -q)
+# docker rmi $(docker images --filter dangling=true -q)
