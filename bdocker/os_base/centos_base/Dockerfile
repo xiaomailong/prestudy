@@ -47,8 +47,8 @@ RUN set -ex \
 RUN set -ex \
 
     # 配置中文语言
-    && yum -y groupinstall chinese-support \
-    && yum -y install fonts-chinese \ 
+    # && yum -y groupinstall chinese-support \
+    # && yum -y install fonts-chinese \ 
     # && /usr/share/locales/install-language-pack zh_CN \
     # && sed -i \
     #     -e 's~^# zh_CN.UTF-8~zh_CN.UTF-8~g' \
