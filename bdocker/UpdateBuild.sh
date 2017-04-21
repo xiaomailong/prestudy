@@ -20,18 +20,18 @@ docker build -t alpine_base ${ROOTPATH}/os_base/alpine_base/
 docker build -t centos_base ${ROOTPATH}/os_base/centos_base/
 docker build -t debian_base ${ROOTPATH}/os_base/debian_base/
 docker build -t ubuntu_base ${ROOTPATH}/os_base/ubuntu_base/
-docker build -t balpine ${ROOTPATH}/os_base/balpine/
-docker build -t bcentos ${ROOTPATH}/os_base/bcentos/
-docker build -t bdebian ${ROOTPATH}/os_base/bdebian/
-docker build -t bubuntu ${ROOTPATH}/os_base/bubuntu/
+# docker build -t balpine ${ROOTPATH}/os_base/balpine/
+# docker build -t bcentos ${ROOTPATH}/os_base/bcentos/
+# docker build -t bdebian ${ROOTPATH}/os_base/bdebian/
+# docker build -t bubuntu ${ROOTPATH}/os_base/bubuntu/
 
-docker build -t bgollum ${ROOTPATH}/bgollum/
+# docker build -t bgollum ${ROOTPATH}/bgollum/
 
-docker build -t bnodejs ${ROOTPATH}/bnodejs/
+# docker build -t bnodejs ${ROOTPATH}/bnodejs/
 
-docker build -t bpython ${ROOTPATH}/bpython/
+# docker build -t bpython ${ROOTPATH}/bpython/
 
-docker build -t bzookeeper ${ROOTPATH}/bzookeeper/
+# docker build -t bzookeeper ${ROOTPATH}/bzookeeper/
 
 # 查看Docker的磁盘使用情况
 docker system df

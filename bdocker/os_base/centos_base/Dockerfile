@@ -3,13 +3,25 @@ FROM centos:7
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV TZ=Asia/Shanghai \
+ENV container=docker \
+    TZ=Asia/Shanghai \
     # 配置中文语言
     LANG=zh_CN.UTF-8 \
     LANGUAGE=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
     SUPPORTED=zh_CN.UTF-8:en_US.UTF-8:C.UTF-8 \
     # LC_ALL=C.UTF-8 
     LC_ALL=zh_CN.UTF-8 
+
+# use systemd
+# RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
+# systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+# rm -f /lib/systemd/system/multi-user.target.wants/*;\
+# rm -f /etc/systemd/system/*.wants/*;\
+# rm -f /lib/systemd/system/local-fs.target.wants/*; \
+# rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+# rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+# rm -f /lib/systemd/system/basic.target.wants/*;\
+# rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 RUN set -ex \
     # 查看系统版本
@@ -35,6 +47,9 @@ RUN set -ex \
     # && yum -y install epel-release \
     # && wget -O /etc/yum.repos.d/epel.repo http://${YUM_MIRROR}/repo/epel-7.repo \
     # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://${YUM_MIRROR}/repo/Centos-7.repo \
+    # && yum -y install epel-release \
+    # && yum repolist \   
+    && yum -y update \  
     && yum makecache \
 
     # 设置时区
@@ -47,8 +62,17 @@ RUN set -ex \
 RUN set -ex \
 
     # 配置中文语言
-    && yum -y groupinstall chinese-support \
-    && yum -y install fonts-chinese \ 
+    # && yum -y groupinstall chinese-support \
+    # && yum -y install fonts-chinese \ 
+    && sed -i \
+        -e 's~^override_install_langs=en_US.utf8~override_install_langs=zh_CN.utf8~g' \
+        /etc/yum.conf \
+    && cat /etc/yum.conf \
+    && yum reinstall -y glibc-common \
+    # && yum -y install \
+    #     sudo \
+    #     systemd \ 
+        # which \
     # && /usr/share/locales/install-language-pack zh_CN \
     # && sed -i \
     #     -e 's~^# zh_CN.UTF-8~zh_CN.UTF-8~g' \
@@ -56,12 +80,28 @@ RUN set -ex \
     #     /etc/locale.gen \
     # && cat /etc/locale.gen \
     # && locale-gen \
+    && { \
+            echo 'LANG="zh_CN.UTF8"'; \ 
+            echo 'LANGUAGE="zh_CN.UTF-8:en_US.UTF-8:C.UTF-8"'; \
+            echo 'SUPPORTED="zh_CN.UTF-8:en_US.UTF-8:C.UTF-8"'; \
+            echo 'LC_ALL="zh_CN.UTF-8"'; \
+            echo 'SYSFONT="lat0-sun16"'; \
+        } > /etc/locale.conf \
     && cat /etc/locale.conf \
+    # && localedef -i en_US -f UTF-8 C.UTF-8 \
+    && localedef -i zh_CN -f UTF-8 zh_CN.UTF-8 \
+    # && localectl status \
+    # && localectl list-locales \
+    # && localectl set-locale LANG=zh_CN.utf8 \
     # && cat /etc/sysconfig/i18n \
     # && dpkg-reconfigure --frontend noninteractive locales \
 
     # 命令执行结束
     && echo "end"
+
+# VOLUME [ "/sys/fs/cgroup" ]
+
+# CMD ["/usr/sbin/init"]
 
 CMD ["bin/bash"]
 
