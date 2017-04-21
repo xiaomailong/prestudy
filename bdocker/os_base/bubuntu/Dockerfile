@@ -85,5 +85,5 @@ CMD ["bin/bash"]
 # CMD openrc && bash
 
 # $ docker build -t bubuntu /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
-# docker build -t bubuntu /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
+# docker build -t bubuntu B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
 # docker run -it --rm bubuntu 

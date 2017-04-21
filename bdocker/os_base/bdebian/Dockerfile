@@ -87,5 +87,5 @@ EXPOSE 2222
 CMD ["bin/bash"]  
 
 # $ docker build -t bdebian /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bdebian/
-# docker build -t bdebian /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/bdebian/
+# docker build -t bdebian B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bdebian/
 # docker run -it --rm bdebian 

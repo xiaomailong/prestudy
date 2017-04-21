@@ -57,5 +57,5 @@ RUN set -ex \
 CMD ["bin/bash"]  
 
 # $ docker build -t ubuntu_base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/ubuntu_base/
-# docker build -t ubuntu_base /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/ubuntu_base/
+# docker build -t ubuntu_base B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/ubuntu_base/
 # docker run -it --rm ubuntu_base 

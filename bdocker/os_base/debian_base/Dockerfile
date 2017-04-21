@@ -72,5 +72,5 @@ RUN set -ex \
 CMD ["bin/bash"]  
 
 # $ docker build -t debian_base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/debian_base/
-# docker build -t debian_base /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/debian_base/
+# docker build -t debian_base B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/debian_base/
 # docker run -it --rm debian_base 

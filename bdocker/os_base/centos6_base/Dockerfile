@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:6.9
 # https://hub.docker.com/_/centos/
 
 MAINTAINER Bolik WaterBolik@163.com
@@ -66,28 +66,28 @@ RUN set -ex \
 RUN set -ex \
 
     # 配置中文语言
-    && localedef -i zh_CN -f UTF-8 zh_CN.utf8 \
-    && sed -i \
-        -e 's~^override_install_langs=en_US.utf8~override_install_langs=zh_CN.utf8~g' \
-        /etc/yum.conf \
-    && cat /etc/yum.conf \
+    # && yum -y groupinstall chinese-support \
+    # && yum -y install fonts-chinese \ 
+    # && localedef -i zh_CN -f utf8 zh_CN.utf8 \
+    # && sed -i \
+    #     -e 's~^override_install_langs=en_US.utf8~override_install_langs=zh_CN.utf8~g' \
+    #     /etc/yum.conf \
+    # && cat /etc/yum.conf \
+    # && yum reinstall -y \
+    #     glibc-common \
+    #     systemd \
     # && yum -y install \
     #     sudo \
     #     which \
-    #     kde-l10n-Chinese \
-    && yum reinstall -y \
-        glibc-common \
-        # systemd \
-    # && localedef -c -f UTF-8 -i zh_CN zh_CN.utf8 \
-    && cat /etc/locale.conf \   
+    && cat /etc/sysconfig/i18n \   
     && { \
             echo 'LANG="zh_CN.utf8"'; \ 
             echo 'LANGUAGE="zh_CN.utf8:en_US.utf8:C.utf8"'; \
             echo 'SUPPORTED="zh_CN.utf8:en_US.utf8:C.utf8"'; \
             echo 'LC_ALL="zh_CN.utf8"'; \
             echo 'SYSFONT="lat0-sun16"'; \
-        } > /etc/locale.conf \
-    && cat /etc/locale.conf \   
+        } > /etc/sysconfig/i18n \
+    && cat /etc/sysconfig/i18n \   
     && echo "export LC_ALL=zh_CN.utf8" >> /etc/profile \
     && cat /etc/profile \
     # && cat /etc/sysconfig/i18n \
@@ -105,6 +105,6 @@ RUN set -ex \
 
 CMD ["bin/bash"]
 
-# $ docker build -t centos_base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/centos_base/
-# docker build -t centos_base B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/centos_base/
-# docker run -it --rm centos_base 
+# $ docker build -t centos6_base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/centos6_base/
+# docker build -t centos6_base B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/centos6_base/
+# docker run -it --rm centos6_base 

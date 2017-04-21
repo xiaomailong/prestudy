@@ -69,5 +69,5 @@ EXPOSE 2222
 CMD ["bin/bash"]
 
 # $ docker build -t bcentos /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
-# docker build -t bcentos /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
+# docker build -t bcentos B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
 # docker run -it --rm bcentos 

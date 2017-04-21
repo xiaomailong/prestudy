@@ -23,7 +23,7 @@ RUN set -ex \
         #   libc-utils:               Meta package to pull in correct libc
         
         # tzdata: Timezone data
-        tzdata \
+        # tzdata \
   
         # curl(4-10): An URL retrival utility and library        
         #   ca-certificates:          Common CA certificates PEM files
@@ -431,7 +431,7 @@ CMD openrc && bash
 
 # 编译及执行方法如下: 
 #     $ docker build -t balpine /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/balpine/
-#     docker build -t balpine /B/OpenSource/WaterBolik/prestudy/bdocker/os_base/balpine/
+#     docker build -t balpine B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/balpine/
 #     docker run -it --rm balpine 
 
 # 从容器中拷贝出配置文件
