@@ -48,13 +48,17 @@ RUN set -ex \
     # && wget -O /etc/yum.repos.d/epel.repo http://${YUM_MIRROR}/repo/epel-7.repo \
     # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://${YUM_MIRROR}/repo/Centos-7.repo \
     # && yum -y install epel-release \
-    # && yum repolist \   
     && yum -y update \  
-    && yum makecache \
+    && yum repolist \   
+    # && yum makecache \
 
     # 设置时区
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
+    # ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+    # echo Asia/Shanghai > /etc/timezone
+    # && timedatectl list-timezones \
+    # && timedatectl set-timezone Asia/Shanghai \
 
     # 命令执行结束
     && echo "end"
@@ -64,22 +68,17 @@ RUN set -ex \
     # 配置中文语言
     # && yum -y groupinstall chinese-support \
     # && yum -y install fonts-chinese \ 
+    && localedef -i zh_CN -f UTF-8 zh_CN.UTF-8 \
     && sed -i \
         -e 's~^override_install_langs=en_US.utf8~override_install_langs=zh_CN.utf8~g' \
         /etc/yum.conf \
     && cat /etc/yum.conf \
-    && yum reinstall -y glibc-common \
-    # && yum -y install \
-    #     sudo \
-    #     systemd \ 
-        # which \
-    # && /usr/share/locales/install-language-pack zh_CN \
-    # && sed -i \
-    #     -e 's~^# zh_CN.UTF-8~zh_CN.UTF-8~g' \
-    #     -e 's~^# en_US.UTF-8~en_US.UTF-8~g' \
-    #     /etc/locale.gen \
-    # && cat /etc/locale.gen \
-    # && locale-gen \
+    && yum reinstall -y \
+        glibc-common \
+        systemd \
+    && yum -y install \
+        sudo \
+        which \
     && { \
             echo 'LANG="zh_CN.UTF8"'; \ 
             echo 'LANGUAGE="zh_CN.UTF-8:en_US.UTF-8:C.UTF-8"'; \
@@ -87,13 +86,13 @@ RUN set -ex \
             echo 'LC_ALL="zh_CN.UTF-8"'; \
             echo 'SYSFONT="lat0-sun16"'; \
         } > /etc/locale.conf \
-    && cat /etc/locale.conf \
-    # && localedef -i en_US -f UTF-8 C.UTF-8 \
-    && localedef -i zh_CN -f UTF-8 zh_CN.UTF-8 \
+    && cat /etc/locale.conf \   
+    && echo "export LC_ALL=zh_CN.UTF-8" >> /etc/profile \
+    && cat /etc/profile \
+    # && cat /etc/sysconfig/i18n \
     # && localectl status \
     # && localectl list-locales \
     # && localectl set-locale LANG=zh_CN.utf8 \
-    # && cat /etc/sysconfig/i18n \
     # && dpkg-reconfigure --frontend noninteractive locales \
 
     # 命令执行结束

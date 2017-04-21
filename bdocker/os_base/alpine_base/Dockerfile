@@ -31,7 +31,9 @@ RUN set -ex \
     # 配置时区
     && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
-    && apk del tzdata \
+    # 删除tzdata将会使时区设置失效
+    # && apk del \
+    #     tzdata \
     && echo "end"
 
 CMD sh
