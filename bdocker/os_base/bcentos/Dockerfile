@@ -2,24 +2,18 @@ FROM centos_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV LC_ALL=zh_CN.UTF-8 
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
+    PATH=${PATH}:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin 
 
 RUN set -ex \
-   
-    # && yum -y update \
-    # && yum -y reinstall glibc-common \
-    # && yum -y install kde-l10n-Chinese \
-    # && yum -y install system-config-language \
-    # && yum -y install snack \
-    # && yum -y install fontconfig \
-    # && yum -y groupinstall chinese-support \
     && yum -y install \
         sudo \
         openssh \
         openssh-server \
         openssh-clients \
-        sshpass \
-        openrc \
+        openjdk8 \
+        # sshpass \
+        # openrc \
     && yum clean all \
 
     # 命令执行结束

@@ -1,4 +1,4 @@
-FROM bjava
+FROM balpine
 
 MAINTAINER Bolik WaterBolik@163.com
 

@@ -1,0 +1,16 @@
+version: '2'
+services:
+    webserver:
+        image: bnodejs
+        restart: always
+        ports:
+            - 3000:3000
+        volume: ./webserver
+        environment:
+           
+    client:
+        image: balpine
+        restart: always
+        ports:
+        environment:
+   

@@ -3,7 +3,7 @@ FROM alpine_base
 MAINTAINER Bolik WaterBolik@163.com
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
-    PATH=${PATH}:${JAVA_HOME}/jre/bin:${JAVA_HOME}/bin 
+    PATH=${PATH}:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin 
 
 RUN set -ex \   
     # 使用apk安装必备软件 

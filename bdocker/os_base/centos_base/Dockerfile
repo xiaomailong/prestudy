@@ -35,21 +35,25 @@ RUN set -ex \
     # && YUM_MIRROR=mirror.tuna.tsinghua.edu.cn \
     && YUM_MIRROR=mirrors.aliyun.com \
     && sed -i \
+        -e "s|^mirrorlist=|#mirrorlist=|g" \    
+        -e "s|^#baseurl=|baseurl=|g" \    
         -e "s|mirror.centos.org|${YUM_MIRROR}|g" \    
         -e "s|vault.centos.org|${YUM_MIRROR}|g" \    
-        -e "s|#baseurl=|baseurl=|g" \    
-        -e "s|mirrorlist=|#mirrorlist=|g" \    
-        -e "s|http|https|g" \
+        -e "s|http:|https:|g" \
         /etc/yum.repos.d/* \ 
     && cat /etc/yum.repos.d/CentOS-Base.repo \
     # 安装 epel repo 源
-    # && yum -y install wget \
-    # && yum -y install epel-release \
-    # && wget -O /etc/yum.repos.d/epel.repo http://${YUM_MIRROR}/repo/epel-7.repo \
-    # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://${YUM_MIRROR}/repo/Centos-7.repo \
-    # && yum -y install epel-release \
-    && yum -y update \  
+    && yum -y install epel-release \
+    && sed -i \
+        -e "s|^mirrorlist=|#mirrorlist=|g" \
+        -e "s|^#baseurl=|baseurl=|g" \
+        -e "s|download.fedoraproject.org/pub|${YUM_MIRROR}|g" \
+        -e "s|http:|https:|g" \
+        /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel-testing.repo \
+    # 更新源列表
     && yum repolist \   
+    && yum -y update \  
+    && yum clean all \
     # && yum makecache \
 
     # 设置时区
@@ -60,10 +64,10 @@ RUN set -ex \
     # && timedatectl list-timezones \
     # && timedatectl set-timezone Asia/Shanghai \
 
-    # 命令执行结束
-    && echo "end"
+#     # 命令执行结束
+#     && echo "end"
 
-RUN set -ex \
+# RUN set -ex \
 
     # 配置中文语言
     && localedef -i zh_CN -f UTF-8 zh_CN.utf8 \

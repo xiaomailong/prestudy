@@ -24,17 +24,19 @@ RUN set -ex \
 
 WORKDIR /app
 
+VOLUME /app
+
 # ADD app.js /app/app.js
 # ADD package.json /app/package.json
 
-ADD . /app
+# ADD . /app
 
 # 使用淘宝的npm镜像
-RUN npm install --production -d --registry=https://registry.npm.taobao.org
+# RUN npm install --production -d --registry=https://registry.npm.taobao.org
 
 CMD ["bash"]
 
-CMD ["node", "/app/app.js"]
+# CMD ["node", "/app/app.js"]
 
 # $ docker build -t bnodejs /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bnodejs/
 # $ docker run -it --rm -v /Volumes/Work/OpenSource/WaterBolik/:/WaterBolik bnodejs

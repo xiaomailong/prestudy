@@ -20,11 +20,13 @@ RUN set -ex \
     # 查看系统版本
     && cat /etc/issue \
     # 使用apt镜像请任选其一   
+    && cat /etc/apt/sources.list \
     # && APT_MIRROR=mirrors.ustc.edu.cn \
     # && APT_MIRROR=mirrors.tuna.tsinghua.edu.cn \
     && APT_MIRROR=mirrors.aliyun.com \   
     && sed -i \
         -e "s|archive.ubuntu.com|${APT_MIRROR}|g" \    
+        -e "s|security.ubuntu.com|${APT_MIRROR}|g" \  
         # -e "s|http|https|g" \
         /etc/apt/sources.list \
     && cat /etc/apt/sources.list \

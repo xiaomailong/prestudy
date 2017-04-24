@@ -12,17 +12,6 @@ ENV TZ=Asia/Shanghai \
     # LC_ALL=C.utf8 
     LC_ALL=zh_CN.utf8 
 
-# use systemd
-# RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
-# systemd-tmpfiles-setup.service ] || rm -f $i; done); \
-# rm -f /lib/systemd/system/multi-user.target.wants/*;\
-# rm -f /etc/systemd/system/*.wants/*;\
-# rm -f /lib/systemd/system/local-fs.target.wants/*; \
-# rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
-# rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
-# rm -f /lib/systemd/system/basic.target.wants/*;\
-# rm -f /lib/systemd/system/anaconda.target.wants/*;
-
 RUN set -ex \
     # 查看系统版本
     # && cat /etc/issue \
@@ -35,21 +24,25 @@ RUN set -ex \
     # && YUM_MIRROR=mirror.tuna.tsinghua.edu.cn \
     && YUM_MIRROR=mirrors.aliyun.com \
     && sed -i \
+        -e "s|^mirrorlist=|#mirrorlist=|g" \    
+        -e "s|^#baseurl=|baseurl=|g" \    
         -e "s|mirror.centos.org|${YUM_MIRROR}|g" \    
         -e "s|vault.centos.org|${YUM_MIRROR}|g" \    
-        -e "s|#baseurl=|baseurl=|g" \    
-        -e "s|mirrorlist=|#mirrorlist=|g" \    
-        -e "s|http|https|g" \
+        -e "s|http:|https:|g" \
         /etc/yum.repos.d/* \ 
     && cat /etc/yum.repos.d/CentOS-Base.repo \
     # 安装 epel repo 源
-    # && yum -y install wget \
-    # && yum -y install epel-release \
-    # && wget -O /etc/yum.repos.d/epel.repo http://${YUM_MIRROR}/repo/epel-7.repo \
-    # && wget -O /etc/yum.repos.d/CentOS-Base.repo http://${YUM_MIRROR}/repo/Centos-7.repo \
-    # && yum -y install epel-release \
-    && yum -y update \  
+    && yum -y install epel-release \
+    && sed -i \
+        -e "s|^mirrorlist=|#mirrorlist=|g" \
+        -e "s|^#baseurl=|baseurl=|g" \
+        -e "s|download.fedoraproject.org/pub|${YUM_MIRROR}|g" \
+        -e "s|http:|https:|g" \
+        /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel-testing.repo \
+    # 更新源列表
     && yum repolist \   
+    && yum -y update \  
+    && yum clean all \
     # && yum makecache \
 
     # 设置时区
@@ -98,10 +91,6 @@ RUN set -ex \
 
     # 命令执行结束
     && echo "end"
-
-# VOLUME [ "/sys/fs/cgroup" ]
-
-# CMD ["/usr/sbin/init"]
 
 CMD ["bin/bash"]
 
