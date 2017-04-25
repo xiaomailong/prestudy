@@ -4,18 +4,18 @@
 
 # brew install
 # bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/brew-install.sh
-brew update
-brew upgrade
+# brew update
+# brew upgrade
 
 # brew cask install & update
 # bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/brew-cask.sh
 
 # git clone & update
-bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/git-update.sh
+# bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/git-update.sh
 
 # npm install -g
 # bash /Volumes/Work/OpenSource/WaterBolik/prestudy/shell-src/npm-install.sh
-cnpm update -g
+# cnpm update -g
 
 # svn cleanup & update
 svn cleanup /Volumes/Work/百度云同步盘/SvnWork/*

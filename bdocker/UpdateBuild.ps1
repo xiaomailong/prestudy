@@ -1,6 +1,5 @@
 
-$ROOTPATH="B:/OpenSource/WaterBolik/prestudy/bdocker"
-# $ROOTPATH="B:\OpenSource\WaterBolik\prestudy\bdocker\"
+$ROOTPATH=B:/OpenSource/WaterBolik/prestudy/bdocker
 
 # base image pull -------------------------------------------------------------
 docker pull alpine:latest
