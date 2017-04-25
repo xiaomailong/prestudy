@@ -2,37 +2,16 @@ FROM ubuntu_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-# ENV LC_ALL=zh_CN.UTF-8 \
-#     SYSFONT=lat0-sun16    
-    
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
+    PATH=${PATH}:/usr/lib/jvm/java-8-openjdk-amd64/jre/bin:/usr/lib/jvm/java-8-openjdk-amd64/bin 
+ 
 RUN set -ex \   
-    # 配置中文语言
-    # && /usr/share/locales/install-language-pack zh_CN \
-    # && locale-gen zh_CN.UTF-8 \
-    # && dpkg-reconfigure --frontend noninteractive locales \
-  
-    && apt-get -y install --no-install-recommends \
-        # 安装中文包
-        # language-pack-zh-hans \
-        # 安装基本字体
-        # fonts-ipafont-gothic \
-        # xfonts-100dpi \
-        # xfonts-75dpi \
-        # xfonts-cyrillic \
-        # xfonts-scalable \
-        # 安装文泉驿微米黑字体
-        # ttf-wqy-microhei \
-        # 安装时区数据
-        # tzdata \
-        # 安装openssh
-        # openssh \
-        openssh-server \
-        openssh-client \
-        # sshpass \
-        # openrc \
-    # 将文泉驿微米黑设置为系统默认字体
-    # && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
-  
+    && apt-get -y install --no-install-recommends \       
+        ssh \
+        rsync \
+        openjdk-8-jdk \
+        curl \
+    
     # 删除不必要的软件和Apt缓存包列表
     && apt-get autoclean  \
     && apt-get autoremove  \
@@ -82,7 +61,6 @@ RUN set -ex \
 EXPOSE 2222
 
 CMD ["bin/bash"]  
-# CMD openrc && bash
 
 # $ docker build -t bubuntu /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
 # docker build -t bubuntu B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/

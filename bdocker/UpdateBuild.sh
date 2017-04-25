@@ -35,6 +35,8 @@ docker build -t bpython ${ROOTPATH}/bpython/
 
 docker build -t bzookeeper ${ROOTPATH}/bzookeeper/
 
+docker build -t hadoop-base ${ROOTPATH}/hadoop/hadoop-base/
+
 # 查看Docker的磁盘使用情况
 docker system df
 

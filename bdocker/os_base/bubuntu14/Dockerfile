@@ -1,34 +1,21 @@
-FROM centos_base
+FROM ubuntu14_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
-    PATH=${PATH}:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin 
-
-RUN set -ex \
-    && yum -y install \
-        tar \
-        bzip2 \
-        yum-utils \
-        rpm-build \
-        # ssh \
+ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 \
+    PATH=${PATH}:/usr/lib/jvm/java-7-openjdk-amd64/jre/bin:/usr/lib/jvm/java-7-openjdk-amd64/bin 
+ 
+RUN set -ex \   
+    && apt-get -y install --no-install-recommends \       
+        ssh \
         rsync \
-        # openjdk-7-jdk \
+        openjdk-7-jdk \
         curl \
-        sudo \
-        # openssh \
-        # openssh-server \
-        # openssh-clients \
-        openjdk8 \
-        # sshpass \
-        # openrc \
-    && yum clean all \
-    && yum-builddep -y pam \
-    && yumdownloader --source pam \
-    && rpmbuild --rebuild  --define 'WITH_AUDIT 0' --define 'dist +noaudit' pam*.src.rpm \
-    && rpm -Uvh --oldpackage ~/rpmbuild/RPMS/*/pam*+noaudit*.rpm \
-    && rm -f /*.rpm \
-    && rm -rf ~/rpmbuild \
+    
+    # 删除不必要的软件和Apt缓存包列表
+    && apt-get autoclean  \
+    && apt-get autoremove  \
+    # && rm -rf /var/lib/apt/lists/* \
 
     # 命令执行结束
     && echo "end"
@@ -73,9 +60,8 @@ RUN set -ex \
 
 EXPOSE 2222
 
-# CMD openrc && bash
-CMD ["bin/bash"]
+CMD ["bin/bash"]  
 
-# $ docker build -t bcentos /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
-# docker build -t bcentos B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
-# docker run -it --rm bcentos 
+# $ docker build -t bubuntu /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
+# docker build -t bubuntu B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
+# docker run -it --rm bubuntu 

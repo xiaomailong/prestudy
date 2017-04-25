@@ -1,9 +1,9 @@
-FROM centos_base
+FROM centos6_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
-    PATH=${PATH}:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin 
+ENV JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk \
+    PATH=${PATH}:/usr/lib/jvm/java-1.7-openjdk/jre/bin:/usr/lib/jvm/java-1.7-openjdk/bin 
 
 RUN set -ex \
     && yum -y install \
@@ -19,7 +19,7 @@ RUN set -ex \
         # openssh \
         # openssh-server \
         # openssh-clients \
-        openjdk8 \
+        openjdk7 \
         # sshpass \
         # openrc \
     && yum clean all \
@@ -76,6 +76,6 @@ EXPOSE 2222
 # CMD openrc && bash
 CMD ["bin/bash"]
 
-# $ docker build -t bcentos /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
-# docker build -t bcentos B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos/
-# docker run -it --rm bcentos 
+# $ docker build -t bcentos6 /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos6/
+# docker build -t bcentos6 B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bcentos6/
+# docker run -it --rm bcentos6 

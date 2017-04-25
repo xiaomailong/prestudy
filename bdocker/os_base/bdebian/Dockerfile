@@ -2,39 +2,15 @@ FROM debian_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-RUN set -ex \
-    && apt-get -y install \
-        apt-utils \
-        # 区域设置
-        locales \
-        # 常用的中文字体、SCIM输入法框架和拼音输入法
-        # scim-pinyin \
-        openssh-server \
-        openssh-client \
-        sshpass \
-        openrc \
-        tzdata \
+ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 \
+    PATH=${PATH}:/usr/lib/jvm/java-7-openjdk-amd64/jre/bin:/usr/lib/jvm/java-7-openjdk-amd64/bin 
 
-    # 配置中文语言
-    # && /usr/share/locales/install-language-pack zh_CN \
-    # && locale-gen zh_CN.UTF-8 \
-    # && dpkg-reconfigure --frontend noninteractive locales \
-    # && apt-get -qqy install \
-    #     # 安装中文包
-    #     language-pack-zh-hans \
-    #     # 安装基本字体
-    #     fonts-ipafont-gothic \
-    #     xfonts-100dpi \
-    #     xfonts-75dpi \
-    #     xfonts-cyrillic \
-    #     xfonts-scalable \
-    #     # 安装文泉驿微米黑字体
-    #     ttf-wqy-microhei \
-    #     # 安装时区数据
-    #     tzdata \
-    # # 将文泉驿微米黑设置为系统默认字体
-    # && ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf \
-    
+RUN set -ex \
+    && apt-get -y install \ 
+        ssh \
+        rsync \
+        openjdk-7-jdk \
+        curl \
     # 删除不必要的软件和Apt缓存包列表
     && apt-get autoclean  \
     && apt-get autoremove  \
