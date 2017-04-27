@@ -367,12 +367,22 @@ fi
 #   不开放注册，仅限个人或小团体使用。
 #   提供dokuwiki to markdown转换脚本
 #   其他
+if [ -d "/Volumes/Work/OpenSource/Tools/mdwiki2" ]; then
+  cd "/Volumes/Work/OpenSource/Tools/mdwiki2"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Tools/"
+  git clone "https://github.com/xbynet/mdwiki.git" mdwiki2
+fi
+
+# MDwiki 是一个完全使用 HTML5/Javascript 技术构建，完全运行在客户端的 Wiki/CMS 系统。
+# 无需专门的服务器软件，只需将 mdwiki.html 上传到你存放 markdown 文件的目录。
 if [ -d "/Volumes/Work/OpenSource/Tools/mdwiki" ]; then
   cd "/Volumes/Work/OpenSource/Tools/mdwiki"
   git pull
 else
   cd "/Volumes/Work/OpenSource/Tools/"
-  git clone "https://github.com/xbynet/mdwiki.git"
+  git clone "https://github.com/Dynalon/mdwiki.git"
 fi
 
 echo "Web 相关开源项目更新"
@@ -582,10 +592,25 @@ else
   git clone "https://github.com/stagadish/NNplusplus.git"
 fi
 
+# Go 相关例程更新
+if [ ! -d "/Volumes/Work/OpenSource/Go" ]; then
+mkdir "/Volumes/Work/OpenSource/Go"
+fi
+
+#  Upspin ：全局命名系统。
+if [ -d "/Volumes/Work/OpenSource/Go/upspin" ]; then
+  cd "/Volumes/Work/OpenSource/Go/upspin"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/Go/"
+  git clone "https://github.com/upspin/upspin.git"
+fi
+
 # JavaScript 相关例程更新
 if [ ! -d "/Volumes/Work/OpenSource/JavaScript" ]; then
 mkdir "/Volumes/Work/OpenSource/JavaScript"
 fi
+
 # mojs motion graphics toolbelt for the web http://mojs.io/
 if [ -d "/Volumes/Work/OpenSource/JavaScript/mojs" ]; then
   cd "/Volumes/Work/OpenSource/JavaScript/mojs"
@@ -610,6 +635,15 @@ else
   cd "/Volumes/Work/OpenSource/JavaScript/"
   git clone "https://github.com/ksky521/nodePPT.git"
 fi
+# MathJax
+if [ -d "/Volumes/Work/OpenSource/JavaScript/MathJax" ]; then
+  cd "/Volumes/Work/OpenSource/JavaScript/MathJax"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/JavaScript/"
+  git clone "https://github.com/mathjax/MathJax.git"
+fi
+
 
 # Hadoop 生态更新
 if [ ! -d "/Volumes/Work/OpenSource/Hadoop" ]; then
@@ -722,6 +756,59 @@ else
   cd "/Volumes/Work/OpenSource/Hadoop/"
   git clone "https://github.com/apache/incubator-carbondata.git"
 fi
+
+# gitbook 
+if [ ! -d "/Volumes/Work/OpenSource/GitBook" ]; then
+mkdir "/Volumes/Work/OpenSource/GitBook"
+fi
+
+# Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。
+if [ -d "/Volumes/Work/OpenSource/GitBook/linux-command" ]; then
+  cd "/Volumes/Work/OpenSource/GitBook/linux-command"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/GitBook/"
+  git clone "https://github.com/jaywcjlove/linux-command.git"
+fi
+
+# Docker — 从入门到实践
+if [ -d "/Volumes/Work/OpenSource/GitBook/docker_practice" ]; then
+  cd "/Volumes/Work/OpenSource/GitBook/docker_practice"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/GitBook/"
+  git clone "https://github.com/yeasy/docker_practice.git"
+fi
+
+# problem-solving-with-algorithms-and-data-structure-using-python 中文版
+if [ -d "/Volumes/Work/OpenSource/GitBook/python-data-structure-cn" ]; then
+  cd "/Volumes/Work/OpenSource/GitBook/python-data-structure-cn"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/GitBook/"
+  git clone "https://github.com/facert/python-data-structure-cn.git"
+fi
+
+# Shell 编程范例
+if [ -d "/Volumes/Work/OpenSource/GitBook/open-shell-book" ]; then
+  cd "/Volumes/Work/OpenSource/GitBook/open-shell-book"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/GitBook/"
+  git clone "https://github.com/tinyclub/open-shell-book.git"
+fi
+
+# 雨痕个人学习笔记
+if [ -d "/Volumes/Work/OpenSource/GitBook/book" ]; then
+  cd "/Volumes/Work/OpenSource/GitBook/book"
+  git pull
+else
+  cd "/Volumes/Work/OpenSource/GitBook/"
+  git clone "https://github.com/qyuhen/book.git"
+fi
+
+
+
 
 # # Sample 相关例程更新
 # if [ ! -d "/Volumes/Work/OpenSource/Sample" ]; then

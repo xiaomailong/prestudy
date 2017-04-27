@@ -30,6 +30,10 @@ apm install autoprefixer
 # color-picker:css中需要赋值颜色的时候，使用这个插件可以看到一个完整的取色器，实时的取色，改变。。。非常方便！
 apm install color-picker
 
+# amWiki 是一款基于 Javascript 脚本语言、依赖 Atom 编辑器、使用 Markdown 标记语法的轻量级开源 wiki 文库系统。 
+# amWiki 致力于让大家可以更简单、更便捷的建设个人和团队文库系统！
+apm install amWiki
+
 # 代码提示
 apm install css-snippets
 # jsdoc 给js添加注释

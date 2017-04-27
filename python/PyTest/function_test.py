@@ -235,7 +235,7 @@ def test_exec():
 
 
 # globals()与locals()函数 -------------------------------------------------------
-# globals() 
+# globals()
 # 返回一个表示当前全局标识符表的字典。
 # 这永远是当前模块的字典（在一个函数或方法内部，这是指定义该函数或方法的模块，而不是调用该函数或方法的模块）
 # locals()
@@ -247,6 +247,8 @@ name = 'Tom'
 age = 18
 G = globals()
 L = locals()
+
+
 def test_globals_locals():
     _G = globals()
     _L = locals()
@@ -268,6 +270,8 @@ for x in range(10):
     print(x, end='')
 print()
 """
+
+
 def test_compile():
     # code_exec = compile(s, '<string>', 'exec')
     code_eval = compile('10 + 20', '<string>', 'eval')

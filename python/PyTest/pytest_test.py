@@ -9,13 +9,18 @@ import pytest
 #     测试函数以 test_ 开头
 #     断言使用基本的 assert 即可
 
+
 def func(x):
     return x + 1
 # 测试函数
+
+
 def test_func():
     assert func(3) == 4
 
 # 测试类
+
+
 class TestClass:
 
     def test_one(self):
@@ -92,62 +97,68 @@ class TestClass:
 #            +-- BytesWarning
 #            +-- ResourceWarning
 
-# 测试异常
+
 def f():
+    # 测试异常
     raise SystemExit(1)
 
+
 def test_mytest():
+    # 测试异常
     with pytest.raises(SystemExit):
         f()
 
-# 除数为零异常
+
 def test_zero_division():
+    # 除数为零异常
     with pytest.raises(ZeroDivisionError):
         1 / 0
 
-# 递归深度异常
+
 def test_recursion_depth():
+    # 递归深度异常
     with pytest.raises(RuntimeError) as excinfo:
         def f():
             f()
         f()
     assert 'maximum recursion' in str(excinfo.value)
 
-# 异常信息匹配
+
 def myfunc():
     raise ValueError("Exception 123 raised")
 
+
 def test_match():
+    # 异常信息匹配
     with pytest.raises(ValueError) as excinfo:
         myfunc()
     excinfo.match(r'.* 123 .*')
 
-# 集合比较
+
 def test_set_comparison():
+    # 集合比较
     set1 = set("1308")
     set2 = set("8035")
     assert set1 != set2
 
-# 自定义比较
+
 class Foo:
+
     def __init__(self, val):
         self.val = val
 
     def __eq__(self, other):
         return self.val == other.val
 
+
 def test_compare():
+    # 自定义比较
     f1 = Foo(1)
     f2 = Foo(1)
     assert f1 == f2
 
-# from test_foocompare import Foo
+
 def pytest_assertrepr_compare(op, left, right):
     if isinstance(left, Foo) and isinstance(right, Foo) and op == "==":
         return ['Comparing Foo instances:',
                 '   vals: %s != %s' % (left.val, right.val)]
-
-
-# def test_needsfiles(tmpdir):
-#     print (tmpdir)
-#     assert 0
