@@ -66,7 +66,7 @@ choco install sysinternals -y
 # choco install powershell -y
 # choco install winrar -y
 # choco install everything -y
-choco install teamviewer -y
+choco install teamviewer --force -y
 # choco install chocolateygui -y
 # choco install cpu-z -y
 # choco install gpu-z -y
