@@ -3,8 +3,8 @@ choco list -l
 choco upgrade all -y
 
 # Atom 插件自动更新
-apm list -l
-apm upgrade -c false
+#apm list -l
+#apm upgrade -c false
 
 # Svn 自动更新
 svn update B:/SvnWork/ChangYongWenDang
