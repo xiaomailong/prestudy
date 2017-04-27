@@ -6,24 +6,24 @@ ENV HADOOP_VERSION=2.8.0 \
     HADOOP_HOME=/opt/hadoop \
     PATH=${PATH}:/opt/hadoop/bin:/opt/hadoop/sbin 
 
-RUN set -ex \   
-    # 下载并安装hadoop到/opt/hadoop/目录下
-	&& mkdir -p /opt \
-	# && APACHE_MIRROT=mirror.tuna.tcurlsinghua.edu.cn/apache \
-	&& APACHE_MIRROT=mirrors.ustc.edu.cn/apache \
-	# && APACHE_MIRROT=mirrors.aliyun.com/apache \
-	&& curl -sSL http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | tar -xzf - -C /opt \
-	&& mv /opt/hadoop-${HADOOP_VERSION} ${HADOOP_HOME} \
-    && cd ${HADOOP_HOME} \
-    && echo "end"   
-
-# COPY hadoop-${HADOOP_VERSION}.tar.gz /opt/
-
 # RUN set -ex \   
-#     && tar -xzf /opt/hadoop-${HADOOP_VERSION}.tar.gz -C /opt \
+#     # 下载并安装hadoop到/opt/hadoop/目录下
+# 	&& mkdir -p /opt \
+# 	# && APACHE_MIRROT=mirror.tuna.tcurlsinghua.edu.cn/apache \
+# 	&& APACHE_MIRROT=mirrors.ustc.edu.cn/apache \
+# 	# && APACHE_MIRROT=mirrors.aliyun.com/apache \
+# 	&& curl -sSL http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | tar -xzf - -C /opt \
 # 	&& mv /opt/hadoop-${HADOOP_VERSION} ${HADOOP_HOME} \
 #     && cd ${HADOOP_HOME} \
-#     && echo "end" 
+#     && echo "end"   
+
+COPY hadoop-${HADOOP_VERSION}.tar.gz /opt/
+
+RUN set -ex \   
+    && tar -xzf /opt/hadoop-${HADOOP_VERSION}.tar.gz -C /opt \
+	&& mv /opt/hadoop-${HADOOP_VERSION} ${HADOOP_HOME} \
+    && cd ${HADOOP_HOME} \
+    && echo "end" 
 
 COPY config/* /tmp/
 
