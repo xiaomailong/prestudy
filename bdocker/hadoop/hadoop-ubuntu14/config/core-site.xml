@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<configuration>
+<!--
+This section deals with important parameters to be specified in the given configuration files:
+    fs.defaultFS	        NameNode URI	hdfs://host:port/
+    io.file.buffer.size	    131072	        Size of read/write buffer used in SequenceFiles.
+-->
+    <property>
+        <!--NameNode URI-->
+        <name>fs.defaultFS</name>
+        <value>hdfs://hadoop-master:9000/</value>
+    </property>
+</configuration>

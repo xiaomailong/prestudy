@@ -282,3 +282,4 @@ FakesAssemblies/
 demo/es6-example/lib
 __pycache__
 *.npy
+hadoop-2.8.0.tar.gz

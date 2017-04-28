@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<configuration>    
+<!--
+    Configurations for NameNode:
+        dfs.namenode.name.dir	        Path on the local filesystem where the NameNode stores the namespace and transactions logs persistently.	If this is a comma-delimited list of directories then the name table is replicated in all of the directories, for redundancy.
+        dfs.hosts / dfs.hosts.exclude	List of permitted/excluded DataNodes.	                                                                    If necessary, use these files to control the list of allowable datanodes.
+        dfs.blocksize	                268435456	                                                                                                HDFS blocksize of 256MB for large file-systems.
+        dfs.namenode.handler.count	    100	     
+-->
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///hdfs/namenode</value>
+        <description>NameNode directory for namespace and transaction logs storage.</description>
+    </property>
+<!--
+    Configurations for DataNode:
+        dfs.datanode.data.dir	Comma separated list of paths on the local filesystem of a DataNode where it should store its blocks.	            If this is a comma-delimited list of directories, then data will be stored in all named directories, typically on different devices.                                                                                                More NameNode server threads to handle RPCs from large number of DataNodes.
+-->     
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///hdfs/datanode</value>
+        <description>DataNode directory</description>
+    </property>
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+    </property>
+</configuration>

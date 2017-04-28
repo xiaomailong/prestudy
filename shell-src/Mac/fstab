@@ -1,0 +1,3 @@
+
+LABEL=BK none ntfs rw,auto,nobrowse
+LABEL=BU none ntfs rw,auto,nobrowse
