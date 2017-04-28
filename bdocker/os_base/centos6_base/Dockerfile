@@ -21,8 +21,8 @@ RUN set -ex \
     # CentOS-Base.repo CentOS-Debuginfo.repo CentOS-Media.repo CentOS-Vault.repo CentOS-fasttrack.repo
     # 安装包源镜像请任选其一    
     # && YUM_MIRROR=mirrors.ustc.edu.cn \
-    # && YUM_MIRROR=mirror.tuna.tsinghua.edu.cn \
-    && YUM_MIRROR=mirrors.aliyun.com \
+    && YUM_MIRROR=mirror.tuna.tsinghua.edu.cn \
+    # && YUM_MIRROR=mirrors.aliyun.com \
     && sed -i \
         -e "s|^mirrorlist=|#mirrorlist=|g" \    
         -e "s|^#baseurl=|baseurl=|g" \    
@@ -78,7 +78,7 @@ RUN set -ex \
             echo 'LANGUAGE="zh_CN.utf8:en_US.utf8:C.utf8"'; \
             echo 'SUPPORTED="zh_CN.utf8:en_US.utf8:C.utf8"'; \
             echo 'LC_ALL="zh_CN.utf8"'; \
-            echo 'SYSFONT="lat0-sun16"'; \
+            # echo 'SYSFONT="lat0-sun16"'; \
         } > /etc/sysconfig/i18n \
     && cat /etc/sysconfig/i18n \   
     && echo "export LC_ALL=zh_CN.utf8" >> /etc/profile \

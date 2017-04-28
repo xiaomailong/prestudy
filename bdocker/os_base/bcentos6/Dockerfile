@@ -7,28 +7,24 @@ ENV JAVA_HOME=/usr/lib/jvm/java-1.7-openjdk \
 
 RUN set -ex \
     && yum -y install \
-        tar \
-        bzip2 \
-        yum-utils \
-        rpm-build \
-        # ssh \
+        # tar \
+        # bzip2 \
+        # yum-utils \
+        # rpm-build \
         rsync \
-        # openjdk-7-jdk \
         curl \
         sudo \
-        # openssh \
-        # openssh-server \
-        # openssh-clients \
+        openssh \
+        openssh-server \
+        openssh-clients \
         openjdk7 \
-        # sshpass \
-        # openrc \
     && yum clean all \
-    && yum-builddep -y pam \
-    && yumdownloader --source pam \
-    && rpmbuild --rebuild  --define 'WITH_AUDIT 0' --define 'dist +noaudit' pam*.src.rpm \
-    && rpm -Uvh --oldpackage ~/rpmbuild/RPMS/*/pam*+noaudit*.rpm \
-    && rm -f /*.rpm \
-    && rm -rf ~/rpmbuild \
+    # && yum-builddep -y pam \
+    # && yumdownloader --source pam \
+    # && rpmbuild --rebuild  --define 'WITH_AUDIT 0' --define 'dist +noaudit' pam*.src.rpm \
+    # && rpm -Uvh --oldpackage ~/rpmbuild/RPMS/*/pam*+noaudit*.rpm \
+    # && rm -f /*.rpm \
+    # && rm -rf ~/rpmbuild \
 
     # 命令执行结束
     && echo "end"
@@ -36,8 +32,6 @@ RUN set -ex \
 # 配置ssh
 RUN set -ex \
     # && mkdir -p /var/run/sshd \
-    # 生成ssh访问秘钥 /etc/ssh/
-    && ssh-keygen -A \
     # 免密访问配置
     && sed -i \
         -e 's~^#PermitRootLogin prohibit-password~PermitRootLogin yes~g' \
@@ -61,6 +55,11 @@ RUN set -ex \
         } > $HOME/.ssh/config \ 
     && chmod 600 $HOME/.ssh/config \
     && cat $HOME/.ssh/config \
+    # passwordless ssh
+    # 生成ssh访问秘钥 /etc/ssh/
+    # && ssh-keygen -A \
+    && ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key \
+    && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key \
     && ssh-keygen -q -N "" -t rsa -f $HOME/.ssh/id_rsa \
     && cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys \
     && chmod 600 $HOME/.ssh/authorized_keys \   

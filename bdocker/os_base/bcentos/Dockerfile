@@ -7,28 +7,24 @@ ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
 
 RUN set -ex \
     && yum -y install \
-        tar \
-        bzip2 \
-        yum-utils \
-        rpm-build \
-        # ssh \
+        # tar \
+        # bzip2 \
+        # yum-utils \
+        # rpm-build \
         rsync \
-        # openjdk-7-jdk \
         curl \
         sudo \
-        # openssh \
-        # openssh-server \
-        # openssh-clients \
+        openssh \
+        openssh-server \
+        openssh-clients \
         openjdk8 \
-        # sshpass \
-        # openrc \
     && yum clean all \
-    && yum-builddep -y pam \
-    && yumdownloader --source pam \
-    && rpmbuild --rebuild  --define 'WITH_AUDIT 0' --define 'dist +noaudit' pam*.src.rpm \
-    && rpm -Uvh --oldpackage ~/rpmbuild/RPMS/*/pam*+noaudit*.rpm \
-    && rm -f /*.rpm \
-    && rm -rf ~/rpmbuild \
+    # && yum-builddep -y pam \
+    # && yumdownloader --source pam \
+    # && rpmbuild --rebuild  --define 'WITH_AUDIT 0' --define 'dist +noaudit' pam*.src.rpm \
+    # && rpm -Uvh --oldpackage ~/rpmbuild/RPMS/*/pam*+noaudit*.rpm \
+    # && rm -f /*.rpm \
+    # && rm -rf ~/rpmbuild \
 
     # 命令执行结束
     && echo "end"
