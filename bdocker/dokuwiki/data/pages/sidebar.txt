@@ -1,1 +1,51 @@
-这里是边栏，主要用于导航
+[[start|]]
+<a href="http://bbc.taikang.com/public/index.jsp">泰康养老</a>
+<a href="http://wit.xjgc.com/">工作项列表</a>
+<a href="http://mubu.io/list">幕布</a>
+<a href="http://www.waitsun.com/">守望者</a>
+<a href="http://pan.baidu.com/disk/home#list/path=%2F">百度云</a>
+<a href="http://chocolatey.org/packages">Chocolatey</a>
+<a href="http://91.213.30.151/">Google</a>
+<a href="http://www.konghai99.net/h-index.html">高心灵</a>
+<a href="http://www.shantianfang.com.cn/">单田芳</a>
+<a href="http://www.pnman.com/">中国历史</a>
+<a href="http://vbird.dic.ksu.edu.tw/">鸟哥Linux</a>
+<a href="http://docs.strongloop.com/">StrongLoop</a>
+<a href="https://github.com/LightTable/LightTable">LightTable</a>
+<a href="http://www.proxy360.net/guowai/">代理服务器</a>
+<a href="http://wit.xjgc.com/">工作项</a>
+<a href="http://www.360buy.com/">京东商城</a>
+<a href="https://pbank.95559.com.cn/personbank/credit_logon.jsp">网银登录</a>
+<a href="http://i.taobao.com/home.htm?t=1276238990886312">淘宝</a>
+<a href="http://www.cnki.net/">知网</a>
+<a href="https://vip.icbc.com.cn/icbc/perbank/index.jsp">工行</a>
+<a href="http://www.xiazaiba.com/newsoft.html">雨林木风</a>
+<a href="https://mail.google.com/mail/?shva=1#inbox">Gmail</a>
+<a href="https://www.google.com/reader/view/?hl=zh-CN">Google 阅读器</a>
+<a href="https://www.icloud.com/">iCloud</a>
+<a href="http://msdn.itellyou.cn/">MSDN - 我告诉你</a>
+<a href="http://dls.cec.org.cn/yijianzhengqiu/">标准意见征求专栏</a>
+<a href="http://click.union.360buy.com/JdClick/?unionId=316&siteId=21611&to=http://www.360buy.com">京东商城</a>
+<a href="http://www.dianlv.us/channeln_new_8.html">软件下载电骡(emule)下载</a>
+<a href="http://skypearl.csair.com/cn/air1.html">中国南方航空 - 明珠俱乐部</a>
+<a href="http://dls.cec.org.cn/yijianzhengqiu/">标准</a>
+<a href="http://click.union.360buy.com/JdClick/?unionId=316&siteId=21611&to=http://www.360buy.com">京东商城</a>
+<a href="https://mail.google.com/mail/?shva=1#inbox">Gmail</a>
+<a href="http://wit.xjgc.com/">工作项列表</a>
+<a href="http://www.inoreader.com/all_articles">Inoreader</a>
+<a href="https://edgecastcdn.net/00107ED/g/">Google by 自由微博</a>
+<a href="http://www.baidu.com/">百度</a>
+<a href="http://www.weiyun.com/disk/index.html?WYTaG=weiyun.portal.index#m=disk">微云</a>
+<a href="http://pan.baidu.com/disk/home#dir">百度云</a>
+<a href="http://c18.yunpan.360.cn/my/index/">360云</a>
+<a href="http://konghi.1000eb.com/">空海</a>
+<a href="http://mooc.guokr.com/">MOOC学院</a>
+<a href="https://ic.qq.com/pim/contact.jsp">QQ同步</a>
+<a href="http://so.baiduyun.me/">百度云搜</a>
+<a href="http://www.feng.com/">威锋网</a>
+<a href="http://www.cnki.net/">中国知网首页</a>
+<a href="http://ppt.geekbang.org/">极客邦科技PPT大全</a>
+<a href="http://edu.talkingdata.com/">腾云大学</a>
+<a href="https://jaywcjlove.github.io/linux-command/">Linux命令</a>
+<a href="https://yq.aliyun.com/topic/78?&utm_campaign=sys&utm_medium=market&utm_source=edm_email&msctype=email&mscareaid=cn&mscsiteid=cn&mscmsgid=6740116123000419363&">docker技术-云栖社区-阿里云</a>
+<a href="http://www.yangzhiping.com/">阳志平</a>

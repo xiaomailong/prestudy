@@ -1,2 +1,11 @@
 1493435405	172.17.0.1	C	start		创建		43
 1493435453	172.17.0.1	C	sidebar		创建		36
+1493686003	127.0.0.1	E	start		external edit		0
+1493686544	172.17.0.1	E	start				64
+1493686003	127.0.0.1	E	sidebar		external edit		0
+1493686695	172.17.0.1	E	sidebar				3679
+1493686754	172.17.0.1	E	sidebar				-104
+1493692594	172.17.0.1	E	sidebar				-66
+1493692735	172.17.0.1	E	sidebar				-311
+1493692834	127.0.0.1	E	sidebar		external edit		0
+1493692874	172.17.0.1	E	sidebar				11
