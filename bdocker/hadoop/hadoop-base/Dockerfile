@@ -25,12 +25,15 @@ RUN set -x \
 	&& APACHE_MIRROT=mirrors.aliyun.com/apache \
 	# && apk add --no-cache --virtual .build-deps \
     #     gnupg \
+    # && curl -fSL "$http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" -o /opt/hadoop-${HADOOP_VERSION}.tar.gz \
+    # && curl -fSL "http://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz.asc" -o /opt/hadoop-${HADOOP_VERSION}.tar.gz.asc \
     && wget -q "http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" \
     && wget -q "http://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz.asc" \
     && export GNUPGHOME="$(mktemp -d)" \
     # && gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" \
     # && gpg --batch --verify "hadoop-${HADOOP_VERSION}.tar.gz.asc" "hadoop-${HADOOP_VERSION}.tar.gz" \
     && tar -xzf "hadoop-${HADOOP_VERSION}.tar.gz" \
+    # && tar -xvf hadoop-${HADOOP_VERSION}.tar.gz -C /opt/ \
 	&& mv /opt/hadoop-${HADOOP_VERSION} /opt/hadoop \
     && ln -s /opt/hadoop/etc/hadoop /etc/hadoop \
     && cp /etc/hadoop/mapred-site.xml.template /etc/hadoop/mapred-site.xml \

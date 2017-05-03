@@ -37,6 +37,8 @@ RUN set -ex \
 		openssh \
 		openjdk8-jre \
         perl \
+        net-tools \
+        curl \
 	# 验证JAVA_HOME
 	&& { \
 		echo '#!/bin/sh'; \
@@ -88,9 +90,11 @@ RUN set -ex \
     
     && echo "end"
 
+EXPOSE 2222
+
 # USER ${DOCKER_USER}
 
-CMD sh
+CMD ["sh"]
 
 # 编译及执行方法如下: 
 # docker build -t alpine_base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/alpine_base/
