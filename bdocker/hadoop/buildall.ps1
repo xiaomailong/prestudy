@@ -13,7 +13,7 @@ docker build -t hadoop-spark ${ROOTPATH}/hadoop-spark/
 docker network create hadoop 
 docker network create kafka
 
-docker volume create --name=hadoop_datanode2
-docker volume create --name=hadoop_datanode1
-docker volume create --name=hadoop_historyserver
 docker volume create --name=hadoop_namenode
+docker volume create --name=hadoop_datanode1
+docker volume create --name=hadoop_datanode2
+docker volume create --name=hadoop_historyserver

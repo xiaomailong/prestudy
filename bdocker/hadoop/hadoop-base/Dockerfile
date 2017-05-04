@@ -4,8 +4,8 @@ FROM alpine_base
 
 MAINTAINER Bolik WaterBolik@163.com
 
-# ENV HADOOP_VERSION=2.8.0 \
-ENV HADOOP_VERSION=2.7.2 \
+ENV HADOOP_VERSION=2.8.0 \
+# ENV HADOOP_VERSION=2.7.2 \
 	PATH=$PATH:/opt/hadoop/bin/ \	
 	HADOOP_PREFIX=/opt/hadoop \
     HADOOP_CONF_DIR=/etc/hadoop \
