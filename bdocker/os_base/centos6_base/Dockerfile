@@ -65,7 +65,23 @@ RUN set -ex \
         openssh-server \
         openssh-clients \
         supervisor \
+        ntp \
+        ntpdate \
     && yum clean all \
+
+    # && cat /etc/ntp.conf \
+    # && { \
+	# 	echo 'restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap'; \
+	# 	echo 'server 127.127.1.0 #local clock'; \
+	# 	echo 'fudge 127.127.1.0 stratum 10'; \
+	# } >> /etc/ntp.conf \
+    # && sed -i \
+    #     -e 's~^server 0.centos.pool.ntp.org iburst~#server 0.centos.pool.ntp.org iburst~g' \
+    #     -e 's~^server 1.centos.pool.ntp.org iburst~#server 1.centos.pool.ntp.org iburst~g' \
+    #     -e 's~^server 2.centos.pool.ntp.org iburst~#server 2.centos.pool.ntp.org iburst~g' \
+    #     -e 's~^server 3.centos.pool.ntp.org iburst~#server 3.centos.pool.ntp.org iburst~g' \
+    #     /etc/ntp.conf \
+    # && cat /etc/ntp.conf \
 
     # ssh免密访问配置
     && sed -i \

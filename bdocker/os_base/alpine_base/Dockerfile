@@ -32,6 +32,8 @@ RUN set -ex \
     && apk upgrade \
     && apk add --update --no-cache \
         tzdata \
+        # Lightweight NTP server ported from OpenBSD
+        openntpd \
 		su-exec \
 		bash \
 		openssh \
@@ -51,10 +53,14 @@ RUN set -ex \
     # 配置时区
     && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
-    # 删除tzdata将会使时区设置失效
-    # && apk del \
-    #     tzdata \
 
+    # && { \
+	# 	echo 'restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap'; \
+	# 	echo 'server 127.127.1.0 #local clock'; \
+	# 	echo 'fudge 127.127.1.0 stratum 10'; \
+	# } > /etc/ntp.conf \
+    # && cat /etc/ntp.conf \
+    
 	# 配置ssh    
     # 生成ssh访问秘钥 /etc/ssh/
     && ssh-keygen -A \
