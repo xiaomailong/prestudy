@@ -69,6 +69,7 @@ RUN set -ex \
         ntpdate \
     && yum clean all \
 
+    # https://www.ibm.com/developerworks/cn/analytics/library/ba-cn-setup-environment-before-install-spark-cluster/index.html?ca=drs-
     # && cat /etc/ntp.conf \
     # && { \
 	# 	echo 'restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap'; \
