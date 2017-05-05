@@ -1,4 +1,6 @@
-FROM alpine_base
+# FROM alpine_base
+
+FROM nginx:alpine
 
 MAINTAINER Bolik WaterBolik@163.com
 
@@ -8,7 +10,9 @@ ENV MDWIKI_VERSION=0.6.2
 
 RUN set -ex \
     && apk --no-cache add \
-        nginx \
+        curl \
+        # TODO: 通过该方式安装的nginx启动时会报错，不知原因如何，待查
+        # nginx \
     && mkdir -p /opt \
     && cd /opt \
     # https://github.com/Dynalon/mdwiki/releases/download/0.6.2/mdwiki-0.6.2.zip
@@ -27,9 +31,10 @@ WORKDIR /wiki
 
 EXPOSE 80
 
-# CMD ["/usr/sbin/nginx", "-c", "/etc/nginx/nginx.conf"]
+STOPSIGNAL SIGQUIT
 
 CMD ["nginx", "-g", "daemon off;"]
+
 # CMD cp -f /opt/mdwiki/mdwiki.html /wiki/index.html && nginx -t
 
 
