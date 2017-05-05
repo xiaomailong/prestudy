@@ -28,3 +28,8 @@
   * [中国特色官场用词汇编](常识/中国特色官场用词汇编.md)
   * [中国省份](常识/中国省份.md)
 
+[gimmick:theme (inverse: true)](flatly)
+
+[gimmick:ThemeChooser](皮肤)
+
+[gimmick:forkmeongithub](http://github.com/WaterBolik/waterbolik.github.io/)
