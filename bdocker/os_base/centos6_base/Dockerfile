@@ -53,6 +53,7 @@ RUN set -ex \
     && yum -y update \  
     && yum -y install \
         epel-release \
+        yum-utils \  
     && sed -i \
         -e "s|^mirrorlist=|#mirrorlist=|g" \
         -e "s|^#baseurl=|baseurl=|g" \
@@ -60,10 +61,12 @@ RUN set -ex \
         -e "s|http:|https:|g" \
         /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel-testing.repo \
     # 更新源列表
-    && yum repolist \ 
+    && yum repolist \       
+    && yum -y upgrade \  
     && yum -y install \
         openssh-server \
         openssh-clients \
+        rsync \
         supervisor \
         ntp \
         ntpdate \

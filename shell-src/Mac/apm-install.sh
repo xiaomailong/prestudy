@@ -2,6 +2,9 @@
 
 apm install activate-power-mode
 
+# amWiki是一套非常简单基于atom编辑器markdown语法的轻量级wiki文库系统。
+apm install amWiki
+
 # 快速打开、切换文件
 apm install advanced-open-file
 

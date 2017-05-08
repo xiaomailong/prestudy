@@ -18,6 +18,7 @@ ENV DOCKER_USER=docker \
     LC_ALL=C.UTF-8 \
     # LC_ALL=zh_CN.UTF-8 
 	JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk/jre \
+    CLASSPATH=/usr/lib/jvm/java-1.8-openjdk/jre/lib \
 	PATH=$PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
 
 RUN set -ex \
@@ -37,6 +38,8 @@ RUN set -ex \
 		su-exec \
 		bash \
 		openssh \
+        rsync \
+        supervisor \
 		openjdk8-jre \
         perl \
         net-tools \
@@ -77,7 +80,7 @@ RUN set -ex \
     && cat /etc/ssh/sshd_config \   
     # 客户端配置
     && mkdir -p $HOME/.ssh \
-    && chmod 700 $HOME/.ssh \
+    && chmod 700 -R $HOME/.ssh \
     &&  { \
             echo 'Host *'; \ 
             echo '  UserKnownHostsFile /dev/null'; \
