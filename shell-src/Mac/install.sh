@@ -96,7 +96,7 @@ brew cask install \
   docker \
   kitematic \
   rtx \
-  # thunder \
-  youdaoNote \
+  detexify \
+  # youdaoNote \
   # qq
   
