@@ -1,9 +1,8 @@
 ---
-
 layout: post  
 title: CSS位置  
 lead: 本文主要是学习CSS位置的笔记，总结了一些基本概念，知识点和细节。  
-date: 2015-10-28T00:00:00.000Z  
+date: 2015-10-29T00:00:00.000Z  
 categories: Web  
 tagline: Css  
 tags: [Css]
@@ -26,12 +25,12 @@ static |默认值。没有定位，元素出现在正常的流中（忽略 top, 
 inherit |规定应该从父元素继承 position 属性的值。  
 
 -	position的值为absolute、fixed的元素脱离文档流，static、relative没有脱离文档流  
--	父子节点都是没有脱离文档的两种定位（static、relative）的外边距（margin）会合并，显示效果以最大的那个外边距为准。
--	inherit 顾名思义，元素的position属性值从该元素的父元素继承而来，即与父元素相同。  
--	static position属性的默认值。被应用了position:static的元素，会根据文档流中的位置来显示，即原始的html文档结构是什么样子，元素就会显示在什么位置。left、right、top、bottom属性设置的值将不起作用。对margin/padding敏感。  
--	fixed 固定定位，即一旦指定了元素的显示位置，该元素就会一直显示在屏幕上的那个位置，即使滚动屏幕，元素在屏幕中的位置依然不变。  
--	relative 相对定位，下文详述。  
--	absolute 绝对定位，下文详述。  
+ -父子节点都是没有脱离文档的两种定位（static、relative）的外边距（margin）会合并，显示效果以最大的那个外边距为准。
+ -inherit 顾名思义，元素的position属性值从该元素的父元素继承而来，即与父元素相同。  
+ -static position属性的默认值。被应用了position:static的元素，会根据文档流中的位置来显示，即原始的html文档结构是什么样子，元素就会显示在什么位置。left、right、top、bottom属性设置的值将不起作用。对margin/padding敏感。  
+ -fixed 固定定位，即一旦指定了元素的显示位置，该元素就会一直显示在屏幕上的那个位置，即使滚动屏幕，元素在屏幕中的位置依然不变。  
+ -relative 相对定位，下文详述。  
+ -absolute 绝对定位，下文详述。  
 
 # 相对定位
 

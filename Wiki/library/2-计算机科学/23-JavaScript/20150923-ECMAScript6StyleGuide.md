@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ECMAScript6 Style Guide - Frontend Team of GF Securities
-date: 2015-09-22T00:00:00.000Z
+date: 2015-09-23T00:00:00.000Z
 categories: JavaScript
 tagline: JavaScript
 tags:

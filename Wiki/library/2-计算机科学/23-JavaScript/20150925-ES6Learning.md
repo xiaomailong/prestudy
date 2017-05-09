@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ECMAScript 6 Learning
-date: 2015-09-22T00:00:00.000Z
+date: 2015-09-25T00:00:00.000Z
 categories: JavaScript
 tagline: JavaScript
 tags:
@@ -40,10 +40,10 @@ Just send a pull request or open an [issue](https://github.com/ericdouglas/ES6-L
 8. [Summary of ECMAScript 6 major features](http://ryandao.net/summary-ecmascript-6-major-features/)
 9. [5 Great Features in EcmaScript 6 (ES6 Harmony)](http://wintellect.com/blogs/nstieglitz/5-great-features-in-es6-harmony)
 10. An introduction to ES6
-  - [Part 1: Using ES6 Today](http://globaldev.co.uk/2013/09/es6-part-1/)
-  - [Part 2: Block Scoping](http://globaldev.co.uk/2013/09/es6-part-2/)
-  - [Part 3: Destructuring](http://globaldev.co.uk/2013/10/es6-part-3/)
-  - [Part 4: Parameters and Spread](http://globaldev.co.uk/2013/10/es6-part-4/)
+ - [Part 1: Using ES6 Today](http://globaldev.co.uk/2013/09/es6-part-1/)
+ - [Part 2: Block Scoping](http://globaldev.co.uk/2013/09/es6-part-2/)
+ - [Part 3: Destructuring](http://globaldev.co.uk/2013/10/es6-part-3/)
+ - [Part 4: Parameters and Spread](http://globaldev.co.uk/2013/10/es6-part-4/)
 
 11. [ECMAScript 6: Jump in, the water is warm!](http://flippinawesome.org/2014/04/14/ecmascript-6-jump-in-the-water-is-warm/)
 12. [ECMAScript 6 – Playing around in Harmony](http://thejackalofjavascript.com/es6-playing-around-in-harmony/)
