@@ -24,6 +24,7 @@ RUN set -ex \
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY default.conf /etc/nginx/conf.d/default.conf
+# COPY generate-index.sh /generate-index.sh
 
 VOLUME /wiki
 
@@ -33,11 +34,15 @@ EXPOSE 80
 
 STOPSIGNAL SIGQUIT
 
+
+# CMD cp -f /opt/mdwiki/mdwiki.html /wiki/index.html \
+#     && cp -f /generate-index.sh /wiki/generate-index.sh \
+#     && nginx -t
+
 CMD ["nginx", "-g", "daemon off;"]
-
-# CMD cp -f /opt/mdwiki/mdwiki.html /wiki/index.html && nginx -t
-
-
+# CMD chmod a+x /wiki/generate-index.sh \
+#     && sh /wiki/generate-index.sh /wiki \
+#     && nginx -g "daemon off;"
 
 # 编译及执行方法如下: 
 #     $ docker build -t mdwiki /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/mdwiki/

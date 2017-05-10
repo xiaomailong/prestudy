@@ -13,11 +13,6 @@
     <meta name="fragment" content="!">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
     <meta charset="UTF-8">
-    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default">
-    </script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} });
-    </script>
     <style type="text/css">
     /* hide the main content while we assemble everything */
     .md-hidden-load { display: none; }
@@ -3958,24 +3953,24 @@ function googlemapsReady() {
     }
 }(jQuery));
 
-// (function($) {
-//     var mathGimmick = {
-//         name: 'math',
-//         once: function() {
-//             $.md.linkGimmick(this, 'math', load_mathjax);
-//         }
-//     };
-//     $.md.registerGimmick(mathGimmick);
+(function($) {
+    var mathGimmick = {
+        name: 'math',
+        once: function() {
+            $.md.linkGimmick(this, 'math', load_mathjax);
+        }
+    };
+    $.md.registerGimmick(mathGimmick);
 
-//     function load_mathjax($links, opt, ref) {
-//         $links.remove();
-//         var script = document.createElement('script');
-//         script.type = 'text/javascript';
-//         script.src  = $.md.prepareLink('cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML', { forceHTTP: true });
-//         document.getElementsByTagName('head')[0].appendChild(script);
-//     }
+    function load_mathjax($links, opt, ref) {
+        $links.remove();
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src  = $.md.prepareLink('cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML', { forceHTTP: true });
+        document.getElementsByTagName('head')[0].appendChild(script);
+    }
 
-// }(jQuery));
+}(jQuery));
 
 (function($) {
     'use strict';

@@ -3,5 +3,6 @@
     "lineBreaks": "gfm",
     "additionalFooterText": "All content and images &copy; by WaterBolik  ——",
     "anchorCharacter": "#",
-    "title": "WaterBolik"
+    "title": "WaterBolik",
+    "parseHeader": true 
 }
