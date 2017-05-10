@@ -22,7 +22,7 @@ RUN set -ex \
 
 # 配置ssh
 RUN set -ex \
-    # && mkdir -p /var/run/sshd \
+    && mkdir -p /var/run/sshd \
     # 生成ssh访问秘钥 /etc/ssh/
     && ssh-keygen -A \
     # 免密访问配置
@@ -60,7 +60,8 @@ RUN set -ex \
 
 EXPOSE 2222
 
-CMD ["bin/bash"]  
+CMD ["/usr/sbin/sshd", "-D"]
+# CMD ["bin/bash"]  
 
 # $ docker build -t bubuntu /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/
 # docker build -t bubuntu B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/bubuntu/

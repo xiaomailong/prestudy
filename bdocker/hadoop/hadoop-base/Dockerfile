@@ -8,7 +8,18 @@ ENV HADOOP_VERSION=2.8.0 \
 # ENV HADOOP_VERSION=2.7.2 \
 	PATH=$PATH:/opt/hadoop/bin/ \	
 	HADOOP_PREFIX=/opt/hadoop \
+    # HADOOP_HOME=/opt/hadoop \
+    # HADOOP_MAPARED_HOME=/opt/hadoop \
+    # HADOOP_COMMON_HOME=/opt/hadoop \
+    # HADOOP_HDFS_HOME=/opt/hadoop \
+    # HADOOP_YARN_HOME=/opt/hadoop \
+    # YARN_HOME=/opt/hadoop \
+    # LD_LIBRARY_PATH=/opt/hadoop/lib/native/ \
+    # HADOOP_COMMON_LIB_NATIVE_DIR=/opt/hadoop/lib/native/ \
+    # HADOOP_OPTS="-Djava.library.path=/opt/hadoop/lib/native" \
     HADOOP_CONF_DIR=/etc/hadoop \
+    # HDFS_CONF_DIR=/etc/hadoop \
+    # YARN_CONF_DIR=/etc/hadoop \
     HADOOP_DATA_DIR=/hadoop-data \
     MULTIHOMED_NETWORK=1 
 

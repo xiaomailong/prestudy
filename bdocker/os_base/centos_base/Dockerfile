@@ -113,9 +113,9 @@ RUN set -ex \
     && cat $HOME/.ssh/config \
     # passwordless ssh
     # 生成ssh访问秘钥 /etc/ssh/
-    # && ssh-keygen -A \
-    && ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key \
-    && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key \
+    && ssh-keygen -A \
+    # && ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key \
+    # && ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key \
     && ssh-keygen -q -N "" -t rsa -f $HOME/.ssh/id_rsa \
     && cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys \
     && chmod 600 $HOME/.ssh/authorized_keys \   
@@ -129,8 +129,8 @@ EXPOSE 2222
 COPY supervisord.conf /etc/supervisord.conf
 
 # CMD ["bin/bash"]
-# CMD ["/usr/sbin/sshd", "-D"]
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/sbin/sshd", "-D"]
+# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
 # $ docker build -t centos_base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/centos_base/
 # docker build -t centos_base B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/centos_base/
