@@ -34,6 +34,7 @@ RUN set -x \
 	# && APACHE_MIRROT=mirror.tuna.tsinghua.edu.cn/apache \
 	# && APACHE_MIRROT=mirrors.ustc.edu.cn/apache \
 	&& APACHE_MIRROT=mirrors.aliyun.com/apache \
+	# && APACHE_MIRROT=mirrors.cnnic.cn/apache \
 	# && apk add --no-cache --virtual .build-deps \
     #     gnupg \
     # && curl -fSL "$http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" -o /opt/hadoop-${HADOOP_VERSION}.tar.gz \

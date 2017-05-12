@@ -129,8 +129,9 @@ EXPOSE 2222
 COPY supervisord.conf /etc/supervisord.conf
 
 # CMD ["bin/bash"]
-CMD ["/usr/sbin/sshd", "-D"]
-# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+# CMD ["/usr/sbin/sshd", "-D"]
+CMD /usr/bin/supervisord -c /etc/supervisord.conf \
+    && bash
 
 # $ docker build -t centos_base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/centos_base/
 # docker build -t centos_base B:/OpenSource/WaterBolik/prestudy/bdocker/os_base/centos_base/

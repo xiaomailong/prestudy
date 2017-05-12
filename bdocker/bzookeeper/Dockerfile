@@ -31,6 +31,7 @@ RUN set -x \
 	# && APACHE_MIRROT=mirror.tuna.tsinghua.edu.cn/apache \
 	# && APACHE_MIRROT=mirrors.ustc.edu.cn/apache \
 	&& APACHE_MIRROT=mirrors.aliyun.com/apache \
+	# && APACHE_MIRROT=mirrors.cnnic.cn/apache \
 	&& apk add --no-cache --virtual .build-deps \
         gnupg \
     && wget -q "http://${APACHE_MIRROT}/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz" \
