@@ -76,7 +76,8 @@ RUN set -ex \
         -e "s|http:|https:|g" \
         /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel-testing.repo \
     # 更新源列表
-    && yum repolist \            
+    && yum repolist \       
+    && yum makecache fast \           
     && yum -y upgrade \  
     && yum -y install \
         openssh-server \
@@ -86,7 +87,6 @@ RUN set -ex \
         ntp \
         ntpdate \
     && yum clean all \
-    # && yum makecache \
 
     # ssh免密访问配置
     && sed -i \

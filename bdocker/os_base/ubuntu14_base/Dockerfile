@@ -52,6 +52,7 @@ RUN set -ex \
     # 删除不必要的软件和Apt缓存包列表
     && apt-get autoclean  \
     && apt-get autoremove  \
+    # && rm -rf /var/lib/apt/lists/*
 
     # 命令执行结束
     && echo "end"
