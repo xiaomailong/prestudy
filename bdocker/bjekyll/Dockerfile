@@ -15,6 +15,8 @@ RUN set -ex \
         ruby-bundler \
         ruby-rdoc \
         libffi-dev \
+        python-pygments \
+        node \
 #     && echo "end"    
 # RUN set -ex \
     # 淘宝镜像
@@ -29,9 +31,13 @@ RUN set -ex \
     && gem install \
         jekyll \
         jekyll-feed \
+        jekyll-redirect-from \
+        github-pages \  
+        kramdown \
         minima \
         json \
         rouge \
+        rdiscount \
         redcarpet \
         go_script \
     && echo "end"

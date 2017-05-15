@@ -34,6 +34,7 @@ EXPOSE 80
 
 STOPSIGNAL SIGQUIT
 
+HEALTHCHECK CMD curl --fail http://localhost:80 || exit 1
 
 # CMD cp -f /opt/mdwiki/mdwiki.html /wiki/index.html \
 #     && cp -f /generate-index.sh /wiki/generate-index.sh \

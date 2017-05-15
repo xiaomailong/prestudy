@@ -1,48 +1,5 @@
 # 1. Dockerfile
 
-<!-- TOC -->
-
-- [1. Dockerfile](#1-dockerfile)
-    - [1.1. Dockerfile格式](#11-dockerfile格式)
-        - [1.1.1. 交互式方式制定CentOS镜像](#111-交互式方式制定centos镜像)
-        - [1.1.2. Dockerfile方式制定CentOS镜像](#112-dockerfile方式制定centos镜像)
-        - [1.1.3. Dockerfile准则](#113-dockerfile准则)
-    - [1.2. 指令注意事项](#12-指令注意事项)
-        - [1.2.1. FROM](#121-from)
-        - [1.2.2. LABEL](#122-label)
-        - [1.2.3. RUN](#123-run)
-            - [1.2.3.1. apt-get](#1231-apt-get)
-            - [1.2.3.2. 管道使用](#1232-管道使用)
-        - [1.2.4. CMD](#124-cmd)
-        - [1.2.5. EXPOSE](#125-expose)
-        - [1.2.6. ENV](#126-env)
-        - [1.2.7. ADD和COPY](#127-add和copy)
-        - [1.2.8. ENTRYPOINT](#128-entrypoint)
-        - [1.2.9. VOLUME](#129-volume)
-        - [1.2.10. USER](#1210-user)
-        - [1.2.11. WORKDIR](#1211-workdir)
-        - [1.2.12. ONBUILD](#1212-onbuild)
-        - [1.2.13. 其他资源](#1213-其他资源)
-    - [1.3. 编写最佳的Dockerfile](#13-编写最佳的dockerfile)
-        - [目标](#目标)
-        - [总结](#总结)
-        - [1.3.3. 使用.dockerignore](#133-使用dockerignore)
-        - [1.3.4. 容器只运行单个应用](#134-容器只运行单个应用)
-        - [1.3.5. 将多个RUN指令合并为一个](#135-将多个run指令合并为一个)
-        - [1.3.6. 基础镜像的标签不要用latest](#136-基础镜像的标签不要用latest)
-        - [1.3.7. 每个RUN指令后删除多余文件](#137-每个run指令后删除多余文件)
-        - [1.3.8. 选择合适的基础镜像(alpine版本最好)](#138-选择合适的基础镜像alpine版本最好)
-        - [1.3.9. 设置WORKDIR和 CMD](#139-设置workdir和-cmd)
-        - [1.3.10. 使用ENTRYPOINT (可选)](#1310-使用entrypoint-可选)
-        - [1.3.11. 在entrypoint脚本中使用exec](#1311-在entrypoint脚本中使用exec)
-        - [1.3.12. COPY与ADD优先使用前者](#1312-copy与add优先使用前者)
-        - [1.3.13. 合理调整COPY与RUN的顺序](#1313-合理调整copy与run的顺序)
-        - [1.3.14. 设置默认的环境变量，映射端口和数据卷](#1314-设置默认的环境变量映射端口和数据卷)
-        - [1.3.15. 使用LABEL设置镜像元数据](#1315-使用label设置镜像元数据)
-        - [1.3.16. 添加HEALTHCHECK](#1316-添加healthcheck)
-
-<!-- /TOC -->
-
 ## 1.1. Dockerfile格式
 
 如果你的编译目录下有一些文件是不需要打包进Image的，你可以使用"dockerignoe file"文件进行过滤。重要涉及的指令是ADD和COPY。
@@ -95,47 +52,47 @@ RUN apt-get dist-upgrade -y
 
 ### 1.1.1. 交互式方式制定CentOS镜像
 
-```shell
+```sh
 # 下载centos镜像
-$ docker pull centos
+docker pull centos
 # 启动容器
-$ docker run -it -d --name test-centos1 centos
+docker run -it -d --name test-centos1 centos
 # 进入容器
-$ docker exec -it test-centos1 /bin/bash
+docker exec -it test-centos1 /bin/bash
 # 检查工具
-$ ifconfig
+ifconfig
 # 安装 net-tools 
-$ yum install net-tools -y
+yum install net-tools -y
 # 安装 openssh-server
-$ yum install openssh-server -y
+yum install openssh-server -y
 # 创建ssh 所需的目录
-$ mkdir -pv /var/run/sshd
+mkdir -pv /var/run/sshd
 # 在根目录创建sshd 启动脚本
 cat /auto_sshd.sh
 #!/bin/bash
 /usr/sbin/sshd -D
 # 给启动脚本权限
-$ chmod +x /auto_sshd.sh
+chmod +x /auto_sshd.sh
 # 修改容器内root 的账户密码
-$ echo "root:iloveworld" | chpasswd
+echo "root:iloveworld" | chpasswd
 # 生成ssh 主机dsa 密钥（不然ssh 该容器时，会出现错误。）
-$ ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
-$ ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
+ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key
+ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
 # history记录的时间
-$ echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/profile
+echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/profile
 
 # 打包成新的镜像
-$ docker commit test-centos1 centos_sshd:7.0
+docker commit test-centos1 centos_sshd:7.0
 # 这条命令更方便以后启动
-$ docker commit --change='CMD ["/auto_sshd.sh"]' -c "EXPOSE 22" test-centos1 centos_sshd:7.0
+docker commit --change='CMD ["/auto_sshd.sh"]' -c "EXPOSE 22" test-centos1 centos_sshd:7.0
 # --change : 将后期使用此镜像运行容器时的命令参数、开放的容器端口提前设置好。
 
 # 启动新的容器
-$ docker run -d -it --name centos_7.0-1 centos_sshd:7.0
+docker run -d -it --name centos_7.0-1 centos_sshd:7.0
 # 查看容器ip
-$ docker exec centos_7.0-1 hostname -I
+docker exec centos_7.0-1 hostname -I
 # ssh连接容器
-$ ssh root@172.17.0.2
+ssh root@172.17.0.2
 ```
 
 ### 1.1.2. Dockerfile方式制定CentOS镜像
@@ -175,7 +132,7 @@ CMD ["/usr/sbin/sshd","-D"]
 
 构建
 
-```shell
+```sh
 # 使用docker build命令来创建镜像
 docker build -t centos_sshd_1 .
 # -t 选项来docker build新的镜像以便于标记构建的镜像，
@@ -193,15 +150,15 @@ ssh root@172.17.0.2
 
 ### 1.1.3. Dockerfile准则
 
-1. 尽量将Dockerfile放在空目录中，如果目录中必须有其他文件，则使用.dockerignore文件。
-2. 避免安装不必须的包。
-3. 每个容器应该只关注一个功能点。
-4. 最小化镜像的层数。
-5. 多行参数时应该分类。这样更清晰直白，便于阅读和review，另外，在每个换行符`\`前都增加一个空格。
-6. 固定软件版本。固定所有依赖的版本是实现良好实践最佳途径。这包括基本映象，从GitHub中提取的代码，代码依赖的库等等。通过版本控制，您可以简化应用程序已知的工作版本。
-7. 对构建缓存要有清楚的认识。自我清理。确保所有的清理语句在同一个部分运行，否则它们将看起来清除，但最终仍然存在于Docker容器成为残留。
-8. 组合运行语句。把逻辑上属于一起操作步骤的语句合并进入Dockerfile中，这样以避免类似缓存和不必要地使用磁盘空间有关常见问题。 
-9. 使用启动脚本。创建和调试比较大型的项目，不要直接使用CMD命令运行，建立一个开始脚本，每次调用运行。
+1.  尽量将Dockerfile放在空目录中，如果目录中必须有其他文件，则使用.dockerignore文件。
+2.  避免安装不必须的包。
+3.  每个容器应该只关注一个功能点。
+4.  最小化镜像的层数。
+5.  多行参数时应该分类。这样更清晰直白，便于阅读和review，另外，在每个换行符`\`前都增加一个空格。
+6.  固定软件版本。固定所有依赖的版本是实现良好实践最佳途径。这包括基本映象，从GitHub中提取的代码，代码依赖的库等等。通过版本控制，您可以简化应用程序已知的工作版本。
+7.  对构建缓存要有清楚的认识。自我清理。确保所有的清理语句在同一个部分运行，否则它们将看起来清除，但最终仍然存在于Docker容器成为残留。
+8.  组合运行语句。把逻辑上属于一起操作步骤的语句合并进入Dockerfile中，这样以避免类似缓存和不必要地使用磁盘空间有关常见问题。 
+9.  使用启动脚本。创建和调试比较大型的项目，不要直接使用CMD命令运行，建立一个开始脚本，每次调用运行。
 10. 创建 Non-Root User。
 
 ```dockerfile
@@ -217,9 +174,8 @@ USER docker
 
 任何时候，尽量使用官方镜像源作为你镜像的基础镜像。我们建议使用[Debian Image](https://hub.docker.com/_/debian/)，因为其被很好地管理着，并且作为一个完整的发布包，但体积却保持着最小化（当前不足150MB）。
 
-　　1. FROM必须是除了注释以外的第一行；
-
-　　2. 可以有多个FROM语句，来创建多个image；
+1.  FROM必须是除了注释以外的第一行；
+2.  可以有多个FROM语句，来创建多个image；
 
 ### 1.2.2. LABEL
 
@@ -262,15 +218,21 @@ RUN apt-get update && apt-get install -y \
 
 很多RUN命令都需要使用到管道，如：
 
-`RUN wget -O - https://some.site | wc -l > /number`
+```dockerfile
+RUN wget -O - https://some.site | wc -l > /number
+```
 
 Docker使用`/bin/sh -c`解释器来执行这些命令，该解释器只评估管道最后一个操作的返回值来判断整个命令是否成功。在上面的例子中，只要`wc -l`命令成功了，即使`wget`命令失败了，也会创建一个新镜像。为了避免上述情况，可以在语句首部加上`set -o pipefail &&`。比如：
 
-`RUN set -o pipefail && wget -O - https://some.site | wc -l > /number`
+```dockerfile
+RUN set -o pipefail && wget -O - https://some.site | wc -l > /number
+```
 
 **注意**：并非所有的shell都支持`-o pipefail`选项，比如说基于Debian的镜像下的模式`shell：dash shell`。这种情况下，我们可以使用`exec`格式的RUN命令来显示地选择shell来支持pipefail选项。如：
 
-`RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]`
+```dockerfile
+RUN ["/bin/bash", "-c", "set -o pipefail && wget -O - https://some.site | wc -l > /number"]
+```
 
 ### 1.2.4. CMD
 
@@ -278,7 +240,9 @@ Docker使用`/bin/sh -c`解释器来执行这些命令，该解释器只评估�
 
 CMD语句与RUN不同，RUN是在build镜像的时候运行，而CMD语句是在build结束后运行。一个Dockerfile钟可以有多个RUN语句，虽然也可以有多个CMD语句，但是却只有最后一条CMD语句会执行。CMD语句格式为：
 
-`CMD [“executable”, “param1”, “param2”…]`
+```dockerfile
+CMD [“executable”, “param1”, “param2”…]
+```
 
 ### 1.2.5. EXPOSE
 
@@ -358,7 +322,9 @@ VOLUME指令一般用于数据库的存储区域，配置存储，或者docker�
 
 如果服务可以在不需要特权的情况下运行，那么就应该使用USER来切换用户至非root用户。可以用RUN命令创建用户组和用户如：
 
-`RUN groupadd -r postgres && useradd -r -g postgres postgres`
+```dockerfile
+RUN groupadd -r postgres && useradd -r -g postgres postgres
+```
 
 应该避免安装和使用sudo，因为它有不可预知的TTY和信号转移特性，会产生很多问题。如果的确一定要使用类似sudo的功能（如root下初始化daemon，非root下运行），可以使用“gosu”。
 
@@ -378,43 +344,41 @@ VOLUME指令一般用于数据库的存储区域，配置存储，或者docker�
 
 [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
 
-[https://github.com/docker-library/buildpack-deps/blob/master/jessie/Dockerfile](https://github.com/docker-library/buildpack-deps/blob/master/jessie/Dockerfile)
+[jessie-Dockerfile](https://github.com/docker-library/buildpack-deps/blob/master/jessie/Dockerfile)
 
 [.dockerignore file](https://docs.docker.com/engine/reference/builder/#dockerignore-file)
 
-[http://dockone.io/article/2034](http://dockone.io/article/2034)
+[Dockerfile实践优化建议](http://dockone.io/article/2034)
 
-[https://docs.resin.io/deployment/build-optimisation/](https://docs.resin.io/deployment/build-optimisation/)
-
+[build-optimisation/](https://docs.resin.io/deployment/build-optimisation/)
 
 ## 1.3. 编写最佳的Dockerfile
 
 ### 目标
 
-- 更快的构建速度
-- 更小的Docker镜像大小
-- 更少的Docker镜像层
-- 充分利用镜像缓存
-- 增加Dockerfile可读性
-- 让Docker容器使用起来更简单
+-   更快的构建速度
+-   更小的Docker镜像大小
+-   更少的Docker镜像层
+-   充分利用镜像缓存
+-   增加Dockerfile可读性
+-   让Docker容器使用起来更简单
 
 ### 总结
 
-- 编写.dockerignore文件
-- 容器只运行单个应用
-- 将多个RUN指令合并为一个
-- 基础镜像的标签不要用latest
-- 每个RUN指令后删除多余文件
-- 选择合适的基础镜像(alpine版本最好)
-- 设置WORKDIR和CMD
-- 使用ENTRYPOINT (可选)
-- 在entrypoint脚本中使用exec
-- COPY与ADD优先使用前者
-- 合理调整COPY与RUN的顺序
-- 设置默认的环境变量，映射端口和数据卷
-- 使用LABEL设置镜像元数据
-- 添加HEALTHCHECK
-
+-   编写.dockerignore文件
+-   容器只运行单个应用
+-   将多个RUN指令合并为一个
+-   基础镜像的标签不要用latest
+-   每个RUN指令后删除多余文件
+-   选择合适的基础镜像(alpine版本最好)
+-   设置WORKDIR和CMD
+-   使用ENTRYPOINT (可选)
+-   在entrypoint脚本中使用exec
+-   COPY与ADD优先使用前者
+-   合理调整COPY与RUN的顺序
+-   设置默认的环境变量，映射端口和数据卷
+-   使用LABEL设置镜像元数据
+-   添加HEALTHCHECK
 
 ### 1.3.3. 使用.dockerignore
 
@@ -424,11 +388,11 @@ VOLUME指令一般用于数据库的存储区域，配置存储，或者docker�
 
 从技术角度讲，你可以在Docker容器中运行多个进程。你可以将数据库，前端，后端，ssh，supervisor都运行在同一个Docker容器中。但是，这会让你非常痛苦:
 
-- 非常长的构建时间(修改前端之后，整个后端也需要重新构建)
-- 非常大的镜像大小
-- 多个应用的日志难以处理(不能直接使用stdout，否则多个应用的日志会混合到一起)
-- 横向扩展时非常浪费资源(不同的应用需要运行的容器数并不相同)
-- 僵尸进程问题 - 你需要选择合适的init进程
+-   非常长的构建时间(修改前端之后，整个后端也需要重新构建)
+-   非常大的镜像大小
+-   多个应用的日志难以处理(不能直接使用stdout，否则多个应用的日志会混合到一起)
+-   横向扩展时非常浪费资源(不同的应用需要运行的容器数并不相同)
+-   僵尸进程问题 - 你需要选择合适的init进程
 
 因此，我建议大家为每个应用构建单独的Docker镜像，然后使用 Docker Compose 运行多个Docker容器。
 
@@ -438,11 +402,11 @@ SSH可以用docker exec替代。
 
 Docker镜像是分层的，下面这些知识点非常重要:
 
-- Dockerfile中的每个指令都会创建一个新的镜像层。
-- 镜像层将被缓存和复用
-- 当Dockerfile的指令修改了，复制的文件变化了，或者构建镜像时指定的变量不同了，对应的镜像层缓存就会失效
-- 某一层的镜像缓存失效之后，它之后的镜像层缓存都会失效
-- 镜像层是不可变的，如果我们在某一层中添加一个文件，然后在下一层中删除它，则镜像中依然会包含该文件(只是这个文件在Docker容器中不可见了)。
+-   Dockerfile中的每个指令都会创建一个新的镜像层。
+-   镜像层将被缓存和复用
+-   当Dockerfile的指令修改了，复制的文件变化了，或者构建镜像时指定的变量不同了，对应的镜像层缓存就会失效
+-   某一层的镜像缓存失效之后，它之后的镜像层缓存都会失效
+-   镜像层是不可变的，如果我们在某一层中添加一个文件，然后在下一层中删除它，则镜像中依然会包含该文件(只是这个文件在Docker容器中不可见了)。
 
 Docker镜像类似于洋葱。它们都有很多层。为了修改内层，则需要将外面的层都删掉。我们只能将变化频率一样的指令合并在一起。
 
@@ -517,7 +481,7 @@ CMD ["start"]
 
 可以使用如下命令运行该镜像:
 
-```shell
+```sh
 # 运行开发版本
 docker run our-app dev
 
@@ -590,5 +554,3 @@ CMD ["start"]
 ```
 
 当请求失败时，curl --fail 命令返回非0状态。
-
-

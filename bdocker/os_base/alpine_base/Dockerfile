@@ -34,7 +34,7 @@ RUN set -ex \
     && apk add --update --no-cache \
         tzdata \
         # Lightweight NTP server ported from OpenBSD
-        openntpd \
+        # openntpd \
 		su-exec \
 		bash \
 		openssh \
