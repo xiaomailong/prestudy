@@ -358,9 +358,10 @@ RUN set -ex \
             echo "ELECTRON_MIRROR=http://${NPM_MIRROR}/mirrors/electron/"; \
         } > ${HOME}/.npmrc \
     && cat ${HOME}/.npmrc \
-    && npm install -g cnpm --registry=https://registry.${NPM_MIRROR}/ \
-    # yarn 淘宝镜像 tyarn
-    && npm install yarn tyarn -g --registry=https://registry.${NPM_MIRROR}/ \
+    && npm install -g --registry=https://registry.${NPM_MIRROR}/ \
+        cnpm \
+        yarn \
+        tyarn \
     && yarn config set registry https://registry.${NPM_MIRROR}/ \
     && echo "end"
 
