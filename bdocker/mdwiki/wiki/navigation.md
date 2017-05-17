@@ -77,7 +77,11 @@
 [计算机技术]()
 
   * [Docker](计算机技术/Docker/Dockerfile.md)
-  * [2016-09-08-Docker](计算机技术/Docker/2016-09-08-Docker.md)
+  * [2016-09-08-Docker](计算机技术/Docker/2016-09-08-Docker.md) 
+  * [sed](计算机技术/linux/sed.md)
+  * [Electron](计算机技术/JavaScript/Electron.md)
+  * [算法复杂度](计算机技术/算法/算法复杂度.md)
+  * [排序算法](计算机技术/算法/排序算法.md)
 
 [gimmick:theme (inverse: true)](flatly)
 
