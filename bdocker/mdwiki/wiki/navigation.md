@@ -82,6 +82,7 @@
   * [Electron](计算机技术/JavaScript/Electron.md)
   * [算法复杂度](计算机技术/算法/算法复杂度.md)
   * [排序算法](计算机技术/算法/排序算法.md)
+  * [自然语言处理](计算机技术/人工智能/自然语言处理.md)
 
 [gimmick:theme (inverse: true)](flatly)
 
