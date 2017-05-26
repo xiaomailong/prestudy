@@ -38,7 +38,7 @@
   * [懒癌与智能](认知神经心理科学/2017-02-10-懒癌与智能.md)
   * [阅读与记忆](认知神经心理科学/2017-03-03-阅读与记忆.md)
   * [Representation：表征](认知神经心理科学/Representation：表征.md)
-  * [Cognition：认知](认知神经心理科学/Cognition：认知)
+  * [Cognition：认知](认知神经心理科学/Cognition：认知.md)
   * [Thought：思维](认知神经心理科学/Thought：思维.md)
   * [三段论推理](认知神经心理科学/三段论推理.md)
   
