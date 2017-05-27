@@ -23,7 +23,7 @@ svn update /Volumes/Work/百度云同步盘/SvnWork/Solar-8500
 svn update /Volumes/Work/百度云同步盘/SvnWork/SolarLib
 svn update /Volumes/Work/百度云同步盘/SvnWork/SourceCode
 svn update /Volumes/Work/百度云同步盘/SvnWork/TuZhiCangKu
-svn update /Volumes/Work/百度云同步盘/SvnWork/web
+# svn update /Volumes/Work/百度云同步盘/SvnWork/web
 svn update /Volumes/Work/百度云同步盘/SvnWork/WeiDianWang
 svn update /Volumes/Work/百度云同步盘/SvnWork/YuanJianKu
 # svn update /Volumes/Work/百度云同步盘/SvnWork/bdzics8000
