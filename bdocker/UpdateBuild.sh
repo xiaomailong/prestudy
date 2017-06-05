@@ -4,7 +4,7 @@ ROOTPATH=/Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker
 
 # base image pull -------------------------------------------------------------
 docker pull alpine:latest
-docker pull alpine:3.5
+docker pull alpine:3.6
 
 docker pull centos:latest
 docker pull centos:7

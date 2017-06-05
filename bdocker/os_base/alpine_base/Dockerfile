@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 # https://hub.docker.com/_/alpine/
 
 # Linux 01562754130f 4.9.4-moby #1 SMP Wed Jan 18 17:04:43 UTC 2017 x86_64 Linux
