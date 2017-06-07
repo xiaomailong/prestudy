@@ -9,6 +9,7 @@ RUN set -x \
 	&& mkdir -p ${ELECTRON_DATA_DIR} \
 	&& apk add --update --no-cache \
         nodejs \
+        nodejs-npm \
         git \
     && NPM_MIRROR=npm.taobao.org \
     &&  { \

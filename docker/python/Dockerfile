@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine_base
 
 MAINTAINER Bolik WaterBolik@163.com
 

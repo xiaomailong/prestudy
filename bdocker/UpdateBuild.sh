@@ -31,7 +31,7 @@ docker build -t bdebian ${ROOTPATH}/os_base/bdebian/
 docker build -t bubuntu ${ROOTPATH}/os_base/bubuntu/
 docker build -t bubuntu14 ${ROOTPATH}/os_base/bubuntu14/
 
-docker build -t bgollum ${ROOTPATH}/bgollum/
+# docker build -t bgollum ${ROOTPATH}/bgollum/
 
 docker build -t bnodejs ${ROOTPATH}/bnodejs/
 
@@ -39,7 +39,7 @@ docker build -t bpython ${ROOTPATH}/bpython/
 
 docker build -t bzookeeper ${ROOTPATH}/bzookeeper/
 
-docker build -t hadoop-ubuntu14 ${ROOTPATH}/hadoop/hadoop-ubuntu14/
+# docker build -t hadoop-ubuntu14 ${ROOTPATH}/hadoop/hadoop-ubuntu14/
 
 # 查看Docker的磁盘使用情况
 docker system df

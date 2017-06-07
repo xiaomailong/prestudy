@@ -35,7 +35,7 @@ docker run -publish 80:80 --volumes-from dokuwiki_data --name dokuwiki --restart
 Create dokuwiki_backup.tar.gz archive in current directory using temporaty container:
 
 ```shell
-docker run --rm --volumes-from dokuwiki_data --volume $(pwd):/backups alpine:3.5 tar zcvf /backups/dokuwiki_backup.tar.gz /srv
+docker run --rm --volumes-from dokuwiki_data --volume $(pwd):/backups alpine:3.6 tar zcvf /backups/dokuwiki_backup.tar.gz /srv
 ```
 
 ## Restore
@@ -61,7 +61,7 @@ docker stop dokuwiki
 Restore from backup using temporary container:
 
 ```shell
-docker run --rm --volumes-from dokuwiki -w / -v $(pwd):/backup alpine:3.5 tar xzvf /backup/dokuwiki_backup.tar.gz
+docker run --rm --volumes-from dokuwiki -w / -v $(pwd):/backup alpine:3.6 tar xzvf /backup/dokuwiki_backup.tar.gz
 ```
 
 Start dokuwiki:

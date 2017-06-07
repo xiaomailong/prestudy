@@ -1,5 +1,5 @@
 FROM alpine_base
-# FROM alpine:3.5
+# FROM alpine:3.6
 
 MAINTAINER Bolik WaterBolik@163.com
 
@@ -240,6 +240,7 @@ RUN set -ex \
         #   http-parser:              HTTP request/response parser for C
         #   libuv:                    Cross-platform asychronous I/O
         nodejs \
+        nodejs-npm \
         # nodejs-dev: JavaScript runtime built on V8 engine - LTS version (development files)
         nodejs-dev \
         

@@ -10,6 +10,7 @@ RUN set -x \
 	&& mkdir -p ${GITBOOK_DATA_DIR} ${GITBOOK_HTML_DIR} \
 	&& apk add --update --no-cache \
         nodejs \
+        nodejs-npm \
     && NPM_MIRROR=npm.taobao.org \
     && npm install -g --registry=https://registry.${NPM_MIRROR}/ \
         gitbook-cli \
