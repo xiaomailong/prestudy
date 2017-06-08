@@ -1,4 +1,6 @@
 # https://bitbucket.org/uhopper/hadoop-docker.git
+# http://mirrors.aliyun.com/apache/hadoop/common/
+# http://mirrors.aliyun.com/apache/spark/
 
 FROM alpine_base
 
@@ -37,10 +39,10 @@ RUN set -x \
 	# && APACHE_MIRROT=mirrors.cnnic.cn/apache \
 	# && apk add --no-cache --virtual .build-deps \
     #     gnupg \
-    # && curl -fSL "$http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" -o /opt/hadoop-${HADOOP_VERSION}.tar.gz \
-    # && curl -fSL "http://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz.asc" -o /opt/hadoop-${HADOOP_VERSION}.tar.gz.asc \
-    && wget -q "http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" \
-    && wget -q "http://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz.asc" \
+    && curl -fSL "http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" -o /opt/hadoop-${HADOOP_VERSION}.tar.gz \
+    && curl -fSL "http://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz.asc" -o /opt/hadoop-${HADOOP_VERSION}.tar.gz.asc \
+    # && wget -q "http://${APACHE_MIRROT}/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" \
+    # && wget -q "http://www.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz.asc" \
     && export GNUPGHOME="$(mktemp -d)" \
     # && gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" \
     # && gpg --batch --verify "hadoop-${HADOOP_VERSION}.tar.gz.asc" "hadoop-${HADOOP_VERSION}.tar.gz" \
@@ -68,5 +70,5 @@ ENTRYPOINT ["/entrypoint.sh"]
 # CMD ["sh"]
 
 # 编译及执行方法如下: 
-# docker build -t hadoop /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/hadoop/hadoop/
-# docker build -t hadoop B:\OpenSource\WaterBolik\prestudy\bdocker\hadoop\hadoop\
+# docker build -t hadoop-base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/hadoop/hadoop-base/
+# docker build -t hadoop-base B:\OpenSource\WaterBolik\prestudy\bdocker\hadoop\hadoop-base\

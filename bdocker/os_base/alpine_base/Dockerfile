@@ -57,6 +57,14 @@ RUN set -ex \
     && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
 
+    # && apk --update add --virtual build-dependencies \
+    #     python-dev \
+    #     build-base \
+    #     wget \
+    # && pip install -r requirements.txt \
+    # && python setup.py install \
+    # && apk del build-dependencies \
+
     # && { \
 	# 	echo 'restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap'; \
 	# 	echo 'server 127.127.1.0 #local clock'; \

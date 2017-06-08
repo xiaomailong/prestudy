@@ -1,5 +1,7 @@
 FROM hadoop-base
 
+# http://mirrors.aliyun.com/apache/spark/
+
 ENV SPARK_VERSION=2.1.1 \
 # ENV SPARK_VERSION=2.0.2 \
     SPARK_HADOOP_PROFILE=2.8 \
