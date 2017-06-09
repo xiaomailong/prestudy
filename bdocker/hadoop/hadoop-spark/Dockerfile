@@ -3,7 +3,6 @@ FROM hadoop-base
 # http://mirrors.aliyun.com/apache/spark/
 
 ENV SPARK_VERSION=2.1.1 \
-# ENV SPARK_VERSION=2.0.2 \
     SPARK_HADOOP_PROFILE=2.8 \
     SPARK_HOME=/opt/spark \
     PATH=$PATH:/opt/spark/bin
@@ -16,8 +15,9 @@ ADD spark-slave.sh /
 RUN set -x \
     # && APACHE_MIRROT=mirror.tuna.tsinghua.edu.cn/apache \
 	# && APACHE_MIRROT=mirrors.ustc.edu.cn/apache \
-	&& APACHE_MIRROT=mirrors.aliyun.com/apache \
-    && wget -q "http://${APACHE_MIRROT}/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop.tgz" -O /tmp/spark.tar.gz \
+	&& APACHE_MIRROT=mirrors.aliyun.com/apache \ 
+    && curl -fSL "http://${APACHE_MIRROT}/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop.tgz" -o /tmp/spark.tar.gz \
+    # && wget -q "http://${APACHE_MIRROT}/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-without-hadoop.tgz" -o /tmp/spark.tar.gz \
     && tar -xvf /tmp/spark.tar.gz -C /opt \
     && mv /opt/spark-$SPARK_VERSION-* $SPARK_HOME \
     && rm -f /tmp/spark.tar.gz \
