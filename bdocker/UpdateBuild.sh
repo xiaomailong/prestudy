@@ -11,7 +11,7 @@ docker pull centos:7
 docker pull centos:6.9
 
 docker pull debian:latest
-docker pull debian:8.7
+docker pull debian:8.8
 
 docker pull ubuntu:latest
 docker pull ubuntu:16.04
