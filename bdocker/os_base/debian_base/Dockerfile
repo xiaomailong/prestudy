@@ -1,9 +1,10 @@
-FROM debian:8.8
+FROM debian:9.1
 # FROM debian:jessie-backports
 
 # https://hub.docker.com/_/debian/
 
-# 8.7, 8, jessie, latest 
+# 9.1, 9, stretch, latest 
+# 8.9, 8, jessie, latest 
 # 7.11, 7, wheezy 
 
 MAINTAINER Bolik WaterBolik@163.com
