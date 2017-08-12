@@ -123,3 +123,6 @@ brew cask update visual-studio
 brew cask update visual-studio-code
 # brew cask update webstorm
 brew cask update xquartz
+
+# 基于最优秀的开源播放器之一 mpv，IINA 支持几乎所有常用媒体的播放（甚至是 GIF），并得以稳定输出高质量的图像。MPV 的配置文件和脚本系统仍然保留。
+brew cask install iina

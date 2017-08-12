@@ -97,6 +97,7 @@ brew cask install \
   kitematic \
   rtx \
   detexify \
+  iina \
   # youdaoNote \
   # qq
   
