@@ -32,14 +32,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		perl \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN set -ex; \
-# gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
-	key='A4A9406876FCBD3C456770C88C718D3B5072E1F5'; \
-	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
-	gpg --export "$key" > /etc/apt/trusted.gpg.d/mysql.gpg; \
-	rm -r "$GNUPGHOME"; \
-	apt-key list > /dev/null
+# RUN set -ex; \
+# # gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
+# 	key='A4A9406876FCBD3C456770C88C718D3B5072E1F5'; \
+# 	export GNUPGHOME="$(mktemp -d)"; \
+# 	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+# 	gpg --export "$key" > /etc/apt/trusted.gpg.d/mysql.gpg; \
+# 	rm -r "$GNUPGHOME"; \
+# 	apt-key list > /dev/null
 
 ENV MYSQL_MAJOR 5.7
 ENV MYSQL_VERSION 5.7.19-1debian8
@@ -74,7 +74,7 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 3306
 CMD ["mysqld"]
 
-# $ docker build -t bmysql /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/bmysql/
+# $ docker build -t bmysql /Users/Bolik/OpenSource/WaterBolik/prestudy/bdocker/bmysql/
 # $ docker run -it --rm bmysql
 # docker build -t bmysql B:\OpenSource\WaterBolik\prestudy\bdocker\bmysql\
 # docker run -it --rm bmysql 

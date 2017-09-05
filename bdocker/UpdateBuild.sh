@@ -1,7 +1,6 @@
 #!/bin/bash
 
-ROOTPATH=/Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker
-
+ROOTPATH=/Users/Bolik/OpenSource/WaterBolik/prestudy/bdocker
 # base image pull -------------------------------------------------------------
 docker pull alpine:latest
 docker pull alpine:3.6
@@ -38,6 +37,8 @@ docker build -t bnodejs ${ROOTPATH}/bnodejs/
 docker build -t bpython ${ROOTPATH}/bpython/
 
 docker build -t bzookeeper ${ROOTPATH}/bzookeeper/
+
+docker build -t bmysql ${ROOTPATH}/bmysql/
 
 # docker build -t hadoop-ubuntu14 ${ROOTPATH}/hadoop/hadoop-ubuntu14/
 
