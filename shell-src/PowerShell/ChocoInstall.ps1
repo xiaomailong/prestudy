@@ -60,7 +60,7 @@ choco install k-litecodecpackmega -y
 # choco install 7zip.commandline -y
 # choco install autohotkey.portable -y
 # choco install totalcommander -y
-#choco install cmder -y
+# choco install cmder -y
 choco install sysinternals -y
 # choco install rapidee -y
 # choco install powershell -y
@@ -102,7 +102,7 @@ pip install jupyter
 choco install nodejs -y
 # choco install phantomjs -y
 choco install atom -y
-#choco install visualstudiocode -y
+choco install visualstudiocode -y
 # choco install microsoft-build-tools -y
 # choco install visualstudio2015enterprise -y
 # choco install resharper -y
@@ -136,7 +136,7 @@ choco install pycharm -y
 # choco install redis -y
 
 # Note
-#choco install ynote -y
+# choco install ynote -y
 # choco install xmind -y
 
 # Skype
