@@ -39,6 +39,7 @@ RUN set -ex \
 		bash \
 		openssh \
         rsync \
+        openrc \
         supervisor \
 		openjdk8-jre \
         perl \
@@ -115,5 +116,6 @@ CMD ["sh"]
 
 # 编译及执行方法如下: 
 # docker build -t alpine_base /Volumes/Work/OpenSource/WaterBolik/prestudy/bdocker/os_base/alpine_base/
+# docker build -t alpine_base /Users/Bolik/OpenSource/WaterBolik/prestudy/bdocker/os_base/alpine_base/
 # docker build -t alpine_base B:\OpenSource\WaterBolik\prestudy\bdocker\os_base\alpine_base\
 # docker run -it --rm alpine_base 
