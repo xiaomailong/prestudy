@@ -16,6 +16,9 @@ docker pull ubuntu:latest
 docker pull ubuntu:16.04
 docker pull ubuntu:14.04
 
+docker pull mysql
+docker pull postgres:alpine
+
 # os base images 
 docker build -t alpine_base ${ROOTPATH}/os_base/alpine_base/
 docker build -t centos_base ${ROOTPATH}/os_base/centos_base/
